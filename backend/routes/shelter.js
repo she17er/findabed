@@ -3,10 +3,10 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const router = express.Router();
 // const { check, oneOf, validationResult } = require('express-validator/check');
 
 //Local Imports
-const port = 9009;
 const Shelter = require('../models/shelter');
 const db = process.env.MONGOLAB_URI;
 
