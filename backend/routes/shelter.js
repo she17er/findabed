@@ -20,6 +20,12 @@ router.use(bodyParser.urlencoded({
 }));
 
 
+
+router.route('/')
+    .get((req, res) => {
+      console.log("checking the get request in user.js");
+    })
+
 // Promise Example
 router.get('/getLocations', (req, res) => {
     console.log('getting all books');
@@ -72,4 +78,4 @@ router.get('/getLocations', (req, res) => {
       .catch((err) => res.send("" + err))
   });
 
-module.exports = express.Router(); 
+module.exports = router; 

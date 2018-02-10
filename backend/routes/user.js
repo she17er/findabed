@@ -87,4 +87,4 @@ router.post('/updatePassword/:_id', (req, res) => {
 })
 });
 
-module.exports = express.Router(); 
+module.exports = router; 
