@@ -4,7 +4,7 @@ var mongoose = require('mongoose');
 
 var Schema = mongoose.Schema;
 
-var shelterSchema = Schema({
+var adminSchema = Schema({
     username: {
         type: String, 
         required: true
@@ -15,6 +15,10 @@ var shelterSchema = Schema({
     },
     role: {
         type: String,
+        required: true
+    }, 
+    login: {
+        type: Boolean, 
         required: true
     }
 }, { timestamps: true });
