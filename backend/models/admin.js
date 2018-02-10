@@ -6,7 +6,7 @@ var Schema = mongoose.Schema;
 
 var shelterSchema = Schema({
     username: {
-        type: String, 
+        type: String,
         required: true
     },
     password: {
@@ -15,6 +15,10 @@ var shelterSchema = Schema({
     },
     role: {
         type: String,
+        required: true
+    },
+    login: {
+        type: Boolean,
         required: true
     }
 }, { timestamps: true });

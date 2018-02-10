@@ -11,9 +11,8 @@ const api = require('./backend/routes');
 
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGOLAB_URI, { useMongoClient: true });
+mongoose.connect(process.env.MONGOLAB_URI);
 mongoose.Promise = global.Promise;
-
 //app.use(express.static(path.join(__dirname, 'public')));
 
 
