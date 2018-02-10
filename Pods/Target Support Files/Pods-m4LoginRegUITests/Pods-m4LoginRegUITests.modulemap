@@ -1,0 +1,6 @@
+framework module Pods_m4LoginRegUITests {
+  umbrella header "Pods-m4LoginRegUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
