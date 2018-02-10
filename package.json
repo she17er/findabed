@@ -5,11 +5,14 @@
   "main": "index.js",
   "dependencies": {
     "body-parser": "^1.18.2",
+    "dotenv": "^5.0.0",
+    "dotenv-export": "^1.0.5",
     "express": "^4.16.2",
     "express-validation": "^1.0.2",
     "express-validator": "^4.3.0",
     "mongodb": "^3.0.1",
     "mongoose": "^5.0.1",
+    "node-env-file": "^0.1.8",
     "nodemon": "^1.14.12"
   },
   "devDependencies": {},

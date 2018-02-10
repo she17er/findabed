@@ -9,7 +9,6 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 const api = require('./backend/routes');
 
-
 // Connect to MongoDB
 mongoose.connect(process.env.MONGOLAB_URI);
 mongoose.Promise = global.Promise;
@@ -18,7 +17,6 @@ mongoose.Promise = global.Promise;
 
 // Route API Calls to seperate router
 app.use('/api', api);
-
 app.listen(PORT, error => {
   error
     ? console.error(error)

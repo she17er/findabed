@@ -37,6 +37,7 @@ var shelterSchema = Schema({
         type: Boolean,
         required: true
     }
-}, { timestamps: true });
+}, { timestamps: true },
+    {collection: 'shelters'});
 
 var shelter = module.exports = mongoose.model('shelters', shelterSchema);
