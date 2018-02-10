@@ -34,10 +34,17 @@ var shelterSchema = Schema({
         required: true
     },
     login: {
+<<<<<<< HEAD
         type: Boolean,
         required: true
     }
 }, { timestamps: true },
     {collection: 'shelters'});
+=======
+        type: Boolean, 
+        required: true
+    }
+}, { timestamps: true });
+>>>>>>> 840b98778d728d7383655465f933ff75c62fe027
 
 var shelter = module.exports = mongoose.model('shelters', shelterSchema);
