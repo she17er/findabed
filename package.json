@@ -1,0 +1,19 @@
+{
+  "name": "findabed",
+  "version": "1.0.0",
+  "description": "This is the repository for Team 17 of the Georgia Tech CS 2340 class",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/she17er/findabed.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/she17er/findabed/issues"
+  },
+  "homepage": "https://github.com/she17er/findabed#readme"
+}
