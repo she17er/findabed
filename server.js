@@ -11,10 +11,10 @@ const api = require('./backend/routes');
 
 
 // Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI, { useMongoClient: true });
+mongoose.connect(process.env.MONGOLAB_URI, { useMongoClient: true });
 mongoose.Promise = global.Promise;
 
-app.use(express.static(path.join(__dirname, 'public')));
+//app.use(express.static(path.join(__dirname, 'public')));
 
 
 // Route API Calls to seperate router

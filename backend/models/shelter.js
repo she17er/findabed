@@ -35,4 +35,4 @@ var shelterSchema = Schema({
     },
 }, { timestamps: true });
 
-var shelter = module.exports = mongoose.model('Shelter', shelterSchema);
+var shelter = module.exports = mongoose.model('shelters', shelterSchema);

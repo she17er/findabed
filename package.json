@@ -9,7 +9,8 @@
     "express-validation": "^1.0.2",
     "express-validator": "^4.3.0",
     "mongodb": "^3.0.1",
-    "mongoose": "^5.0.1"
+    "mongoose": "^5.0.1",
+    "nodemon": "^1.14.12"
   },
   "devDependencies": {},
   "scripts": {

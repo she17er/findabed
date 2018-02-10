@@ -1,6 +1,5 @@
 //NPM Packages
 const express = require('express');
-const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const router = express.Router();
@@ -15,13 +14,14 @@ mongoose.Promise = global.Promise;
 mongoose.connect(db);
 
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({
   extended: true
 }));
 
+
 // Promise Example
-app.get('/getLocations', (req, res) => {
+router.get('/getLocations', (req, res) => {
     console.log('getting all books');
     var locations = [];
     Shelter.find({})
@@ -37,12 +37,8 @@ app.get('/getLocations', (req, res) => {
       });
   });
 
-  // app.post('/updateOldShelters', (req, res) => {
-  //   var name = req.body.name;
-  //   Shelter.find({name: name}).then((shelter) => res.
-  // });
 
-  app.post('/newShelters', (req, res) => {
+  router.post('/newShelters', (req, res) => {
     Shelter.create(req.body, (err, shelter) => {
         if(err) {
           res.send(""+err);
@@ -53,7 +49,7 @@ app.get('/getLocations', (req, res) => {
     })
   });
 
-  app.post('/updateCapacity/:_id', (req, res) => {
+  router.post('/updateCapacity/:_id', (req, res) => {
       Shelter.findByIdAndUpdate({
           _id: req.params._id
       }, {
@@ -68,7 +64,7 @@ app.get('/getLocations', (req, res) => {
       })
   });
 
-  app.get('/shelter/:_id', (req, res) => {
+  router.get('/shelter/:_id', (req, res) => {
     Shelter.find({
         _id: req.params._id
     })

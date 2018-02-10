@@ -1,26 +1,26 @@
 //NPM Packages
 const express = require('express');
-const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const router = express.Router();
 const { check, oneOf, validationResult } = require('express-validator/check');
 
 //Local Imports
 const User = require('../models/user');
-const db = process.env.MONGOLAB_URI;
+// const db = process.env.MONGOLAB_URI;
 const Shelter = require('../models/shelter');
 
-// Use native ES6 promises
-mongoose.Promise = global.Promise;
-mongoose.connect(db);
+// // Use native ES6 promises
+// mongoose.Promise = global.Promise;
+// mongoose.connect(db);
 
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+// router.use(bodyParser.json());
+// router.use(bodyParser.urlencoded({
+//   extended: true
+// }));
 
-app.post('/newUsers', (req, res) => {
+router.post('/newUsers', (req, res) => {
     console.log('trying new things');
     User.create(req.body, (err, user) => {
       if(err) {
@@ -31,7 +31,12 @@ app.post('/newUsers', (req, res) => {
   }})
  } );
 
-app.get('/getUsers', (req, res) => {
+ router.route('/')
+    .get((req, res) => {
+      console.log("checking the get request in user.js");
+    })
+
+router.get('/getUsers', (req, res) => {
     User.find({}) 
     .exec()
     .then((user) => res.send(user))
@@ -48,7 +53,7 @@ app.get('/getUsers', (req, res) => {
  * return all shelters which contain the searched
  * phrase 
  */
-app.get('/searchKeyword', (req, res) => {
+router.get('/searchKeyword', (req, res) => {
   var keyword = req.query.keyword
   Shelter.find({
     name : keyword
@@ -59,7 +64,7 @@ app.get('/searchKeyword', (req, res) => {
   })
 })
 
-app.get('/userStatus/:_id' , (req, res) => {
+router.get('/userStatus/:_id' , (req, res) => {
     User.find({
         _id : req.params._id
     })
@@ -67,7 +72,7 @@ app.get('/userStatus/:_id' , (req, res) => {
     .catch((err) => res.send("" + err))
 })
 
-app.post('/updatePassword/:_id', (req, res) => {
+router.post('/updatePassword/:_id', (req, res) => {
   User.findByIdAndUpdate({
     _id: req.params._id
 }, {
