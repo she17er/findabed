@@ -7,7 +7,7 @@ const { check, oneOf, validationResult } = require('express-validator/check');
 //Local Imports 
 const user = require('./user');
 const shelter = require('./shelter');
-const db = process.env.MONGOLAB_URI;
+const db = 'mongodb://she17ers:she17ers@ds131258.mlab.com:31258/she17erdb';
 
 // const admin = require('./admin');
 

@@ -4,10 +4,10 @@ const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const router = express.Router();
 // const { check, oneOf, validationResult } = require('express-validator/check');
-
+const MONGO_URL = 'mongodb://krrishdholakia:she17erTeam@ds131258.mlab.com:31258/she17erdb';
 //Local Imports
 const Shelter = require('../models/shelter');
-const db = process.env.MONGOLAB_URI;
+const db = 'mongodb://she17ers:she17ers@ds131258.mlab.com:31258/she17erdb';
 
 // Use native ES6 promises
 mongoose.Promise = global.Promise;
@@ -33,6 +33,7 @@ router.get('/getLocations', (req, res) => {
     Shelter.find({})
       .exec()
       .then((shelter) => {
+          console.log("checking");
           shelter.forEach(shade => {
               locations.push(shade.location);
           });
