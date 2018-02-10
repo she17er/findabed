@@ -1,19 +1,20 @@
 {
-  "name": "findabed",
-  "version": "1.0.0",
-  "description": "This is the repository for Team 17 of the Georgia Tech CS 2340 class",
-  "main": "index.js",
+  "name": "webfrontend",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "express": "^4.16.2",
+    "react": "^16.2.0",
+    "react-bootstrap": "^0.32.1",
+    "react-dom": "^16.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.1.1"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/she17er/findabed.git"
-  },
-  "author": "",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/she17er/findabed/issues"
-  },
-  "homepage": "https://github.com/she17er/findabed#readme"
+  "proxy": "http://localhost:8080"
 }
