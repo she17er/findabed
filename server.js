@@ -6,6 +6,7 @@ const app = express();
 
 // Local Imports & Constants
 // load env vars
+require('dotenv').config();
 const PORT = process.env.PORT || 3000;
 const api = require('./backend/routes');
 
