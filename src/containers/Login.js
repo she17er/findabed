@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
 import "./Login.css";
 
 export default class Login extends Component {
@@ -11,6 +11,13 @@ export default class Login extends Component {
       email: "",
       password: ""
     };
+  }
+
+  getUser() {
+      return fetch('https://she17er.herokuapp.com/api/users/getUsers').then((response)=>response.json()).then((responseJson) => {return responseJson;
+      }).catch((error) => {
+          console.error(error);
+      });
   }
 
   validateForm() {
@@ -25,6 +32,10 @@ export default class Login extends Component {
 
   handleSubmit = event => {
     event.preventDefault();
+  }
+
+  ValidateUser() {
+      return this.getUser().email.stringify() === this.state.email && this.getUser().password.stringify() === this.state.password;
   }
 
 
@@ -49,6 +60,7 @@ export default class Login extends Component {
               type="password"
             />
           </FormGroup>
+          <Link to="LoggedIn">
           <Button
             block
             bsSize="large"
@@ -57,6 +69,7 @@ export default class Login extends Component {
           >
             Login
           </Button>
+      </Link>
           <br></br>
           <Link to="/">
           <Button
