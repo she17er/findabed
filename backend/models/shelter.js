@@ -34,6 +34,11 @@ var shelterSchema = Schema({
         required: true
     },
     login: {
+        type: Boolean,
+        required: true
+    }
+}, { timestamps: true },
+    {collection: 'shelters'});
         type: Boolean, 
         required: true
     }

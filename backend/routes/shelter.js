@@ -23,7 +23,7 @@ router.use(bodyParser.urlencoded({
 
 router.route('/')
     .get((req, res) => {
-      console.log("checking the get request in user.js");
+      console.log("checking the get request in shelter.js");
     })
 
 // Promise Example
@@ -33,7 +33,11 @@ router.get('/getLocations', (req, res) => {
     Shelter.find({})
       .exec()
       .then((shelter) => {
+<<<<<<< HEAD
+          console.log("getting them");
+=======
           console.log("checking");
+>>>>>>> 840b98778d728d7383655465f933ff75c62fe027
           shelter.forEach(shade => {
               locations.push(shade.location);
           });
@@ -79,4 +83,4 @@ router.get('/getLocations', (req, res) => {
       .catch((err) => res.send("" + err))
   });
 
-module.exports = router; 
+module.exports = router;

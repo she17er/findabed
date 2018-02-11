@@ -41,6 +41,9 @@ var userSchema = Schema({
     role: {
         type: String,
         required: true
+    },
+    login: {
+        type: Boolean,
     }, 
     login: {
         type: Boolean, 
