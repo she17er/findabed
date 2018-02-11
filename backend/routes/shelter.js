@@ -33,11 +33,8 @@ router.get('/getLocations', (req, res) => {
     Shelter.find({})
       .exec()
       .then((shelter) => {
-<<<<<<< HEAD
           console.log("getting them");
-=======
           console.log("checking");
->>>>>>> 840b98778d728d7383655465f933ff75c62fe027
           shelter.forEach(shade => {
               locations.push(shade.location);
           });

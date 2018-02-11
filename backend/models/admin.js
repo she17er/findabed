@@ -16,15 +16,9 @@ var adminSchema = Schema({
     role: {
         type: String,
         required: true
-<<<<<<< HEAD
     },
     login: {
         type: Boolean,
-=======
-    }, 
-    login: {
-        type: Boolean, 
->>>>>>> 840b98778d728d7383655465f933ff75c62fe027
         required: true
     }
 }, { timestamps: true });
