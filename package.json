@@ -11,8 +11,12 @@
     "express-validator": "^4.3.0",
     "mongodb": "^3.0.2",
     "mongoose": "^5.0.1",
+    "morgan": "^1.9.0",
     "node-env-file": "^0.1.8",
-    "nodemon": "^1.14.12"
+    "nodemon": "^1.14.12",
+    "passport": "^0.4.0",
+    "passport-http": "^0.3.0",
+    "passport-local": "^1.0.0"
   },
   "devDependencies": {},
   "scripts": {

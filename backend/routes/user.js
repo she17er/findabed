@@ -3,6 +3,9 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const router = express.Router();
+const passport = require('passport');
+const morgan = require('morgan');
+const LocalStrategy = require('passport-local').Strategy;
 const { check, oneOf, validationResult } = require('express-validator/check');
 
 //Local Imports
@@ -19,6 +22,48 @@ const Shelter = require('../models/shelter');
 // router.use(bodyParser.urlencoded({
 //   extended: true
 // }));
+router.use(morgan('dev'));
+router.use(bodyParser.json());
+router.use(bodyParser.urlencoded({ extended: true }));
+router.use(passport.initialize());
+router.use(passport.session());
+
+passport.use(new LocalStrategy(
+    function(username, password, done) {
+      User.findOne({ username: username }, function (err, user) {
+        if (err) { return done(err); }
+        if (!user) { return done(null, false); }
+        if (!user.verifyPassword(password)) { return done(null, false); }
+        return done(null, user);
+      });
+    }
+  ));
+  
+  passport.serializeUser((user, done) => {
+    return done(null, user._id.$oid);
+  });
+  
+  passport.deserializeUser((id, done) => {
+    User.findById(id, (err, user) => {
+      return done(err, user);
+    });
+  });
+
+  // Login Route
+router.post('/login', (req, res) => {
+    passport.authenticate('local', (errors, user) => {
+      req.logIn(user, () => {
+        if (errors) return res.status(500).json({ errors });
+        return res.status(user ? 200 : 400).json(user ? { user } : { errors: "Login Failed" });
+      });
+    })(req, res);
+  });
+  
+  // Logout Route
+  router.get('/logout', (req, res) => {
+    req.logout();
+    return res.status(200).json({ logout: 'success' });
+  });
 
 router.post('/newUsers', (req, res) => {
     console.log('trying new things');
@@ -62,14 +107,6 @@ router.get('/searchKeyword', (req, res) => {
   .catch((err) => {
     res.send("" + err); 
   })
-})
-
-router.get('/userStatus/:_id' , (req, res) => {
-    User.find({
-        _id : req.params._id
-    })
-    .then((user) => res.send(user.role))
-    .catch((err) => res.send("" + err))
 })
 
 router.post('/updatePassword/:_id', (req, res) => {
