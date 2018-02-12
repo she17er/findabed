@@ -6,10 +6,6 @@
   "dependencies": {
     "body-parser": "^1.18.2",
     "dotenv": "^5.0.0",
-<<<<<<< HEAD
-=======
-    "dotenv-export": "^1.0.5",
->>>>>>> 2fad98227d20a32bcde4fe33549003ff4a0f1e84
     "express": "^4.16.2",
     "express-validation": "^1.0.2",
     "express-validator": "^4.3.0",
