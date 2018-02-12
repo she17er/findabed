@@ -12,23 +12,29 @@ export default class LoggedIn extends Component {
   }
   render() {
     return (
-        <div className = "App container">
-            <Navbar fluid collapseOnSelect>
-              <Navbar.Header>
-                <Navbar.Brand>
-                  <Link to="/">She17er</Link>
-                </Navbar.Brand>
-                <Navbar.Toggle />
-              </Navbar.Header>
-              <Navbar.Collapse>
-                <Nav pullRight>
-                  <RouteNavItem href="/signup">Signup</RouteNavItem>
-                  <RouteNavItem href="/">Logout</RouteNavItem>
-                </Nav>
-              </Navbar.Collapse>
-            </Navbar>
-            <Routes />
-      </div>
+        <div className="Home">
+          <div className="lander">
+            <h1>She17er</h1>
+            <p>We help you find shelters</p>
+          </div>
+        </div>
+      //   <div className = "App container">
+      //       <Navbar fluid collapseOnSelect>
+      //         <Navbar.Header>
+      //           <Navbar.Brand>
+      //             <Link to="/">She17er</Link>
+      //           </Navbar.Brand>
+      //           <Navbar.Toggle />
+      //         </Navbar.Header>
+      //         <Navbar.Collapse>
+      //           <Nav pullRight>
+      //             <RouteNavItem href="/signup">Signup</RouteNavItem>
+      //             <RouteNavItem href="/">Logout</RouteNavItem>
+      //           </Nav>
+      //         </Navbar.Collapse>
+      //       </Navbar>
+      //       <Routes />
+      // </div>
     );
   }
 }

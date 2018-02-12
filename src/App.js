@@ -6,6 +6,17 @@ import RouteNavItem from "./components/RouteNavItem";
 import "./App.css";
 
 class App extends Component {
+  constructor(props) {
+      super(props);
+      this.state = {
+          login: true
+      }
+  }
+
+  componentDidMount() {
+      fetch('https://she17er.herokuapp.com/api/users/getUsers').then(results => {return results.json();}).then(data => {this.setState({login: data.login});});
+    }
+    
   render() {
     return (
       <div className="App container">
@@ -19,7 +30,7 @@ class App extends Component {
           <Navbar.Collapse>
             <Nav pullRight>
               <RouteNavItem href="/signup">Signup</RouteNavItem>
-              <RouteNavItem href="/login">Login</RouteNavItem>
+              {this.state.login ? <RouteNavItem href="/login">Login</RouteNavItem> : <RouteNavItem href="/"> Logout</RouteNavItem>}
             </Nav>
           </Navbar.Collapse>
         </Navbar>

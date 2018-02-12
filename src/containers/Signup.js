@@ -20,11 +20,11 @@ export default class Signup extends Component {
   }
 
   validatePassWord() {
-      return this.state.confirmpassword === this.state.password && this.state.password.length > 8;
+      return this.state.confirmpassword === this.state.password && this.state.password.length > 0;
   }
 
   validateForm() {
-    return this.state.email.length > 0 && this.validatePassWord() && this.state.phone.length > 0 && this.state.age.length > 0;
+    return this.state.email.length > 0 && this.validatePassWord() && this.state.phone.length > 0 && this.state.age.length > 0 && this.state.gender.length > 0 && this.state.role.length > 0;
   }
 
   handleChange = event => {
@@ -40,6 +40,7 @@ export default class Signup extends Component {
   handleSignUp = event => {
       if (this.validateForm()) {
           this.setState({login: true});
+          this.props.history.push("LoggedIn");
           window.alert("Sign up Sucessfully");
       } else {
           window.alert("Please check your inputs");

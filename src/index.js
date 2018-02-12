@@ -6,17 +6,9 @@ import LoggedIn from "./containers/LoggedIn"
 import registerServiceWorker from "./registerServiceWorker";
 import "./index.css";
 
-function decide(props) {
-  const login = props.login;
-  if (login) {
-      return <App />;
-  } else {
-      return <LoggedIn />;
-  }
-}
 ReactDOM.render(
   <Router>
-     <LoggedIn/>
+     <App/>
   </Router>,
   document.getElementById("root")
 );
