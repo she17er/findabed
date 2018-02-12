@@ -9,7 +9,8 @@ export default class Login extends Component {
 
     this.state = {
       email: "",
-      password: ""
+      password: "",
+      login: false
     };
   }
 
@@ -30,8 +31,9 @@ export default class Login extends Component {
     });
   }
 
-  handleSubmit = event => {
-    event.preventDefault();
+  handleSubmit() {
+    this.state.login = true;
+    this.props.history.push("LoggedIn");
   }
 
   ValidateUser() {
@@ -66,6 +68,7 @@ export default class Login extends Component {
             bsSize="large"
             disabled={!this.validateForm()}
             type="submit"
+            onClick={() => this.handleSubmit()}
           >
             Login
           </Button>

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import { Link } from 'react-router-dom';
-import { RadioGroup, RadioButton} from 'react-radio-buttons';
 import "./Signup.css";
 
 export default class Signup extends Component {
@@ -14,6 +13,9 @@ export default class Signup extends Component {
       confirmpassword:"",
       phone:"",
       age:"",
+      role:"",
+      gender:"",
+      login: false
     };
   }
 
@@ -37,7 +39,7 @@ export default class Signup extends Component {
 
   handleSignUp = event => {
       if (this.validateForm()) {
-          console.log("Sign up Successfully");
+          this.state.login.setState(true);
           window.alert("Sign up Sucessfully");
       } else {
           window.alert("Please check your inputs");
@@ -48,7 +50,7 @@ export default class Signup extends Component {
   render() {
     return (
       <div className="Signup">
-        <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit}>
           <FormGroup controlId="email" bsSize="large">
             <ControlLabel>Email</ControlLabel>
             <FormControl
@@ -82,18 +84,14 @@ export default class Signup extends Component {
               type="phone"
             />
         </FormGroup>
-        <FormGroup>
-        <ControlLabel>Role</ControlLabel>
-        <br></br>
-        <RadioGroup onChange={ this.onChange } horizontal>
-          <RadioButton value="shelter owner">
-            Shelter Owner
-          </RadioButton>
-          <RadioButton value="user">
-            User
-        </RadioButton>
-        </RadioGroup>
-    </FormGroup>
+        <FormGroup controlId="role" bsSize="large">
+          <ControlLabel>Role</ControlLabel>
+          <FormControl
+            value={this.state.role}
+            onChange={this.handleChange}
+            type="role"
+          />
+      </FormGroup>
         <FormGroup controlId="age" bsSize="large">
           <ControlLabel>Age</ControlLabel>
           <FormControl
@@ -102,6 +100,15 @@ export default class Signup extends Component {
             type="age"
           />
       </FormGroup>
+      <FormGroup controlId="Gender" bsSize="large">
+        <ControlLabel>gender</ControlLabel>
+        <FormControl
+          value={this.state.gender}
+          onChange={this.handleChange}
+          type="gender"
+        />
+    </FormGroup>
+      <Link to="LoggedIn">
           <Button
             block
             bsSize="large"
@@ -111,6 +118,7 @@ export default class Signup extends Component {
           >
             Sign Up
           </Button>
+      </Link>
           <br></br>
           <Link to="/">
           <Button
