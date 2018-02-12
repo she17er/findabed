@@ -1,6 +1,5 @@
 import React, { Component } from "react";
-import "./Home.css";
-import "../App.css";
+import "./LoggedIn.css";
 import { Link } from "react-router-dom";
 import { Nav, Navbar } from "react-bootstrap";
 import Routes from "../Routes";
@@ -13,8 +12,7 @@ export default class LoggedIn extends Component {
   }
   render() {
     return (
-      <div className="Home">
-        <div className="lander">
+        <div className = "App container">
             <Navbar fluid collapseOnSelect>
               <Navbar.Header>
                 <Navbar.Brand>
@@ -30,9 +28,6 @@ export default class LoggedIn extends Component {
               </Navbar.Collapse>
             </Navbar>
             <Routes />
-          <h1>She17er</h1>
-          <p>We help you find shelters</p>
-        </div>
       </div>
     );
   }

@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import { BrowserRouter as Router } from "react-router-dom";
+import { Switch, BrowserRouter as Router } from "react-router-dom";
 import App from "./App";
 import LoggedIn from "./containers/LoggedIn"
 import registerServiceWorker from "./registerServiceWorker";
@@ -16,7 +16,7 @@ function decide(props) {
 }
 ReactDOM.render(
   <Router>
-    <App />
+     <LoggedIn/>
   </Router>,
   document.getElementById("root")
 );
