@@ -30,17 +30,22 @@ router.use(passport.session());
 
 passport.use(new LocalStrategy(
     function(username, password, done) {
-      User.findOne({ username: username }, function (err, user) {
-        if (err) { return done(err); }
+      User.findOne({ "username": username }, function (err, user) {
+        console.log(user);
+        if (err) { 
+            console.log("error");
+            return done(err); }
         if (!user) { return done(null, false); }
-        if (!user.verifyPassword(password)) { return done(null, false); }
+        if (!user.verifyPassword(password)) { 
+            console.log("checking hoexxoxoxoox");
+            return done(null, false); }
         return done(null, user);
       });
     }
   ));
   
   passport.serializeUser((user, done) => {
-    return done(null, user._id.$oid);
+    return done(null, user._id);
   });
   
   passport.deserializeUser((id, done) => {

@@ -4,6 +4,7 @@
   "description": "This is the repository for Team 17 of the Georgia Tech CS 2340 class",
   "main": "index.js",
   "dependencies": {
+    "bcrypt": "^1.0.3",
     "body-parser": "^1.18.2",
     "dotenv": "^5.0.0",
     "express": "^4.16.2",

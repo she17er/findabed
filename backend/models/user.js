@@ -1,6 +1,5 @@
 //NPM Packages
 var mongoose = require('mongoose');
-
 var Schema = mongoose.Schema;
 
 var userSchema = Schema({
@@ -50,5 +49,10 @@ var userSchema = Schema({
         required: true
     }
 }, { timestamps: true });
+
+
+userSchema.methods.verifyPassword = function(password) {
+    return password ==  this.password;
+  };
 
 module.exports = mongoose.model('users', userSchema);
