@@ -43,10 +43,6 @@ var userSchema = Schema({
     },
     login: {
         type: Boolean,
-    }, 
-    login: {
-        type: Boolean, 
-        required: true
     }
 }, { timestamps: true });
 
