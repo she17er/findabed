@@ -39,7 +39,7 @@ export default class Signup extends Component {
 
   handleSignUp = event => {
       if (this.validateForm()) {
-          this.state.login.setState(true);
+          this.setState({login: true});
           window.alert("Sign up Sucessfully");
       } else {
           window.alert("Please check your inputs");
@@ -100,7 +100,7 @@ export default class Signup extends Component {
             type="age"
           />
       </FormGroup>
-      <FormGroup controlId="Gender" bsSize="large">
+      <FormGroup controlId="gender" bsSize="large">
         <ControlLabel>gender</ControlLabel>
         <FormControl
           value={this.state.gender}

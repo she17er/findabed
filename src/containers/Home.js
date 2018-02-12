@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import "./Home.css";
 
 export default class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state={login: false};
+  }
   render() {
     return (
       <div className="Home">

@@ -31,8 +31,8 @@ export default class Login extends Component {
     });
   }
 
-  handleSubmit() {
-    this.state.login = true;
+  handleSubmit = event => {
+    this.setState({login: true});
     this.props.history.push("LoggedIn");
   }
 
@@ -68,7 +68,7 @@ export default class Login extends Component {
             bsSize="large"
             disabled={!this.validateForm()}
             type="submit"
-            onClick={() => this.handleSubmit()}
+            onClick={(e) => this.handleSubmit(e)}
           >
             Login
           </Button>
