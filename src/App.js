@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Nav, Navbar } from "react-bootstrap";
-import Routes from "./Routes";
+import Routes from "./containers/Routes";
 import RouteNavItem from "./components/RouteNavItem";
 import "./App.css";
 
@@ -13,10 +13,10 @@ class App extends Component {
       }
   }
 
-  componentDidMount() {
-      fetch('https://she17er.herokuapp.com/api/users/getUsers').then(results => {return results.json();}).then(data => {this.setState({login: data.login});});
-    }
-    
+  // componentDidMount() {
+  //     fetch('https://she17er.herokuapp.com/api/users/getUsers').then(results => {return results.json();}).then(data => {this.setState({login: data.login});});
+  //   }
+
   render() {
     return (
       <div className="App container">

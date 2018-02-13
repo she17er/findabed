@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import { Link } from 'react-router-dom';
+import Routes from "./Routes";
 import "./Signup.css";
 
 export default class Signup extends Component {
   constructor(props) {
     super(props);
-
     this.state = {
       email: "",
       password: "",
@@ -34,10 +34,6 @@ export default class Signup extends Component {
   }
 
   handleSubmit = event => {
-    event.preventDefault();
-  }
-
-  handleSignUp = event => {
       if (this.validateForm()) {
           this.setState({login: true});
           this.props.history.push("LoggedIn");
@@ -115,7 +111,7 @@ export default class Signup extends Component {
             bsSize="large"
             disabled={!this.validateForm()}
             type="submit"
-            onClick={(e) => this.handleSignUp(e)}
+            onClick={(e) => this.handleSubmit(e)}
           >
             Sign Up
           </Button>

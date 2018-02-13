@@ -14,12 +14,12 @@ export default class Login extends Component {
     };
   }
 
-  getUser() {
-      return fetch('https://she17er.herokuapp.com/api/users/getUsers').then((response)=>response.json()).then((responseJson) => {return responseJson;
-      }).catch((error) => {
-          console.error(error);
-      });
-  }
+  // getUser() {
+  //     return fetch('https://she17er.herokuapp.com/api/users/getUsers').then((response)=>response.json()).then((responseJson) => {return responseJson;
+  //     }).catch((error) => {
+  //         console.error(error);
+  //     });
+  // }
 
   validateForm() {
     return this.state.email.length > 0 && this.state.password.length > 0;
@@ -36,9 +36,9 @@ export default class Login extends Component {
     this.props.history.push("LoggedIn");
   }
 
-  ValidateUser() {
-      return this.getUser().email.stringify() === this.state.email && this.getUser().password.stringify() === this.state.password;
-  }
+  // ValidateUser() {
+  //     return this.getUser().email.stringify() === this.state.email && this.getUser().password.stringify() === this.state.password;
+  // }
 
 
   render() {

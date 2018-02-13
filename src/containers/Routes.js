@@ -1,11 +1,11 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
 
-import Home from "./containers/Home";
-import Login from "./containers/Login";
-import NotFound from "./containers/NotFound";
-import Signup from "./containers/Signup";
-import LoggedIn from "./containers/LoggedIn";
+import Home from "./Home";
+import Login from "./Login";
+import NotFound from "./NotFound";
+import Signup from "./Signup";
+import LoggedIn from "./LoggedIn";
 
 export default () =>
   <Switch>
