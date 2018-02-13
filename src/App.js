@@ -8,9 +8,6 @@ import "./App.css";
 class App extends Component {
   constructor(props) {
       super(props);
-      this.state = {
-          login: true
-      }
   }
 
   // componentDidMount() {
@@ -20,6 +17,7 @@ class App extends Component {
   render() {
     return (
       <div className="App container">
+          <Navbar fluid collapseOnSelect>
         <Navbar fluid collapseOnSelect>
           <Navbar.Header>
             <Navbar.Brand>
@@ -27,13 +25,16 @@ class App extends Component {
             </Navbar.Brand>
             <Navbar.Toggle />
           </Navbar.Header>
-          <Navbar.Collapse>
-            <Nav pullRight>
-              <RouteNavItem href="/signup">Signup</RouteNavItem>
-              {this.state.login ? <RouteNavItem href="/login">Login</RouteNavItem> : <RouteNavItem href="/"> Logout</RouteNavItem>}
-            </Nav>
-          </Navbar.Collapse>
+          {/* <Navbar.Collapse> */}
+            {/* <Nav pullRight>
+                <RouteNavItem href="/signup">Signup</RouteNavItem>
+                <RouteNavItem href="/login">Login</RouteNavItem>
+            </Nav> */}
+          {/* </Navbar.Collapse> */}
+        {/* </Navbar>
+        <Routes /> */}
         </Navbar>
+    </Navbar>
         <Routes />
       </div>
     );

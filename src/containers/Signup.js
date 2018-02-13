@@ -3,20 +3,41 @@ import { Button, FormGroup, FormControl, ControlLabel } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import Routes from "./Routes";
 import "./Signup.css";
+import {post} from 'form-urlencoded-post';
 
 export default class Signup extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      email: "",
-      password: "",
-      confirmpassword:"",
-      phone:"",
-      age:"",
-      role:"",
-      gender:"",
-      login: false
-    };
+        this.state = {
+          username: "",
+          password: "",
+          confirmpassword:"",
+          phone:"",
+          email:"",
+          account_State:"",
+          vet_S:"",
+          age:"",
+          role:"",
+          gender:"",
+          login: false
+        };
+  }
+
+  // info = {
+  //     username: this.state.username,
+  //     password: this.state.password,
+  //     phone:this.state.phone,
+  //     email:this.state.email,
+  //     account_State:this.state.account_State,
+  //     vet_S:this.state.vet_S,
+  //     age:this.state.age,
+  //     role:this.state.role,
+  //     gender:this.state.gender,
+  //     login: true
+  // };
+
+  GenerateNewUser() {
+      post('https://she17er.herokuapp.com/api/users/newUsers', this.state).then(res => {console.log(res);})
   }
 
   validatePassWord() {
@@ -36,6 +57,7 @@ export default class Signup extends Component {
   handleSubmit = event => {
       if (this.validateForm()) {
           this.setState({login: true});
+          this.GenerateNewUser();
           this.props.history.push("LoggedIn");
           window.alert("Sign up Sucessfully");
       } else {
@@ -43,17 +65,15 @@ export default class Signup extends Component {
       }
   }
 
-
   render() {
     return (
       <div className="Signup">
           <form onSubmit={this.handleSubmit}>
-          <FormGroup controlId="email" bsSize="large">
-            <ControlLabel>Email</ControlLabel>
+          <FormGroup controlId="username" bsSize="large">
+            <ControlLabel>user</ControlLabel>
             <FormControl
-              autoFocus
-              type="email"
-              value={this.state.email}
+              type="username"
+              value={this.state.username}
               onChange={this.handleChange}
             />
           </FormGroup>
@@ -79,6 +99,30 @@ export default class Signup extends Component {
               value={this.state.phone}
               onChange={this.handleChange}
               type="phone"
+            />
+        </FormGroup>
+          <FormGroup controlId="vet_S" bsSize="large">
+            <ControlLabel>vet_S</ControlLabel>
+            <FormControl
+              value={this.state.vet_S}
+              onChange={this.handleChange}
+              type="vet_S"
+            />
+        </FormGroup>
+        <FormGroup controlId="email" bsSize="large">
+          <ControlLabel>email</ControlLabel>
+          <FormControl
+            value={this.state.email}
+            onChange={this.handleChange}
+            type="email"
+          />
+      </FormGroup>
+          <FormGroup controlId="account_State" bsSize="large">
+            <ControlLabel>account_State</ControlLabel>
+            <FormControl
+              value={this.state.account_State}
+              onChange={this.handleChange}
+              type="account_State"
             />
         </FormGroup>
         <FormGroup controlId="role" bsSize="large">
