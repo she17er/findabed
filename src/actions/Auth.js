@@ -10,8 +10,8 @@ import * as types from './types';
  */
 export function login() {
   return (dispatch, getState) => { // using Thunks
-    const { email, password } = getState().forms.user.bio;
-    axios.post('/api/login', {  username, password })
+    const { username, password } = getState().forms.user;
+    axios.post('https://she17er.herokuapp.com/api/users/login', {  username, password })
       .then(resp => {
         dispatch(loginGenerator(resp.data.user));
       })
@@ -24,10 +24,8 @@ export function login() {
  */
 export function register() {
   return (dispatch, getState) => {
-    const { bio, history, availability, skills_interests,
-      referral, employment, ice, reference, criminal, permissions} = getState().forms.user;
-    axios.post('https://she17er.herokuapp.com/api/users/newUsers', { bio, history, availability, skills_interests,
-      referral, employment, ice, reference, criminal, permissions })
+    const { username, age, gender, vet_S, contact, account_State, password, role, login} = getState().forms.user;
+    axios.post('https://she17er.herokuapp.com/api/users/newUsers', { username, age, gender, vet_S, contact, account_State, password, role, login})
       .then(resp => {
         if (resp.data.user) dispatch(push('/login'));
         dispatch(registerGenerator(resp.data.user));
@@ -42,7 +40,7 @@ export function register() {
 export function logout() {
   return function(dispatch, getState) {
     sessionStorage.removeItem('state');
-    dispatch(push('/login'));
+    dispatch(push('/'));
     axios.get('/api/logout')
       .then(resp => dispatch(logoutGenerator()));
   };

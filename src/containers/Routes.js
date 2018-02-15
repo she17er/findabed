@@ -14,7 +14,7 @@ export default function Routes() {
     <Route path="/login" exact component={Login} />
     <Route path="/signup" exact component={Signup}/>
     <Auth />
-    <Route path="/LoggedIn" exact component={LoggedIn}/>
+    <Route path="/loggedIn" exact component={LoggedIn}/>
   </Switch>
   );
 }
