@@ -54,7 +54,7 @@ public class LoginScreen extends AppCompatActivity implements LoaderCallbacks<Cu
      * TODO: remove after connecting to a real authentication system.
      */
     private static final String[] DUMMY_CREDENTIALS = new String[]{
-            "foo@example.com:hello", "bar@example.com:world"
+            "seanwalsh@gatech.edu:password", "idong101@gmail.com:dongers"
     };
     /**
      * Keep track of the login task to ensure we can cancel it if requested.
@@ -207,7 +207,7 @@ public class LoginScreen extends AppCompatActivity implements LoaderCallbacks<Cu
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 5;
+        return password.length() > 4;
     }
 
     /**
@@ -334,7 +334,7 @@ public class LoginScreen extends AppCompatActivity implements LoaderCallbacks<Cu
             }
 
             // TODO: register the new account here.
-            return true;
+            return false;
         }
 
         @Override
