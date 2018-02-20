@@ -4,6 +4,7 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.ActionBar;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -71,9 +72,6 @@ public class LoginScreen extends AppCompatActivity implements LoaderCallbacks<Cu
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
 
-        //Back button on action bar
-        getActionBar().setDisplayHomeAsUpEnabled(true);
-
         // Set up the login form.
         mEmailView = (AutoCompleteTextView) findViewById(R.id.email);
         populateAutoComplete();
@@ -100,16 +98,6 @@ public class LoginScreen extends AppCompatActivity implements LoaderCallbacks<Cu
 
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     private void populateAutoComplete() {
@@ -362,6 +350,11 @@ public class LoginScreen extends AppCompatActivity implements LoaderCallbacks<Cu
         protected void onCancelled() {
             mAuthTask = null;
             showProgress(false);
+        }
+
+        public void login(View view) {
+            Intent intent = new Intent(view.getContext(), Dashboard.class);
+            startActivity(intent);
         }
     }
 }

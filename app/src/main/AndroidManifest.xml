@@ -23,7 +23,12 @@
         </activity>
         <activity
             android:name=".LoginScreen"
-            android:label="@string/title_activity_login_screen" />
+            android:label="@string/title_activity_login_screen"
+            android:parentActivityName=".WelcomeScreen">
+            <meta-data
+                android:name="anroid.support.PARENT_ACTIVITY"
+                android:value=".WelcomeScreen"/>
+        </activity>
         <activity
             android:name=".Dashboard"
             android:label="@string/title_activity_dashboard"
