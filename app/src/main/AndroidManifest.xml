@@ -27,12 +27,9 @@
             android:parentActivityName=".WelcomeScreen">
             <meta-data
                 android:name="anroid.support.PARENT_ACTIVITY"
-                android:value=".WelcomeScreen"/>
+                android:value=".WelcomeScreen" />
         </activity>
-        <activity
-            android:name=".Dashboard"
-            android:label="@string/title_activity_dashboard"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".Dashboard"></activity>
     </application>
 
 </manifest>

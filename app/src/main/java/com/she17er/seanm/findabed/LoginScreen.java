@@ -166,7 +166,11 @@ public class LoginScreen extends AppCompatActivity implements LoaderCallbacks<Cu
         View focusView = null;
 
         // Check for a valid password, if the user entered one.
-        if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+        if (TextUtils.isEmpty(password)) {
+            mPasswordView.setError(getString(R.string.error_field_required));
+            focusView = mPasswordView;
+            cancel = true;
+        } else if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
             mPasswordView.setError(getString(R.string.error_invalid_password));
             focusView = mPasswordView;
             cancel = true;
@@ -203,7 +207,7 @@ public class LoginScreen extends AppCompatActivity implements LoaderCallbacks<Cu
 
     private boolean isPasswordValid(String password) {
         //TODO: Replace this with your own logic
-        return password.length() > 4;
+        return password.length() > 5;
     }
 
     /**
@@ -339,6 +343,8 @@ public class LoginScreen extends AppCompatActivity implements LoaderCallbacks<Cu
             showProgress(false);
 
             if (success) {
+                Intent intent = new Intent(getApplicationContext(), Dashboard.class);
+                startActivity(intent);
                 finish();
             } else {
                 mPasswordView.setError(getString(R.string.error_incorrect_password));
