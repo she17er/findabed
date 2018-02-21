@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Nav, Navbar } from "react-bootstrap";
-import Routes from "./containers/Routes";
-import RouteNavItem from "./components/RouteNavItem";
+import Routes from "./Routes";
+import RouteNavItem from "../components/RouteNavItem";
 import "./App.css";
 
 class App extends Component {
