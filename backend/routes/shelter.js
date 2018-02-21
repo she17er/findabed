@@ -72,6 +72,21 @@ router.get('/getLocations', (req, res) => {
       })
   });
 
+  router.post('/shelter/logout/:id', (req, res) => {
+      Shelter.findByIdAndUpdate({
+          _id: req.params._id
+      }, {
+          login: false
+      }, function(err, docs) {
+          if (err) {
+              res.json(err);
+          } else {
+              console.log("successful");
+              res.json("logged out")
+          }
+      })
+  });
+
   router.get('/shelter/:_id', (req, res) => {
     Shelter.find({
         _id: req.params._id

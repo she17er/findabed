@@ -32,22 +32,22 @@ passport.use(new LocalStrategy(
     function(username, password, done) {
       User.findOne({ "username": username }, function (err, user) {
         console.log(user);
-        if (err) { 
+        if (err) {
             console.log("error");
             return done(err); }
         if (!user) { return done(null, false); }
-        if (!user.verifyPassword(password)) { 
+        if (!user.verifyPassword(password)) {
             console.log("checking hoexxoxoxoox");
             return done(null, false); }
         return done(null, user);
       });
     }
   ));
-  
+
   passport.serializeUser((user, done) => {
     return done(null, user._id);
   });
-  
+
   passport.deserializeUser((id, done) => {
     User.findById(id, (err, user) => {
       return done(err, user);
@@ -63,7 +63,7 @@ router.post('/login', (req, res) => {
       });
     })(req, res);
   });
-  
+
   // Logout Route
   router.get('/logout', (req, res) => {
     req.logout();
@@ -79,29 +79,29 @@ router.post('/newUsers', (req, res) => {
         console.log(user);
         res.send(user);
   }})
- } );
+ });
 
  router.route('/')
     .get((req, res) => {
       console.log("checking the get request in user.js");
-    })
+  });
 
 router.get('/getUsers', (req, res) => {
-    User.find({}) 
+    User.find({})
     .exec()
     .then((user) => res.send(user))
     .catch((err) => {
       res.send("" + err);
     });
-})
+});
 
 
 /**
- * this is very simple searching where keyword has to 
+ * this is very simple searching where keyword has to
  * equal the ENTIRE shelter name
- * Shelter searching should be more robust to 
+ * Shelter searching should be more robust to
  * return all shelters which contain the searched
- * phrase 
+ * phrase
  */
 router.get('/searchKeyword', (req, res) => {
   var keyword = req.query.keyword
@@ -110,9 +110,24 @@ router.get('/searchKeyword', (req, res) => {
   })
   .then((user) => res.send(user))
   .catch((err) => {
-    res.send("" + err); 
+    res.send("" + err);
   })
-})
+});
+
+router.post('/user/logout/:id', (req, res) => {
+    User.findByIdAndUpdate({
+        _id: req.params._id
+    }, {
+        login: false
+    }, function(err, docs) {
+        if (err) {
+            res.json(err);
+        } else {
+            console.log("successful");
+            res.json("logged out!")
+        }
+    })
+});
 
 router.post('/updatePassword/:_id', (req, res) => {
   User.findByIdAndUpdate({
@@ -129,4 +144,4 @@ router.post('/updatePassword/:_id', (req, res) => {
 })
 });
 
-module.exports = router; 
+module.exports = router;
