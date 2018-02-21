@@ -27,12 +27,22 @@ class registrationSecondFile: UIViewController, UIPickerViewDataSource, UIPicker
         
             rolePickerView?.delegate = self
             rolePickerView?.dataSource = self
+        let toolbar = UIToolbar()
+
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneClicked))
         
+        toolbar.setItems([doneButton], animated: false)
+        
+        ageTxtField.inputAccessoryView = toolbar
+        phoneTxtField.inputAccessoryView = toolbar
+        emailTxtField.inputAccessoryView = toolbar
         
         
         
     }
-    
+    @objc func doneClicked() {
+        view.endEditing(true)
+    }
     
     @IBAction func onDoneClicked(_ sender: Any) {
         let parameters: Parameters = [
@@ -46,13 +56,16 @@ class registrationSecondFile: UIViewController, UIPickerViewDataSource, UIPicker
             ],
             "password": password ?? "",
             "role": roleTxt,
+             "account_State": "existslmao"
             ]
         
         
         Alamofire.request("https://she17er.herokuapp.com/api/users/newUsers", method: HTTPMethod.post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).validate().responseString {
             (response) -> Void in
             
+            
         }
+        
     }
     
     let roles = ["user", "admin", "shelter"]

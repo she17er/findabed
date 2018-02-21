@@ -18,10 +18,21 @@ class registrationViewController: UIViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        let toolbar = UIToolbar()
         
+        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneClicked))
+        
+        toolbar.setItems([doneButton], animated: false)
+        
+        userNameTxtField.inputAccessoryView = toolbar
+        pwdTxtField.inputAccessoryView = toolbar
+        genderTxtField.inputAccessoryView = toolbar
+        veteranTxtField.inputAccessoryView = toolbar
         
     }
-    
+    @objc func doneClicked() {
+        view.endEditing(true)
+    }
     @IBAction func onNextClicked(_ sender: UIButton) {
         if !userNameTxtField.text!.isEmpty &&
             !pwdTxtField.text!.isEmpty &&
