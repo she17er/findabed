@@ -25,8 +25,8 @@ class registrationSecondFile: UIViewController, UIPickerViewDataSource, UIPicker
     override func viewDidLoad() {
         super.viewDidLoad()
         
-            rolePickerView?.delegate = self
-            rolePickerView?.dataSource = self
+        rolePickerView?.delegate = self
+        rolePickerView?.dataSource = self
         let toolbar = UIToolbar()
 
         let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneClicked))
@@ -37,6 +37,8 @@ class registrationSecondFile: UIViewController, UIPickerViewDataSource, UIPicker
         phoneTxtField.inputAccessoryView = toolbar
         emailTxtField.inputAccessoryView = toolbar
         
+        
+        rolePickerView.selectedRow(inComponent: 0)
         
         
     }
@@ -56,13 +58,14 @@ class registrationSecondFile: UIViewController, UIPickerViewDataSource, UIPicker
             ],
             "password": password ?? "",
             "role": roleTxt,
-             "account_State": "existslmao"
+            "account_State": "existslmao",
+            "login": "true"
             ]
         
         
         Alamofire.request("https://she17er.herokuapp.com/api/users/newUsers", method: HTTPMethod.post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).validate().responseString {
-            (response) -> Void in
-            
+            response in
+            print(response)
             
         }
         

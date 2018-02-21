@@ -33,7 +33,7 @@ class registrationViewController: UIViewController{
     @objc func doneClicked() {
         view.endEditing(true)
     }
-    @IBAction func onNextClicked(_ sender: UIButton) {
+    @IBAction func onNextClicked(_ sender: Any) {
         if !userNameTxtField.text!.isEmpty &&
             !pwdTxtField.text!.isEmpty &&
             !genderTxtField.text!.isEmpty &&

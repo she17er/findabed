@@ -22,8 +22,15 @@ class loginViewController: UIViewController {
         
         //actually do something with it
         print(name! + password!)
-        
-        
+        let parameters: Parameters = [
+            "username": name ?? "",
+            "password": password ?? "",
+        ]
+        Alamofire.request("https://she17er.herokuapp.com/api/users/login", method: HTTPMethod.post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).validate().responseString {
+            response in
+            print(response)
+            
+        }
         
     }
 }

@@ -158,12 +158,16 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="gjI-pb-IhB"/>
                     </view>
+                    <connections>
+                        <outlet property="nameTxt" destination="6HF-u0-8cq" id="YH6-qv-jy9"/>
+                        <outlet property="passwordTxt" destination="Bt7-63-4Mg" id="cDu-yo-c4n"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dZk-ip-TwN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1328.8" y="-119.1904047976012"/>
         </scene>
-        <!--Registration View Controller-->
+        <!--Registration-->
         <scene sceneID="n8E-jV-76g">
             <objects>
                 <viewController id="ZrU-Fi-N6J" customClass="registrationViewController" customModule="m4LoginReg" customModuleProvider="target" sceneMemberID="viewController">
@@ -194,7 +198,7 @@
                                 <rect key="frame" x="171" y="273" width="107" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="lvB-ro-MS8">
                                 <rect key="frame" x="171" y="358" width="107" height="30"/>
@@ -242,8 +246,7 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <action selector="onNextClicked:" destination="ZrU-Fi-N6J" eventType="touchUpInside" id="uqv-hx-cAe"/>
-                                    <segue destination="AYL-ar-I6d" kind="show" identifier="registrationIdentifier" id="vvw-JX-7eN"/>
+                                    <action selector="onNextClicked:" destination="ZrU-Fi-N6J" eventType="touchUpInside" id="fS4-Be-i22"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -282,18 +285,26 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="CWW-Dq-xzA"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Registration" id="51r-8k-COO">
+                        <barButtonItem key="rightBarButtonItem" title="Next" id="QP1-lw-s1N">
+                            <connections>
+                                <action selector="onNextClicked:" destination="ZrU-Fi-N6J" id="bVa-5B-ZgC"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="genderTxtField" destination="lvB-ro-MS8" id="IXb-zk-XZc"/>
                         <outlet property="pwdTxtField" destination="sMe-1t-g94" id="6gJ-W5-3Wj"/>
                         <outlet property="userNameTxtField" destination="gJw-wP-aki" id="KT6-Vw-hAv"/>
                         <outlet property="veteranTxtField" destination="RlR-K5-81h" id="VxK-Qt-Sru"/>
+                        <segue destination="AYL-ar-I6d" kind="show" identifier="registrationIdentifier" id="T5t-wv-vUd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wdK-mC-cGr" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1328.8" y="680.5097451274363"/>
         </scene>
-        <!--Registration Second File-->
+        <!--Registration-->
         <scene sceneID="nIO-m6-ezT">
             <objects>
                 <viewController id="AYL-ar-I6d" customClass="registrationSecondFile" customModule="m4LoginReg" customModuleProvider="target" sceneMemberID="viewController">
@@ -368,10 +379,15 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="bVR-SJ-QPR">
+                                <rect key="frame" x="168" y="610" width="39" height="37"/>
+                                <color key="pageIndicatorTintColor" red="0.95272320508956909" green="0.6952328085899353" blue="0.3449958860874176" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </pageControl>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="iQy-cT-OEi" firstAttribute="bottom" secondItem="3S0-XE-GfU" secondAttribute="bottom" constant="279" id="2AG-rg-MUO"/>
+                            <constraint firstItem="bVR-SJ-QPR" firstAttribute="centerX" secondItem="KdL-yf-Ula" secondAttribute="centerX" id="2oG-Ku-wTG"/>
                             <constraint firstItem="HX7-JM-IeT" firstAttribute="leading" secondItem="gDJ-y1-8MQ" secondAttribute="leading" id="3Ez-95-Zqk"/>
                             <constraint firstItem="XhV-Wq-i8j" firstAttribute="leading" secondItem="KdL-yf-Ula" secondAttribute="leading" id="3cP-xZ-Brn"/>
                             <constraint firstItem="Uh9-Yf-Xal" firstAttribute="top" secondItem="gDJ-y1-8MQ" secondAttribute="bottom" constant="23" id="7Vy-vK-BDg"/>
@@ -393,14 +409,19 @@
                             <constraint firstItem="KdL-yf-Ula" firstAttribute="centerX" secondItem="A1o-Pa-peQ" secondAttribute="centerX" id="Wrb-wT-aFK"/>
                             <constraint firstItem="Pmt-4R-cc5" firstAttribute="top" secondItem="Uh9-Yf-Xal" secondAttribute="bottom" constant="5" id="YdN-ac-NWj"/>
                             <constraint firstItem="i9L-uO-Zxy" firstAttribute="leading" secondItem="iQy-cT-OEi" secondAttribute="leading" constant="61" id="cvS-AH-nti"/>
+                            <constraint firstAttribute="bottom" secondItem="bVR-SJ-QPR" secondAttribute="bottom" constant="20" symbolic="YES" id="eyr-zc-KhD"/>
                             <constraint firstItem="gDJ-y1-8MQ" firstAttribute="top" secondItem="HX7-JM-IeT" secondAttribute="bottom" constant="55" id="jzD-8O-BhE"/>
                             <constraint firstItem="iQy-cT-OEi" firstAttribute="trailing" secondItem="HX7-JM-IeT" secondAttribute="trailing" constant="97" id="pjN-eg-h4l"/>
                             <constraint firstItem="i9L-uO-Zxy" firstAttribute="bottom" secondItem="Pmt-4R-cc5" secondAttribute="bottom" id="s2x-FR-XJ9"/>
                             <constraint firstItem="HX7-JM-IeT" firstAttribute="top" secondItem="KdL-yf-Ula" secondAttribute="bottom" constant="32" id="seM-eX-J8T"/>
+                            <constraint firstItem="bVR-SJ-QPR" firstAttribute="leading" secondItem="iQy-cT-OEi" secondAttribute="leading" constant="168" id="xGp-rP-2A6"/>
                             <constraint firstItem="3S0-XE-GfU" firstAttribute="centerY" secondItem="Uh9-Yf-Xal" secondAttribute="centerY" id="yJT-67-nfb"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="iQy-cT-OEi"/>
                     </view>
+                    <navigationItem key="navigationItem" title="Registration" id="KRO-2C-r9C">
+                        <barButtonItem key="rightBarButtonItem" systemItem="done" id="K5x-N1-3PX"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="ageTxtField" destination="gDJ-y1-8MQ" id="92z-UC-jZm"/>
                         <outlet property="emailTxtField" destination="Pmt-4R-cc5" id="aTt-KF-A84"/>
@@ -428,7 +449,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="w4I-IB-G5Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-83.200000000000003" y="115.14242878560721"/>
+            <point key="canvasLocation" x="-622" y="116"/>
         </scene>
     </scenes>
 </document>
