@@ -242,7 +242,8 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="AYL-ar-I6d" kind="show" id="vvw-JX-7eN"/>
+                                    <action selector="onNextClicked:" destination="ZrU-Fi-N6J" eventType="touchUpInside" id="uqv-hx-cAe"/>
+                                    <segue destination="AYL-ar-I6d" kind="show" identifier="registrationIdentifier" id="vvw-JX-7eN"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -282,8 +283,8 @@
                         <viewLayoutGuide key="safeArea" id="CWW-Dq-xzA"/>
                     </view>
                     <connections>
-                        <outlet property="ageTxtField" destination="sMe-1t-g94" id="vUg-2E-g73"/>
                         <outlet property="genderTxtField" destination="lvB-ro-MS8" id="IXb-zk-XZc"/>
+                        <outlet property="pwdTxtField" destination="sMe-1t-g94" id="6gJ-W5-3Wj"/>
                         <outlet property="userNameTxtField" destination="gJw-wP-aki" id="KT6-Vw-hAv"/>
                         <outlet property="veteranTxtField" destination="RlR-K5-81h" id="VxK-Qt-Sru"/>
                     </connections>
@@ -292,23 +293,14 @@
             </objects>
             <point key="canvasLocation" x="1328.8" y="680.5097451274363"/>
         </scene>
-        <!--Registration View Controller-->
+        <!--Registration Second File-->
         <scene sceneID="nIO-m6-ezT">
             <objects>
-                <viewController id="AYL-ar-I6d" customClass="registrationViewController" customModule="m4LoginReg" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="AYL-ar-I6d" customClass="registrationSecondFile" customModule="m4LoginReg" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="A1o-Pa-peQ">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Registration" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KdL-yf-Ula">
-                                <rect key="frame" x="61" y="64" width="253" height="92"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="92" id="CIy-hN-wXR"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="43"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="HX7-JM-IeT">
                                 <rect key="frame" x="172" y="188" width="106" height="30"/>
                                 <nil key="textColor"/>
@@ -348,9 +340,12 @@
                                 <state key="normal" title="Done">
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="onDoneClicked:" destination="AYL-ar-I6d" eventType="touchUpInside" id="paT-cQ-wLE"/>
+                                </connections>
                             </button>
-                            <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Uh9-Yf-Xal">
-                                <rect key="frame" x="171" y="326" width="107" height="103"/>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uh9-Yf-Xal">
+                                <rect key="frame" x="172" y="326" width="106" height="103"/>
                             </pickerView>
                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Pmt-4R-cc5">
                                 <rect key="frame" x="163" y="434" width="126" height="30"/>
@@ -358,10 +353,19 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i9L-uO-Zxy">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i9L-uO-Zxy">
                                 <rect key="frame" x="61" y="443" width="41" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.95278424019999997" green="0.70694988969999994" blue="0.3646098673" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Registration" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KdL-yf-Ula">
+                                <rect key="frame" x="61" y="64" width="253" height="92"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="92" id="CIy-hN-wXR"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="43"/>
+                                <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -377,7 +381,7 @@
                             <constraint firstItem="HX7-JM-IeT" firstAttribute="trailing" secondItem="gDJ-y1-8MQ" secondAttribute="trailing" id="FwH-0t-Xbf"/>
                             <constraint firstItem="XhV-Wq-i8j" firstAttribute="bottom" secondItem="HX7-JM-IeT" secondAttribute="bottom" id="IaQ-xO-Hyd"/>
                             <constraint firstItem="HX7-JM-IeT" firstAttribute="leading" secondItem="XhV-Wq-i8j" secondAttribute="trailing" constant="31" id="KkK-Za-NTg"/>
-                            <constraint firstItem="Pmt-4R-cc5" firstAttribute="leading" secondItem="i9L-uO-Zxy" secondAttribute="trailing" constant="50" id="L31-ZS-6ry"/>
+                            <constraint firstItem="Pmt-4R-cc5" firstAttribute="leading" secondItem="i9L-uO-Zxy" secondAttribute="trailing" constant="61" id="L31-ZS-6ry"/>
                             <constraint firstItem="SzB-x8-0V9" firstAttribute="leading" secondItem="3S0-XE-GfU" secondAttribute="leading" id="Lae-Rc-S2V"/>
                             <constraint firstItem="iQy-cT-OEi" firstAttribute="trailing" secondItem="Pmt-4R-cc5" secondAttribute="trailing" constant="86" id="Lfg-rb-Dxp"/>
                             <constraint firstItem="SzB-x8-0V9" firstAttribute="bottom" secondItem="gDJ-y1-8MQ" secondAttribute="bottom" id="OKu-p7-49R"/>
@@ -388,7 +392,7 @@
                             <constraint firstItem="3S0-XE-GfU" firstAttribute="top" secondItem="SzB-x8-0V9" secondAttribute="bottom" constant="64" id="VJD-gZ-GW7"/>
                             <constraint firstItem="KdL-yf-Ula" firstAttribute="centerX" secondItem="A1o-Pa-peQ" secondAttribute="centerX" id="Wrb-wT-aFK"/>
                             <constraint firstItem="Pmt-4R-cc5" firstAttribute="top" secondItem="Uh9-Yf-Xal" secondAttribute="bottom" constant="5" id="YdN-ac-NWj"/>
-                            <constraint firstItem="i9L-uO-Zxy" firstAttribute="leading" secondItem="iQy-cT-OEi" secondAttribute="leading" constant="72" id="cvS-AH-nti"/>
+                            <constraint firstItem="i9L-uO-Zxy" firstAttribute="leading" secondItem="iQy-cT-OEi" secondAttribute="leading" constant="61" id="cvS-AH-nti"/>
                             <constraint firstItem="gDJ-y1-8MQ" firstAttribute="top" secondItem="HX7-JM-IeT" secondAttribute="bottom" constant="55" id="jzD-8O-BhE"/>
                             <constraint firstItem="iQy-cT-OEi" firstAttribute="trailing" secondItem="HX7-JM-IeT" secondAttribute="trailing" constant="97" id="pjN-eg-h4l"/>
                             <constraint firstItem="i9L-uO-Zxy" firstAttribute="bottom" secondItem="Pmt-4R-cc5" secondAttribute="bottom" id="s2x-FR-XJ9"/>
@@ -398,10 +402,10 @@
                         <viewLayoutGuide key="safeArea" id="iQy-cT-OEi"/>
                     </view>
                     <connections>
-                        <outlet property="ageTxtField" destination="gDJ-y1-8MQ" id="PCp-LI-CDn"/>
-                        <outlet property="emailTxtField" destination="Pmt-4R-cc5" id="4Y7-Ue-Bv7"/>
-                        <outlet property="phoneTxtField" destination="HX7-JM-IeT" id="VYI-d2-cl6"/>
-                        <outlet property="rolePickerView" destination="Uh9-Yf-Xal" id="iO5-Qs-b2C"/>
+                        <outlet property="ageTxtField" destination="gDJ-y1-8MQ" id="92z-UC-jZm"/>
+                        <outlet property="emailTxtField" destination="Pmt-4R-cc5" id="aTt-KF-A84"/>
+                        <outlet property="phoneTxtField" destination="HX7-JM-IeT" id="wzW-tp-TWV"/>
+                        <outlet property="rolePickerView" destination="Uh9-Yf-Xal" id="BJ9-JL-GS3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X1L-e0-BOv" userLabel="First Responder" sceneMemberID="firstResponder"/>
