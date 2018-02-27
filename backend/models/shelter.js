@@ -9,8 +9,12 @@ var shelterSchema = Schema({
         type: String,
         required: true
     },
-    location: {
+    coOrdinates: {
         type: String,
+        required: true
+    },
+    location: {
+        type: String, 
         required: true
     },
     currCapacity: {
@@ -29,12 +33,20 @@ var shelterSchema = Schema({
         type: Array,
         required: true
     },
+    phoneNumber: {
+        type: Number, 
+        required: true
+    },
     role: {
         type: String,
         required: true
     },
     login: {
         type: Boolean,
+        required: true
+    },
+    specialNotes: {
+        type: String, 
         required: true
     }
 }, { timestamps: true });
