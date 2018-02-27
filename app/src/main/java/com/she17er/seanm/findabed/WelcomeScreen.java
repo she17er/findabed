@@ -13,12 +13,22 @@ public class WelcomeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_screen);
 
+        //Login button functionality, switches to login activity screen
         Button login = (Button) findViewById(R.id.loginButton);
         login.setOnClickListener(new View.OnClickListener() {
            public void onClick(View view) {
-               Intent myIntent = new Intent(view.getContext(), LoginScreen.class);
-               startActivityForResult(myIntent, 0);
+               Intent loginIntent = new Intent(view.getContext(), LoginScreen.class);
+               startActivityForResult(loginIntent, 0);
            }
+        });
+
+        //Signup button functionality, switches to signup activity screen
+        Button signup = (Button) findViewById(R.id.signupButton);
+        signup.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent signupIntent = new Intent(view.getContext(), SignupScreen.class);
+                startActivityForResult(signupIntent, 0);
+            }
         });
     }
 }

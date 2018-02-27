@@ -26,10 +26,19 @@
             android:label="@string/title_activity_login_screen"
             android:parentActivityName=".WelcomeScreen">
             <meta-data
-                android:name="anroid.support.PARENT_ACTIVITY"
+                android:name="android.support.PARENT_ACTIVITY"
                 android:value=".WelcomeScreen" />
         </activity>
-        <activity android:name=".Dashboard"></activity>
+        <activity
+            android:name=".SignupScreen"
+            android:label="@string/title_activity_signup_screen"
+            android:theme="@style/AppTheme.NoActionBar"
+            android:parentActivityName=".WelcomeScreen" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".WelcomeScreen" />
+        </activity>
+        <activity android:name=".Dashboard" />
     </application>
 
 </manifest>

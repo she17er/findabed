@@ -23,4 +23,17 @@
     <!-- Strings related to the dashboard -->
     <string name="title_activity_dashboard">Dashboard</string>
     <string name="logout_button">Logout</string>
+    <string name="title_activity_signup_screen">SignupScreen</string>
+    <string name="nameDesc">Name:</string>
+    <string name="usernameDesc">Username:</string>
+    <string name="emailDesc">Email:</string>
+    <string name="phoneDesc">Phone Number:</string>
+    <string name="passwordDesc">Password:</string>
+    <string name="passwordDesc2">Reenter Password:</string>
+    <string name="ageDesc">Age:</string>
+    <string name="genderDesc">Gender:</string>
+    <string name="vetStatDesc">Veteran Status:</string>
+    <string name="accountStateDesc">Account State:</string>
+    <string name="roleDesc">Role:</string>
+    <string name="action_settings">Settings</string>
 </resources>
