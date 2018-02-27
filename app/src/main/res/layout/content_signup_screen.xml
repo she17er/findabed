@@ -100,8 +100,10 @@
 
         <Spinner
             android:id="@+id/genderSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:drawSelectorOnTop="true"
+            android:entries="@array/genderArray" />
 
         <TextView
             android:id="@+id/vetStatusDescription"
@@ -111,8 +113,10 @@
 
         <Spinner
             android:id="@+id/vetStatusSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:drawSelectorOnTop="true"
+            android:entries="@array/vetStatArray" />
 
         <TextView
             android:id="@+id/accountStateDescription"
@@ -122,8 +126,10 @@
 
         <Spinner
             android:id="@+id/accountStateSpinner"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:drawSelectorOnTop="true"
+            android:entries="@array/accountStateArray" />
 
         <TextView
             android:id="@+id/roleDescription"
@@ -133,8 +139,16 @@
 
         <Spinner
             android:id="@+id/roleDescriptionSpinner"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:drawSelectorOnTop="true"
+            android:entries="@array/roleArray" />
+
+        <Button
+            android:id="@+id/submitButton"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="@string/submitButton" />
 
     </LinearLayout>
 </android.support.v4.widget.NestedScrollView>

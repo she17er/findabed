@@ -22,6 +22,8 @@
 
     <!-- Strings related to the dashboard -->
     <string name="title_activity_dashboard">Dashboard</string>
+
+    <!-- Strings related to the signup screen -->
     <string name="logout_button">Logout</string>
     <string name="title_activity_signup_screen">SignupScreen</string>
     <string name="nameDesc">Name:</string>
@@ -35,5 +37,27 @@
     <string name="vetStatDesc">Veteran Status:</string>
     <string name="accountStateDesc">Account State:</string>
     <string name="roleDesc">Role:</string>
+    <!-- Strings for gender spinner -->
+    <string-array name="genderArray">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+    </string-array>
+    <!-- Strings for vetStatus spinner -->
+    <string-array name="vetStatArray">
+        <item>Non-Veteran</item>
+        <item>Veteran</item>
+    </string-array>
+    <!-- Strings for accountState spinner -->
+    <string-array name="accountStateArray">
+        <item>User</item>
+        <item>Admin</item>
+    </string-array>
+    <!-- Strings for role spinner -->
+    <string-array name="roleArray">
+        <item>Shelter Seeker</item>
+        <item>Shelter Worker</item>
+    </string-array>
+    <string name="submitButton">Submit</string>
     <string name="action_settings">Settings</string>
 </resources>

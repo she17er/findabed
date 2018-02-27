@@ -10,8 +10,15 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class SignupScreen extends AppCompatActivity {
+
+    private Spinner genderSpinner, vetSpinner, roleSpinner, accountSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +27,52 @@ public class SignupScreen extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        populateSpinners();
+        addButtonListener();
 //        getActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    private void populateSpinners() {
+        genderSpinner = (Spinner) findViewById(R.id.genderSpinner);
+        List<String> genderEntries = new ArrayList<>();
+        genderEntries.add("Male");
+        genderEntries.add("Female");
+        genderEntries.add("Other");
+        ArrayAdapter<String> dataAdapterGender = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, genderEntries);
+        dataAdapterGender.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        genderSpinner.setAdapter(dataAdapterGender);
+
+        vetSpinner = (Spinner) findViewById(R.id.vetStatusSpinner);
+        List<String> vetStatEntries = new ArrayList<>();
+        vetStatEntries.add("Non-Veteran");
+        vetStatEntries.add("Veteran");
+        ArrayAdapter<String> dataAdapterVet = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, vetStatEntries);
+        dataAdapterGender.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        vetSpinner.setAdapter(dataAdapterVet);
+
+        accountSpinner = (Spinner) findViewById(R.id.accountStateSpinner);
+        List<String> accountEntries = new ArrayList<>();
+        accountEntries.add("User");
+        accountEntries.add("Admin");
+        ArrayAdapter<String> dataAdapterAccount = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, accountEntries);
+        dataAdapterAccount.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        accountSpinner.setAdapter(dataAdapterAccount);
+
+        roleSpinner = (Spinner) findViewById(R.id.roleDescriptionSpinner);
+        List<String> roleEntries = new ArrayList<>();
+        roleEntries.add("Shelter Seeker");
+        roleEntries.add("Shelter Worker");
+        ArrayAdapter<String> dataAdapterRole = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, roleEntries);
+        dataAdapterRole.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        roleSpinner.setAdapter(dataAdapterRole);
+    }
+
+    private void addButtonListener() {
+
     }
 
 //    @Override
