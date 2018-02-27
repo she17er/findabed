@@ -2,23 +2,28 @@ package com.she17er.seanm.findabed;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.NavUtils;
-import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.view.MenuItem;
+import android.text.Editable;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class SignupScreen extends AppCompatActivity {
 
+    public static Map<String, String> accounts = new HashMap<>();
+    private EditText username, email, phone, password, passwordCheck;
     private Spinner genderSpinner, vetSpinner, roleSpinner, accountSpinner;
+    private Button submit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +31,13 @@ public class SignupScreen extends AppCompatActivity {
         setContentView(R.layout.activity_signup_screen);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        submit = (Button) findViewById(R.id.submitButton);
+        username = (EditText) findViewById(R.id.usernameField);
+        email = (EditText) findViewById(R.id.emailField);
+        phone = (EditText) findViewById(R.id.phoneField);
+        password = (EditText) findViewById(R.id.passwordField);
+        passwordCheck = (EditText) findViewById(R.id.reenterPasswordField);
 
         populateSpinners();
         addButtonListener();
@@ -72,7 +84,16 @@ public class SignupScreen extends AppCompatActivity {
     }
 
     private void addButtonListener() {
-
+        submit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                accounts.put(username.getText().toString(), password.getText().toString());
+                Intent successIntent = new Intent(v.getContext(), WelcomeScreen.class);
+                startActivityForResult(successIntent, 0);
+                Snackbar confirmationSnackbar = Snackbar.make(v, "TEST", Snackbar.LENGTH_LONG);
+                confirmationSnackbar.show();
+            }
+        });
     }
 
 //    @Override
