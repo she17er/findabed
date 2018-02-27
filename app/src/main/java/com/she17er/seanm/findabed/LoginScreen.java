@@ -67,6 +67,7 @@ public class LoginScreen extends AppCompatActivity implements LoaderCallbacks<Cu
     private EditText mPasswordView;
     private View mProgressView;
     private View mLoginFormView;
+    public static String currentUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -337,6 +338,7 @@ public class LoginScreen extends AppCompatActivity implements LoaderCallbacks<Cu
 //            }
 
             if (SignupScreen.accounts.containsKey(mUser)) {
+                currentUser = mUser;
                 return SignupScreen.accounts.get(mUser).equals(mPassword);
             }
 

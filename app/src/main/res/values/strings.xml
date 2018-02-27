@@ -22,6 +22,7 @@
 
     <!-- Strings related to the dashboard -->
     <string name="title_activity_dashboard">Dashboard</string>
+    <string name="dashboardWelcomeText">Welcome </string>
 
     <!-- Strings related to the signup screen -->
     <string name="logout_button">Logout</string>
