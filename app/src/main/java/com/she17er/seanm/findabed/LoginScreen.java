@@ -68,6 +68,7 @@ public class LoginScreen extends AppCompatActivity implements LoaderCallbacks<Cu
     private View mProgressView;
     private View mLoginFormView;
     public static String currentUser;
+    public static String accountState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -173,11 +174,11 @@ public class LoginScreen extends AppCompatActivity implements LoaderCallbacks<Cu
             focusView = mPasswordView;
             cancel = true;
         }
-//        else if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-//            mPasswordView.setError(getString(R.string.error_invalid_password));
-//            focusView = mPasswordView;
-//            cancel = true;
-//        }
+        else if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
+            mPasswordView.setError(getString(R.string.error_invalid_password));
+            focusView = mPasswordView;
+            cancel = true;
+        }
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
@@ -185,11 +186,6 @@ public class LoginScreen extends AppCompatActivity implements LoaderCallbacks<Cu
             focusView = mUserView;
             cancel = true;
         }
-//        else if (!isEmailValid(email)) {
-//            mUserView.setError(getString(R.string.error_invalid_email));
-//            focusView = mUserView;
-//            cancel = true;
-//        }
 
         if (cancel) {
             // There was an error; don't attempt login and focus the first
@@ -204,15 +200,10 @@ public class LoginScreen extends AppCompatActivity implements LoaderCallbacks<Cu
         }
     }
 
-//    private boolean isEmailValid(String email) {
-//        //TODO: Replace this with your own logic
-//        return email.contains("@");
-//    }
-//
-//    private boolean isPasswordValid(String password) {
-//        //TODO: Replace this with your own logic
-//        return password.length() > 4;
-//    }
+    private boolean isPasswordValid(String password) {
+        //TODO: Replace this with your own logic
+        return password.length() > 5;
+    }
 
     /**
      * Shows the progress UI and hides the login form.
@@ -339,7 +330,8 @@ public class LoginScreen extends AppCompatActivity implements LoaderCallbacks<Cu
 
             if (SignupScreen.accounts.containsKey(mUser)) {
                 currentUser = mUser;
-                return SignupScreen.accounts.get(mUser).equals(mPassword);
+                accountState = SignupScreen.accounts.get(mUser)[1];
+                return SignupScreen.accounts.get(mUser)[0].equals(mPassword);
             }
 
             // TODO: register the new account here.

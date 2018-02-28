@@ -27,7 +27,7 @@ import java.util.Map;
 
 public class SignupScreen extends AppCompatActivity {
 
-    public static Map<String, String> accounts = new HashMap<>();
+    public static Map<String, String[]> accounts = new HashMap<>();
     private EditText username, email, phone, password, passwordCheck, age;
     private Spinner genderSpinner, vetSpinner, roleSpinner, accountSpinner;
     private Button submit;
@@ -102,7 +102,8 @@ public class SignupScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (checkValid()) {
-                    accounts.put(username.getText().toString(), password.getText().toString());
+                    String[] accountData = {password.getText().toString(), accountSpinner.getSelectedItem().toString()};
+                    accounts.put(username.getText().toString(), accountData);
                     Intent successIntent = new Intent(v.getContext(), WelcomeScreen.class);
                     startActivityForResult(successIntent, 0);
                     Snackbar confirmationSnackbar = Snackbar.make(v, "TEST", Snackbar.LENGTH_LONG);

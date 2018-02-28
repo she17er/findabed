@@ -10,6 +10,7 @@ import android.widget.TextView;
 public class Dashboard extends AppCompatActivity {
 
     private TextView welcomeText;
+    private TextView accountStateText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +19,10 @@ public class Dashboard extends AppCompatActivity {
 
         welcomeText = (TextView) findViewById(R.id.dashboardWelcomeText);
         welcomeText.setText("Welcome " + LoginScreen.currentUser.toString());
+
+        accountStateText = (TextView) findViewById(R.id.dashboardAccountStateText);
+        accountStateText.setText("You are a "
+            + LoginScreen.accountState);
 
         Button logout = (Button) findViewById(R.id.logoutButton);
         logout.setOnClickListener(new View.OnClickListener() {
