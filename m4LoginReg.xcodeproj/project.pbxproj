@@ -16,8 +16,11 @@
 		55119902202CF4450045D950 /* m4LoginRegTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55119901202CF4450045D950 /* m4LoginRegTests.swift */; };
 		5511990D202CF4450045D950 /* m4LoginRegUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5511990C202CF4450045D950 /* m4LoginRegUITests.swift */; };
 		5511991B202CFFB60045D950 /* loginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5511991A202CFFB60045D950 /* loginViewController.swift */; };
-		5511991D202D00020045D950 /* registrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5511991C202D00020045D950 /* registrationViewController.swift */; };
-		559075A1203CE42B00BC85F4 /* registrationSecondFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5552017A2034C52F006BBD4D /* registrationSecondFile.swift */; };
+		5511991D202D00020045D950 /* userRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5511991C202D00020045D950 /* userRegistrationViewController.swift */; };
+		559075A1203CE42B00BC85F4 /* userRegistrationContinuedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5552017A2034C52F006BBD4D /* userRegistrationContinuedViewController.swift */; };
+		55A98B042047140E00AAB00B /* shelterRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A98B032047140E00AAB00B /* shelterRegistrationViewController.swift */; };
+		55A98B062047579100AAB00B /* shelterRegistrationContinuedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A98B052047579100AAB00B /* shelterRegistrationContinuedViewController.swift */; };
+		55E3655A2045FE28003C54DA /* registrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55E365592045FE28003C54DA /* registrationViewController.swift */; };
 		D3BD2E5AC7C6943F17B52534 /* Pods_m4LoginReg.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 43521BEBFC80BA607EBAD719 /* Pods_m4LoginReg.framework */; };
 		FB376EDF223F42C46FF0405D /* Pods_m4LoginRegUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AC1AA050016D4655E6F0FF0 /* Pods_m4LoginRegUITests.framework */; };
 /* End PBXBuildFile section */
@@ -60,8 +63,11 @@
 		5511990C202CF4450045D950 /* m4LoginRegUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = m4LoginRegUITests.swift; sourceTree = "<group>"; };
 		5511990E202CF4450045D950 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5511991A202CFFB60045D950 /* loginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = loginViewController.swift; sourceTree = "<group>"; };
-		5511991C202D00020045D950 /* registrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = registrationViewController.swift; sourceTree = "<group>"; };
-		5552017A2034C52F006BBD4D /* registrationSecondFile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = registrationSecondFile.swift; sourceTree = "<group>"; };
+		5511991C202D00020045D950 /* userRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userRegistrationViewController.swift; sourceTree = "<group>"; };
+		5552017A2034C52F006BBD4D /* userRegistrationContinuedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userRegistrationContinuedViewController.swift; sourceTree = "<group>"; };
+		55A98B032047140E00AAB00B /* shelterRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shelterRegistrationViewController.swift; sourceTree = "<group>"; };
+		55A98B052047579100AAB00B /* shelterRegistrationContinuedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shelterRegistrationContinuedViewController.swift; sourceTree = "<group>"; };
+		55E365592045FE28003C54DA /* registrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = registrationViewController.swift; sourceTree = "<group>"; };
 		5FBE13F8E318956E22D74EDE /* Pods-m4LoginRegUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-m4LoginRegUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-m4LoginRegUITests/Pods-m4LoginRegUITests.release.xcconfig"; sourceTree = "<group>"; };
 		7BC868F7F42104124D1EBCF6 /* Pods-m4LoginReg.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-m4LoginReg.release.xcconfig"; path = "Pods/Target Support Files/Pods-m4LoginReg/Pods-m4LoginReg.release.xcconfig"; sourceTree = "<group>"; };
 		AC898CB0049C7DA0F265025F /* Pods_m4LoginRegTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_m4LoginRegTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,13 +128,16 @@
 			children = (
 				551198EC202CF4450045D950 /* AppDelegate.swift */,
 				551198EE202CF4450045D950 /* ViewController.swift */,
-				5511991C202D00020045D950 /* registrationViewController.swift */,
+				5511991C202D00020045D950 /* userRegistrationViewController.swift */,
 				551198F0202CF4450045D950 /* Main.storyboard */,
-				5552017A2034C52F006BBD4D /* registrationSecondFile.swift */,
+				5552017A2034C52F006BBD4D /* userRegistrationContinuedViewController.swift */,
 				5511991A202CFFB60045D950 /* loginViewController.swift */,
 				551198F3202CF4450045D950 /* Assets.xcassets */,
 				551198F5202CF4450045D950 /* LaunchScreen.storyboard */,
 				551198F8202CF4450045D950 /* Info.plist */,
+				55E365592045FE28003C54DA /* registrationViewController.swift */,
+				55A98B032047140E00AAB00B /* shelterRegistrationViewController.swift */,
+				55A98B052047579100AAB00B /* shelterRegistrationContinuedViewController.swift */,
 			);
 			path = m4LoginReg;
 			sourceTree = "<group>";
@@ -337,9 +346,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-m4LoginReg/Pods-m4LoginReg-resources.sh",
+				"${PODS_ROOT}/GooglePlaces/Frameworks/GooglePlaces.framework/Resources/GooglePlaces.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GooglePlaces.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -469,8 +481,11 @@
 			files = (
 				551198EF202CF4450045D950 /* ViewController.swift in Sources */,
 				551198ED202CF4450045D950 /* AppDelegate.swift in Sources */,
-				5511991D202D00020045D950 /* registrationViewController.swift in Sources */,
-				559075A1203CE42B00BC85F4 /* registrationSecondFile.swift in Sources */,
+				55A98B042047140E00AAB00B /* shelterRegistrationViewController.swift in Sources */,
+				55E3655A2045FE28003C54DA /* registrationViewController.swift in Sources */,
+				5511991D202D00020045D950 /* userRegistrationViewController.swift in Sources */,
+				55A98B062047579100AAB00B /* shelterRegistrationContinuedViewController.swift in Sources */,
+				559075A1203CE42B00BC85F4 /* userRegistrationContinuedViewController.swift in Sources */,
 				5511991B202CFFB60045D950 /* loginViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

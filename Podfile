@@ -9,7 +9,7 @@ use_frameworks!
   # Pods for m4LoginReg
 
     pod 'Alamofire', '~> 4.5'
-
+    pod 'GooglePlaces'
   target 'm4LoginRegTests' do
     inherit! :search_paths
     # Pods for testing

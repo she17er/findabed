@@ -2,53 +2,57 @@
 //  registrationViewController.swift
 //  m4LoginReg
 //
-//  Created by Krrish Dholakia on 2/8/18.
+//  Created by Krrish Dholakia on 2/27/18.
 //  Copyright © 2018 Krrish Dholakia. All rights reserved.
 //
 
 import Foundation
 import UIKit
-class registrationViewController: UIViewController{
+
+class registrationViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate {
     
-    @IBOutlet weak var userNameTxtField: UITextField!
-    @IBOutlet weak var pwdTxtField: UITextField!
-    @IBOutlet weak var genderTxtField: UITextField!
-    @IBOutlet weak var veteranTxtField: UITextField!
- 
+    @IBOutlet weak var rolePickerView: UIPickerView!
+    let roles = ["user", "shelter"]
+    var roleTxt: String = ""
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1;
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return roles.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return roles[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        roleTxt = roles[row]
+    }
+    
+    
+    
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        let toolbar = UIToolbar()
         
-        let doneButton = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.done, target: self, action: #selector(self.doneClicked))
-        
-        toolbar.setItems([doneButton], animated: false)
-        
-        userNameTxtField.inputAccessoryView = toolbar
-        pwdTxtField.inputAccessoryView = toolbar
-        genderTxtField.inputAccessoryView = toolbar
-        veteranTxtField.inputAccessoryView = toolbar
-        
+        rolePickerView?.delegate = self
+        rolePickerView?.dataSource = self
     }
-    @objc func doneClicked() {
-        view.endEditing(true)
+    
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
     }
-    @IBAction func onNextClicked(_ sender: Any) {
-        if !userNameTxtField.text!.isEmpty &&
-            !pwdTxtField.text!.isEmpty &&
-            !genderTxtField.text!.isEmpty &&
-            !veteranTxtField.text!.isEmpty {
-            performSegue(withIdentifier: "registrationIdentifier", sender: self)
+    @IBAction func nextBtn(_ sender: Any) {
+        if roleTxt == "user" {
+            self.performSegue(withIdentifier: "userRegIdentifier", sender:self)
+        } else if roleTxt == "shelter" {
+            self.performSegue(withIdentifier: "shelterRegIdentifier", sender:self)
         }
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destination = segue.destination as? registrationSecondFile {
-            destination.userName = userNameTxtField.text
-            destination.password = pwdTxtField.text
-            destination.gender = genderTxtField.text
-            destination.veteran = veteranTxtField.text
-        }
-    }
 }
-
