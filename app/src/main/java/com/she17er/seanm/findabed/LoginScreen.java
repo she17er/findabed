@@ -329,7 +329,7 @@ public class LoginScreen extends AppCompatActivity implements LoaderCallbacks<Cu
 //            }
 
             if (SignupScreen.accounts.containsKey(mUser)) {
-                currentUser = mUser;
+                currentUser = mUser.toLowerCase();
                 accountState = SignupScreen.accounts.get(mUser)[1];
                 return SignupScreen.accounts.get(mUser)[0].equals(mPassword);
             }

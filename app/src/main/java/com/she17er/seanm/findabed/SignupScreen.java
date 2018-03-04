@@ -103,11 +103,10 @@ public class SignupScreen extends AppCompatActivity {
             public void onClick(View v) {
                 if (checkValid()) {
                     String[] accountData = {password.getText().toString(), accountSpinner.getSelectedItem().toString()};
-                    accounts.put(username.getText().toString(), accountData);
+                    accounts.put(username.getText().toString().toLowerCase(), accountData);
                     Intent successIntent = new Intent(v.getContext(), WelcomeScreen.class);
+                    successIntent.putExtra("FromSignup", "Account successfully created!");
                     startActivityForResult(successIntent, 0);
-                    Snackbar confirmationSnackbar = Snackbar.make(v, "TEST", Snackbar.LENGTH_LONG);
-                    confirmationSnackbar.show();
                 }
             }
         });
