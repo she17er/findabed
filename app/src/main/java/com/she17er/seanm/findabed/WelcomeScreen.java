@@ -9,7 +9,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
+/**
+ * Welcome screen that the application starts with
+ */
 public class WelcomeScreen extends AppCompatActivity {
+
+    //UI references
+    Button login;
+    Button signup;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -17,7 +24,7 @@ public class WelcomeScreen extends AppCompatActivity {
         setContentView(R.layout.activity_welcome_screen);
 
         //Login button functionality, switches to login activity screen
-        Button login = (Button) findViewById(R.id.loginButton);
+        login = (Button) findViewById(R.id.loginButton);
         login.setOnClickListener(new View.OnClickListener() {
            public void onClick(View view) {
                Intent loginIntent = new Intent(view.getContext(), LoginScreen.class);
@@ -26,7 +33,7 @@ public class WelcomeScreen extends AppCompatActivity {
         });
 
         //Signup button functionality, switches to signup activity screen
-        Button signup = (Button) findViewById(R.id.signupButton);
+        signup = (Button) findViewById(R.id.signupButton);
         signup.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent signupIntent = new Intent(view.getContext(), SignupScreen.class);
@@ -38,7 +45,8 @@ public class WelcomeScreen extends AppCompatActivity {
         View parentLayout = getWindow().getDecorView().findViewById(android.R.id.content);
         Intent intent = this.getIntent();
         if (intent.getExtras() != null) {
-            Snackbar confirmationSnackbar = Snackbar.make(parentLayout, intent.getExtras().getString("FromSignup"), Snackbar.LENGTH_LONG);
+            Snackbar confirmationSnackbar = Snackbar.make(parentLayout,
+                    intent.getExtras().getString("FromSignup"), Snackbar.LENGTH_LONG);
             confirmationSnackbar.show();
         }
     }

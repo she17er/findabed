@@ -25,12 +25,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Activity containing a signup form for users
+ */
+
 public class SignupScreen extends AppCompatActivity {
 
-    public static Map<String, String[]> accounts = new HashMap<>();
+    //UI references
     private EditText username, email, phone, password, passwordCheck, age;
     private Spinner genderSpinner, vetSpinner, roleSpinner, accountSpinner;
     private Button submit;
+
+    //Temporary map for M4 - M6 that holds account data
+    public static Map<String, String[]> accounts = new HashMap<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +46,12 @@ public class SignupScreen extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        //Dummy login for testing purposes
+        // TODO: Remove once connected to the backend
+        String[] seanData = {"password", "Admin"};
+        accounts.put("sean", seanData);
+
+        //Initializes all UI components
         submit = (Button) findViewById(R.id.submitButton);
         username = (EditText) findViewById(R.id.usernameField);
         email = (EditText) findViewById(R.id.emailField);
@@ -50,6 +63,7 @@ public class SignupScreen extends AppCompatActivity {
         populateSpinners();
         addButtonListener();
 
+        //Generates back button on action bar
         if (getActionBar() != null) {
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
@@ -58,6 +72,10 @@ public class SignupScreen extends AppCompatActivity {
         }
     }
 
+    /**
+     * Adds all predefined options to signup spinners
+     * These spinners include genderSpinner, vetSpinner, roleSpinner, and accountSpinner
+     */
     private void populateSpinners() {
         genderSpinner = (Spinner) findViewById(R.id.genderSpinner);
         List<String> genderEntries = new ArrayList<>();
@@ -97,6 +115,9 @@ public class SignupScreen extends AppCompatActivity {
         roleSpinner.setAdapter(dataAdapterRole);
     }
 
+    /**
+     * Creates a button listener that adds user accounts to the accounts map
+     */
     private void addButtonListener() {
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,6 +133,11 @@ public class SignupScreen extends AppCompatActivity {
         });
     }
 
+    /**
+     * Checks if all entered signup data is valid
+     * Throws error messages on signup textboxes that are invalid
+     * @return Whether or not the signup data is valid
+     */
     private boolean checkValid() {
         boolean validLogin = true;
         if (TextUtils.isEmpty(username.getText())) {
@@ -139,7 +165,9 @@ public class SignupScreen extends AppCompatActivity {
         if (TextUtils.isEmpty(passwordCheck.getText())) {
             passwordCheck.setError("Please re-enter your password");
             validLogin = false;
-        }// else if (!password.getText().equals(passwordCheck.getText().toString())) {
+        }
+        //@todo Fix password confirmation, I have no clue why this always failes :(
+        // else if (!password.getText().equals(passwordCheck.getText().toString())) {
 //            passwordCheck.setError("Passwords must match");
 //            validLogin = false;
 //        }
