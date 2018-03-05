@@ -46,11 +46,6 @@ public class SignupScreen extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //Dummy login for testing purposes
-        // TODO: Remove once connected to the backend
-        String[] seanData = {"password", "Admin"};
-        accounts.put("sean", seanData);
-
         //Initializes all UI components
         submit = (Button) findViewById(R.id.submitButton);
         username = (EditText) findViewById(R.id.usernameField);

@@ -1,35 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android.support.v4.widget.NestedScrollView="http://schemas.android.com/apk/res-auto"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     tools:context="com.she17er.seanm.findabed.Dashboard">
 
-
-    <LinearLayout
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="match_parent" >
 
-
-        <Button
-            android:id="@+id/logoutButton"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/shelterRecyclerView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/logout_button" />
+            android:layout_height="match_parent" />
 
-        <TextView
-            android:id="@+id/dashboardWelcomeText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="" />
+    </RelativeLayout>
 
-        <TextView
-            android:id="@+id/dashboardAccountStateText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="" />
-    </LinearLayout>
-</android.support.v4.widget.NestedScrollView>
+</android.support.constraint.ConstraintLayout>

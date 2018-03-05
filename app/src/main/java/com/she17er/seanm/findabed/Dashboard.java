@@ -1,43 +1,42 @@
 package com.she17er.seanm.findabed;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+
+import java.util.ArrayList;
 
 /**
- * The screen the user first sees upon successfully signing in
- * Generates a list of shelters from a csv file
+ * Initial dashboard activity that a user sees upon login
+ * Parses and displays all shelters from a CSV file as a list
  */
 
 public class Dashboard extends AppCompatActivity {
 
-    //UI references
-    private TextView welcomeText;
-    private TextView accountStateText;
-    private Button logout;
+    ArrayList<Shelter> shelters;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
+        RecyclerView shelterView = (RecyclerView) findViewById(R.id.shelterRecyclerView);
 
-        //Initializes all welcome text
-        welcomeText = (TextView) findViewById(R.id.dashboardWelcomeText);
-        welcomeText.setText("Welcome " + LoginScreen.currentUser.toString());
-        accountStateText = (TextView) findViewById(R.id.dashboardAccountStateText);
-        accountStateText.setText("You are a "
-            + LoginScreen.accountState);
+        // Initialize shelters
+        shelters = new ArrayList<>();
+        addDummyShelters();
+        // Create adapter passing in the sample user data
+        ShelterAdapter adapter = new ShelterAdapter(this, shelters);
+        // Attach the adapter to the recyclerview to populate items
+        shelterView.setAdapter(adapter);
+        // Set layout manager to position the items
+        shelterView.setLayoutManager(new LinearLayoutManager(this));
+    }
 
-        //Sets up logout button functionality
-        logout = (Button) findViewById(R.id.logoutButton);
-        logout.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Intent myIntent = new Intent(view.getContext(), WelcomeScreen.class);
-                startActivityForResult(myIntent, 0);
-            }
-        });
+    public void addDummyShelters() {
+        shelters.add(new Shelter("Test Shelter 1"));
+        shelters.add(new Shelter("Test Shelter 2"));
+        shelters.add(new Shelter("Test Shelter 3"));
     }
 }

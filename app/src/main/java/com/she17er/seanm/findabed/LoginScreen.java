@@ -90,6 +90,11 @@ public class LoginScreen extends AppCompatActivity {
         //Login form & loader setup
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
+
+        //Dummy login for testing purposes
+        // TODO: Remove once connected to the backend
+        String[] seanData = {"password", "Admin"};
+        SignupScreen.accounts.put("sean", seanData);
     }
 
     /**
@@ -241,14 +246,6 @@ public class LoginScreen extends AppCompatActivity {
         protected void onCancelled() {
             mAuthTask = null;
             showProgress(false);
-        }
-
-        /**
-         * Logs in and switches to dashboard activity on success
-         */
-        public void login(View view) {
-            Intent intent = new Intent(view.getContext(), Dashboard.class);
-            startActivity(intent);
         }
     }
 }

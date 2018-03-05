@@ -32,13 +32,13 @@
         <activity
             android:name=".SignupScreen"
             android:label="@string/title_activity_signup_screen"
-            android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".WelcomeScreen" >
+            android:parentActivityName=".WelcomeScreen"
+            android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".WelcomeScreen" />
         </activity>
-        <activity android:name=".Dashboard" />
+        <activity android:name=".Dashboard"></activity>
     </application>
 
 </manifest>
