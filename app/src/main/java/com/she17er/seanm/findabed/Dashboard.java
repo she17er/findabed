@@ -25,7 +25,7 @@ public class Dashboard extends AppCompatActivity {
 
         // Initialize shelters
         shelters = new ArrayList<>();
-        addDummyShelters();
+        addCSVShelters();
         // Create adapter passing in the sample user data
         ShelterAdapter adapter = new ShelterAdapter(this, shelters);
         // Attach the adapter to the recyclerview to populate items
@@ -34,7 +34,7 @@ public class Dashboard extends AppCompatActivity {
         shelterView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    public void addDummyShelters() {
+    public void addCSVShelters() {
         shelters.add(new Shelter("Test Shelter 1"));
         shelters.add(new Shelter("Test Shelter 2"));
         shelters.add(new Shelter("Test Shelter 3"));
