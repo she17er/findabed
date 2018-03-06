@@ -1,5 +1,6 @@
 package com.she17er.seanm.findabed;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +19,8 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import android.content.res.AssetManager;
+import android.view.View;
+import android.widget.TextView;
 
 
 /**
@@ -30,6 +33,10 @@ import android.content.res.AssetManager;
 
 public class Dashboard extends AppCompatActivity {
 
+    //UI Components
+    TextView dashWelcomeText;
+
+    //ArrayList that stores data from CSV
     ArrayList<Shelter> shelters;
 
     @Override
@@ -37,12 +44,23 @@ public class Dashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         RecyclerView shelterView = (RecyclerView) findViewById(R.id.shelterRecyclerView);
+        dashWelcomeText = (TextView) findViewById(R.id.dashWelcomeText);
+        dashWelcomeText.setText("Welcome " + LoginScreen.currentUser + ", you are a "
+            + LoginScreen.accountState.toLowerCase());
 
         // Initialize shelters
         shelters = new ArrayList<>();
         addCSVShelters(R.raw.data);
         // Create adapter passing in the sample user data
         ShelterAdapter adapter = new ShelterAdapter(this, shelters);
+        adapter.setOnItemClickListener(new ShelterAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View itemView, int position) {
+                Intent intent = new Intent(itemView.getContext(), ShelterInspectScreen.class);
+                intent.putExtra("shelterName", shelters.get(position).getName());
+                startActivityForResult(intent, 0);
+            }
+        });
         // Attach the adapter to the recyclerview to populate items
         shelterView.setAdapter(adapter);
         // Set layout manager to position the items

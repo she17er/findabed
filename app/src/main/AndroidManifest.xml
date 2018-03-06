@@ -38,7 +38,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".WelcomeScreen" />
         </activity>
-        <activity android:name=".Dashboard"></activity>
+        <activity android:name=".Dashboard" />
+        <activity
+            android:name=".ShelterInspectScreen"
+            android:label="ShelterInspectScreen"
+            android:parentActivityName=".Dashboard">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Dashboard"/>
+        </activity>
     </application>
 
 </manifest>

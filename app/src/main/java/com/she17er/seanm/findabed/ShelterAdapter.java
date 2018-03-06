@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -16,22 +17,43 @@ import java.util.List;
 
 public class ShelterAdapter extends RecyclerView.Adapter<ShelterAdapter.ViewHolder> {
 
+    //Listener variable, interface, and method for parent (Dashboard)
+    private OnItemClickListener listener;
+
+    public interface OnItemClickListener {
+        void onItemClick(View itemView, int position);
+    }
+
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
     // Provide a direct reference to each of the views within a data item
     // Used to cache the views within the item layout for fast access
     public class ViewHolder extends RecyclerView.ViewHolder {
         //All variables to be rendered in a row
         public TextView shelterName;
-        public Button checkShelter;
 
         // We also create a constructor that accepts the entire item row
         // and does the view lookups to find each subview
-        public ViewHolder(View itemView) {
+        public ViewHolder(final View itemView) {
             // Stores the itemView in a public final member variable that can be used
             // to access the context from any ViewHolder instance.
             super(itemView);
 
             shelterName = (TextView) itemView.findViewById(R.id.shelter_name);
-            checkShelter = (Button) itemView.findViewById(R.id.checkout_shelter_button);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (listener != null) {
+                        int position = getAdapterPosition();
+                        if (position != RecyclerView.NO_POSITION) {
+                            listener.onItemClick(itemView, position);
+                        }
+                    }
+                }
+            });
         }
     }
 
@@ -74,8 +96,6 @@ public class ShelterAdapter extends RecyclerView.Adapter<ShelterAdapter.ViewHold
         // Set item views based on your views and data model
         TextView textView = viewHolder.shelterName;
         textView.setText(shelter.getName());
-        Button button = viewHolder.checkShelter;
-        button.setText("Check Details");
     }
 
     // Returns the total count of items in the list
