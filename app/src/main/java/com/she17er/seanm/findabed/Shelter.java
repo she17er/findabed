@@ -1,4 +1,5 @@
-package com.she17er.seanm.findabed;
+import java.util.ArrayList;
+import java.util.Iterator;
 
 /**
  * Represents a given shelter
@@ -16,14 +17,14 @@ public class Shelter {
     private String address;
     private String phoneNumber;
 
-    public Shelter(String[] tokens) {
-        setName(tokens[1]);
-        setCapacity(tokens[2]);
-        setGender(tokens[3]);
-        setLongitude(tokens[4]);
-        setLatitude(tokens[5]);
-        setAddress(tokens[6]);
-        setPhoneNumber(tokens[8]);
+    public Shelter(ArrayList<String> tokens) {
+        setName(tokens.get(1));
+        setCapacity(tokens.get(2));
+        setGender(tokens.get(3));
+        setLongitude(tokens.get(4));
+        setLatitude(tokens.get(5));
+        setAddress(tokens.get(6));
+        setPhoneNumber(tokens.get(8));
     }
 
     public String getName() {
@@ -31,7 +32,9 @@ public class Shelter {
     }
 
     public void setName(String name) {
+        name = name.replaceAll(";", ",");
         this.name = name;
+
     }
 
     public String getCapacity() {
@@ -39,7 +42,8 @@ public class Shelter {
     }
 
     public void setCapacity(String s) {
-        if (s == null) {
+        s = s.replaceAll(";", ",");
+        if (s == null || s.equals(" ")) {
             this.capacity = "0 available";
         } else {
             this.capacity = s + " available";
@@ -51,6 +55,7 @@ public class Shelter {
     }
 
     public void setGender(String gender) {
+        gender = gender.replaceAll(";", ",");
         if (gender.toLowerCase().contains("women")) {
             if (gender.toLowerCase().contains("men")) {
                 this.gender = "all";
@@ -71,6 +76,7 @@ public class Shelter {
     }
 
     public void setLongitude(String longitude) {
+        longitude = longitude.replaceAll(";", ",");
         try {
             this.longitude = Double.valueOf(longitude);
         } catch (Exception e) {
@@ -83,6 +89,7 @@ public class Shelter {
     }
 
     public void setLatitude(String latitude) {
+        latitude = latitude.replaceAll(";", ",");
         try {
             this.latitude = Double.valueOf(latitude);
         } catch (Exception e) {
@@ -95,6 +102,7 @@ public class Shelter {
     }
 
     public void setAddress(String address) {
+        address = address.replaceAll(";", ",");
         this.address = address;
     }
 
@@ -103,6 +111,7 @@ public class Shelter {
     }
 
     public void setPhoneNumber(String phoneNumber) {
+        phoneNumber = phoneNumber.replaceAll(";", ",");
         this.phoneNumber = phoneNumber;
     }
 }

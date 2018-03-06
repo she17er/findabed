@@ -8,9 +8,9 @@ import android.support.v7.widget.Toolbar;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
-
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Initial dashboard activity that a user sees upon login
@@ -44,14 +44,25 @@ public class Dashboard extends AppCompatActivity {
 
     public void addCSVShelters(String filePath) {
         BufferedReader br = null;
+        System.out.println(filePath);
         try {
             br = new BufferedReader(new FileReader(filePath));
             String s = br.readLine();
             while ((s = br.readLine()) != null) {
-                String[] tokens = s.split(",");
+                StringBuilder builder = new StringBuilder(s);
+                boolean inQuotes = false;
+                for (int currentIndex = 0; currentIndex < builder.length(); currentIndex++) {
+                    char currentChar = builder.charAt(currentIndex);
+                    if (currentChar == '\"') {
+                        inQuotes = !inQuotes; // toggle state
+                    }
+                    if (currentChar == ',' && inQuotes) {
+                        builder.setCharAt(currentIndex, ';');
+                    }
+                }
+                ArrayList<String> tokens = new ArrayList<String> (Arrays.asList(builder.toString().split(",")));
                 shelters.add(new Shelter(tokens));
             }
-
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
