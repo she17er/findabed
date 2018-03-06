@@ -1,3 +1,4 @@
+package com.she17er.seanm.findabed;
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -5,7 +6,7 @@ import java.util.Iterator;
  * Represents a given shelter
  *
  * @author elissa huang
- * @version 1.0
+ * @version 1.3
  */
 
 public class Shelter {

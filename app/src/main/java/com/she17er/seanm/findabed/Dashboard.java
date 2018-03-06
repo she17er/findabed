@@ -6,18 +6,26 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
+import android.content.res.AssetManager;
+
 
 /**
  * Initial dashboard activity that a user sees upon login
  * Parses and displays all shelters from a CSV file as a list
  *
  * @edited by elissa huang
- * @version 1.1
+ * @version 1.3
  */
 
 public class Dashboard extends AppCompatActivity {
@@ -32,8 +40,7 @@ public class Dashboard extends AppCompatActivity {
 
         // Initialize shelters
         shelters = new ArrayList<>();
-        String csvFile = "C:/Users/eliss/Documents/GitHub/findabed/app/src/main/java/data/data.csv";
-        addCSVShelters(csvFile);
+        addCSVShelters(R.raw.data);
         // Create adapter passing in the sample user data
         ShelterAdapter adapter = new ShelterAdapter(this, shelters);
         // Attach the adapter to the recyclerview to populate items
@@ -42,11 +49,10 @@ public class Dashboard extends AppCompatActivity {
         shelterView.setLayoutManager(new LinearLayoutManager(this));
     }
 
-    public void addCSVShelters(String filePath) {
-        BufferedReader br = null;
-        System.out.println(filePath);
+    public void addCSVShelters(int id) {
+        InputStream inputStream = getResources().openRawResource(id);
+        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
         try {
-            br = new BufferedReader(new FileReader(filePath));
             String s = br.readLine();
             while ((s = br.readLine()) != null) {
                 StringBuilder builder = new StringBuilder(s);
@@ -57,7 +63,7 @@ public class Dashboard extends AppCompatActivity {
                         inQuotes = !inQuotes; // toggle state
                     }
                     if (currentChar == ',' && inQuotes) {
-                        builder.setCharAt(currentIndex, ';');
+                        builder.setCharAt(currentIndex, ';'); // sets the comma in the quotes to semi-colon
                     }
                 }
                 ArrayList<String> tokens = new ArrayList<String> (Arrays.asList(builder.toString().split(",")));
