@@ -3,7 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\eliss\Documents\GitHub\findabed\app\app.iml" filepath="C:\Users\eliss\Documents\GitHub\findabed\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/findabed.iml" filepath="$PROJECT_DIR$/findabed.iml" />
+      <module fileurl="file://C:\Users\eliss\Documents\GitHub\findabed\findabed.iml" filepath="C:\Users\eliss\Documents\GitHub\findabed\findabed.iml" />
     </modules>
   </component>
 </project>
