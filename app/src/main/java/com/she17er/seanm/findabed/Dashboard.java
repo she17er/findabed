@@ -37,7 +37,7 @@ public class Dashboard extends AppCompatActivity {
     TextView dashWelcomeText;
 
     //ArrayList that stores data from CSV
-    ArrayList<Shelter> shelters;
+    public static ArrayList<Shelter> shelters;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,7 +57,7 @@ public class Dashboard extends AppCompatActivity {
             @Override
             public void onItemClick(View itemView, int position) {
                 Intent intent = new Intent(itemView.getContext(), ShelterInspectScreen.class);
-                intent.putExtra("shelterName", shelters.get(position).getName());
+                intent.putExtra("shelterID", shelters.get(position).getName());
                 startActivityForResult(intent, 0);
             }
         });

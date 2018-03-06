@@ -62,4 +62,13 @@
     </string-array>
     <string name="submitButton">Submit</string>
     <string name="action_settings">Settings</string>
+
+    <!-- Strings related to the shelter inspector screen -->
+    <string name="shelterName">Name: </string>
+    <string name="shelterCapacity">Capacity: </string>
+    <string name="shelterGender">Genders Accepted: </string>
+    <string name="shelterLatitude">Latitude: </string>
+    <string name="shelterLongitude">Longitude</string>
+    <string name="shelterAddress">Address: </string>
+    <string name="shelterPhoneNumber">Phone Number: </string>
 </resources>
