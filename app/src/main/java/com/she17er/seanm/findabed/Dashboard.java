@@ -46,7 +46,7 @@ public class Dashboard extends AppCompatActivity {
         BufferedReader br = null;
         try {
             br = new BufferedReader(new FileReader(filePath));
-            String s;
+            String s = br.readLine();
             while ((s = br.readLine()) != null) {
                 String[] tokens = s.split(",");
                 shelters.add(new Shelter(tokens));
