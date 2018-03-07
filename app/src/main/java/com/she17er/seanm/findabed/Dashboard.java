@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import android.content.res.AssetManager;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 
@@ -35,6 +36,7 @@ public class Dashboard extends AppCompatActivity {
 
     //UI Components
     TextView dashWelcomeText;
+    Button logout;
 
     //ArrayList that stores data from CSV
     public static ArrayList<Shelter> shelters;
@@ -47,6 +49,13 @@ public class Dashboard extends AppCompatActivity {
         dashWelcomeText = (TextView) findViewById(R.id.dashWelcomeText);
         dashWelcomeText.setText("Welcome " + LoginScreen.currentUser + ", you are a "
             + LoginScreen.accountState.toLowerCase());
+        logout = (Button) findViewById(R.id.logoutButton);
+        logout.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), WelcomeScreen.class);
+                startActivityForResult(intent, 0);
+            }
+        });
 
         // Initialize shelters
         shelters = new ArrayList<>();
@@ -67,6 +76,9 @@ public class Dashboard extends AppCompatActivity {
         shelterView.setLayoutManager(new LinearLayoutManager(this));
     }
 
+    /**
+     * Reads all shelter data from csv in the modal and adds them to an arraylist
+     */
     public void addCSVShelters(int id) {
         InputStream inputStream = getResources().openRawResource(id);
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));

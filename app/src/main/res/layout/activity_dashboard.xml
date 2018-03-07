@@ -13,10 +13,22 @@
             android:id="@+id/dashWelcomeText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/shelterRecyclerView"
-            android:layout_centerHorizontal="true"
-            android:text=""
+            android:layout_alignBaseline="@+id/logoutButton"
+            android:layout_alignBottom="@+id/logoutButton"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="15dp"
+            android:text="Welcome"
             android:textStyle="bold" />
+
+        <Button
+            android:id="@+id/logoutButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/shelterRecyclerView"
+            android:layout_alignParentEnd="true"
+            android:layout_marginBottom="17dp"
+            android:layout_marginEnd="14dp"
+            android:text="@string/logoutButton" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/shelterRecyclerView"
