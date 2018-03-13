@@ -25,6 +25,7 @@
     <string name="dashboardWelcomeText">Welcome </string>
     <string name="shelterList">Shelter List</string>
     <string name="logoutButton">Logout</string>
+    <string name="profileButton">Profile</string>
 
     <!-- Strings related to the signup screen -->
     <string name="logout_button">Logout</string>

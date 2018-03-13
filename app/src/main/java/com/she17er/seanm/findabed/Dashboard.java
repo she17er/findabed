@@ -28,6 +28,7 @@ import android.widget.TextView;
  * Initial dashboard activity that a user sees upon login
  * Parses and displays all shelters from a CSV file as a list
  *
+ * @author sean walsh
  * @edited by elissa huang
  * @version 1.3
  */
@@ -35,8 +36,8 @@ import android.widget.TextView;
 public class Dashboard extends AppCompatActivity {
 
     //UI Components
-    TextView dashWelcomeText;
     Button logout;
+    Button profile;
 
     //ArrayList that stores data from CSV
     public static ArrayList<Shelter> shelters;
@@ -46,13 +47,17 @@ public class Dashboard extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         RecyclerView shelterView = (RecyclerView) findViewById(R.id.shelterRecyclerView);
-        dashWelcomeText = (TextView) findViewById(R.id.dashWelcomeText);
-        dashWelcomeText.setText("Welcome " + LoginScreen.currentUser + ", you are a "
-            + LoginScreen.accountState.toLowerCase());
         logout = (Button) findViewById(R.id.logoutButton);
         logout.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), WelcomeScreen.class);
+                startActivityForResult(intent, 0);
+            }
+        });
+        profile = (Button) findViewById(R.id.profileButton);
+        profile.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), ProfileScreen.class);
                 startActivityForResult(intent, 0);
             }
         });

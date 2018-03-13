@@ -38,14 +38,27 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".WelcomeScreen" />
         </activity>
-        <activity android:name=".Dashboard" />
+        <activity
+            android:name=".Dashboard" >
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".ShelterInspectScreen"
             android:label="ShelterInspectScreen"
             android:parentActivityName=".Dashboard">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".Dashboard"/>
+                android:value=".Dashboard" />
+        </activity>
+        <activity
+            android:name=".ProfileScreen"
+            android:label="ProfileScreen"
+            android:parentActivityName=".Dashboard">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Dashboard" />
         </activity>
     </application>
 
