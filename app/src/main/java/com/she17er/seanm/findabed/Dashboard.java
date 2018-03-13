@@ -1,6 +1,9 @@
 package com.she17er.seanm.findabed;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.content.Intent;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,8 +22,13 @@ import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import android.content.res.AssetManager;
+import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 
@@ -33,11 +41,12 @@ import android.widget.TextView;
  * @version 1.3
  */
 
-public class Dashboard extends AppCompatActivity {
+public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     //UI Components
     Button logout;
     Button profile;
+    SearchView searchBar;
 
     //ArrayList that stores data from CSV
     public static ArrayList<Shelter> shelters;
@@ -79,6 +88,29 @@ public class Dashboard extends AppCompatActivity {
         shelterView.setAdapter(adapter);
         // Set layout manager to position the items
         shelterView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+
+        final MenuItem searchItem = menu.findItem(R.id.action_search);
+        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setOnQueryTextListener(this);
+
+        return true;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String query) {
+        // Here is where we are going to implement the filter logic
+        
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
     }
 
     /**
