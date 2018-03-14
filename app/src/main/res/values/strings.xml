@@ -73,7 +73,8 @@
     <string name="shelterLongitude">Longitude</string>
     <string name="shelterAddress">Address: </string>
     <string name="shelterPhoneNumber">Phone Number: </string>
-arch Shetlers
+    <string name="shelterAgeRange">Age Ranges Accepted: </string>
+    <string name="shelterRestrictions">Restrictions: </string>
     <!-- Search xml strings -->
     <string name="search_hint">Search Shelters</string>
     <string name="action_search">Search Shelter</string>

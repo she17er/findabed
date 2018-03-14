@@ -14,8 +14,8 @@ import org.w3c.dom.Text;
 public class ShelterInspectScreen extends AppCompatActivity {
 
     //UI Setup
-    TextView name, address, number, capacity, gender, latitude, longitude;
-    TextView nameF, addressF, numberF, capacityF, genderF, latitudeF, longitudeF;
+    TextView name, address, number, capacity, gender, latitude, longitude, age, restrictions;
+    TextView nameF, addressF, numberF, capacityF, genderF, latitudeF, longitudeF, ageF, restrictionsF;
 
     //Data variables
     String shelterID;
@@ -39,8 +39,8 @@ public class ShelterInspectScreen extends AppCompatActivity {
         if (intent.getExtras() != null) {
             shelterID = intent.getExtras().getString("shelterID");
             Log.d("intentExtra", intent.getExtras().toString());
-            Log.d("ShelterExistsInList", "" + Dashboard.shelters.contains(shelterID));
-            for (Shelter mShelter: Dashboard.shelters) {
+            Log.d("ShelterExistsInList", "" + Dashboard.masterShelters.contains(shelterID));
+            for (Shelter mShelter: Dashboard.masterShelters) {
                 if (mShelter.getName().equals(shelterID)) {
                     this.shelter = mShelter;
                 }
@@ -54,6 +54,8 @@ public class ShelterInspectScreen extends AppCompatActivity {
         gender = (TextView) findViewById(R.id.shelterGender);
         latitude = (TextView) findViewById(R.id.shelterLatitude);
         longitude = (TextView) findViewById(R.id.shelterLongitude);
+        age = (TextView) findViewById(R.id.shelterAges);
+        restrictions = (TextView) findViewById(R.id.shelterRestrictions);
 
         nameF = (TextView) findViewById(R.id.shelterNameField);
         nameF.setText(shelter.getName());
@@ -69,6 +71,10 @@ public class ShelterInspectScreen extends AppCompatActivity {
         latitudeF.setText("" + shelter.getLatitude());
         longitudeF = (TextView) findViewById(R.id.shelterLongitudeField);
         longitudeF.setText("" + shelter.getLongitude());
+        ageF = (TextView) findViewById(R.id.shelterAgesField);
+        ageF.setText(shelter.getAgeRange());
+        restrictionsF = (TextView) findViewById(R.id.shelterRestrictionsField);
+        restrictionsF.setText(shelter.getRestrictions());
     }
 
     @Override

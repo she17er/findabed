@@ -13,6 +13,8 @@ public class Shelter {
     private String name;
     private String capacity;
     private String gender;
+    private String ageRange;
+    private String restrictions;
     private double longitude;
     private double latitude;
     private String address;
@@ -21,7 +23,7 @@ public class Shelter {
     public Shelter(ArrayList<String> tokens) {
         setName(tokens.get(1));
         setCapacity(tokens.get(2));
-        setGender(tokens.get(3));
+        setGenderandAge(tokens.get(3));
         setLongitude(tokens.get(4));
         setLatitude(tokens.get(5));
         setAddress(tokens.get(6));
@@ -55,21 +57,38 @@ public class Shelter {
         return gender;
     }
 
-    public void setGender(String gender) {
-        this.gender = gender.replaceAll(";", ",").toLowerCase();
-//        if (gender.toLowerCase().contains("women")) {
-//            if (gender.toLowerCase().contains("men")) {
-//                this.gender = "all";
-//            } else {
-//                this.gender = "women";
-//            }
-//        } else if (gender.toLowerCase().contains("men")) {
-//            this.gender = "men";
-//        } else if (gender.toLowerCase().contains("any")){
-//            this.gender = "all";
-//        } else {
-//            this.gender = "N/A";
-//        }
+    public String getAgeRange() { return ageRange; }
+
+    public String getRestrictions() { return restrictions; }
+
+    public void setGenderandAge(String gender) {
+        restrictions = gender.toLowerCase();
+        if (restrictions.equals("")) {
+            restrictions = "N/A";
+        }
+
+        gender = gender.replaceAll(";", ",").toLowerCase();
+        if (gender.contains("women")) {
+            this.gender = "women";
+        } else if (gender.contains("men")) {
+            this.gender = "men ";
+        } else {
+            this.gender = "any gender";
+        }
+
+        ageRange = "";
+        if (gender.contains("newborn")) {
+            ageRange += "newborns, ";
+        }
+        if (gender.contains("children")) {
+            ageRange += "children, ";
+        }
+        if (gender.contains("young adults")) {
+            ageRange += "young adults, ";
+        }
+        if (!gender.contains("newborn") && !gender.contains("children") && !gender.contains("young adults")) {
+            ageRange = "any age";
+        }
     }
 
     public double getLongitude() {

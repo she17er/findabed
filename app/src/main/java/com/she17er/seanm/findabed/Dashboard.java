@@ -52,11 +52,13 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
     RecyclerView shelterView;
     Button logout;
     Button profile;
-    SearchView searchBar;
     Spinner genderSelect, ageSelect;
 
     //ArrayList that stores data from CSV
-    public static ArrayList<Shelter> shelters;
+    public static ArrayList<Shelter> masterShelters, currentShelters;
+
+    //Current restrictions from the spinners
+    String gender, age;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -78,51 +80,56 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
             }
         });
 
+        // Initialize shelters
+        masterShelters = new ArrayList<>();
+        currentShelters = new ArrayList<>();
+        addCSVShelters(R.raw.data);
+        for (Shelter shelter: masterShelters) {
+            currentShelters.add(shelter);
+        }
+        populateShelterList(currentShelters);
+
         //Initialize Spinners
+        gender = "";
+        age = "";
         populateSpinners();
         genderSelect.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                // your code here
+                if (position == 1) {
+                    gender = "women";
+                } else if (position == 2) {
+                    gender = "men ";
+                } else {
+                    gender = "";
+                }
+                spinnerSearch();
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // Might add action here if necessary
-            }
+            public void onNothingSelected(AdapterView<?> parentView) {}
 
         });
 
         ageSelect.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                // your code here
+                if (position == 0) {
+                    age = "";
+                } else if (position == 1) {
+                    age = "children";
+                } else if (position == 2) {
+                    age = "young adults";
+                } else {
+                    age = "newborn";
+                }
+                spinnerSearch();
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // Might add action here if necessary
-            }
+            public void onNothingSelected(AdapterView<?> parentView) {}
 
         });
-
-        // Initialize shelters
-        shelters = new ArrayList<>();
-        addCSVShelters(R.raw.data);
-        // Create adapter passing in the sample user data
-        ShelterAdapter adapter = new ShelterAdapter(this, shelters);
-        adapter.setOnItemClickListener(new ShelterAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View itemView, int position) {
-                Intent intent = new Intent(itemView.getContext(), ShelterInspectScreen.class);
-                intent.putExtra("shelterID", shelters.get(position).getName());
-                startActivityForResult(intent, 0);
-            }
-        });
-        // Attach the adapter to the recyclerview to populate items
-        shelterView.setAdapter(adapter);
-        // Set layout manager to position the items
-        shelterView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
@@ -140,25 +147,12 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
     public boolean onQueryTextChange(String query) {
         // Here is where we are going to implement the filter logic
         final ArrayList<Shelter> updatedShelters = new ArrayList<>();
-        for (Shelter aShelter: shelters) {
+        for (Shelter aShelter: currentShelters) {
             if (aShelter.getName().toLowerCase().contains(query)) {
                 updatedShelters.add(aShelter);
             }
         }
-        // Create adapter passing in the sample user data
-        ShelterAdapter adapter = new ShelterAdapter(this, updatedShelters);
-        adapter.setOnItemClickListener(new ShelterAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View itemView, int position) {
-                Intent intent = new Intent(itemView.getContext(), ShelterInspectScreen.class);
-                intent.putExtra("shelterID", updatedShelters.get(position).getName());
-                startActivityForResult(intent, 0);
-            }
-        });
-        // Attach the adapter to the recyclerview to populate items
-        shelterView.setAdapter(adapter);
-        // Set layout manager to position the items
-        shelterView.setLayoutManager(new LinearLayoutManager(this));
+        populateShelterList(updatedShelters);
         return false;
     }
 
@@ -168,43 +162,48 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
     }
 
     /**
-     * Reads all shelter data from csv in the modal and adds them to an arraylist
+     * Narrows down displayed/ searchable shelters based on spinner selection
      */
-    public void addCSVShelters(int id) {
-        InputStream inputStream = getResources().openRawResource(id);
-        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
-        try {
-            String s = br.readLine();
-            while ((s = br.readLine()) != null) {
-                StringBuilder builder = new StringBuilder(s);
-                boolean inQuotes = false;
-                for (int currentIndex = 0; currentIndex < builder.length(); currentIndex++) {
-                    char currentChar = builder.charAt(currentIndex);
-                    if (currentChar == '\"') {
-                        inQuotes = !inQuotes; // toggle state
-                    }
-                    if (currentChar == ',' && inQuotes) {
-                        builder.setCharAt(currentIndex, ';'); // sets the comma in the quotes to semi-colon
-                    }
-                }
-                ArrayList<String> tokens = new ArrayList<String> (Arrays.asList(builder.toString().split(",")));
-                shelters.add(new Shelter(tokens));
-            }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+    private void spinnerSearch() {
+        currentShelters = new ArrayList<>();
+        String wrongGender = "";
+        if (gender.equals("women")) {
+            wrongGender = "men ";
+        } else if (gender.equals("men ")) {
+            wrongGender = "women";
+        }
+        for (Shelter shelter: masterShelters) {
+            if (!shelter.getGender().equals(wrongGender) && shelter.getAgeRange().contains(age)) {
+                currentShelters.add(shelter);
             }
         }
+        populateShelterList(currentShelters);
     }
 
+    /**
+     * Populates the RecyclerView with appropriate shelters
+     * @param mShelters The list of shelters to be added, filtered based on criteria
+     */
+    private void populateShelterList(final ArrayList<Shelter> mShelters) {
+        // Create adapter passing in the sample user data
+        ShelterAdapter adapter = new ShelterAdapter(this, mShelters);
+        adapter.setOnItemClickListener(new ShelterAdapter.OnItemClickListener() {
+            @Override
+            public void onItemClick(View itemView, int position) {
+                Intent intent = new Intent(itemView.getContext(), ShelterInspectScreen.class);
+                intent.putExtra("shelterID", mShelters.get(position).getName());
+                startActivityForResult(intent, 0);
+            }
+        });
+        // Attach the adapter to the recyclerview to populate items
+        shelterView.setAdapter(adapter);
+        // Set layout manager to position the items
+        shelterView.setLayoutManager(new LinearLayoutManager(this));
+    }
+
+    /**
+     * Populates the genderSelect and ageSelect spinners with all appropriate entry choices
+     */
     private void populateSpinners() {
         genderSelect = (Spinner) findViewById(R.id.genderFilterSpinner);
         List<String> genderEntries = new ArrayList<>();
@@ -228,4 +227,41 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
         ageSelect.setAdapter(dataAdapterRole);
     }
 
+    /**
+     * Reads all shelter data from csv in the modal and adds them to an arraylist
+     */
+    public void addCSVShelters(int id) {
+        InputStream inputStream = getResources().openRawResource(id);
+        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
+        try {
+            String s = br.readLine();
+            while ((s = br.readLine()) != null) {
+                StringBuilder builder = new StringBuilder(s);
+                boolean inQuotes = false;
+                for (int currentIndex = 0; currentIndex < builder.length(); currentIndex++) {
+                    char currentChar = builder.charAt(currentIndex);
+                    if (currentChar == '\"') {
+                        inQuotes = !inQuotes; // toggle state
+                    }
+                    if (currentChar == ',' && inQuotes) {
+                        builder.setCharAt(currentIndex, ';'); // sets the comma in the quotes to semi-colon
+                    }
+                }
+                ArrayList<String> tokens = new ArrayList<String> (Arrays.asList(builder.toString().split(",")));
+                masterShelters.add(new Shelter(tokens));
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
 }

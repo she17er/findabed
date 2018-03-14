@@ -20,6 +20,7 @@
                 android:id="@+id/shelterName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:text="@string/shelterName" />
 
             <TextView
@@ -32,6 +33,7 @@
                 android:id="@+id/shelterCapacity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:text="@string/shelterCapacity" />
 
             <TextView
@@ -44,6 +46,7 @@
                 android:id="@+id/shelterAddress"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:text="@string/shelterAddress" />
 
             <TextView
@@ -56,6 +59,7 @@
                 android:id="@+id/shelterPhoneNumber"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:text="@string/shelterPhoneNumber" />
 
             <TextView
@@ -65,9 +69,23 @@
                 android:text="TextView" />
 
             <TextView
+                android:id="@+id/shelterRestrictions"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="@string/shelterRestrictions" />
+
+            <TextView
+                android:id="@+id/shelterRestrictionsField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
+            <TextView
                 android:id="@+id/shelterGender"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:text="@string/shelterGender" />
 
             <TextView
@@ -77,9 +95,23 @@
                 android:text="TextView" />
 
             <TextView
+                android:id="@+id/shelterAges"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="@string/shelterAgeRange" />
+
+            <TextView
+                android:id="@+id/shelterAgesField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
+            <TextView
                 android:id="@+id/shelterLatitude"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:text="@string/shelterLatitude" />
 
             <TextView
@@ -92,6 +124,7 @@
                 android:id="@+id/shelterLongitude"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:textStyle="bold"
                 android:text="@string/shelterLongitude" />
 
             <TextView
