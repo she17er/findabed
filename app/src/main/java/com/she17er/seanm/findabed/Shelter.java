@@ -56,20 +56,20 @@ public class Shelter {
     }
 
     public void setGender(String gender) {
-        gender = gender.replaceAll(";", ",");
-        if (gender.toLowerCase().contains("women")) {
-            if (gender.toLowerCase().contains("men")) {
-                this.gender = "all";
-            } else {
-                this.gender = "women";
-            }
-        } else if (gender.toLowerCase().contains("men")) {
-            this.gender = "men";
-        } else if (gender.toLowerCase().contains("any")){
-            this.gender = "all";
-        } else {
-            this.gender = "N/A";
-        }
+        this.gender = gender.replaceAll(";", ",").toLowerCase();
+//        if (gender.toLowerCase().contains("women")) {
+//            if (gender.toLowerCase().contains("men")) {
+//                this.gender = "all";
+//            } else {
+//                this.gender = "women";
+//            }
+//        } else if (gender.toLowerCase().contains("men")) {
+//            this.gender = "men";
+//        } else if (gender.toLowerCase().contains("any")){
+//            this.gender = "all";
+//        } else {
+//            this.gender = "N/A";
+//        }
     }
 
     public double getLongitude() {
