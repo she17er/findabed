@@ -80,6 +80,9 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
             }
         });
 
+        //Removes actionbar title
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         // Initialize shelters
         masterShelters = new ArrayList<>();
         currentShelters = new ArrayList<>();
