@@ -1,14 +1,10 @@
 package com.she17er.seanm.findabed;
 
-import android.app.ActionBar;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.NavUtils;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.telephony.PhoneNumberUtils;
-import android.text.Editable;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.MenuItem;
@@ -17,13 +13,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-
-import org.w3c.dom.Text;
-
+import org.json.JSONObject;
+import java.io.DataOutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Activity containing a signup form for users
@@ -36,8 +31,8 @@ public class SignupScreen extends AppCompatActivity {
     private Spinner genderSpinner, vetSpinner, roleSpinner, accountSpinner;
     private Button submit;
 
-    //Temporary map for M4 - M6 that holds account data
-    public static Map<String, String[]> accounts = new HashMap<>();
+    //URL for the Heroku backend
+    String backendURL = "https://she17er.herokuapp.com/api/users/newUsers";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -118,8 +113,8 @@ public class SignupScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (checkValid()) {
-                    String[] accountData = {password.getText().toString(), accountSpinner.getSelectedItem().toString()};
-                    accounts.put(username.getText().toString().toLowerCase(), accountData);
+                    AsyncTaskRunner postReq = new AsyncTaskRunner();
+                    postReq.execute("start");
                     Intent successIntent = new Intent(v.getContext(), WelcomeScreen.class);
                     successIntent.putExtra("FromSignup", "Account successfully created!");
                     startActivityForResult(successIntent, 0);
@@ -185,6 +180,59 @@ public class SignupScreen extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private class AsyncTaskRunner extends AsyncTask<String, String, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+                URL url = new URL(backendURL);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setDoOutput(true);
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setRequestMethod("POST");
+                connection.connect();
+
+                JSONObject user = new JSONObject();
+                user.put("username", username.getText());
+                user.put("age", age.getText());
+                user.put("gender", genderSpinner.getSelectedItem().toString());
+                user.put("vet_S", vetSpinner.getSelectedItem().toString());
+                user.put("contact.phone", phone.getText());
+                user.put("contact.email", email.getText());
+                user.put("account_State", accountSpinner.getSelectedItem().toString());
+                user.put("password", password.getText());
+                user.put("role", roleSpinner.getSelectedItem().toString());
+                user.put("login", "false");
+
+                Log.d("json", user.toString());
+
+                DataOutputStream localDataOutputStream = new DataOutputStream(connection.getOutputStream());
+                localDataOutputStream.writeBytes(user.toString());
+                localDataOutputStream.flush();
+                localDataOutputStream.close();
+
+            } catch (Exception e) {
+                Log.d("POSTError", e.toString());
+            }
+            return "";
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onProgressUpdate(String... values) {
+            super.onProgressUpdate(values);
         }
     }
 }

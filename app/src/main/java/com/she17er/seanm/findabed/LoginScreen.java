@@ -94,7 +94,7 @@ public class LoginScreen extends AppCompatActivity {
         //Dummy login for testing purposes
         // TODO: Remove once connected to the backend
         String[] seanData = {"password", "Admin"};
-        SignupScreen.accounts.put("sean", seanData);
+        //SignupScreen.accounts.put("sean", seanData);
     }
 
     /**
@@ -217,13 +217,14 @@ public class LoginScreen extends AppCompatActivity {
                 return false;
             }
 
-            if (SignupScreen.accounts.containsKey(mUser)) {
-                currentUser = mUser.toLowerCase();
-                accountState = SignupScreen.accounts.get(mUser)[1];
-                return SignupScreen.accounts.get(mUser)[0].equals(mPassword);
-            } else {
-                return false;
-            }
+//            if (SignupScreen.accounts.containsKey(mUser)) {
+//                currentUser = mUser.toLowerCase();
+//                accountState = SignupScreen.accounts.get(mUser)[1];
+//                return SignupScreen.accounts.get(mUser)[0].equals(mPassword);
+//            } else {
+//                return false;
+//            }
+            return false;
         }
 
         @Override
