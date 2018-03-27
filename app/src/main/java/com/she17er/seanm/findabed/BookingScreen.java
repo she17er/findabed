@@ -7,6 +7,8 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.util.ArrayList;
+
 public class BookingScreen extends AppCompatActivity {
 
     //UI Components
@@ -16,6 +18,7 @@ public class BookingScreen extends AppCompatActivity {
     //Shelter Data
     int shelterPosition;
     Shelter shelter;
+    ArrayList<Shelter> currStatus;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,5 +46,7 @@ public class BookingScreen extends AppCompatActivity {
             shelter = Dashboard.masterShelters.get(shelterPosition);
         }
         Log.d("bookingShelter", shelter.getName());
+
+
     }
 }
