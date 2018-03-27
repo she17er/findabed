@@ -22,14 +22,6 @@ public class BookingScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_screen);
 
-        //Generates back button on action bar
-        if (getActionBar() != null) {
-            getActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-
         //Removes actionbar title
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
@@ -43,6 +35,5 @@ public class BookingScreen extends AppCompatActivity {
             shelterPosition = Integer.parseInt(intent.getExtras().getString("shelterID"));
             shelter = Dashboard.masterShelters.get(shelterPosition);
         }
-        Log.d("bookingShelter", shelter.getName());
     }
 }
