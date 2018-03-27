@@ -71,7 +71,8 @@ router.post('/login', (req, res) => {
   });
 
 router.post('/newUsers', (req, res) => {
-    console.log('trying new things');
+  console.log("does exist")
+    console.log(req.body.password);
     User.create(req.body, (err, user) => {
       if(err) {
         res.send(""+err);

@@ -95,4 +95,13 @@ router.get('/getLocations', (req, res) => {
       .catch((err) => res.send("" + err))
   });
 
+  router.get('/getShelters', (req, res) => {
+    Shelter.find({})
+    .exec()
+    .then((shelter) => res.send(shelter))
+    .catch((err) => {
+      res.send("" + err);
+    });
+});
+
 module.exports = router;
