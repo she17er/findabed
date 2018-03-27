@@ -832,15 +832,15 @@
                                     <inset key="sectionInset" minX="0.0" minY="10" maxX="0.0" maxY="10"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="Bgb-sU-rbW" customClass="CollectionViewCell" customModule="cardLayout" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="cell" id="Bgb-sU-rbW" customClass="CollectionViewCell" customModule="m4LoginReg" customModuleProvider="target">
                                         <rect key="frame" x="13" y="10" width="349" height="227"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                             <rect key="frame" x="0.0" y="0.0" width="349" height="227"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWg-aL-a6q">
-                                                    <rect key="frame" x="145" y="20" width="59" height="30"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AWg-aL-a6q">
+                                                    <rect key="frame" x="145" y="12" width="59" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="a8v-jN-X8Q"/>
                                                     </constraints>
@@ -848,25 +848,31 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="ACCEPTED TYPES • WOMEN, CHILDREN" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="QSQ-z2-3KU">
-                                                    <rect key="frame" x="20" y="61" width="309" height="34"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="ACCEPTED TYPES • WOMEN, CHILDREN" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="QSQ-z2-3KU">
+                                                    <rect key="frame" x="12" y="53" width="325" height="34"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="34" id="nu2-Vg-n9I"/>
+                                                    </constraints>
                                                     <color key="textColor" red="0.22083396309016931" green="0.5292260362694301" blue="0.19259232819924016" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleCaption2"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Current Capacity | 34" textAlignment="natural" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M9S-Tg-fvq">
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Current Capacity | 34" textAlignment="natural" adjustsFontForContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="M9S-Tg-fvq">
                                                     <rect key="frame" x="20" y="173" width="329" height="34"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="34" id="avy-HF-N7v"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" style="UICTFontTextStyleTitle2"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
-                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="Phone Number (770)-878-3106" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="nOf-Cf-hWx">
-                                                    <rect key="frame" x="20" y="102" width="309" height="61"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Phone Number (770)-878-3106" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="nOf-Cf-hWx">
+                                                    <rect key="frame" x="12" y="94" width="325" height="61"/>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="61" id="l8w-ZR-0mf"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
                                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                 </textView>
@@ -874,11 +880,26 @@
                                         </view>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="AWg-aL-a6q" firstAttribute="leading" secondItem="Bgb-sU-rbW" secondAttribute="leadingMargin" constant="12" id="J57-yj-3Ln"/>
+                                            <constraint firstItem="M9S-Tg-fvq" firstAttribute="leading" secondItem="nOf-Cf-hWx" secondAttribute="leading" constant="8" id="7hs-nI-AGi"/>
+                                            <constraint firstAttribute="trailing" secondItem="M9S-Tg-fvq" secondAttribute="trailing" id="8s1-fh-zJH"/>
+                                            <constraint firstItem="M9S-Tg-fvq" firstAttribute="leading" secondItem="Bgb-sU-rbW" secondAttribute="leadingMargin" constant="12" id="A82-oV-4t7"/>
+                                            <constraint firstItem="AWg-aL-a6q" firstAttribute="leading" secondItem="Bgb-sU-rbW" secondAttribute="leadingMargin" constant="137" id="J57-yj-3Ln"/>
+                                            <constraint firstItem="M9S-Tg-fvq" firstAttribute="top" secondItem="nOf-Cf-hWx" secondAttribute="bottom" constant="18" id="Mah-R3-RtP"/>
+                                            <constraint firstItem="nOf-Cf-hWx" firstAttribute="centerX" secondItem="AWg-aL-a6q" secondAttribute="centerX" id="VeN-0j-0vW"/>
+                                            <constraint firstItem="nOf-Cf-hWx" firstAttribute="trailing" secondItem="QSQ-z2-3KU" secondAttribute="trailing" id="Wxu-sa-Jg3"/>
+                                            <constraint firstItem="nOf-Cf-hWx" firstAttribute="centerX" secondItem="Bgb-sU-rbW" secondAttribute="centerX" id="k0R-oQ-Rg1"/>
+                                            <constraint firstAttribute="bottomMargin" secondItem="M9S-Tg-fvq" secondAttribute="bottom" constant="12" id="kvl-zj-THR"/>
+                                            <constraint firstItem="M9S-Tg-fvq" firstAttribute="leading" secondItem="QSQ-z2-3KU" secondAttribute="leading" constant="8" id="qBh-bf-3VL"/>
+                                            <constraint firstItem="QSQ-z2-3KU" firstAttribute="top" secondItem="AWg-aL-a6q" secondAttribute="bottom" constant="11" id="xFM-YJ-CqA"/>
+                                            <constraint firstItem="nOf-Cf-hWx" firstAttribute="top" secondItem="QSQ-z2-3KU" secondAttribute="bottom" constant="7" id="zfD-iD-dqO"/>
                                         </constraints>
                                         <size key="customSize" width="349" height="227"/>
                                         <connections>
+                                            <outlet property="acceptedTypesLabel" destination="QSQ-z2-3KU" id="ekO-4K-cSu"/>
+                                            <outlet property="currCapacityLabel" destination="M9S-Tg-fvq" id="gee-DH-EsK"/>
+                                            <outlet property="labelName" destination="AWg-aL-a6q" id="hHM-5u-xX2"/>
                                             <outlet property="locationName" destination="AWg-aL-a6q" id="9Ih-Xk-H9g"/>
+                                            <outlet property="phoneNumberLabel" destination="nOf-Cf-hWx" id="bEo-gG-ToW"/>
                                         </connections>
                                     </collectionViewCell>
                                 </cells>
