@@ -11,5 +11,5 @@ public class BookingScreen extends AppCompatActivity {
         setContentView(R.layout.activity_booking_screen);
     }
 
-    
+
 }
