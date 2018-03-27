@@ -194,7 +194,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
             @Override
             public void onItemClick(View itemView, int position) {
                 Intent intent = new Intent(itemView.getContext(), ShelterInspectScreen.class);
-                intent.putExtra("shelterID", mShelters.get(position).getName());
+                intent.putExtra("shelterID", "" + position);
                 startActivityForResult(intent, 0);
             }
         });

@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -16,9 +17,10 @@ public class ShelterInspectScreen extends AppCompatActivity {
     //UI Setup
     TextView name, address, number, capacity, gender, latitude, longitude, age, restrictions;
     TextView nameF, addressF, numberF, capacityF, genderF, latitudeF, longitudeF, ageF, restrictionsF;
+    Button bookButton;
 
     //Data variables
-    String shelterID;
+    int shelterPosition;
     Shelter shelter;
 
     @Override
@@ -37,15 +39,14 @@ public class ShelterInspectScreen extends AppCompatActivity {
         View parentLayout = getWindow().getDecorView().findViewById(android.R.id.content);
         Intent intent = this.getIntent();
         if (intent.getExtras() != null) {
-            shelterID = intent.getExtras().getString("shelterID");
-            Log.d("intentExtra", intent.getExtras().toString());
-            Log.d("ShelterExistsInList", "" + Dashboard.masterShelters.contains(shelterID));
-            for (Shelter mShelter: Dashboard.masterShelters) {
-                if (mShelter.getName().equals(shelterID)) {
-                    this.shelter = mShelter;
-                }
-            }
+            shelterPosition = Integer.parseInt(intent.getExtras().getString("shelterID"));
+//            Log.d("intentExtra", intent.getExtras().toString());
+//            Log.d("ShelterExistsInList", "" + Dashboard.masterShelters.contains(shelterID));
+            shelter = Dashboard.masterShelters.get(shelterPosition);
         }
+
+//        bookButton = (Button) findViewById(R.id.bookButton);
+//        addButtonListener();
 
         name = (TextView) findViewById(R.id.shelterName);
         address = (TextView) findViewById(R.id.shelterAddress);
@@ -76,6 +77,15 @@ public class ShelterInspectScreen extends AppCompatActivity {
         restrictionsF = (TextView) findViewById(R.id.shelterRestrictionsField);
         restrictionsF.setText(shelter.getRestrictions());
     }
+
+//    private void addButtonListener() {
+//        bookButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if ()
+//            }
+//        });
+//    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
