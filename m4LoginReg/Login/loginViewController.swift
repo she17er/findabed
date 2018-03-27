@@ -26,10 +26,14 @@ class loginViewController: UIViewController {
             "username": name ?? "",
             "password": password ?? "",
         ]
+        
         Alamofire.request("https://she17er.herokuapp.com/api/users/login", method: HTTPMethod.post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).validate().responseString {
             response in
             print(response)
             
+            if(response.result.isSuccess) {
+                self.performSegue(withIdentifier: "mainAppIdentifier", sender: self)
+            }
         }
         
     }

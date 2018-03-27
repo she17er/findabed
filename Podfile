@@ -10,6 +10,7 @@ use_frameworks!
 
     pod 'Alamofire', '~> 4.5'
     pod 'GooglePlaces'
+    pod 'BEMCheckBox'
   target 'm4LoginRegTests' do
     inherit! :search_paths
     # Pods for testing

@@ -9,11 +9,13 @@
 import Foundation
 import UIKit
 import GooglePlaces
+import Alamofire
 
 class shelterRegistrationContinuedViewController: UIViewController, UITextViewDelegate {
     var street_number: String = ""
     var route: String = ""
-
+    var coOrdinates: String = ""
+    
     var name: String?
     var currCapacity: String?
     var maxCapacity: String?
@@ -57,6 +59,28 @@ class shelterRegistrationContinuedViewController: UIViewController, UITextViewDe
         route = ""
         
     }
+    
+    @IBAction func onDoneClicked(_ sender: Any) {
+//        let parameters: Parameters = [
+//            "name": name ?? "",
+//            "coOrdinates": coOrdinates ?? "",
+//            "location": street_number + " " + route ?? "",
+//            "currCapacity": currCapacity ?? "",
+//            "maxCapacity": maxCapacity ?? "",
+//            "acceptedTypes": 
+//            "role": roleTxt,
+//            "account_State": "existslmao",
+//            "login": "true"
+//        ]
+//        
+//
+//        Alamofire.request("https://she17er.herokuapp.com/api/users/newUsers", method: HTTPMethod.post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).validate().responseString {
+//            response in
+//            print(response)
+//
+//        }
+        
+    }
 }
 
 
@@ -65,6 +89,7 @@ extension shelterRegistrationContinuedViewController: GMSAutocompleteViewControl
     // Handle the user's selection.
     func viewController(_ viewController: GMSAutocompleteViewController, didAutocompleteWith place: GMSPlace) {
         
+        coOrdinates = String(place.coordinate.latitude) + "," + String(place.coordinate.longitude)
         
         // Get the address components.
         if let addressLines = place.addressComponents {
