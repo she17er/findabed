@@ -100,7 +100,7 @@ router.get('/getLocations', (req, res) => {
     .exec()
     .then((shelter) => res.send(shelter))
     .catch((err) => {
-      res.send("" + err);
+      res.send("here is the error" + err);
     });
 });
 
