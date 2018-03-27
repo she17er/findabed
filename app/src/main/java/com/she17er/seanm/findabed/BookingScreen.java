@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public class BookingScreen extends AppCompatActivity {
@@ -40,6 +41,9 @@ public class BookingScreen extends AppCompatActivity {
             shelter = Dashboard.masterShelters.get(shelterPosition);
         }
 
+        bookButton = (Button)findViewById(R.id.bookButton);
+        addButtonListener();
+
         Button cancelButton = (Button)findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,8 +65,15 @@ public class BookingScreen extends AppCompatActivity {
                 if (bookingNumber + currCapacity > maxCapacity) {
                     numberText.setError("Not enough space in the shelter");
                 }
+                shelter.setCurrentCapacity(Integer.toString(shelter.getCurrentCapacity() + bookingNumber));
+                Intent intent = new Intent(v.getContext(), ShelterInspectScreen.class);
+                intent.putExtra("shelterID", "" + shelterPosition);
+                startActivityForResult(intent, 0);
             }
         });
     }
 
+    public void writeToCSV(int id){
+        InputStream inputStream = getResources().openRawResource(id);
+    }
 }
