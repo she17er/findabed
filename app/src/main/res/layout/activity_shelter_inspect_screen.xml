@@ -137,7 +137,7 @@
                 android:id="@+id/currCapacity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Current Capacity:"
+                android:text="Remaining Beds:"
                 android:textStyle="bold" />
 
             <TextView

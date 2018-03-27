@@ -64,7 +64,7 @@ public class ShelterInspectScreen extends AppCompatActivity {
         numberF = (TextView) findViewById(R.id.shelterPhoneNumberField);
         numberF.setText(shelter.getPhoneNumber());
         capacityF = (TextView) findViewById(R.id.shelterCapacityField);
-        capacityF.setText(shelter.getCapacity());
+        capacityF.setText("" + shelter.getCapacity());
         genderF = (TextView) findViewById(R.id.shelterGenderField);
         genderF.setText(shelter.getGender());
         latitudeF = (TextView) findViewById(R.id.shelterLatitudeField);
@@ -74,7 +74,7 @@ public class ShelterInspectScreen extends AppCompatActivity {
         ageF = (TextView) findViewById(R.id.shelterAgesField);
         ageF.setText(shelter.getAgeRange());
         currCapacityF = (TextView)findViewById(R.id.currCapacityField);
-        currCapacityF.setText(""+shelter.getCurrentCapacity());
+        currCapacityF.setText("" + (shelter.getCapacity() - shelter.getCurrentCapacity()));
         restrictionsF = (TextView) findViewById(R.id.shelterRestrictionsField);
         restrictionsF.setText(shelter.getRestrictions());
     }

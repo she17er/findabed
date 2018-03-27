@@ -16,6 +16,7 @@ public class BookingScreen extends AppCompatActivity {
     //UI Components
     EditText numberText;
     Button confirmButton;
+    Button cancelButton;
 
     //Shelter Data
     int shelterPosition;
@@ -32,6 +33,7 @@ public class BookingScreen extends AppCompatActivity {
         //Adds UI components
         numberText = (EditText) findViewById(R.id.numberText);
         confirmButton = (Button) findViewById(R.id.confirmButton);
+        cancelButton = (Button)findViewById(R.id.cancelButton);
         addButtonListener();
 
         //Initializes shelter data
@@ -40,16 +42,6 @@ public class BookingScreen extends AppCompatActivity {
             shelterPosition = Integer.parseInt(intent.getExtras().getString("shelterID"));
             shelter = Dashboard.masterShelters.get(shelterPosition);
         }
-
-        Button cancelButton = (Button)findViewById(R.id.cancelButton);
-        cancelButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), ShelterInspectScreen.class);
-                intent.putExtra("shelterID", "" + shelterPosition);
-                startActivityForResult(intent, 0);
-            }
-        });
     }
 
     /**
@@ -59,17 +51,23 @@ public class BookingScreen extends AppCompatActivity {
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int maxCapacity = Integer.parseInt(shelter.getCapacity());
-                int currCapacity = shelter.getCurrentCapacity();
                 int bookingNumber = Integer.parseInt(numberText.getText().toString());
-                if (bookingNumber + currCapacity > maxCapacity) {
+                if (bookingNumber + shelter.getCurrentCapacity() > shelter.getCapacity()) {
                     numberText.setError("Not enough space in the shelter");
                 } else {
                     shelter.setCurrentCapacity(Integer.toString(shelter.getCurrentCapacity() + bookingNumber));
-                    Intent intent = new Intent(v.getContext(), ShelterInspectScreen.class);
+                    Intent intent = new Intent(v.getContext(), Dashboard.class);
                     intent.putExtra("shelterID", "" + shelterPosition);
                     startActivityForResult(intent, 0);
                 }
+            }
+        });
+
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), Dashboard.class);
+                startActivityForResult(intent, 0);
             }
         });
     }

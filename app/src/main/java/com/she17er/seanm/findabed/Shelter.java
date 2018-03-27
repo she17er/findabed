@@ -11,7 +11,7 @@ import java.util.Iterator;
 
 public class Shelter {
     private String name;
-    private String capacity;
+    private int capacity;
     private String gender;
     private String ageRange;
     private String restrictions;
@@ -42,16 +42,16 @@ public class Shelter {
 
     }
 
-    public String getCapacity() {
+    public int getCapacity() {
         return capacity;
     }
 
     public void setCapacity(String s) {
         s = s.replaceAll(";", ",");
         if (s == null || s.equals(" ")) {
-            this.capacity = "0";
+            this.capacity = 0;
         } else {
-            this.capacity = s;
+            this.capacity = Integer.parseInt(s);
         }
     }
 
