@@ -10,6 +10,4 @@ public class BookingScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_screen);
     }
-
-
 }
