@@ -136,4 +136,16 @@ public class Shelter {
         phoneNumber = phoneNumber.replaceAll(";", ",");
         this.phoneNumber = phoneNumber;
     }
+
+    public int getCurrentCapacity() {
+        return currentCapacity;
+    }
+
+    public void incrementCurrentCapacity() {
+        currentCapacity += 1;
+    }
+
+    public void decrementCurrentCapacity() {
+        currentCapacity -= 1;
+    }
 }
