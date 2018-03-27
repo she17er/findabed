@@ -55,7 +55,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
     Spinner genderSelect, ageSelect;
 
     //ArrayList that stores data from CSV
-    public static ArrayList<Shelter> masterShelters, currentShelters, currShelterStatus;
+    public static ArrayList<Shelter> masterShelters, currentShelters;
 
     //Current restrictions from the spinners
     String gender, age;
@@ -91,9 +91,6 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
             currentShelters.add(shelter);
         }
         populateShelterList(currentShelters);
-
-        currShelterStatus = new ArrayList<>();
-        addCSVShelters(R.raw.bookings, currShelterStatus);
 
         //Initialize Spinners
         gender = "";

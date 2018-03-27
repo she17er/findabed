@@ -29,7 +29,7 @@ public class Shelter {
         setLatitude(tokens.get(5));
         setAddress(tokens.get(6));
         setPhoneNumber(tokens.get(8));
-        currentCapacity = 0;
+        setCurrentCapacity(tokens.get(9));
     }
 
     public String getName() {
@@ -62,6 +62,11 @@ public class Shelter {
     public String getAgeRange() { return ageRange; }
 
     public String getRestrictions() { return restrictions; }
+
+    public void setCurrentCapacity(String currentCapacity) {
+        currentCapacity = currentCapacity.replaceAll(";", ",");
+        this.currentCapacity = Integer.parseInt(currentCapacity);
+    }
 
     public void setGenderandAge(String gender) {
         restrictions = gender.toLowerCase();

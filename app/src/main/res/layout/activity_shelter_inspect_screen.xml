@@ -134,12 +134,14 @@
                 android:text="TextView" />
 
             <TextView
+                android:id="@+id/currCapacity"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textStyle="bold"
-                android:text="Current Capacity:" />
+                android:text="Current Capacity:"
+                android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/currCapacityField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView" />

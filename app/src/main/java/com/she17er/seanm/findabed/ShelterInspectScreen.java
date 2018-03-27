@@ -15,8 +15,8 @@ import org.w3c.dom.Text;
 public class ShelterInspectScreen extends AppCompatActivity {
 
     //UI Setup
-    TextView name, address, number, capacity, gender, latitude, longitude, age, restrictions;
-    TextView nameF, addressF, numberF, capacityF, genderF, latitudeF, longitudeF, ageF, restrictionsF;
+    TextView name, address, number, capacity, gender, latitude, longitude, age, restrictions, currCapacity;
+    TextView nameF, addressF, numberF, capacityF, genderF, latitudeF, longitudeF, ageF, restrictionsF, currCapacityF;
     Button bookButton;
 
     //Data variables
@@ -55,6 +55,7 @@ public class ShelterInspectScreen extends AppCompatActivity {
         longitude = (TextView) findViewById(R.id.shelterLongitude);
         age = (TextView) findViewById(R.id.shelterAges);
         restrictions = (TextView) findViewById(R.id.shelterRestrictions);
+        currCapacity = (TextView) findViewById(R.id.currCapacity);
 
         nameF = (TextView) findViewById(R.id.shelterNameField);
         nameF.setText(shelter.getName());
@@ -72,6 +73,8 @@ public class ShelterInspectScreen extends AppCompatActivity {
         longitudeF.setText("" + shelter.getLongitude());
         ageF = (TextView) findViewById(R.id.shelterAgesField);
         ageF.setText(shelter.getAgeRange());
+        currCapacityF = (TextView)findViewById(R.id.currCapacityField);
+        currCapacityF.setText(""+shelter.getCurrentCapacity());
         restrictionsF = (TextView) findViewById(R.id.shelterRestrictionsField);
         restrictionsF.setText(shelter.getRestrictions());
     }
@@ -84,7 +87,8 @@ public class ShelterInspectScreen extends AppCompatActivity {
                 intent.putExtra("shelterID", "" + shelterPosition);
                 startActivityForResult(intent, 0);
             }
-        });    }
+        });
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
