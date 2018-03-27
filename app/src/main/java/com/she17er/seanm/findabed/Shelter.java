@@ -49,9 +49,9 @@ public class Shelter {
     public void setCapacity(String s) {
         s = s.replaceAll(";", ",");
         if (s == null || s.equals(" ")) {
-            this.capacity = "0 available";
+            this.capacity = "0";
         } else {
-            this.capacity = s + " available";
+            this.capacity = s;
         }
     }
 

@@ -20,7 +20,6 @@ public class BookingScreen extends AppCompatActivity {
     //Shelter Data
     int shelterPosition;
     Shelter shelter;
-    Button bookButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +32,7 @@ public class BookingScreen extends AppCompatActivity {
         //Adds UI components
         numberText = (EditText) findViewById(R.id.numberText);
         confirmButton = (Button) findViewById(R.id.confirmButton);
+        addButtonListener();
 
         //Initializes shelter data
         Intent intent = this.getIntent();
@@ -40,9 +40,6 @@ public class BookingScreen extends AppCompatActivity {
             shelterPosition = Integer.parseInt(intent.getExtras().getString("shelterID"));
             shelter = Dashboard.masterShelters.get(shelterPosition);
         }
-
-        bookButton = (Button)findViewById(R.id.bookButton);
-        addButtonListener();
 
         Button cancelButton = (Button)findViewById(R.id.cancelButton);
         cancelButton.setOnClickListener(new View.OnClickListener() {
@@ -55,24 +52,33 @@ public class BookingScreen extends AppCompatActivity {
         });
     }
 
+    /**
+     * Adds button that confirms a booking
+     */
     private void addButtonListener() {
-        bookButton.setOnClickListener(new View.OnClickListener() {
+        confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 int maxCapacity = Integer.parseInt(shelter.getCapacity());
                 int currCapacity = shelter.getCurrentCapacity();
-                int bookingNumber = Integer.parseInt(numberText.toString());
+                int bookingNumber = Integer.parseInt(numberText.getText().toString());
                 if (bookingNumber + currCapacity > maxCapacity) {
                     numberText.setError("Not enough space in the shelter");
+                } else {
+                    shelter.setCurrentCapacity(Integer.toString(shelter.getCurrentCapacity() + bookingNumber));
+                    Intent intent = new Intent(v.getContext(), ShelterInspectScreen.class);
+                    intent.putExtra("shelterID", "" + shelterPosition);
+                    startActivityForResult(intent, 0);
                 }
-                shelter.setCurrentCapacity(Integer.toString(shelter.getCurrentCapacity() + bookingNumber));
-                Intent intent = new Intent(v.getContext(), ShelterInspectScreen.class);
-                intent.putExtra("shelterID", "" + shelterPosition);
-                startActivityForResult(intent, 0);
             }
         });
     }
 
+    /**
+     * Reads csv data from the data.csv file for booking purposes
+     *
+     * @param id The file to read csv data from
+     */
     public void writeToCSV(int id){
         InputStream inputStream = getResources().openRawResource(id);
     }
