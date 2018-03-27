@@ -40,13 +40,11 @@ public class ShelterInspectScreen extends AppCompatActivity {
         Intent intent = this.getIntent();
         if (intent.getExtras() != null) {
             shelterPosition = Integer.parseInt(intent.getExtras().getString("shelterID"));
-//            Log.d("intentExtra", intent.getExtras().toString());
-//            Log.d("ShelterExistsInList", "" + Dashboard.masterShelters.contains(shelterID));
             shelter = Dashboard.masterShelters.get(shelterPosition);
         }
 
-//        bookButton = (Button) findViewById(R.id.bookButton);
-//        addButtonListener();
+        bookButton = (Button) findViewById(R.id.bookButton);
+        addButtonListener();
 
         name = (TextView) findViewById(R.id.shelterName);
         address = (TextView) findViewById(R.id.shelterAddress);
@@ -78,14 +76,15 @@ public class ShelterInspectScreen extends AppCompatActivity {
         restrictionsF.setText(shelter.getRestrictions());
     }
 
-//    private void addButtonListener() {
-//        bookButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if ()
-//            }
-//        });
-//    }
+    private void addButtonListener() {
+        bookButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), BookingScreen.class);
+                intent.putExtra("shelterID", "" + shelterPosition);
+                startActivityForResult(intent, 0);
+            }
+        });    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
