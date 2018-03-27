@@ -19,6 +19,7 @@ public class Shelter {
     private double latitude;
     private String address;
     private String phoneNumber;
+    private int currentCapacity;
 
     public Shelter(ArrayList<String> tokens) {
         setName(tokens.get(1));
@@ -28,6 +29,7 @@ public class Shelter {
         setLatitude(tokens.get(5));
         setAddress(tokens.get(6));
         setPhoneNumber(tokens.get(8));
+        currentCapacity = 0;
     }
 
     public String getName() {
