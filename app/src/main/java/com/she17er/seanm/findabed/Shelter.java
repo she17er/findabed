@@ -6,6 +6,7 @@ import java.util.Iterator;
  * Represents a given shelter
  *
  * @author elissa huang
+ * @edited by sean walsh
  * @version 1.3
  */
 

@@ -8,14 +8,20 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.opencsv.CSVWriter;
+
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.io.Reader;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -65,11 +71,12 @@ public class BookingScreen extends AppCompatActivity {
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d("thisisthepath", "" + System.getProperty("user.dir"));
                 int bookingNumber = Integer.parseInt(numberText.getText().toString());
                 if (bookingNumber + shelter.getCurrentCapacity() > shelter.getCapacity()) {
                     numberText.setError("Not enough space in the shelter");
                 } else {
-                    shelter.setCurrentCapacity(Integer.toString(shelter.getCurrentCapacity() + bookingNumber));
+                    writeToCSV(R.raw.data);
                     Intent intent = new Intent(v.getContext(), Dashboard.class);
                     startActivityForResult(intent, 0);
                 }
@@ -97,35 +104,31 @@ public class BookingScreen extends AppCompatActivity {
 
     /**
      * Reads csv data from the data.csv file for booking purposes
-     *
-     * @param id The file to read csv data from
      */
-    public void writeToCSV(int id){
+    public void writeToCSV(int id) {
+        String csvData = "";
         InputStream inputStream = getResources().openRawResource(id);
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
         try {
-            String s;
-            ArrayList<String> allLines = new ArrayList<>();
+            String s = br.readLine();
             while ((s = br.readLine()) != null) {
-                if (s.contains(shelter.getName())){
-                    int lastComma = s.lastIndexOf(",");
-                    s = s.substring(0, lastComma + 1) + shelter.getCurrentCapacity();
+                StringBuilder builder = new StringBuilder(s);
+                boolean inQuotes = false;
+                for (int currentIndex = 0; currentIndex < builder.length(); currentIndex++) {
+                    char currentChar = builder.charAt(currentIndex);
+                    if (currentChar == '\"') {
+                        inQuotes = !inQuotes; // toggle state
+                    }
+                    if (currentChar == ',' && inQuotes) {
+                        builder.setCharAt(currentIndex, ';'); // sets the comma in the quotes to semi-colon
+                    }
                 }
-                allLines.add(s);
+                csvData += builder.toString();
+                csvData += "\n";
             }
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (br != null) {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
-
+        Log.d("csvdata", csvData);
     }
 }
