@@ -10,9 +10,11 @@ import android.widget.EditText;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -102,7 +104,7 @@ public class BookingScreen extends AppCompatActivity {
         InputStream inputStream = getResources().openRawResource(id);
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
         try {
-            String s = br.readLine();
+            String s;
             ArrayList<String> allLines = new ArrayList<>();
             while ((s = br.readLine()) != null) {
                 if (s.contains(shelter.getName())){
@@ -124,6 +126,6 @@ public class BookingScreen extends AppCompatActivity {
                 }
             }
         }
-        
+
     }
 }
