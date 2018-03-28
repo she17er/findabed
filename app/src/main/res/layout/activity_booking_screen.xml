@@ -24,10 +24,16 @@
                 android:inputType="number" />
 
             <Button
-                android:id="@+id/confirmButton"
+                android:id="@+id/confirmBookingButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ok" />
+                android:text="Confirm Booking" />
+
+            <Button
+                android:id="@+id/cancelBookingButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel Booking" />
 
             <Button
                 android:id="@+id/cancelButton"
