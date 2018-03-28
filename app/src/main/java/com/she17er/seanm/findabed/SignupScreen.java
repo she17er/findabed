@@ -104,7 +104,6 @@ public class SignupScreen extends AppCompatActivity {
         dataAdapterRole.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         roleSpinner.setAdapter(dataAdapterRole);
     }
-
     /**
      * Creates a button listener that adds user accounts to the accounts map
      */
@@ -122,6 +121,7 @@ public class SignupScreen extends AppCompatActivity {
             }
         });
     }
+
 
     /**
      * Checks if all entered signup data is valid

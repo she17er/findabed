@@ -86,7 +86,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
         // Initialize shelters
         masterShelters = new ArrayList<>();
         currentShelters = new ArrayList<>();
-        addCSVShelters(R.raw.data);
+        addCSVShelters(R.raw.data, masterShelters);
         for (Shelter shelter: masterShelters) {
             currentShelters.add(shelter);
         }
@@ -194,7 +194,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
             @Override
             public void onItemClick(View itemView, int position) {
                 Intent intent = new Intent(itemView.getContext(), ShelterInspectScreen.class);
-                intent.putExtra("shelterID", mShelters.get(position).getName());
+                intent.putExtra("shelterID", "" + position);
                 startActivityForResult(intent, 0);
             }
         });
@@ -233,7 +233,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
     /**
      * Reads all shelter data from csv in the modal and adds them to an arraylist
      */
-    public void addCSVShelters(int id) {
+    public void addCSVShelters(int id, ArrayList<Shelter> dataStore) {
         InputStream inputStream = getResources().openRawResource(id);
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
         try {
@@ -251,7 +251,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
                     }
                 }
                 ArrayList<String> tokens = new ArrayList<String> (Arrays.asList(builder.toString().split(",")));
-                masterShelters.add(new Shelter(tokens));
+                dataStore.add(new Shelter(tokens));
             }
         } catch (FileNotFoundException e) {
             e.printStackTrace();

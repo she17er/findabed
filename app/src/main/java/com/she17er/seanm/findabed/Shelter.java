@@ -6,12 +6,13 @@ import java.util.Iterator;
  * Represents a given shelter
  *
  * @author elissa huang
+ * @edited by sean walsh
  * @version 1.3
  */
 
 public class Shelter {
     private String name;
-    private String capacity;
+    private int capacity;
     private String gender;
     private String ageRange;
     private String restrictions;
@@ -19,6 +20,7 @@ public class Shelter {
     private double latitude;
     private String address;
     private String phoneNumber;
+    private int currentCapacity;
 
     public Shelter(ArrayList<String> tokens) {
         setName(tokens.get(1));
@@ -28,6 +30,7 @@ public class Shelter {
         setLatitude(tokens.get(5));
         setAddress(tokens.get(6));
         setPhoneNumber(tokens.get(8));
+        setCurrentCapacity(tokens.get(9));
     }
 
     public String getName() {
@@ -40,16 +43,16 @@ public class Shelter {
 
     }
 
-    public String getCapacity() {
+    public int getCapacity() {
         return capacity;
     }
 
     public void setCapacity(String s) {
         s = s.replaceAll(";", ",");
         if (s == null || s.equals(" ")) {
-            this.capacity = "0 available";
+            this.capacity = 0;
         } else {
-            this.capacity = s + " available";
+            this.capacity = Integer.parseInt(s);
         }
     }
 
@@ -60,6 +63,11 @@ public class Shelter {
     public String getAgeRange() { return ageRange; }
 
     public String getRestrictions() { return restrictions; }
+
+    public void setCurrentCapacity(String currentCapacity) {
+        currentCapacity = currentCapacity.replaceAll(";", ",");
+        this.currentCapacity = Integer.parseInt(currentCapacity);
+    }
 
     public void setGenderandAge(String gender) {
         restrictions = gender.toLowerCase();
@@ -133,5 +141,17 @@ public class Shelter {
     public void setPhoneNumber(String phoneNumber) {
         phoneNumber = phoneNumber.replaceAll(";", ",");
         this.phoneNumber = phoneNumber;
+    }
+
+    public int getCurrentCapacity() {
+        return currentCapacity;
+    }
+
+    public void incrementCurrentCapacity() {
+        currentCapacity += 1;
+    }
+
+    public void decrementCurrentCapacity() {
+        currentCapacity -= 1;
     }
 }

@@ -132,6 +132,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="TextView" />
+
+            <TextView
+                android:id="@+id/currCapacity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Remaining Beds:"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/currCapacityField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView" />
+
+            <Button
+                android:id="@+id/bookButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="book" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </android.support.constraint.ConstraintLayout>

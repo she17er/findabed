@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -14,11 +15,12 @@ import org.w3c.dom.Text;
 public class ShelterInspectScreen extends AppCompatActivity {
 
     //UI Setup
-    TextView name, address, number, capacity, gender, latitude, longitude, age, restrictions;
-    TextView nameF, addressF, numberF, capacityF, genderF, latitudeF, longitudeF, ageF, restrictionsF;
+    TextView name, address, number, capacity, gender, latitude, longitude, age, restrictions, currCapacity;
+    TextView nameF, addressF, numberF, capacityF, genderF, latitudeF, longitudeF, ageF, restrictionsF, currCapacityF;
+    Button bookButton;
 
     //Data variables
-    String shelterID;
+    int shelterPosition;
     Shelter shelter;
 
     @Override
@@ -37,15 +39,12 @@ public class ShelterInspectScreen extends AppCompatActivity {
         View parentLayout = getWindow().getDecorView().findViewById(android.R.id.content);
         Intent intent = this.getIntent();
         if (intent.getExtras() != null) {
-            shelterID = intent.getExtras().getString("shelterID");
-            Log.d("intentExtra", intent.getExtras().toString());
-            Log.d("ShelterExistsInList", "" + Dashboard.masterShelters.contains(shelterID));
-            for (Shelter mShelter: Dashboard.masterShelters) {
-                if (mShelter.getName().equals(shelterID)) {
-                    this.shelter = mShelter;
-                }
-            }
+            shelterPosition = Integer.parseInt(intent.getExtras().getString("shelterID"));
+            shelter = Dashboard.masterShelters.get(shelterPosition);
         }
+
+        bookButton = (Button) findViewById(R.id.bookButton);
+        addButtonListener();
 
         name = (TextView) findViewById(R.id.shelterName);
         address = (TextView) findViewById(R.id.shelterAddress);
@@ -56,6 +55,7 @@ public class ShelterInspectScreen extends AppCompatActivity {
         longitude = (TextView) findViewById(R.id.shelterLongitude);
         age = (TextView) findViewById(R.id.shelterAges);
         restrictions = (TextView) findViewById(R.id.shelterRestrictions);
+        currCapacity = (TextView) findViewById(R.id.currCapacity);
 
         nameF = (TextView) findViewById(R.id.shelterNameField);
         nameF.setText(shelter.getName());
@@ -64,7 +64,7 @@ public class ShelterInspectScreen extends AppCompatActivity {
         numberF = (TextView) findViewById(R.id.shelterPhoneNumberField);
         numberF.setText(shelter.getPhoneNumber());
         capacityF = (TextView) findViewById(R.id.shelterCapacityField);
-        capacityF.setText(shelter.getCapacity());
+        capacityF.setText("" + shelter.getCapacity());
         genderF = (TextView) findViewById(R.id.shelterGenderField);
         genderF.setText(shelter.getGender());
         latitudeF = (TextView) findViewById(R.id.shelterLatitudeField);
@@ -73,8 +73,21 @@ public class ShelterInspectScreen extends AppCompatActivity {
         longitudeF.setText("" + shelter.getLongitude());
         ageF = (TextView) findViewById(R.id.shelterAgesField);
         ageF.setText(shelter.getAgeRange());
+        currCapacityF = (TextView)findViewById(R.id.currCapacityField);
+        currCapacityF.setText("" + (shelter.getCapacity() - shelter.getCurrentCapacity()));
         restrictionsF = (TextView) findViewById(R.id.shelterRestrictionsField);
         restrictionsF.setText(shelter.getRestrictions());
+    }
+
+    private void addButtonListener() {
+        bookButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), BookingScreen.class);
+                intent.putExtra("shelterID", "" + shelterPosition);
+                startActivityForResult(intent, 0);
+            }
+        });
     }
 
     @Override
