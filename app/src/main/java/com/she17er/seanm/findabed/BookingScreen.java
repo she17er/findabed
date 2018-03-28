@@ -8,8 +8,14 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class BookingScreen extends AppCompatActivity {
 
@@ -79,5 +85,30 @@ public class BookingScreen extends AppCompatActivity {
      */
     public void writeToCSV(int id){
         InputStream inputStream = getResources().openRawResource(id);
+        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
+        try {
+            String s = br.readLine();
+            ArrayList<String> allLines = new ArrayList<>();
+            while ((s = br.readLine()) != null) {
+                if (s.contains(shelter.getName())){
+                    int lastComma = s.lastIndexOf(",");
+                    s = s.substring(0, lastComma + 1) + shelter.getCurrentCapacity();
+                }
+                allLines.add(s);
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (br != null) {
+                try {
+                    br.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        
     }
 }
