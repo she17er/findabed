@@ -11,57 +11,60 @@ import Alamofire
 import SwiftyJSON
 
 
-class ShelterCardViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
+class ShelterCardViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
 
-    var shelterNames:[String] = ["label"]
-    var shelterAcceptedTypes:[String] = ["default"]
-    var shelterPhoneNumbers:[String] = ["default2"]
-    var shelterCurrentCapacity:[String] = ["default3"]
+    var shelters:[Shelter] = []
+    var filteredShelters:[Shelter] = []
+    
+    var isSearching = false
 
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var collectionView: UICollectionView!
     override func viewDidLoad() {
-        super.viewDidLoad()
-
         // Do any additional setup after loading the view.
-        Alamofire.request("https://she17er.herokuapp.com/api/shelter/getShelters").validate().responseJSON {
-            (responseObject) -> Void in
+        
+        searchBar.delegate = self
+        requestShelters()
+    }
     
-    //            print(responseObject)
-    
-            if responseObject.result.isSuccess {
-                let resJson = JSON(responseObject.result.value!)
-                print(resJson[0])
-    
-                for (key,subJson):(String, JSON) in resJson {
-                    // Do something you want
-                    self.shelterNames.append(subJson["name"].stringValue)
-    
-                    self.shelterAcceptedTypes.append(subJson["acceptedAge"].stringValue)
-                    self.shelterCurrentCapacity.append(subJson["currCapacity"].stringValue)
-                    self.shelterPhoneNumbers.append(subJson["phoneNumber"].stringValue)
-                    print(self.shelterNames)
-    
-                }
-            }
-            if responseObject.result.isFailure {
-                print("error")
-            }
+    func requestShelters() {
+        Alamofire.request("https://she17er.herokuapp.com/api/shelter/getShelters").validate().responseData { response in
+            guard let data = response.data else { /* handle error? */ return }
+            
+            self.shelters = (try? JSONDecoder().decode([Shelter].self, from: data)) ?? []
+            
+            self.collectionView.reloadData()
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return shelters.count
     }
     
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: UIScreen.main.bounds.width, height: 227)
+        
+        
+    }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CollectionViewCell
         
         print(indexPath.row)
-        cell.labelName.text = shelterNames[indexPath.row]
-        cell.acceptedTypesLabel.text = shelterAcceptedTypes[indexPath.row]
-        cell.phoneNumberLabel.text = shelterPhoneNumbers[indexPath.row]
-        cell.currCapacityLabel.text = shelterCurrentCapacity[indexPath.row]
+        var currentShelters:[Shelter] = []
+        if (isSearching) {
+            currentShelters = filteredShelters
+        } else {
+            currentShelters = shelters
+        }
+        
+        var shelter = currentShelters[indexPath.row]
+        cell.labelName.text = shelter.name
+        cell.acceptedTypesLabel.text = "ACCEPTED TYPES • \(shelter.acceptedTypes[0])"
+        cell.phoneNumberLabel.text = "Phone Number \n\(shelter.phoneNumber)"
+        cell.currCapacityLabel.text = "Current Capacity |  \(shelter.currCapacity)"
         //This creates the shadows and modifies the cards a little bit
         cell.contentView.layer.cornerRadius = 4.0
         cell.contentView.layer.borderWidth = 1.0
@@ -74,10 +77,44 @@ class ShelterCardViewController: UIViewController, UICollectionViewDelegate, UIC
         cell.layer.masksToBounds = false
         cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: cell.contentView.layer.cornerRadius).cgPath
 
-        
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        // get the shelter object
+        self.performSegue(withIdentifier: "shelterViewIdentifier", sender: shelters[indexPath.row])
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? ShelterViewController {
+            if let sendingValue = sender as? Shelter {
+            
+            destination.shelterName = sendingValue.name
+            destination.currCapacity = "Current Capacity |  \(sendingValue.currCapacity)"
+            destination.phoneNumber = "Phone Number \n\(sendingValue.phoneNumber)"
+            destination.acceptedTypes = "ACCEPTED TYPES • \(sendingValue.acceptedTypes[0])"
+            var coOrdinates = sendingValue.coOrdinates.components(separatedBy: ",")
+            destination.latitude = Double(coOrdinates[1])!
+            destination.longitude = Double(coOrdinates[0])!
+            destination.id = sendingValue._id
+            }
+        }
     }
 
     
     
+}
+
+extension ShelterCardViewController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if (searchText == "") {
+            isSearching = false
+        } else {
+            isSearching = true
+        }
+        filteredShelters = shelters.filter({ shelter in
+            return shelter.name.lowercased().contains(searchText.lowercased())
+        })
+        collectionView.reloadData()
+    }
 }
