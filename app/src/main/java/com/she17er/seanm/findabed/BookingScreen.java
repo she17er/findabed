@@ -15,8 +15,7 @@ public class BookingScreen extends AppCompatActivity {
 
     //UI Components
     EditText numberText;
-    Button confirmButton;
-    Button cancelButton;
+    Button confirmButton, cancelBookingButton, cancelButton;
 
     //Shelter Data
     int shelterPosition;
@@ -32,7 +31,8 @@ public class BookingScreen extends AppCompatActivity {
 
         //Adds UI components
         numberText = (EditText) findViewById(R.id.numberText);
-        confirmButton = (Button) findViewById(R.id.confirmButton);
+        confirmButton = (Button) findViewById(R.id.confirmBookingButton);
+        cancelBookingButton = (Button) findViewById(R.id.cancelBookingButton);
         cancelButton = (Button)findViewById(R.id.cancelButton);
         addButtonListener();
 
@@ -42,12 +42,18 @@ public class BookingScreen extends AppCompatActivity {
             shelterPosition = Integer.parseInt(intent.getExtras().getString("shelterID"));
             shelter = Dashboard.masterShelters.get(shelterPosition);
         }
+
+        //Hides cancelBookingButton if there is no booking for a user to cancel
+        if (shelter.getCurrentCapacity() == 0) {
+            cancelBookingButton.setVisibility(View.GONE);
+        }
     }
 
     /**
-     * Adds button that confirms a booking
+     * Adds all button listeners
      */
     private void addButtonListener() {
+        //Button listener that beings a booking
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,12 +63,21 @@ public class BookingScreen extends AppCompatActivity {
                 } else {
                     shelter.setCurrentCapacity(Integer.toString(shelter.getCurrentCapacity() + bookingNumber));
                     Intent intent = new Intent(v.getContext(), Dashboard.class);
-                    intent.putExtra("shelterID", "" + shelterPosition);
                     startActivityForResult(intent, 0);
                 }
             }
         });
 
+        //Button to return to dashboard
+        cancelBookingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), Dashboard.class);
+                startActivityForResult(intent, 0);
+            }
+        });
+
+        //Button to return to dashboard
         cancelButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
