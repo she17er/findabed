@@ -36,6 +36,7 @@ public class SignupScreen extends AppCompatActivity {
 
     //URL for the Heroku backend
     String backendURL = "https://she17er.herokuapp.com/api/users/newUsers";
+    String userNameURL = "https://she17er.herokuapp.com/api/users/getUserName";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -191,6 +192,34 @@ public class SignupScreen extends AppCompatActivity {
         @Override
         protected String doInBackground(String... params) {
             try {
+
+//                URL userUrl = new URL(userNameURL);
+//                HttpURLConnection connection1 = (HttpURLConnection) userUrl.openConnection();
+//                connection1.setDoOutput(true);
+//                connection1.setRequestProperty("Content-Type", "application/json");
+//                connection1.setRequestMethod("POST");
+//                connection1.connect();
+//
+//                JSONObject check = new JSONObject();
+//                check.put("username", username.getText());
+//
+//                DataOutputStream userNameDataOutputStream = new DataOutputStream(connection1.getOutputStream());
+//                userNameDataOutputStream.writeBytes(check.toString());
+//                userNameDataOutputStream.flush();
+//                userNameDataOutputStream.close();
+//
+//                Log.d("connection code", "" + connection1.getResponseCode());
+//
+//                BufferedReader userNamein = new BufferedReader(new InputStreamReader(connection1.getInputStream()));
+//                String userNameinputLine;
+//                userNameinputLine = userNamein.readLine();
+//                Log.d("usernameRes", userNameinputLine);
+//                userNamein.close();
+//
+//                if (userNameinputLine.equals("exists!")) {
+//                    return "exists!";
+//                }
+
                 URL url = new URL(backendURL);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setDoOutput(true);
@@ -199,14 +228,14 @@ public class SignupScreen extends AppCompatActivity {
                 connection.connect();
 
                 JSONObject user = new JSONObject();
-                user.put("username", username.getText());
+                user.put("username", username.getText().toString().toLowerCase());
                 user.put("age", age.getText());
                 user.put("gender", genderSpinner.getSelectedItem().toString());
                 user.put("vet_S", vetSpinner.getSelectedItem().toString());
-                user.put("contact.phone", phone.getText());
-                user.put("contact.email", email.getText());
+                user.put("contact.phone", phone.getText().toString());
+                user.put("contact.email", email.getText().toString());
                 user.put("account_State", accountSpinner.getSelectedItem().toString());
-                user.put("password", password.getText());
+                user.put("password", password.getText().toString());
                 user.put("role", roleSpinner.getSelectedItem().toString());
                 user.put("login", "false");
 
@@ -236,6 +265,7 @@ public class SignupScreen extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(String s) {
+            Log.d("targetString", s);
             super.onPostExecute(s);
         }
 
