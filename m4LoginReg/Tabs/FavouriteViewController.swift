@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FavouriteViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+class FavouriteViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
 
     @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet weak var collectionView: UICollectionView!
@@ -16,27 +16,37 @@ class FavouriteViewController: UIViewController, UICollectionViewDelegateFlowLay
     var shelters:[Shelter] = []
     var isSearching = false
 
-    override func viewDidLoad() {
+    override func viewDidLoad() { // called once before any view shows up
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
         searchBar.delegate = self
+//        requestShelters()
+        collectionView.delegate = self
+        collectionView.dataSource = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) { // called every time
         requestShelters()
+        collectionView.reloadData()
     }
     
     func requestShelters() {
         
-        if let favouriteShelters = UserDefaults().data(forKey: "favouriteShelters"){
-            if favouriteShelters.count != 0 {
-                if let loadedShelter = NSKeyedUnarchiver.unarchiveObject(with: favouriteShelters) as? [Shelter] {
-                    print(loadedShelter[0])
-                    shelters = loadedShelter
-                    self.collectionView.reloadData()
-                }
-            }
-        } else {
-            print("favourite shelters is empty")
-        }
+        shelters = ShelterPersistence.getFavouriteShelters()
+        
+        
+//        if let favouriteShelters = UserDefaults().data(forKey: "favouriteShelters"){
+//            if favouriteShelters.count != 0 {
+//                if let loadedShelter = NSKeyedUnarchiver.unarchiveObject(with: favouriteShelters) as? [Shelter] {
+//                    print(loadedShelter[0])
+//                    shelters = loadedShelter
+//                    self.collectionView.reloadData()
+//                }
+//            }
+//        } else {
+//            print("favourite shelters is empty")
+//        }
         
         
         
@@ -56,10 +66,10 @@ class FavouriteViewController: UIViewController, UICollectionViewDelegateFlowLay
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if filteredShelters.count == 0 {
-            return shelters.count
+        if isSearching {
+            return filteredShelters.count
         }
-        return filteredShelters.count
+        return shelters.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

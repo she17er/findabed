@@ -13,7 +13,9 @@ import SwiftyJSON
 
 class ShelterCardViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
 
-    var shelters:[Shelter] = []
+    var shelters:[Shelter] {
+        return ShelterPersistence.shelters
+    }
     var filteredShelters:[Shelter] = []
     
     var isSearching = false
@@ -30,8 +32,8 @@ class ShelterCardViewController: UIViewController, UICollectionViewDelegateFlowL
     func requestShelters() {
         Alamofire.request("https://she17er.herokuapp.com/api/shelter/getShelters").validate().responseData { response in
             guard let data = response.data else { /* handle error? */ return }
-        
-            self.shelters = (try? JSONDecoder().decode([Shelter].self, from: data)) ?? []
+            
+            ShelterPersistence.shelters = (try? JSONDecoder().decode([Shelter].self, from: data)) ?? []
             
             self.collectionView.reloadData()
         }

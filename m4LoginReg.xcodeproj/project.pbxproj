@@ -24,6 +24,7 @@
 		551288502069C08700E8E4FF /* FavouriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5512884F2069C08700E8E4FF /* FavouriteViewController.swift */; };
 		553A8664206C1D3200110F12 /* CoOrdinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553A8663206C1D3200110F12 /* CoOrdinates.swift */; };
 		553A8666206C8C0200110F12 /* TestUIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553A8665206C8C0100110F12 /* TestUIViewController.swift */; };
+		553A866A206D791200110F12 /* ShelterPersistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 553A8669206D791200110F12 /* ShelterPersistence.swift */; };
 		559075A1203CE42B00BC85F4 /* userRegistrationContinuedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5552017A2034C52F006BBD4D /* userRegistrationContinuedViewController.swift */; };
 		55A98B042047140E00AAB00B /* shelterRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A98B032047140E00AAB00B /* shelterRegistrationViewController.swift */; };
 		55A98B062047579100AAB00B /* shelterRegistrationContinuedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A98B052047579100AAB00B /* shelterRegistrationContinuedViewController.swift */; };
@@ -83,6 +84,7 @@
 		5512884F2069C08700E8E4FF /* FavouriteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteViewController.swift; sourceTree = "<group>"; };
 		553A8663206C1D3200110F12 /* CoOrdinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoOrdinates.swift; sourceTree = "<group>"; };
 		553A8665206C8C0100110F12 /* TestUIViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestUIViewController.swift; sourceTree = "<group>"; };
+		553A8669206D791200110F12 /* ShelterPersistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShelterPersistence.swift; sourceTree = "<group>"; };
 		5552017A2034C52F006BBD4D /* userRegistrationContinuedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = userRegistrationContinuedViewController.swift; sourceTree = "<group>"; };
 		55A98B032047140E00AAB00B /* shelterRegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shelterRegistrationViewController.swift; sourceTree = "<group>"; };
 		55A98B052047579100AAB00B /* shelterRegistrationContinuedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shelterRegistrationContinuedViewController.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 				551198F3202CF4450045D950 /* Assets.xcassets */,
 				551198F5202CF4450045D950 /* LaunchScreen.storyboard */,
 				551198F8202CF4450045D950 /* Info.plist */,
+				553A8669206D791200110F12 /* ShelterPersistence.swift */,
 			);
 			path = m4LoginReg;
 			sourceTree = "<group>";
@@ -576,6 +579,7 @@
 				55A98B062047579100AAB00B /* shelterRegistrationContinuedViewController.swift in Sources */,
 				553A8664206C1D3200110F12 /* CoOrdinates.swift in Sources */,
 				55A98B082047986800AAB00B /* shelterRegistrationFinalViewController.swift in Sources */,
+				553A866A206D791200110F12 /* ShelterPersistence.swift in Sources */,
 				5512884E2069C05900E8E4FF /* ProfileViewController.swift in Sources */,
 				559075A1203CE42B00BC85F4 /* userRegistrationContinuedViewController.swift in Sources */,
 				5511991B202CFFB60045D950 /* loginViewController.swift in Sources */,

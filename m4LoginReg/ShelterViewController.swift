@@ -20,7 +20,8 @@ class ShelterViewController: UIViewController {
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var starBtn: UIButton!
     
-    
+    var cancelBtn: UIButton!
+
     var currCapacity:String = ""
     var phoneNumber:String = ""
     var acceptedTypes:String = ""
@@ -29,6 +30,10 @@ class ShelterViewController: UIViewController {
     var longitude:Double = 0
     var id:String = ""
     override func viewDidLoad() {
+        
+        cancelBtn = makeCancelButton(xVal: 16, yVal: 28)
+
+        
         shelterNameUI.text = shelterName
         acceptedTypesUI.text = "ACCEPTED TYPES • \(acceptedTypes)"
         phoneNumberUI.text = "Phone Number \n\(phoneNumber)"
@@ -41,6 +46,8 @@ class ShelterViewController: UIViewController {
         myAnnotation.title = "Shelter"
         mapView.addAnnotation(myAnnotation)
         
+        cancelBtn.addTarget(self, action: #selector(self.GoBack), for: .touchUpInside)
+        
     }
     @IBAction func onBedClicked(_ sender: Any) {
         performSegue(withIdentifier: "bedIdentifier", sender: self)
@@ -48,14 +55,9 @@ class ShelterViewController: UIViewController {
     }
     
     @IBAction func onFavouriteClicked(_ sender: Any) {
-        let newFavouriteShelter = Shelter.init(name: shelterName, acceptedTypes: acceptedTypes, phoneNumber: Int(phoneNumber)!, currCapacity: Int(currCapacity)!, coOrdinates: "\(longitude),\(latitude)", _id: id)
+//        let newFavouriteShelter = Shelter.init(name: shelterName, acceptedTypes: acceptedTypes, phoneNumber: Int(phoneNumber)!, currCapacity: Int(currCapacity)!, coOrdinates: "\(longitude),\(latitude)", _id: id)
         
-        if var favouriteShelters = UserDefaults.standard.array(forKey: "favouriteShelters") as? [Shelter] {
-            favouriteShelters.append(newFavouriteShelter)
-        } else {
-            let newFavouriteShelters: [Shelter] = [newFavouriteShelter]
-            UserDefaults.standard.set(NSKeyedArchiver.archivedData(withRootObject: newFavouriteShelters), forKey: "favouriteShelters")
-        }
+        ShelterPersistence.toggleFavouriteShelterById(self.id)
         
         starBtn.setTitle("★", for: .normal)
     }
@@ -64,6 +66,22 @@ class ShelterViewController: UIViewController {
             destination.id = self.id
             destination.currCapacity = Int(self.currCapacity)!
         }
+    }
+    
+    @objc func GoBack() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    func makeCancelButton(xVal: Int, yVal: Int) -> UIButton {
+        let button = UIButton(type: .custom)
+        button.frame = CGRect(x: xVal, y: yVal, width: 30, height: 30)
+        button.clipsToBounds = true
+        button.backgroundColor = .clear
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.setTitle("╳", for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 23)
+        view.addSubview(button)
+        return button
     }
     
 }

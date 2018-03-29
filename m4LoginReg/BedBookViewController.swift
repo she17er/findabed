@@ -83,7 +83,7 @@ class BedBookViewController: UIViewController {
     }
     
     @objc func GoBack() {
-        performSegue(withIdentifier: "returnIdentifier", sender: self)
+        self.navigationController?.popViewController(animated: true)
     }
     
     func makePlusButton(xVal: Int, yVal: Int) -> UIButton {
