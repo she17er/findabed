@@ -35,6 +35,13 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -58,6 +65,8 @@ public class LoginScreen extends AppCompatActivity {
     //User account data accessed by Dashboard.class for a given user session
     public static String currentUser;
     public static String accountState;
+
+    String backendURL = "https://she17er.herokuapp.com/api/users/login";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -202,7 +211,7 @@ public class LoginScreen extends AppCompatActivity {
         private final String mPassword;
 
         UserLoginTask(String username, String password) {
-            mUser = username.toLowerCase();
+            mUser = username;
             mPassword = password;
         }
 
@@ -212,9 +221,35 @@ public class LoginScreen extends AppCompatActivity {
 
             try {
                 // Simulate network access.
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                return false;
+                URL url = new URL(backendURL);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setDoOutput(true);
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setRequestMethod("POST");
+                connection.connect();
+
+                JSONObject user = new JSONObject();
+                user.put("username", mUser);
+                user.put("password", mPassword);
+
+                DataOutputStream localDataOutputStream = new DataOutputStream(connection.getOutputStream());
+                localDataOutputStream.writeBytes(user.toString());
+                localDataOutputStream.flush();
+                localDataOutputStream.close();
+
+                Log.d("ResCode", "" + connection.getResponseCode());
+                if (connection.getResponseCode() == 200) {
+                    return true;
+                }
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String inputLine;
+                inputLine = in.readLine();
+                Log.d("LoginRes", inputLine);
+                in.close();
+
+
+            } catch (Exception e) {
+                Log.d("LoginError", e.toString());
             }
 
 //            if (SignupScreen.accounts.containsKey(mUser)) {
