@@ -61,13 +61,13 @@ router.get('/getLocations', (req, res) => {
       Shelter.findByIdAndUpdate({
           _id: req.params._id
       }, {
-          currCapacity: req.body.newCapacity
+          currCapacity: req.body.currCapacity
       }, function(err, docs) {
           if (err) {
               res.json(err);
           } else {
               console.log("successful");
-              res.json("capacity changed!")
+              res.json("capacity changed!" + {currCapacity})
           }
       })
   });
