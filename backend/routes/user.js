@@ -96,16 +96,22 @@ router.get('/getUsers', (req, res) => {
     });
 });
 
-router.post('/getUserName', (req, res) => {
-  User.find({
-    "username" : req.body.username
-  })
-  .exec()
-  .then((user) => res.send("exists!"))
-  .catch((err) => {
-    res.send("doesn't exist!");
-  });
-});
+/**
+ * needs to be fixed
+ */
+
+// router.post('/getUserName', (req, res) => {
+//   var username = req.body.username
+//   User.$where({
+//     "username" : username
+//   })
+//   .equals((user) => "check + " + user)
+//   .exec()
+//   .then((user) => res.send(user))
+//   .catch((err) => {
+//     res.send("" + err);
+//   });
+// });
 
 
 /**
@@ -120,6 +126,7 @@ router.get('/searchKeyword', (req, res) => {
   Shelter.find({
     name : keyword
   })
+  .exec()
   .then((user) => res.send(user))
   .catch((err) => {
     res.send("" + err);
