@@ -96,6 +96,17 @@ router.get('/getUsers', (req, res) => {
     });
 });
 
+router.post('/getUserName', (req, res) => {
+  User.find({
+    "username" : req.body.username
+  })
+  .exec()
+  .then((user) => res.send("exists!"))
+  .catch((err) => {
+    res.send("doesn't exist!");
+  });
+});
+
 
 /**
  * this is very simple searching where keyword has to
