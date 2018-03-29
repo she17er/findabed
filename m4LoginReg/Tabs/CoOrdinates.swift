@@ -10,6 +10,8 @@ import Foundation
 
 struct CoOrdinates: Codable {
 
-    let coOrdinates: String
     let name: String
+    let phoneNumber: Int
+    let acceptedTypes: [String]
+    let currCapacity: Int
 }

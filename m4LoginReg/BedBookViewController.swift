@@ -54,6 +54,8 @@ class BedBookViewController: UIViewController {
         
         
         YoungAdultDecrement.addTarget(self, action: #selector(self.YoungAdultBedDecrementer), for: .touchUpInside)
+        
+        cancelBtn.addTarget(self, action: #selector(self.GoBack), for: .touchUpInside)
     }
     
     @objc func AdultBedIncrementer() {
@@ -78,6 +80,10 @@ class BedBookViewController: UIViewController {
     
     @objc func YoungAdultBedDecrementer() {
         youngAdultCounter.text = "\(Int(youngAdultCounter.text!)! - 1)"
+    }
+    
+    @objc func GoBack() {
+        performSegue(withIdentifier: "returnIdentifier", sender: self)
     }
     
     func makePlusButton(xVal: Int, yVal: Int) -> UIButton {

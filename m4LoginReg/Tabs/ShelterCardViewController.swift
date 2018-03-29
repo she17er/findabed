@@ -14,6 +14,7 @@ import SwiftyJSON
 class ShelterCardViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
 
     var shelters:[Shelter] = []
+    var checker:[CoOrdinates] = []
     var filteredShelters:[Shelter] = []
     
     var isSearching = false
@@ -30,8 +31,10 @@ class ShelterCardViewController: UIViewController, UICollectionViewDelegateFlowL
     func requestShelters() {
         Alamofire.request("https://she17er.herokuapp.com/api/shelter/getShelters").validate().responseData { response in
             guard let data = response.data else { /* handle error? */ return }
-            
+        
             self.shelters = (try? JSONDecoder().decode([Shelter].self, from: data)) ?? []
+            
+            self.checker = (try? JSONDecoder().decode([CoOrdinates].self, from: data)) ?? []
             
             self.collectionView.reloadData()
         }
@@ -90,9 +93,9 @@ class ShelterCardViewController: UIViewController, UICollectionViewDelegateFlowL
             if let sendingValue = sender as? Shelter {
             
             destination.shelterName = sendingValue.name
-            destination.currCapacity = "Current Capacity |  \(sendingValue.currCapacity)"
-            destination.phoneNumber = "Phone Number \n\(sendingValue.phoneNumber)"
-            destination.acceptedTypes = "ACCEPTED TYPES • \(sendingValue.acceptedTypes[0])"
+            destination.currCapacity = "\(sendingValue.currCapacity)"
+            destination.phoneNumber = "\(sendingValue.phoneNumber)"
+            destination.acceptedTypes = sendingValue.acceptedTypes[0]
             var coOrdinates = sendingValue.coOrdinates.components(separatedBy: ",")
             destination.latitude = Double(coOrdinates[1])!
             destination.longitude = Double(coOrdinates[0])!

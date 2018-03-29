@@ -762,7 +762,7 @@
                     <tabBarItem key="tabBarItem" systemItem="search" id="QWM-UG-vwm"/>
                     <connections>
                         <outlet property="mapView" destination="LDK-hW-2M9" id="cll-jF-lc5"/>
-                        <segue destination="h6W-62-bUz" kind="show" id="xYz-fB-1qV"/>
+                        <segue destination="tHz-1F-eI0" kind="show" identifier="bedBookingIdentifier" id="rfC-h8-yut"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="etO-GE-Y4q" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1079,7 +1079,6 @@
                         <outlet property="acceptedTypesUI" destination="tNE-Ga-sXm" id="eWo-EH-iAG"/>
                         <outlet property="currCapacityUI" destination="622-QQ-ZOT" id="Z38-ql-M57"/>
                         <outlet property="mapView" destination="HC2-Kr-K8a" id="ODo-xp-I4J"/>
-                        <outlet property="onBedBook" destination="bSY-Ta-A9a" id="aYb-gR-AxN"/>
                         <outlet property="phoneNumberUI" destination="Qsg-WP-Yyj" id="lmn-5W-HhL"/>
                         <outlet property="shelterNameUI" destination="Hnd-1p-rTz" id="9oX-q4-1aS"/>
                         <segue destination="h6W-62-bUz" kind="show" identifier="bedIdentifier" id="E4p-Oh-BXc"/>
@@ -1214,6 +1213,7 @@
                         <outlet property="adultCounter" destination="Foe-8u-W5h" id="zJ5-JY-qIW"/>
                         <outlet property="childCounter" destination="1Wa-dj-iyg" id="bsh-ZH-cf8"/>
                         <outlet property="youngAdultCounter" destination="Qe1-Zv-1XP" id="iKf-17-PNO"/>
+                        <segue destination="tHz-1F-eI0" kind="show" identifier="returnIdentifier" id="YJT-zm-H0U"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e0w-PG-YCm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1368,6 +1368,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="xYz-fB-1qV"/>
+        <segue reference="YJT-zm-H0U"/>
     </inferredMetricsTieBreakers>
 </document>

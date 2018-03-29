@@ -29,9 +29,9 @@ class ShelterViewController: UIViewController {
     var id:String = ""
     override func viewDidLoad() {
         shelterNameUI.text = shelterName
-        acceptedTypesUI.text = acceptedTypes
-        phoneNumberUI.text = phoneNumber
-        currCapacityUI.text = currCapacity
+        acceptedTypesUI.text = "ACCEPTED TYPES • \(acceptedTypes)"
+        phoneNumberUI.text = "Phone Number \n\(phoneNumber)"
+        currCapacityUI.text = "Current Capacity | \(currCapacity)"
         
         mapView.centerCoordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
         
