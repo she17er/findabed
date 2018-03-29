@@ -14,7 +14,6 @@ import SwiftyJSON
 class ShelterCardViewController: UIViewController, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
 
     var shelters:[Shelter] = []
-    var checker:[CoOrdinates] = []
     var filteredShelters:[Shelter] = []
     
     var isSearching = false
@@ -34,14 +33,15 @@ class ShelterCardViewController: UIViewController, UICollectionViewDelegateFlowL
         
             self.shelters = (try? JSONDecoder().decode([Shelter].self, from: data)) ?? []
             
-            self.checker = (try? JSONDecoder().decode([CoOrdinates].self, from: data)) ?? []
-            
             self.collectionView.reloadData()
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return shelters.count
+        if (filteredShelters.count == 0) {
+            return shelters.count
+        }
+        return filteredShelters.count
     }
     
     

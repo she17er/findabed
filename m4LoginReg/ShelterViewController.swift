@@ -18,6 +18,7 @@ class ShelterViewController: UIViewController {
     @IBOutlet weak var phoneNumberUI: UITextView!
     @IBOutlet weak var currCapacityUI: UITextView!
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var starBtn: UIButton!
     
     
     var currCapacity:String = ""
@@ -46,6 +47,18 @@ class ShelterViewController: UIViewController {
         
     }
     
+    @IBAction func onFavouriteClicked(_ sender: Any) {
+        let newFavouriteShelter = Shelter.init(name: shelterName, acceptedTypes: acceptedTypes, phoneNumber: Int(phoneNumber)!, currCapacity: Int(currCapacity)!, coOrdinates: "\(longitude),\(latitude)", _id: id)
+        
+        if var favouriteShelters = UserDefaults.standard.array(forKey: "favouriteShelters") as? [Shelter] {
+            favouriteShelters.append(newFavouriteShelter)
+        } else {
+            let newFavouriteShelters: [Shelter] = [newFavouriteShelter]
+            UserDefaults.standard.set(NSKeyedArchiver.archivedData(withRootObject: newFavouriteShelters), forKey: "favouriteShelters")
+        }
+        
+        starBtn.setTitle("★", for: .normal)
+    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? BedBookViewController {
             destination.id = self.id
