@@ -3,6 +3,7 @@ package com.she17er.seanm.findabed;
 import android.app.SearchManager;
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,6 +11,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -18,6 +20,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,6 +39,8 @@ import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Spinner;
 import android.widget.TextView;
+
+import org.json.JSONObject;
 
 
 /**
@@ -59,6 +65,49 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
 
     //Current restrictions from the spinners
     String gender, age;
+    String getSheltersURL = "https://she17er.herokuapp.com/api/shelter/getShelters";
+    private class AsyncTaskRunner extends AsyncTask<String, String, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+
+                URL url = new URL(getSheltersURL);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setRequestMethod("GET");
+                connection.connect();
+
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String inputLine;
+                StringBuffer content = new StringBuffer();
+                while ((inputLine = in.readLine()) != null) {
+                    content.append(inputLine);
+                }
+                Log.d("ShelterRes", content.toString());
+                in.close();
+
+
+            } catch (Exception e) {
+                Log.d("POSTError", e.toString());
+            }
+            return "";
+        }
+        @Override
+        protected void onPostExecute(String s) {
+            Log.d("targetString", s);
+            super.onPostExecute(s);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onProgressUpdate(String... values) {
+            super.onProgressUpdate(values);
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +131,8 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
 
         //Removes actionbar title
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        AsyncTaskRunner getShelters = new AsyncTaskRunner();
+        getShelters.execute("get Shelters");
 
         // Initialize shelters
         masterShelters = new ArrayList<>();
