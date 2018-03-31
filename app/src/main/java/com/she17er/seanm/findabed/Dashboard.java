@@ -68,6 +68,8 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
     String getSheltersURL = "https://she17er.herokuapp.com/api/shelter/getShelters";
     private class AsyncTaskRunner extends AsyncTask<String, String, String> {
 
+        private String ShelterInfo;
+
         @Override
         protected String doInBackground(String... params) {
             try {
@@ -78,14 +80,9 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
                 connection.connect();
 
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                String inputLine;
-                StringBuffer content = new StringBuffer();
-                while ((inputLine = in.readLine()) != null) {
-                    content.append(inputLine);
-                }
-                Log.d("ShelterRes", content.toString());
+                ShelterInfo = in.readLine();
                 in.close();
-
+                Log.d("ShelterInfo", ShelterInfo);
 
             } catch (Exception e) {
                 Log.d("POSTError", e.toString());
@@ -106,6 +103,10 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
         @Override
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
+        }
+
+        public String getShelterInfo() {
+            return ShelterInfo;
         }
     }
 
@@ -133,6 +134,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         AsyncTaskRunner getShelters = new AsyncTaskRunner();
         getShelters.execute("get Shelters");
+        String allInfo = getShelters.getShelterInfo();
 
         // Initialize shelters
         masterShelters = new ArrayList<>();

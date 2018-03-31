@@ -11,6 +11,7 @@ import java.util.Iterator;
  */
 
 public class Shelter {
+    private String _id;
     private String name;
     private int capacity;
     private String gender;
@@ -146,6 +147,10 @@ public class Shelter {
     public int getCurrentCapacity() {
         return currentCapacity;
     }
+
+    public void set_id(String _id) {this._id = _id;}
+
+    public String get_id() {return this._id;}
 
     public void incrementCurrentCapacity() {
         currentCapacity += 1;
