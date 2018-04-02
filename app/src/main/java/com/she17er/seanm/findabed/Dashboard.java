@@ -52,7 +52,7 @@ import org.json.JSONObject;
  * @version 1.3
  */
 
-public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTextListener {
+public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
     //UI Components
     RecyclerView shelterView;
@@ -134,6 +134,9 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
         map.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), MapScreen.class);
+                Bundle bundle = new Bundle();
+                bundle.putParcelableArrayList("data", currentShelters);
+                intent.putExtras(bundle);
                 startActivityForResult(intent, 0);
             }
         });

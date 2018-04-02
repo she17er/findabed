@@ -1,4 +1,7 @@
 package com.she17er.seanm.findabed;
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -10,7 +13,7 @@ import java.util.Iterator;
  * @version 1.3
  */
 
-public class Shelter {
+public class Shelter  implements Parcelable{
     private String _id;
     private String name;
     private int capacity;
@@ -33,7 +36,45 @@ public class Shelter {
         setPhoneNumber(tokens.get(8));
         setCurrentCapacity(tokens.get(9));
     }
-
+    public Shelter(Parcel in) {
+        String throwaway = in.readString();
+        setName(in.readString());
+        setCapacity(in.readString());
+        setGenderandAge(in.readString());
+        setLongitude(in.readString());
+        setLatitude(in.readString());
+        setAddress(in.readString());
+        setPhoneNumber(in.readString());
+        String throwaway2 = in.readString();
+        setCurrentCapacity(in.readString());
+    }
+    public int describeContents() {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(_id);
+        dest.writeString(name);
+        dest.writeString(Integer.toString(capacity));
+        dest.writeString(ageRange);
+        dest.writeString(restrictions);
+        dest.writeString(Double.toString(longitude));
+        dest.writeString(Double.toString(latitude));
+        dest.writeString(address);
+        dest.writeString(phoneNumber);
+        dest.writeString(Integer.toString(currentCapacity));
+    }
+    public static final Parcelable.Creator<Shelter> CREATOR = new Parcelable.Creator<Shelter>()
+    {
+        public Shelter createFromParcel(Parcel in)
+        {
+            return new Shelter(in);
+        }
+        public Shelter[] newArray(int size)
+        {
+            return new Shelter[size];
+        }
+    };
     public String getName() {
         return name;
     }

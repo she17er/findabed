@@ -8,7 +8,10 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
+import java.util.ArrayList;
 
 public class MapScreen extends FragmentActivity implements OnMapReadyCallback {
 
@@ -40,10 +43,17 @@ public class MapScreen extends FragmentActivity implements OnMapReadyCallback {
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
+        Bundle bundle = getIntent().getExtras();
+        ArrayList<Shelter> shelterList = new ArrayList<Shelter>();
+        shelterList = bundle.getParcelableArrayList("data");
         // Add a marker in Sydney and move the camera
         LatLng sydney = new LatLng(-34, 151);
-        mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        LatLng temp = new LatLng(shelterList.get(0).getLatitude(), shelterList.get(0).getLongitude());
+
+        for (Shelter s: shelterList) {
+            LatLng mark = new LatLng(s.getLongitude(), s.getLatitude());
+            mMap.addMarker(new MarkerOptions().position(mark).title(s.getName()));
+        }
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(temp));
     }
 }
