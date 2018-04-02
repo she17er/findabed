@@ -57,6 +57,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
     //UI Components
     RecyclerView shelterView;
     Button logout;
+    Button map;
     Button profile;
     Spinner genderSelect, ageSelect;
 
@@ -129,7 +130,13 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
                 startActivityForResult(intent, 0);
             }
         });
-
+        map = (Button) findViewById(R.id.mapButton);
+        map.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), MapScreen.class);
+                startActivityForResult(intent, 0);
+            }
+        });
         //Removes actionbar title
         getSupportActionBar().setDisplayShowTitleEnabled(false);
         AsyncTaskRunner getShelters = new AsyncTaskRunner();
