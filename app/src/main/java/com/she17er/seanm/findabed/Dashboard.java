@@ -82,7 +82,6 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 ShelterInfo = in.readLine();
                 in.close();
-                Log.d("ShelterInfo", ShelterInfo);
 
             } catch (Exception e) {
                 Log.d("POSTError", e.toString());
@@ -135,6 +134,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
         AsyncTaskRunner getShelters = new AsyncTaskRunner();
         getShelters.execute("get Shelters");
         String allInfo = getShelters.getShelterInfo();
+        Log.d("ShelterInfo", allInfo);
 
         // Initialize shelters
         masterShelters = new ArrayList<>();
