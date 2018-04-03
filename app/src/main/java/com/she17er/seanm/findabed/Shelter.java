@@ -3,6 +3,8 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
+import com.google.android.gms.maps.model.Dash;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -36,7 +38,8 @@ public class Shelter implements Parcelable{
         setAddress(tokens.get(6));
         setPhoneNumber(tokens.get(8));
         setCurrentCapacity(tokens.get(9));
-        //set_id(tokens.get(10)); add this after finish the csv parsing algorithm
+        set_id();
+        //set_id(tokens.get(10)); //add this after finish the csv parsing algorithm
     }
     public Shelter(Parcel in) {
         String throwaway = in.readString();
@@ -48,6 +51,7 @@ public class Shelter implements Parcelable{
         setAddress(in.readString());
         setPhoneNumber(in.readString());
         setCurrentCapacity(in.readString());
+        set_id();
         Log.d("latitude", "latitude is " + latitude);
     }
     public int describeContents() {
@@ -191,7 +195,13 @@ public class Shelter implements Parcelable{
         return currentCapacity;
     }
 
-    public void set_id(String _id) {this._id = _id;}
+    public void set_id() {
+        int pos = 0;
+        while (!Dashboard.masterShelters.get(pos).getName().equals(this.getName())) {
+            pos++;
+        }
+        _id = "" + pos;
+    }
 
     public String get_id() {return this._id;}
 
