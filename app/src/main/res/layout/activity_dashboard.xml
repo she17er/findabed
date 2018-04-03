@@ -50,6 +50,14 @@
             android:layout_alignTop="@+id/genderFilterSpinner"
             android:layout_marginStart="12dp" />
 
+        <Button
+            android:id="@+id/mapButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/shelterRecyclerView"
+            android:layout_centerHorizontal="true"
+            android:text="Map" />
+
     </RelativeLayout>
 
 </android.support.constraint.ConstraintLayout>
