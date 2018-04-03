@@ -16,7 +16,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class MapScreen extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
+public class MapScreen extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private HashMap<String, Shelter> nameHashMap;
@@ -56,21 +56,17 @@ public class MapScreen extends FragmentActivity implements OnMapReadyCallback, G
         LatLng temp = new LatLng(shelterList.get(0).getLatitude(), shelterList.get(0).getLongitude());
 
         for (Shelter s: shelterList) {
-            nameHashMap.put(s.getName(), s);
             LatLng mark = new LatLng(s.getLatitude(), s.getLongitude());
             mMap.addMarker(new MarkerOptions().position(mark).title(s.getName()));
-            MarkerOptions m = new MarkerOptions().position(mark).title(s.getName()))
         }
         mMap.moveCamera(CameraUpdateFactory.newLatLng(temp));
         mMap.animateCamera( CameraUpdateFactory.zoomTo( 10.0f ) );
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                int position = (int)(marker.getTag());
                 String name = marker.getTitle();
                 //Using position get Value from arraylist
                 Intent intent = new Intent(MapScreen.this, ShelterInspectScreen.class);
-                Bundle bundle1 = new Bundle();
                 intent.putExtra("shelter_ID", name);
                 startActivityForResult(intent, 0);
                 return false;
