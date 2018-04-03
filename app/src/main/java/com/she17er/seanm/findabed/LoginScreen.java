@@ -62,10 +62,7 @@ public class LoginScreen extends AppCompatActivity {
     private View mLoginFormView;
     private Button mUserSignInButton;
 
-    //User account data accessed by Dashboard.class for a given user session
-    public static String currentUser;
-    public static String accountState;
-
+    //URL for the login route on the backend
     String backendURL = "https://she17er.herokuapp.com/api/users/login";
 
     @Override
@@ -99,11 +96,6 @@ public class LoginScreen extends AppCompatActivity {
         //Login form & loader setup
         mLoginFormView = findViewById(R.id.login_form);
         mProgressView = findViewById(R.id.login_progress);
-
-        //Dummy login for testing purposes
-        // TODO: Remove once connected to the backend
-        String[] seanData = {"password", "Admin"};
-        //SignupScreen.accounts.put("sean", seanData);
     }
 
     /**
@@ -238,18 +230,18 @@ public class LoginScreen extends AppCompatActivity {
                 localDataOutputStream.close();
 
                 Log.d("ResCode", "" + connection.getResponseCode());
-                if (connection.getResponseCode() == 200) {
-                    return true;
+                if (connection.getResponseCode() != 200) {
+                    return false;
                 }
+
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String inputLine;
                 inputLine = in.readLine();
                 Log.d("LoginRes", inputLine);
                 in.close();
 
-
             } catch (Exception e) {
-                Log.d("LoginError", e.toString());
+                e.printStackTrace();
             }
 
 //            if (SignupScreen.accounts.containsKey(mUser)) {
@@ -259,7 +251,7 @@ public class LoginScreen extends AppCompatActivity {
 //            } else {
 //                return false;
 //            }
-            return false;
+            return true;
         }
 
         @Override

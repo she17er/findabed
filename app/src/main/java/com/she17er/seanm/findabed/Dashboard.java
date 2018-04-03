@@ -66,10 +66,13 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
 
     //Current restrictions from the spinners
     String gender, age;
+
+    //Backend URL for populating shelters list
     String getSheltersURL = "https://she17er.herokuapp.com/api/shelter/getShelters";
+
     private class AsyncTaskRunner extends AsyncTask<String, String, String> {
 
-        private String ShelterInfo;
+        private String shelterInfo;
 
         @Override
         protected String doInBackground(String... params) {
@@ -81,7 +84,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
                 connection.connect();
 
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                ShelterInfo = in.readLine();
+                shelterInfo = in.readLine();
                 in.close();
 
             } catch (Exception e) {
@@ -89,6 +92,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
             }
             return "";
         }
+
         @Override
         protected void onPostExecute(String s) {
             Log.d("targetString", s);
@@ -106,7 +110,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
         }
 
         public String getShelterInfo() {
-            return ShelterInfo;
+            return shelterInfo;
         }
     }
 
@@ -139,13 +143,16 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
                 startActivityForResult(intent, 0);
             }
         });
+
         //Removes actionbar title
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+
+        //Populates shelter list
         AsyncTaskRunner getShelters = new AsyncTaskRunner();
-        getShelters.execute("get Shelters");
+        getShelters.execute();
         String allInfo = getShelters.getShelterInfo();
-        Log.d("ShelterInfo", allInfo);
-        ArrayList<Shelter> fromDB = JSONParser(allInfo);
+        Log.d("ShelterInfo", "" + allInfo);
+        ArrayList<Shelter> fromDB = jsonParser(allInfo);
 
         // Initialize shelters
         masterShelters = new ArrayList<>();
@@ -214,42 +221,49 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
      * @param ShelterInfo the information got from the database
      * @return an ArrayList containing various shelters with their information
      */
-    public ArrayList<Shelter> JSONParser (String ShelterInfo) {
+    public ArrayList<Shelter> jsonParser (String ShelterInfo) {
         ArrayList<Shelter> allShelters = new ArrayList<Shelter>();
-        String[] Info = ShelterInfo.split("},");
-        for (String s: Info) {
-            ArrayList<String> arr = new ArrayList<>();
-            int i = s.indexOf("name");
-            int j = s.indexOf(',', i);
-            arr.add(s.substring(i + 7, j - 1));
-            i = s.indexOf("maxCapacity");
-            j = s.indexOf(',', i);
-            arr.add(s.substring(i + 13, j));
-            i = s.indexOf("acceptedTypes");
-            j = s.indexOf(']', i);
-            arr.add(s.substring(i + 18, j));
-            i = s.indexOf("coOrdinates");
-            j = s.indexOf(',', i);
-            arr.add(s.substring(i + 14, j));
-            i = j + 1;
-            j = s.indexOf(',', i);
-            arr.add(s.substring(i, j - 1));
-            i = s.indexOf("location");
-            j = s.indexOf("currCapacity");
-            arr.add(s.substring(i + 11, j - 3));
-            i = s.indexOf("phoneNumber");
-            j = s.indexOf(',', i);
-            arr.add(s.substring(i + 13, j));
-            i = s.indexOf("currCapacity");
-            j = s.indexOf(',', i);
-            arr.add(s.substring(i + 14, j));
-            i = s.indexOf("_id");
-            j = s.indexOf(',', i);
-            arr.add(s.substring(i + 6, j - 1));
-            Log.d("allInfo", arr.toString());
-            Shelter newShelter = new Shelter(arr);
-            allShelters.add(newShelter);
+
+        try {
+            String[] Info = ShelterInfo.split("},");
+            for (String s: Info) {
+                ArrayList<String> arr = new ArrayList<>();
+                int i = s.indexOf("name");
+                int j = s.indexOf(',', i);
+                arr.add(s.substring(i + 7, j - 1));
+                i = s.indexOf("maxCapacity");
+                j = s.indexOf(',', i);
+                arr.add(s.substring(i + 13, j));
+                i = s.indexOf("acceptedTypes");
+                j = s.indexOf(']', i);
+                arr.add(s.substring(i + 18, j));
+                i = s.indexOf("coOrdinates");
+                j = s.indexOf(',', i);
+                arr.add(s.substring(i + 14, j));
+                i = j + 1;
+                j = s.indexOf(',', i);
+                arr.add(s.substring(i, j - 1));
+                i = s.indexOf("location");
+                j = s.indexOf("currCapacity");
+                arr.add(s.substring(i + 11, j - 3));
+                i = s.indexOf("phoneNumber");
+                j = s.indexOf(',', i);
+                arr.add(s.substring(i + 13, j));
+                i = s.indexOf("currCapacity");
+                j = s.indexOf(',', i);
+                arr.add(s.substring(i + 14, j));
+                i = s.indexOf("_id");
+                j = s.indexOf(',', i);
+                arr.add(s.substring(i + 6, j - 1));
+                Log.d("allInfo", arr.toString());
+                Shelter newShelter = new Shelter(arr);
+                allShelters.add(newShelter);
+            }
+        } catch (Exception e) {
+            Log.d("jsonParser", "Parser failed");
+            e.printStackTrace();
         }
+
         return allShelters;
     }
 

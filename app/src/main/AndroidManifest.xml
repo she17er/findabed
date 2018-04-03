@@ -75,7 +75,8 @@
         </activity>
         <activity
             android:name=".BookingScreen"
-            android:label="BookingScreen"></activity>
+            android:label="BookingScreen">
+        </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -90,7 +91,8 @@
 
         <activity
             android:name=".MapScreen"
-            android:label="@string/title_activity_map_screen">
+            android:label="MapScreen"
+            android:parentActivityName=".Dashboard">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Dashboard" />

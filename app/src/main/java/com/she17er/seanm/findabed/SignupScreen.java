@@ -160,7 +160,7 @@ public class SignupScreen extends AppCompatActivity {
             passwordCheck.setError("Please re-enter your password");
             validLogin = false;
         }
-        //@todo Fix password confirmation, I have no clue why this always failes :(
+        //@todo Fix password confirmation, I have no clue why this always fails :(
         // else if (!password.getText().equals(passwordCheck.getText().toString())) {
 //            passwordCheck.setError("Passwords must match");
 //            validLogin = false;
@@ -193,33 +193,6 @@ public class SignupScreen extends AppCompatActivity {
         protected String doInBackground(String... params) {
             try {
 
-//                URL userUrl = new URL(userNameURL);
-//                HttpURLConnection connection1 = (HttpURLConnection) userUrl.openConnection();
-//                connection1.setDoOutput(true);
-//                connection1.setRequestProperty("Content-Type", "application/json");
-//                connection1.setRequestMethod("POST");
-//                connection1.connect();
-//
-//                JSONObject check = new JSONObject();
-//                check.put("username", username.getText());
-//
-//                DataOutputStream userNameDataOutputStream = new DataOutputStream(connection1.getOutputStream());
-//                userNameDataOutputStream.writeBytes(check.toString());
-//                userNameDataOutputStream.flush();
-//                userNameDataOutputStream.close();
-//
-//                Log.d("connection code", "" + connection1.getResponseCode());
-//
-//                BufferedReader userNamein = new BufferedReader(new InputStreamReader(connection1.getInputStream()));
-//                String userNameinputLine;
-//                userNameinputLine = userNamein.readLine();
-//                Log.d("usernameRes", userNameinputLine);
-//                userNamein.close();
-//
-//                if (userNameinputLine.equals("exists!")) {
-//                    return "exists!";
-//                }
-
                 URL url = new URL(backendURL);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setDoOutput(true);
@@ -239,9 +212,6 @@ public class SignupScreen extends AppCompatActivity {
                 user.put("role", roleSpinner.getSelectedItem().toString());
                 user.put("login", "false");
 
-                Log.d("json", user.toString());
-
-
                 DataOutputStream localDataOutputStream = new DataOutputStream(connection.getOutputStream());
                 localDataOutputStream.writeBytes(user.toString());
                 localDataOutputStream.flush();
@@ -258,7 +228,7 @@ public class SignupScreen extends AppCompatActivity {
 
 
             } catch (Exception e) {
-                Log.d("POSTError", e.toString());
+                e.printStackTrace();
             }
             return "";
         }
