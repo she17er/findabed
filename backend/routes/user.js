@@ -101,9 +101,8 @@ router.get('/getUsers', (req, res) => {
  */
 
 router.post('/getUserName', (req, res) => {
-  let username = req.body.username
   User.find({
-    "username" : username
+    username : req.body.username
   })
   .exec()
   .then((user) => {
