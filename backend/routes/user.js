@@ -100,18 +100,17 @@ router.get('/getUsers', (req, res) => {
  * needs to be fixed
  */
 
-// router.post('/getUserName', (req, res) => {
-//   var username = req.body.username
-//   User.$where({
-//     "username" : username
-//   })
-//   .equals((user) => "check + " + user)
-//   .exec()
-//   .then((user) => res.send(user))
-//   .catch((err) => {
-//     res.send("" + err);
-//   });
-// });
+router.post('/getUserName', (req, res) => {
+  let username = req.body.username
+  User.find({
+    "username" : username
+  })
+  .exec()
+  .then((user) => res.send(user.username))
+  .catch((err) => {
+    res.send("Username Exists");
+  });
+});
 
 
 /**
