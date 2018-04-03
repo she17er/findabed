@@ -106,8 +106,13 @@ router.post('/getUserName', (req, res) => {
     "username" : username
   })
   .exec()
-  .then((user) => res.send(user.username))
-  .catch((err) => {
+  .then((user) => {
+    if (user) {
+      res.send(user.username);
+    } else {
+      res.send("Not found");
+    }
+  }).catch((err) => {
     res.send("Username Exists");
   });
 });

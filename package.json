@@ -11,7 +11,7 @@
     "express-validation": "^1.0.2",
     "express-validator": "^4.3.0",
     "mongodb": "^3.0.2",
-    "mongoose": "^5.0.1",
+    "mongoose": "^5.0.12",
     "morgan": "^1.9.0",
     "node-env-file": "^0.1.8",
     "nodemon": "^1.14.12",
