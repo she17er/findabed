@@ -53,7 +53,7 @@ public class MapScreen extends FragmentActivity implements OnMapReadyCallback {
         LatLng temp = new LatLng(shelterList.get(0).getLatitude(), shelterList.get(0).getLongitude());
 
         for (Shelter s: shelterList) {
-            LatLng mark = new LatLng(s.getLongitude(), s.getLatitude());
+            LatLng mark = new LatLng(s.getLatitude(), s.getLongitude());
             mMap.addMarker(new MarkerOptions().position(mark).title(s.getName()));
         }
         mMap.moveCamera(CameraUpdateFactory.newLatLng(temp));

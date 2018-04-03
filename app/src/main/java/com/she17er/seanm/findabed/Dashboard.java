@@ -76,16 +76,27 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
 
         @Override
         protected String doInBackground(String... params) {
+
+            shelterInfo = "";
+
             try {
 
                 URL url = new URL(getSheltersURL);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
+                connection.setDoOutput(true);
                 connection.connect();
 
-                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-                shelterInfo = in.readLine();
-                in.close();
+                BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
+                StringBuilder sb = new StringBuilder();
+
+                String line;
+                while ((line = br.readLine()) != null) {
+                    sb.append(line + "\n");
+                }
+                br.close();
+
+                shelterInfo += sb.toString();
 
             } catch (Exception e) {
                 Log.d("POSTError", e.toString());
@@ -147,14 +158,14 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
         //Removes actionbar title
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        //Populates shelter list
+        //Populates shelter list from JSON data
         AsyncTaskRunner getShelters = new AsyncTaskRunner();
-        getShelters.execute();
+        getShelters.execute("start");
         String allInfo = getShelters.getShelterInfo();
         Log.d("ShelterInfo", "" + allInfo);
         ArrayList<Shelter> fromDB = jsonParser(allInfo);
 
-        // Initialize shelters
+        // Initialize shelters from CSV
         masterShelters = new ArrayList<>();
         currentShelters = new ArrayList<>();
         addCSVShelters(R.raw.data, masterShelters);

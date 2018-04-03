@@ -1,6 +1,7 @@
 package com.she17er.seanm.findabed;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -41,13 +42,13 @@ public class Shelter implements Parcelable{
         String throwaway = in.readString();
         setName(in.readString());
         setCapacity(in.readString());
-        setGenderandAge(in.readString());
+        setGenderandAge(in.readString() + in.readString());
         setLongitude(in.readString());
         setLatitude(in.readString());
         setAddress(in.readString());
         setPhoneNumber(in.readString());
-        String throwaway2 = in.readString();
         setCurrentCapacity(in.readString());
+        Log.d("latitude", "latitude is " + latitude);
     }
     public int describeContents() {
         // TODO Auto-generated method stub
