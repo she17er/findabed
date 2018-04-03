@@ -109,7 +109,8 @@ public class SignupScreen extends AppCompatActivity {
         roleSpinner.setAdapter(dataAdapterRole);
     }
     /**
-     * Creates a button listener that adds user accounts to the accounts map
+     * Creates a button listener that adds the new user to the database
+     * if all input is valid
      */
     private void addButtonListener() {
         submit.setOnClickListener(new View.OnClickListener() {
@@ -125,7 +126,6 @@ public class SignupScreen extends AppCompatActivity {
             }
         });
     }
-
 
     /**
      * Checks if all entered signup data is valid
