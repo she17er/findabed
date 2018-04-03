@@ -38,7 +38,7 @@ public class Shelter implements Parcelable{
         setAddress(tokens.get(6));
         setPhoneNumber(tokens.get(8));
         setCurrentCapacity(tokens.get(9));
-        set_id();
+//        set_id();
         //set_id(tokens.get(10)); //add this after finish the csv parsing algorithm
     }
     public Shelter(Parcel in) {
@@ -51,8 +51,7 @@ public class Shelter implements Parcelable{
         setAddress(in.readString());
         setPhoneNumber(in.readString());
         setCurrentCapacity(in.readString());
-        set_id();
-        Log.d("latitude", "latitude is " + latitude);
+//        set_id();
     }
     public int describeContents() {
         // TODO Auto-generated method stub
