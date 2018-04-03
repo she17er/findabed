@@ -1,5 +1,6 @@
 package com.she17er.seanm.findabed;
 
+import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,10 +14,12 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
-public class MapScreen extends FragmentActivity implements OnMapReadyCallback {
+public class MapScreen extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mMap;
+    private HashMap<String, Shelter> nameHashMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +56,25 @@ public class MapScreen extends FragmentActivity implements OnMapReadyCallback {
         LatLng temp = new LatLng(shelterList.get(0).getLatitude(), shelterList.get(0).getLongitude());
 
         for (Shelter s: shelterList) {
+            nameHashMap.put(s.getName(), s);
             LatLng mark = new LatLng(s.getLatitude(), s.getLongitude());
             mMap.addMarker(new MarkerOptions().position(mark).title(s.getName()));
+            MarkerOptions m = new MarkerOptions().position(mark).title(s.getName()))
         }
         mMap.moveCamera(CameraUpdateFactory.newLatLng(temp));
         mMap.animateCamera( CameraUpdateFactory.zoomTo( 10.0f ) );
+        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+            @Override
+            public boolean onMarkerClick(Marker marker) {
+                int position = (int)(marker.getTag());
+                String name = marker.getTitle();
+                //Using position get Value from arraylist
+                Intent intent = new Intent(MapScreen.this, ShelterInspectScreen.class);
+                Bundle bundle1 = new Bundle();
+                intent.putExtra("shelter_ID", name);
+                startActivityForResult(intent, 0);
+                return false;
+            }
+        });
     }
 }
