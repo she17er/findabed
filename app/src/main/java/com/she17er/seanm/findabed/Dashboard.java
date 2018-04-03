@@ -72,12 +72,10 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
 
     private class AsyncTaskRunner extends AsyncTask<String, String, String> {
 
-        private String shelterInfo;
+        String shelterInfo = "";
 
         @Override
         protected String doInBackground(String... params) {
-
-            shelterInfo = "";
 
             try {
 
@@ -92,14 +90,15 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
 
                 String line;
                 while ((line = br.readLine()) != null) {
-                    sb.append(line + "\n");
+                    shelterInfo += line + "\n";
+                    //Log.d("readLine", line);
                 }
                 br.close();
 
-                shelterInfo += sb.toString();
+                Log.d("shelterInfoString", shelterInfo);
 
             } catch (Exception e) {
-                Log.d("POSTError", e.toString());
+                Log.d("GETError", e.toString());
             }
             return "";
         }
@@ -118,10 +117,6 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
         @Override
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
-        }
-
-        public String getShelterInfo() {
-            return shelterInfo;
         }
     }
 
@@ -161,12 +156,11 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
         //Populates shelter list from JSON data
         AsyncTaskRunner getShelters = new AsyncTaskRunner();
         getShelters.execute("start");
-        String allInfo = getShelters.getShelterInfo();
-        Log.d("ShelterInfo", "" + allInfo);
-        ArrayList<Shelter> fromDB = jsonParser(allInfo);
+        String allInfo = getShelters.shelterInfo;
+        Log.d("jsonData", "" + allInfo);
 
-        // Initialize shelters from CSV
-        masterShelters = new ArrayList<>();
+        // Adds shelters to master list (also has legacy csv code)
+        masterShelters = jsonParser(allInfo);
         currentShelters = new ArrayList<>();
         addCSVShelters(R.raw.data, masterShelters);
         for (Shelter shelter: masterShelters) {
