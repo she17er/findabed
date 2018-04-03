@@ -9,6 +9,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.Dash;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -57,14 +58,14 @@ public class MapScreen extends FragmentActivity implements OnMapReadyCallback {
 
         for (Shelter s: shelterList) {
             LatLng mark = new LatLng(s.getLatitude(), s.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(mark).title(s.getName()));
+            mMap.addMarker(new MarkerOptions().position(mark).title(s.getName()).snippet(s.get_id()));
         }
         mMap.moveCamera(CameraUpdateFactory.newLatLng(temp));
         mMap.animateCamera( CameraUpdateFactory.zoomTo( 10.0f ) );
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
-                String name = marker.getTitle();
+                String name = marker.getSnippet();
                 //Using position get Value from arraylist
                 Intent intent = new Intent(MapScreen.this, ShelterInspectScreen.class);
                 intent.putExtra("shelter_ID", name);
