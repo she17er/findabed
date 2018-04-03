@@ -13,7 +13,7 @@ import java.util.Iterator;
  * @version 1.3
  */
 
-public class Shelter  implements Parcelable{
+public class Shelter implements Parcelable{
     private String _id;
     private String name;
     private int capacity;
@@ -35,6 +35,7 @@ public class Shelter  implements Parcelable{
         setAddress(tokens.get(6));
         setPhoneNumber(tokens.get(8));
         setCurrentCapacity(tokens.get(9));
+        //set_id(tokens.get(10)); add this after finish the csv parsing algorithm
     }
     public Shelter(Parcel in) {
         String throwaway = in.readString();
