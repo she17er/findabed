@@ -57,5 +57,6 @@ public class MapScreen extends FragmentActivity implements OnMapReadyCallback {
             mMap.addMarker(new MarkerOptions().position(mark).title(s.getName()));
         }
         mMap.moveCamera(CameraUpdateFactory.newLatLng(temp));
+        mMap.animateCamera( CameraUpdateFactory.zoomTo( 10.0f ) );
     }
 }
