@@ -43,6 +43,7 @@ public class ShelterAdapter extends RecyclerView.Adapter<ShelterAdapter.ViewHold
 
             shelterName = (TextView) itemView.findViewById(R.id.shelter_name);
 
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -95,7 +96,8 @@ public class ShelterAdapter extends RecyclerView.Adapter<ShelterAdapter.ViewHold
 
         // Set item views based on your views and data model
         TextView textView = viewHolder.shelterName;
-        textView.setText(shelter.getName());
+
+        textView.setText(shelter.getName() + " " + shelter.getLongitude() + ", " + shelter.getLatitude());
     }
 
     // Returns the total count of items in the list
