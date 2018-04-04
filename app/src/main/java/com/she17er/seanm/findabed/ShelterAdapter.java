@@ -97,7 +97,7 @@ public class ShelterAdapter extends RecyclerView.Adapter<ShelterAdapter.ViewHold
         // Set item views based on your views and data model
         TextView textView = viewHolder.shelterName;
 
-        textView.setText(shelter.getName() + " " + shelter.getLongitude() + ", " + shelter.getLatitude());
+        textView.setText(shelter.getName());
     }
 
     // Returns the total count of items in the list

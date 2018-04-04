@@ -18,6 +18,7 @@ import java.util.Iterator;
 
 public class Shelter implements Parcelable{
     private String _id;
+    private static int count = 0;
     private String name;
     private int capacity;
     private String gender;
@@ -38,11 +39,13 @@ public class Shelter implements Parcelable{
         setAddress(tokens.get(6));
         setPhoneNumber(tokens.get(8));
         setCurrentCapacity(tokens.get(9));
+        _id = Integer.toString(count);
+        count++;
 //        set_id();
         //set_id(tokens.get(10)); //add this after finish the csv parsing algorithm
     }
     public Shelter(Parcel in) {
-        String throwaway = in.readString();
+        set_id(in.readString());
         setName(in.readString());
         setCapacity(in.readString());
         setGenderandAge(in.readString() + in.readString());
@@ -194,12 +197,13 @@ public class Shelter implements Parcelable{
         return currentCapacity;
     }
 
-    public void set_id() {
-        int pos = 0;
-        while (!Dashboard.masterShelters.get(pos).getName().equals(this.getName())) {
-            pos++;
-        }
-        _id = "" + pos;
+    public void set_id(String id) {
+//        int pos = 0;
+//        while (!Dashboard.masterShelters.get(pos).getName().equals(this.getName())) {
+//            pos++;
+//        }
+//        _id = "" + pos;
+        _id = id;
     }
 
     public String get_id() {return this._id;}
