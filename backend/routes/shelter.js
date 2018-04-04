@@ -33,8 +33,6 @@ router.get('/getLocations', (req, res) => {
     Shelter.find({})
       .exec()
       .then((shelter) => {
-          console.log("getting them");
-          console.log("checking");
           shelter.forEach(shade => {
               locations.push(shade.location);
           });
@@ -58,7 +56,7 @@ router.get('/getLocations', (req, res) => {
   });
 
   router.post('/updateCapacity/:_id', (req, res) => {
-    res.send(req.body.currCapacity);
+      console.log(req.body);
       Shelter.findByIdAndUpdate(
         req.params._id,
       {$set: {
