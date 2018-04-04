@@ -1,10 +1,8 @@
 package com.she17er.seanm.findabed;
-
 import android.content.Intent;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
-
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -13,14 +11,10 @@ import com.google.android.gms.maps.model.Dash;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-
 import java.util.ArrayList;
 import java.util.HashMap;
-
 public class MapScreen extends FragmentActivity implements OnMapReadyCallback {
-
     private GoogleMap mMap;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +27,6 @@ public class MapScreen extends FragmentActivity implements OnMapReadyCallback {
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
-
-
     /**
      * Manipulates the map once available.
      * This callback is triggered when the map is ready to be used.
@@ -62,6 +54,7 @@ public class MapScreen extends FragmentActivity implements OnMapReadyCallback {
             public boolean onMarkerClick(Marker marker) {
                 //The snippet is the same as the position in the arrayList
                 String name = marker.getSnippet();
+                name = "0";
                 //Using position get Value from arraylist
                 Intent intent = new Intent(MapScreen.this, ShelterInspectScreen.class);
                 intent.putExtra("shelterID", "" + name);

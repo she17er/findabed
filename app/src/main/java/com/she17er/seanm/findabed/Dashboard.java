@@ -167,7 +167,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
         String allInfo = "";
         try {
             allInfo = getShelters.get();
-            Log.d("Async Result", allInfo);
+            Log.d("Async Result", getShelters.get());
         } catch (Exception e) {
             Log.d("Async Exception", e.toString());
         }
@@ -175,12 +175,13 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
 
 
         // Adds shelters to master list (also has legacy csv code)
-        masterShelters = jsonParser(jsonData);
+        masterShelters = jsonParser(allInfo);
         currentShelters = new ArrayList<>();
-        addCSVShelters(R.raw.data, masterShelters);
+//        addCSVShelters(R.raw.data, masterShelters);
         for (Shelter shelter: masterShelters) {
             currentShelters.add(shelter);
         }
+
         populateShelterList(currentShelters);
 
         //Initialize Spinners
@@ -243,10 +244,16 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
      */
     public ArrayList<Shelter> jsonParser (String ShelterInfo) {
         ArrayList<Shelter> allShelters = new ArrayList<Shelter>();
-
+        String tempInfo = ShelterInfo.substring(3);
+        ArrayList<String> Info = new ArrayList<>();
         try {
-            String[] Info = ShelterInfo.split("},");
+            while (tempInfo.indexOf("},{") != -1) {
+                int rightIndex = tempInfo.indexOf("},{");
+                Info.add(tempInfo.substring(0, rightIndex));
+                tempInfo = tempInfo.substring(rightIndex + 3);
+            }
             for (String s: Info) {
+                Log.d("each Info", s);
                 ArrayList<String> arr = new ArrayList<>();
                 int i = s.indexOf("name");
                 int j = s.indexOf(',', i);
@@ -275,15 +282,23 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
                 i = s.indexOf("_id");
                 j = s.indexOf(',', i);
                 arr.add(s.substring(i + 6, j - 1));
-                Log.d("allInfo", arr.toString());
-                Shelter newShelter = new Shelter(arr);
+                Log.d("allInfo", arr.toString() + arr.size());
+                Shelter newShelter = new Shelter();
+                newShelter.setBackendID(arr.get(8));
+                newShelter.setAddress(arr.get(5));
+                newShelter.setCapacity(arr.get(1));
+                newShelter.setLatitude(arr.get(4));
+                newShelter.setName(arr.get(0));
+                newShelter.setGenderandAge(arr.get(2));
+                newShelter.setLongitude(arr.get(3));
+                newShelter.setPhoneNumber(arr.get(6));
+                newShelter.setCurrentCapacity(arr.get(7));
                 allShelters.add(newShelter);
             }
         } catch (Exception e) {
             Log.d("jsonParser", "Parser failed");
             e.printStackTrace();
         }
-
         return allShelters;
     }
 
@@ -336,6 +351,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
             public void onItemClick(View itemView, int position) {
                 Intent intent = new Intent(itemView.getContext(), ShelterInspectScreen.class);
                 intent.putExtra("shelterID", "" + position);
+                intent.putExtra("backendID", masterShelters.get(position).getBackendID());
                 startActivityForResult(intent, 0);
             }
         });

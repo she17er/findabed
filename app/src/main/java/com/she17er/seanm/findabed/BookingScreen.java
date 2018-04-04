@@ -132,7 +132,7 @@ public class BookingScreen extends AppCompatActivity {
                 connection.connect();
 
                 JSONObject booking = new JSONObject();
-                booking.put("currCapacity", shelter.getCurrentCapacity() - bookingNumber);
+                booking.put("currCapacity", shelter.getCurrentCapacity() + bookingNumber);
 
                 DataOutputStream localDataOutputStream = new DataOutputStream(connection.getOutputStream());
                 localDataOutputStream.writeBytes(booking.toString());

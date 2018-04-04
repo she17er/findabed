@@ -31,6 +31,8 @@ public class Shelter implements Parcelable{
     private int currentCapacity;
     private String backendID;
 
+    public Shelter(){}
+
     public Shelter(ArrayList<String> tokens) {
         setName(tokens.get(1));
         setCapacity(tokens.get(2));
@@ -224,5 +226,9 @@ public class Shelter implements Parcelable{
 
     public void decrementCurrentCapacity() {
         currentCapacity -= 1;
+    }
+
+    public String toString() {
+        return _id + currentCapacity;
     }
 }
