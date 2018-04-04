@@ -62,14 +62,9 @@ router.get('/getLocations', (req, res) => {
         _id: req.params._id
       }, {
         currCapacity: req.body.currCapacity
-      }, function(err, shelter) {
-          if (err) {
-              res.json(err);
-          } else {
-              console.log("successful");
-              res.json("capacity changed!" + {currCapacity})
-          }
       })
+      .then((shelter) => res.send(shelter))
+      .catch((err) => res.send("" + err))
   });
 
   router.post('/shelter/logout/:_id', (req, res) => {
