@@ -29,6 +29,7 @@ public class Shelter implements Parcelable{
     private String address;
     private String phoneNumber;
     private int currentCapacity;
+    private String backendID;
 
     public Shelter(ArrayList<String> tokens) {
         setName(tokens.get(1));
@@ -41,6 +42,7 @@ public class Shelter implements Parcelable{
         setCurrentCapacity(tokens.get(9));
         _id = Integer.toString(count);
         count++;
+//        setBackendID(tokens.get(10));
 //        set_id();
         //set_id(tokens.get(10)); //add this after finish the csv parsing algorithm
     }
@@ -207,6 +209,14 @@ public class Shelter implements Parcelable{
     }
 
     public String get_id() {return this._id;}
+
+    public void setBackendID(String id) {
+        backendID = id;
+    }
+
+    public String getBackendID() {
+        return backendID;
+    }
 
     public void incrementCurrentCapacity() {
         currentCapacity += 1;

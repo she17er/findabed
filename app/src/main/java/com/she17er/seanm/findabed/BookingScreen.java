@@ -1,6 +1,7 @@
 package com.she17er.seanm.findabed;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -10,7 +11,10 @@ import android.widget.EditText;
 
 import com.opencsv.CSVWriter;
 
+import org.json.JSONObject;
+
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -19,6 +23,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.Reader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -36,7 +42,9 @@ public class BookingScreen extends AppCompatActivity {
 
     //Shelter Data
     int shelterPosition;
+    String shelterID;
     Shelter shelter;
+    int bookingNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +66,7 @@ public class BookingScreen extends AppCompatActivity {
         if (intent.getExtras() != null) {
             shelterPosition = Integer.parseInt(intent.getExtras().getString("shelterID"));
             shelter = Dashboard.masterShelters.get(shelterPosition);
+            shelterID = shelter.getBackendID();
         }
 
         //Hides cancelBookingButton if there is no booking for a user to cancel
@@ -75,11 +84,13 @@ public class BookingScreen extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d("thisisthepath", "" + System.getProperty("user.dir"));
-                int bookingNumber = Integer.parseInt(numberText.getText().toString());
+                bookingNumber = Integer.parseInt(numberText.getText().toString());
                 if (bookingNumber + shelter.getCurrentCapacity() > shelter.getCapacity()) {
                     numberText.setError("Not enough space in the shelter");
                 } else {
-                    writeToCSV(R.raw.data);
+//                    writeToCSV(R.raw.data);
+                    AsyncTaskRunner makeBooking = new AsyncTaskRunner();
+                    makeBooking.execute("start");
                     Intent intent = new Intent(v.getContext(), Dashboard.class);
                     startActivityForResult(intent, 0);
                 }
@@ -105,33 +116,59 @@ public class BookingScreen extends AppCompatActivity {
         });
     }
 
-    /**
-     * Reads csv data from the data.csv file for booking purposes
-     */
-    public void writeToCSV(int id) {
-        String csvData = "";
-        InputStream inputStream = getResources().openRawResource(id);
-        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
-        try {
-            String s = br.readLine();
-            while ((s = br.readLine()) != null) {
-                StringBuilder builder = new StringBuilder(s);
-                boolean inQuotes = false;
-                for (int currentIndex = 0; currentIndex < builder.length(); currentIndex++) {
-                    char currentChar = builder.charAt(currentIndex);
-                    if (currentChar == '\"') {
-                        inQuotes = !inQuotes; // toggle state
-                    }
-                    if (currentChar == ',' && inQuotes) {
-                        builder.setCharAt(currentIndex, ';'); // sets the comma in the quotes to semi-colon
-                    }
+    private class AsyncTaskRunner extends AsyncTask<String, String, String> {
+
+        @Override
+        protected String doInBackground(String... params) {
+            try {
+
+                Log.d("shelterIDbooking", "" + shelterID);
+
+                URL url = new URL(bookingURL + shelterID);
+                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                connection.setDoOutput(true);
+                connection.setRequestProperty("Content-Type", "application/json");
+                connection.setRequestMethod("POST");
+                connection.connect();
+
+                JSONObject booking = new JSONObject();
+                booking.put("currCapacity", shelter.getCurrentCapacity() - bookingNumber);
+
+                DataOutputStream localDataOutputStream = new DataOutputStream(connection.getOutputStream());
+                localDataOutputStream.writeBytes(booking.toString());
+                localDataOutputStream.flush();
+                localDataOutputStream.close();
+
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                String inputLine;
+                StringBuffer content = new StringBuffer();
+                while ((inputLine = in.readLine()) != null) {
+                    content.append(inputLine);
                 }
-                csvData += builder.toString();
-                csvData += "\n";
+                Log.d("res", content.toString());
+                in.close();
+
+
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+            return "";
         }
-        Log.d("csvdata", csvData);
+
+        @Override
+        protected void onPostExecute(String s) {
+            Log.d("targetString", s);
+            super.onPostExecute(s);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onProgressUpdate(String... values) {
+            super.onProgressUpdate(values);
+        }
     }
 }
