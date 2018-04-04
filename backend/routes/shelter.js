@@ -58,10 +58,12 @@ router.get('/getLocations', (req, res) => {
   });
 
   router.post('/updateCapacity/:_id', (req, res) => {
-      Shelter.findByIdAndUpdate({
-        _id: req.params._id
-      }, {
-        currCapacity: req.body.currCp
+    let Cp = req.body.currCp;
+    Cp = parseInt(Cp);
+      Shelter.findByIdAndUpdate(
+        req.params._id,
+      {
+        currCapacity: Cp
       }, {
         new: true
       })
