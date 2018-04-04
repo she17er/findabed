@@ -10,6 +10,8 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.File;
@@ -96,6 +98,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
                 br.close();
 
                 Log.d("shelterInfoString", shelterInfo);
+                return shelterInfo;
 
             } catch (Exception e) {
                 Log.d("GETError", e.toString());
@@ -154,10 +157,17 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         //Populates shelter list from JSON data
+
         AsyncTaskRunner getShelters = new AsyncTaskRunner();
         getShelters.execute("start");
-        String allInfo = getShelters.shelterInfo;
-        Log.d("jsonData", "" + allInfo);
+        String allInfo;
+        try {
+            allInfo = getShelters.get();
+        } catch (Exception e) {
+            Log.d("Async Exception", e.toString());
+        }
+        allInfo = getShelters.get();
+        Log.d("jsonData", allInfo);
 
         // Adds shelters to master list (also has legacy csv code)
         masterShelters = jsonParser(allInfo);

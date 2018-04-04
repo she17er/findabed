@@ -31,6 +31,9 @@ public class BookingScreen extends AppCompatActivity {
     EditText numberText;
     Button confirmButton, cancelBookingButton, cancelButton;
 
+    //Needs to add id to use it
+    String bookingURL = "https://she17er.herokuapp.com/api/shelter/updateCapacity/";
+
     //Shelter Data
     int shelterPosition;
     Shelter shelter;
