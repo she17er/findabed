@@ -20,7 +20,6 @@ import java.util.HashMap;
 public class MapScreen extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private HashMap<String, Shelter> nameHashMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,24 +50,21 @@ public class MapScreen extends FragmentActivity implements OnMapReadyCallback {
         Bundle bundle = getIntent().getExtras();
         ArrayList<Shelter> shelterList = new ArrayList<Shelter>();
         shelterList = bundle.getParcelableArrayList("data");
-        // Add a marker in Sydney and move the camera
-        Log.d("Latitude", Double.toString(shelterList.get(0).getLatitude()));
-        LatLng sydney = new LatLng(-34, 151);
         LatLng temp = new LatLng(shelterList.get(0).getLatitude(), shelterList.get(0).getLongitude());
-
         for (Shelter s: shelterList) {
             LatLng mark = new LatLng(s.getLatitude(), s.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(mark).title(s.getName()).snippet(s.get_id()));
+            mMap.addMarker(new MarkerOptions().position(mark).title(s.getName()).snippet("" + s.get_id()));
         }
         mMap.moveCamera(CameraUpdateFactory.newLatLng(temp));
-        mMap.animateCamera( CameraUpdateFactory.zoomTo( 10.0f ) );
+        mMap.animateCamera( CameraUpdateFactory.zoomTo( 11.0f ) );
         mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
+                //The snippet is the same as the position in the arrayList
                 String name = marker.getSnippet();
                 //Using position get Value from arraylist
                 Intent intent = new Intent(MapScreen.this, ShelterInspectScreen.class);
-                intent.putExtra("shelter_ID", name);
+                intent.putExtra("shelterID", "" + name);
                 startActivityForResult(intent, 0);
                 return false;
             }

@@ -71,6 +71,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
 
     //Backend URL for populating shelters list
     String getSheltersURL = "https://she17er.herokuapp.com/api/shelter/getShelters";
+    public static String jsonData;
 
     private class AsyncTaskRunner extends AsyncTask<String, String, String> {
 
@@ -99,7 +100,6 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
 
                 Log.d("shelterInfoString", shelterInfo);
                 return shelterInfo;
-
             } catch (Exception e) {
                 Log.d("GETError", e.toString());
             }
@@ -108,7 +108,6 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
 
         @Override
         protected void onPostExecute(String s) {
-            Log.d("targetString", s);
             super.onPostExecute(s);
         }
 
@@ -120,6 +119,11 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
         @Override
         protected void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
+        }
+
+        //Gets the shelter info json data
+        public String getShelterInfo() {
+            return shelterInfo;
         }
     }
 
@@ -160,17 +164,18 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
 
         AsyncTaskRunner getShelters = new AsyncTaskRunner();
         getShelters.execute("start");
+        String store;
         String allInfo;
         try {
             allInfo = getShelters.get();
+            store = allInfo;
         } catch (Exception e) {
             Log.d("Async Exception", e.toString());
         }
-        allInfo = getShelters.get();
-        Log.d("jsonData", allInfo);
+
 
         // Adds shelters to master list (also has legacy csv code)
-        masterShelters = jsonParser(allInfo);
+        masterShelters = jsonParser(jsonData);
         currentShelters = new ArrayList<>();
         addCSVShelters(R.raw.data, masterShelters);
         for (Shelter shelter: masterShelters) {
