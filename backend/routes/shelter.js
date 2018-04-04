@@ -58,8 +58,9 @@ router.get('/getLocations', (req, res) => {
   });
 
   router.post('/updateCapacity/:_id', (req, res) => {
-      Shelter.findByIdAndUpdate(req.params._id,
-      {
+      Shelter.findByIdAndUpdate({
+        _id: req.params._id
+      }, {
           currCapacity: req.body.currCapacity
       }, function(err, shelter) {
           if (err) {
