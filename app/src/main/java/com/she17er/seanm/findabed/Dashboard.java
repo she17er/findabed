@@ -164,14 +164,14 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
 
         AsyncTaskRunner getShelters = new AsyncTaskRunner();
         getShelters.execute("start");
-        String store;
-        String allInfo;
+        String allInfo = "";
         try {
             allInfo = getShelters.get();
-            store = allInfo;
+            Log.d("Async Result", allInfo);
         } catch (Exception e) {
             Log.d("Async Exception", e.toString());
         }
+        Log.d("Async Result1", allInfo);
 
 
         // Adds shelters to master list (also has legacy csv code)
