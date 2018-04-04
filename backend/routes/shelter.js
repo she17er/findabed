@@ -61,7 +61,9 @@ router.get('/getLocations', (req, res) => {
       Shelter.findByIdAndUpdate({
         _id: req.params._id
       }, {
-        currCapacity: req.body.currCapacity
+        currCapacity: req.body.currCp
+      }, {
+        new: true
       })
       .then((shelter) => res.send(shelter))
       .catch((err) => res.send("" + err))
