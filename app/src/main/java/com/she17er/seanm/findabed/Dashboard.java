@@ -171,7 +171,6 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
         } catch (Exception e) {
             Log.d("Async Exception", e.toString());
         }
-        Log.d("Async Result1", allInfo);
 
 
         // Adds shelters to master list (also has legacy csv code)
@@ -253,8 +252,8 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
                 Info.add(tempInfo.substring(0, rightIndex));
                 tempInfo = tempInfo.substring(rightIndex + 3);
             }
+            Info.add(tempInfo);
             for (String s: Info) {
-                Log.d("each Info", s);
                 ArrayList<String> arr = new ArrayList<>();
                 int i = s.indexOf("name");
                 int j = s.indexOf(',', i);
@@ -283,7 +282,6 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
                 i = s.indexOf("_id");
                 j = s.indexOf(',', i);
                 arr.add(s.substring(i + 6, j - 1));
-                Log.d("allInfo", arr.toString() + arr.size());
                 Shelter newShelter = new Shelter();
                 newShelter.setBackendID(arr.get(8));
                 newShelter.setAddress(arr.get(5));
@@ -353,7 +351,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
             @Override
             public void onItemClick(View itemView, int position) {
                 Intent intent = new Intent(itemView.getContext(), ShelterInspectScreen.class);
-                intent.putExtra("shelterID", "" + position);
+                intent.putExtra("shelterID", "" + masterShelters.get(position).get_id());
                 intent.putExtra("backendID", masterShelters.get(position).getBackendID());
                 startActivityForResult(intent, 0);
             }

@@ -39,7 +39,7 @@ public class ShelterInspectScreen extends AppCompatActivity {
         View parentLayout = getWindow().getDecorView().findViewById(android.R.id.content);
         Intent intent = this.getIntent();
         if (intent.getExtras() != null) {
-//            shelterPosition = Integer.parseInt(intent.getExtras().getString("shelterID"));
+            shelterPosition = Integer.parseInt(intent.getExtras().getString("shelterID"));
             shelter = Dashboard.masterShelters.get(shelterPosition);
         }
 
