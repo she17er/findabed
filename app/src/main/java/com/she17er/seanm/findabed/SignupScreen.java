@@ -33,10 +33,11 @@ public class SignupScreen extends AppCompatActivity {
     private EditText username, email, phone, password, passwordCheck, age;
     private Spinner genderSpinner, vetSpinner, roleSpinner, accountSpinner;
     private Button submit;
+    private ArrayList<String> usernames;
 
     //URL for the Heroku backend
     String backendURL = "https://she17er.herokuapp.com/api/users/newUsers";
-    String userNameURL = "https://she17er.herokuapp.com/api/users/getUserName";
+    String userNameURL = "https://she17er.herokuapp.com/api/users/getUserNames";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,14 @@ public class SignupScreen extends AppCompatActivity {
 
         populateSpinners();
         addButtonListener();
+
+        AsyncTaskRunnerGetUsername ATRGU = new AsyncTaskRunnerGetUsername();
+        ATRGU.execute("start");
+        try {
+            Log.d("usernames", ATRGU.get());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         //Generates back button on action bar
         if (getActionBar() != null) {
@@ -184,6 +193,46 @@ public class SignupScreen extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
+        }
+    }
+
+    private class AsyncTaskRunnerGetUsername extends AsyncTask<String, String, String> {
+
+        @Override
+        protected String doInBackground(String ...params) {
+            try {
+                URL url1 = new URL(userNameURL);
+                HttpURLConnection unConnection = (HttpURLConnection) url1.openConnection();
+                unConnection.setRequestProperty("Content-Type", "application/json");
+                unConnection.setRequestMethod("GET");
+                unConnection.connect();
+
+                BufferedReader in = new BufferedReader(new InputStreamReader(unConnection.getInputStream()));
+                String inputLine;
+                StringBuffer userNameContent = new StringBuffer();
+                while ((inputLine = in.readLine()) != null) {
+                    userNameContent.append(inputLine);
+                }
+                in.close();
+                return inputLine;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return "";
+        }
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onProgressUpdate(String... values) {
+            super.onProgressUpdate(values);
         }
     }
 
