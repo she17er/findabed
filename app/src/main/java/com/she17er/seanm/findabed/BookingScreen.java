@@ -83,16 +83,20 @@ public class BookingScreen extends AppCompatActivity {
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("thisisthepath", "" + System.getProperty("user.dir"));
-                bookingNumber = Integer.parseInt(numberText.getText().toString());
-                if (bookingNumber + shelter.getCurrentCapacity() > shelter.getCapacity()) {
-                    numberText.setError("Not enough space in the shelter");
+                Log.d("number", numberText.getText().toString());
+                if (numberText.getText().toString().equals("")) {
+                    numberText.setError("Please enter a number");
                 } else {
+                    bookingNumber = Integer.parseInt(numberText.getText().toString());
+                    if (bookingNumber + shelter.getCurrentCapacity() > shelter.getCapacity()) {
+                        numberText.setError("Not enough space in the shelter");
+                    } else {
 //                    writeToCSV(R.raw.data);
-                    AsyncTaskRunner makeBooking = new AsyncTaskRunner();
-                    makeBooking.execute("start");
-                    Intent intent = new Intent(v.getContext(), Dashboard.class);
-                    startActivityForResult(intent, 0);
+                        AsyncTaskRunner makeBooking = new AsyncTaskRunner();
+                        makeBooking.execute("start");
+                        Intent intent = new Intent(v.getContext(), Dashboard.class);
+                        startActivityForResult(intent, 0);
+                    }
                 }
             }
         });

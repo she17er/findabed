@@ -16,7 +16,8 @@ import java.util.Iterator;
  * @version 1.3
  */
 
-public class Shelter implements Parcelable{
+public class Shelter implements Parcelable {
+//
     private String _id;
     private static int count = 0;
     private String name;
