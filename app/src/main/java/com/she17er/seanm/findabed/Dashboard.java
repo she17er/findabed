@@ -246,6 +246,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
         ArrayList<Shelter> allShelters = new ArrayList<Shelter>();
         String tempInfo = ShelterInfo.substring(3);
         ArrayList<String> Info = new ArrayList<>();
+        int count = 0;
         try {
             while (tempInfo.indexOf("},{") != -1) {
                 int rightIndex = tempInfo.indexOf("},{");
@@ -293,6 +294,8 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
                 newShelter.setLongitude(arr.get(3));
                 newShelter.setPhoneNumber(arr.get(6));
                 newShelter.setCurrentCapacity(arr.get(7));
+                newShelter.set_id("" + count);
+                count++;
                 allShelters.add(newShelter);
             }
         } catch (Exception e) {

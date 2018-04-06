@@ -54,7 +54,7 @@ public class MapScreen extends FragmentActivity implements OnMapReadyCallback {
             public boolean onMarkerClick(Marker marker) {
                 //The snippet is the same as the position in the arrayList
                 String name = marker.getSnippet();
-                name = "0";
+//                name = "0";
                 //Using position get Value from arraylist
                 Intent intent = new Intent(MapScreen.this, ShelterInspectScreen.class);
                 intent.putExtra("shelterID", "" + name);
