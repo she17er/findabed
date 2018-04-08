@@ -57,6 +57,7 @@ public class SignupScreen extends AppCompatActivity {
         populateSpinners();
         addButtonListener();
 
+
         AsyncTaskRunnerGetUsername AsyncGetUsername = new AsyncTaskRunnerGetUsername();
         AsyncGetUsername.execute("start");
         try {
@@ -169,10 +170,10 @@ public class SignupScreen extends AppCompatActivity {
             validLogin = false;
         }
         //@todo Fix password confirmation, I have no clue why this always fails :(
-        // else if (!password.getText().equals(passwordCheck.getText().toString())) {
-//            passwordCheck.setError("Passwords must match");
-//            validLogin = false;
-//        }
+         else if (!password.getText().toString().equals(passwordCheck.getText().toString())) {
+            passwordCheck.setError("Passwords must match");
+            validLogin = false;
+        }
         if (TextUtils.isEmpty(age.getText())) {
             age.setError("Age is required");
             validLogin = false;
