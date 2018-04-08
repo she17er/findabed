@@ -389,7 +389,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
     }
 
     /**
-     * Reads all shelter data from csv in the modal and adds them to an arraylist
+     * Reads all shelter data from csv in the modal and adds them to an ArrayList
      */
     public void addCSVShelters(int id, ArrayList<Shelter> dataStore) {
         InputStream inputStream = getResources().openRawResource(id);
