@@ -33,7 +33,6 @@ public class SignupScreen extends AppCompatActivity {
     private EditText username, email, phone, password, passwordCheck, age;
     private Spinner genderSpinner, vetSpinner, roleSpinner, accountSpinner;
     private Button submit;
-    private ArrayList<String> usernames;
 
     //URL for the Heroku backend
     String backendURL = "https://she17er.herokuapp.com/api/users/newUsers";
@@ -58,10 +57,10 @@ public class SignupScreen extends AppCompatActivity {
         populateSpinners();
         addButtonListener();
 
-        AsyncTaskRunnerGetUsername ATRGU = new AsyncTaskRunnerGetUsername();
-        ATRGU.execute("start");
+        AsyncTaskRunnerGetUsername AsyncGetUsername = new AsyncTaskRunnerGetUsername();
+        AsyncGetUsername.execute("start");
         try {
-            Log.d("usernames", ATRGU.get());
+            Log.d("usernames", AsyncGetUsername.get());
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -129,7 +128,7 @@ public class SignupScreen extends AppCompatActivity {
                     AsyncTaskRunner postReq = new AsyncTaskRunner();
                     postReq.execute("start");
                     Intent successIntent = new Intent(v.getContext(), WelcomeScreen.class);
-                    successIntent.putExtra("FromSignup", "Account successfully created!");
+                    successIntent.putExtra("FromSignUp", "Account successfully created!");
                     startActivityForResult(successIntent, 0);
                 }
             }
@@ -137,9 +136,9 @@ public class SignupScreen extends AppCompatActivity {
     }
 
     /**
-     * Checks if all entered signup data is valid
-     * Throws error messages on signup textboxes that are invalid
-     * @return Whether or not the signup data is valid
+     * Checks if all entered sign-up data is valid
+     * Throws error messages on sign-up text-boxes that are invalid
+     * @return Whether or not the sign-up data is valid
      */
     private boolean checkValid() {
         boolean validLogin = true;

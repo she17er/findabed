@@ -288,7 +288,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
                 newShelter.setCapacity(arr.get(1));
                 newShelter.setLatitude(arr.get(4));
                 newShelter.setName(arr.get(0));
-                newShelter.setGenderandAge(arr.get(2));
+                newShelter.setGenderAndAge(arr.get(2));
                 newShelter.setLongitude(arr.get(3));
                 newShelter.setPhoneNumber(arr.get(6));
                 newShelter.setCurrentCapacity(arr.get(7));
