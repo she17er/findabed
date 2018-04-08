@@ -45,9 +45,9 @@ public class WelcomeScreen extends AppCompatActivity {
         View parentLayout = getWindow().getDecorView().findViewById(android.R.id.content);
         Intent intent = this.getIntent();
         if (intent.getExtras() != null) {
-            Snackbar confirmationSnackbar = Snackbar.make(parentLayout,
+            Snackbar confirmationSnackBar = Snackbar.make(parentLayout,
                     intent.getExtras().getString("FromSignup"), Snackbar.LENGTH_LONG);
-            confirmationSnackbar.show();
+            confirmationSnackBar.show();
         }
     }
 }

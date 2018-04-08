@@ -37,7 +37,7 @@ public class Shelter implements Parcelable {
     public Shelter(ArrayList<String> tokens) {
         setName(tokens.get(1));
         setCapacity(tokens.get(2));
-        setGenderandAge(tokens.get(3));
+        setGenderAndAge(tokens.get(3));
         setLongitude(tokens.get(4));
         setLatitude(tokens.get(5));
         setAddress(tokens.get(6));
@@ -53,7 +53,7 @@ public class Shelter implements Parcelable {
         set_id(in.readString());
         setName(in.readString());
         setCapacity(in.readString());
-        setGenderandAge(in.readString() + in.readString());
+        setGenderAndAge(in.readString() + in.readString());
         setLongitude(in.readString());
         setLatitude(in.readString());
         setAddress(in.readString());
@@ -124,7 +124,7 @@ public class Shelter implements Parcelable {
         this.currentCapacity = Integer.parseInt(currentCapacity);
     }
 
-    public void setGenderandAge(String gender) {
+    public void setGenderAndAge(String gender) {
         restrictions = gender.toLowerCase();
         if (restrictions.equals("")) {
             restrictions = "N/A";

@@ -84,7 +84,7 @@ public class LoginScreen extends AppCompatActivity {
             }
         });
 
-        //Signin button functionality
+        //Sign in button functionality
         mUserSignInButton = (Button) findViewById(R.id.username_sign_in_button);
         mUserSignInButton.setOnClickListener(new OnClickListener() {
             @Override

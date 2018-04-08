@@ -126,8 +126,6 @@ public class BookingScreen extends AppCompatActivity {
         protected String doInBackground(String... params) {
             try {
 
-                Log.d("shelterIDbooking", "" + shelterID);
-
                 URL url = new URL(bookingURL + shelterID);
                 HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setDoOutput(true);
