@@ -1,6 +1,7 @@
 package com.she17er.seanm.findabed;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -46,6 +47,8 @@ public class BookingScreen extends AppCompatActivity {
     Shelter shelter;
     int bookingNumber;
 
+    SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -71,7 +74,7 @@ public class BookingScreen extends AppCompatActivity {
 
         //Hides cancelBookingButton if there is no booking for a user to cancel
         if (shelter.getCurrentCapacity() == 0) {
-            cancelBookingButton.setVisibility(View.GONE);
+            cancelBookingButton.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -91,7 +94,10 @@ public class BookingScreen extends AppCompatActivity {
                     if (bookingNumber + shelter.getCurrentCapacity() > shelter.getCapacity()) {
                         numberText.setError("Not enough space in the shelter");
                     } else {
-//                    writeToCSV(R.raw.data);
+                        //Writes the name of the shelter booked to a local variable
+                        SharedPreferences.Editor userData = sharedPreferences.edit();
+                        userData.putString("booking", shelter.getName()).apply();
+
                         AsyncTaskRunner makeBooking = new AsyncTaskRunner();
                         makeBooking.execute("start");
                         Intent intent = new Intent(v.getContext(), Dashboard.class);
@@ -101,10 +107,19 @@ public class BookingScreen extends AppCompatActivity {
             }
         });
 
-        //Button to return to dashboard
+        //Button to cancel a booking and return to the Dashboard
         cancelBookingButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+//                SharedPreferences userData = getSharedPreferences("booking", 0);
+//                if (userData.) {
+//
+//
+//                    Intent intent = new Intent(v.getContext(), Dashboard.class);
+//                    startActivityForResult(intent, 0);
+//                } else {
+//
+//                }
                 Intent intent = new Intent(v.getContext(), Dashboard.class);
                 startActivityForResult(intent, 0);
             }

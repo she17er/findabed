@@ -36,6 +36,9 @@ public class ShelterInspectScreen extends AppCompatActivity {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
+        //Removes actionbar title
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
+
         View parentLayout = getWindow().getDecorView().findViewById(android.R.id.content);
         Intent intent = this.getIntent();
         if (intent.getExtras() != null) {
