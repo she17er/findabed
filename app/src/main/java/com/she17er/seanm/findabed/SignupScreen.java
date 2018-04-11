@@ -33,6 +33,8 @@ public class SignupScreen extends AppCompatActivity {
     private EditText username, email, phone, password, passwordCheck, age;
     private Spinner genderSpinner, vetSpinner, roleSpinner, accountSpinner;
     private Button submit;
+    private String currUsernames;
+    private ArrayList<String> allNames;
 
     //URL for the Heroku backend
     String backendURL = "https://she17er.herokuapp.com/api/users/newUsers";
@@ -60,10 +62,19 @@ public class SignupScreen extends AppCompatActivity {
 
         AsyncTaskRunnerGetUsername AsyncGetUsername = new AsyncTaskRunnerGetUsername();
         AsyncGetUsername.execute("start");
+
         try {
-            Log.d("usernames", AsyncGetUsername.get());
+            currUsernames = AsyncGetUsername.get();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+
+        currUsernames = currUsernames.substring(1, currUsernames.length() - 1);
+        while (currUsernames.contains("username")) {
+            int index = currUsernames.indexOf("username");
+            int curIndex = currUsernames.indexOf('}', index);
+            allNames.add(currUsernames.substring(index + 11, curIndex - 1));
+            currUsernames = currUsernames.substring(curIndex);
         }
 
         //Generates back button on action bar
@@ -147,6 +158,13 @@ public class SignupScreen extends AppCompatActivity {
             username.setError("Username is required");
             validLogin = false;
         }
+        for (String s: allNames) {
+            if (username.getText().toString().equals(s)) {
+                username.setError("this username has been registered");
+                validLogin = false;
+                break;
+            }
+        }
         if (TextUtils.isEmpty(email.getText())) {
             email.setError("Email is required");
             validLogin = false;
@@ -208,13 +226,13 @@ public class SignupScreen extends AppCompatActivity {
                 unConnection.connect();
 
                 BufferedReader in = new BufferedReader(new InputStreamReader(unConnection.getInputStream()));
-                String inputLine;
+                String inputLine = "";
                 StringBuffer userNameContent = new StringBuffer();
                 while ((inputLine = in.readLine()) != null) {
                     userNameContent.append(inputLine);
+                    return inputLine;
                 }
                 in.close();
-                return inputLine;
             } catch (Exception e) {
                 e.printStackTrace();
             }
