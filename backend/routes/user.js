@@ -131,6 +131,13 @@ router.post('/user/logout/:id', (req, res) => {
     })
 });
 
+router.get('/getUserNames', (req, res) => {
+  let allUserName = []
+  User.find({}, {username: 1, _id: 0})
+  .then((user) => res.send(user))
+  .catch((err) => res.send(err))
+});
+
 router.post('/updatePassword/:_id', (req, res) => {
   User.findByIdAndUpdate({
     _id: req.params._id
