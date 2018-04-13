@@ -110,6 +110,7 @@ router.get('/searchKeyword', (req, res) => {
   Shelter.find({
     name : keyword
   })
+  .exec()
   .then((user) => res.send(user))
   .catch((err) => {
     res.send("" + err);
