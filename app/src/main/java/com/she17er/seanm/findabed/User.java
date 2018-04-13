@@ -20,6 +20,10 @@ public class User {
         this.booked = status;
     }
 
+    public int getLoginTimes(){
+        return loginTimes;
+    }
+
     public void loginTrial() {
         this.loginTimes++;
     }

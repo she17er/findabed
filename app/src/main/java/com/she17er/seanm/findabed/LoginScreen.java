@@ -263,7 +263,7 @@ public class LoginScreen extends AppCompatActivity {
             showProgress(false);
 
             // Performs the actual login if username/ password are valid
-            if (success) {
+            if (success && currUser.getLoginTimes() <= 3) {
                 Intent intent = new Intent(getApplicationContext(), Dashboard.class);
                 startActivity(intent);
                 finish();
