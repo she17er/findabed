@@ -69,6 +69,7 @@ public class SignupScreen extends AppCompatActivity {
             e.printStackTrace();
         }
 
+        allNames = new ArrayList<>();
         currUsernames = currUsernames.substring(1, currUsernames.length() - 1);
         while (currUsernames.contains("username")) {
             int index = currUsernames.indexOf("username");
@@ -214,6 +215,10 @@ public class SignupScreen extends AppCompatActivity {
         }
     }
 
+    /**
+     * This class executes the process of getting existing usernames from backend.
+     * Getting all existing usernames prevents users from signing up with the same usernames.
+     */
     private class AsyncTaskRunnerGetUsername extends AsyncTask<String, String, String> {
 
         @Override
@@ -254,6 +259,10 @@ public class SignupScreen extends AppCompatActivity {
         }
     }
 
+    /**
+     * This class executes the process of registering a new user in the database.
+     * It will give a status 200 if the process is successful.
+     */
     private class AsyncTaskRunner extends AsyncTask<String, String, String> {
 
         @Override

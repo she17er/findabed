@@ -54,7 +54,7 @@ import org.json.JSONObject;
  * @version 1.3
  */
 
-public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTextListener{
+public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     //UI Components
     RecyclerView shelterView;
@@ -73,6 +73,9 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
     String getSheltersURL = "https://she17er.herokuapp.com/api/shelter/getShelters";
     public static String jsonData;
 
+    /**
+     * This class gets all the shelter information from the backend.
+     */
     private class AsyncTaskRunner extends AsyncTask<String, String, String> {
 
         String shelterInfo = "";
@@ -177,7 +180,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
         masterShelters = jsonParser(allInfo);
         currentShelters = new ArrayList<>();
 //        addCSVShelters(R.raw.data, masterShelters);
-        for (Shelter shelter: masterShelters) {
+        for (Shelter shelter : masterShelters) {
             currentShelters.add(shelter);
         }
 
@@ -201,7 +204,8 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parentView) {}
+            public void onNothingSelected(AdapterView<?> parentView) {
+            }
 
         });
 
@@ -221,7 +225,8 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parentView) {}
+            public void onNothingSelected(AdapterView<?> parentView) {
+            }
 
         });
     }
@@ -241,7 +246,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
      * @param ShelterInfo the information got from the database
      * @return an ArrayList containing various shelters with their information
      */
-    public ArrayList<Shelter> jsonParser (String ShelterInfo) {
+    public ArrayList<Shelter> jsonParser(String ShelterInfo) {
         ArrayList<Shelter> allShelters = new ArrayList<Shelter>();
         String tempInfo = ShelterInfo.substring(3);
         ArrayList<String> Info = new ArrayList<>();
@@ -253,7 +258,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
                 tempInfo = tempInfo.substring(rightIndex + 3);
             }
             Info.add(tempInfo);
-            for (String s: Info) {
+            for (String s : Info) {
                 ArrayList<String> arr = new ArrayList<>();
                 int i = s.indexOf("name");
                 int j = s.indexOf(',', i);
@@ -307,7 +312,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
     public boolean onQueryTextChange(String query) {
         // Here is where we are going to implement the filter logic
         final ArrayList<Shelter> updatedShelters = new ArrayList<>();
-        for (Shelter aShelter: currentShelters) {
+        for (Shelter aShelter : currentShelters) {
             if (aShelter.getName().toLowerCase().contains(query)) {
                 updatedShelters.add(aShelter);
             }
@@ -332,7 +337,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
         } else if (gender.equals("men ")) {
             wrongGender = "women";
         }
-        for (Shelter shelter: masterShelters) {
+        for (Shelter shelter : masterShelters) {
             if (!shelter.getGender().equals(wrongGender) && shelter.getAgeRange().contains(age)) {
                 currentShelters.add(shelter);
             }
@@ -342,6 +347,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
 
     /**
      * Populates the RecyclerView with appropriate shelters
+     *
      * @param mShelters The list of shelters to be added, filtered based on criteria
      */
     private void populateShelterList(final ArrayList<Shelter> mShelters) {
@@ -426,3 +432,4 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
         }
     }
 }
+

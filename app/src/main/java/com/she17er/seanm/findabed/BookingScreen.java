@@ -135,6 +135,9 @@ public class BookingScreen extends AppCompatActivity {
         });
     }
 
+    /**
+     * This class executes the process of booking a shelter and update the backend database.
+     */
     private class AsyncTaskRunner extends AsyncTask<String, String, String> {
 
         @Override

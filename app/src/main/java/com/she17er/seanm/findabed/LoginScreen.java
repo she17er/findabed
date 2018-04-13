@@ -61,6 +61,7 @@ public class LoginScreen extends AppCompatActivity {
     private View mProgressView;
     private View mLoginFormView;
     private Button mUserSignInButton;
+    private User currUser;
 
     //URL for the login route on the backend
     String backendURL = "https://she17er.herokuapp.com/api/users/login";
@@ -69,6 +70,7 @@ public class LoginScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_screen);
+        currUser = new User();
 
         // Set up the login form.
         mUserView = (AutoCompleteTextView) findViewById(R.id.username);
@@ -148,6 +150,7 @@ public class LoginScreen extends AppCompatActivity {
             showProgress(true);
             mAuthTask = new UserLoginTask(username, password);
             mAuthTask.execute((Void) null);
+            currUser.loginTrial();
         }
     }
 
