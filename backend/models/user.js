@@ -1,5 +1,6 @@
-//NPM Packages
+//NPM Packages models
 var mongoose = require('mongoose');
+var bcrypt = require('bcrypt');
 var Schema = mongoose.Schema;
 
 var userSchema = Schema({
@@ -48,7 +49,8 @@ var userSchema = Schema({
 
 
 userSchema.methods.verifyPassword = function(password) {
-    return password ==  this.password;
+    return bcrypt.compareSync(password, this.password);
   };
 
 module.exports = mongoose.model('users', userSchema);
+

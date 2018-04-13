@@ -1,7 +1,8 @@
-//NPM Packages
+//NPM Packages routes
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
 const router = express.Router();
 const passport = require('passport');
 const morgan = require('morgan');
@@ -71,8 +72,8 @@ router.post('/login', (req, res) => {
   });
 
 router.post('/newUsers', (req, res) => {
-  console.log("does exist")
-    console.log(req.body.password);
+    const newUserModel = req.body;
+    newUserModel.password = bcrypt.hashSync(newUserModel.password, 10);
     User.create(req.body, (err, user) => {
       if(err) {
         res.send(""+err);
@@ -96,26 +97,6 @@ router.get('/getUsers', (req, res) => {
     });
 });
 
-/**
- * needs to be fixed
- */
-
-router.post('/getUserName', (req, res) => {
-  User.find({
-    username : req.body.username
-  })
-  .exec()
-  .then((user) => {
-    if (user) {
-      res.send(user.username);
-    } else {
-      res.send("Not found");
-    }
-  }).catch((err) => {
-    res.send("Username Exists");
-  });
-});
-
 
 /**
  * this is very simple searching where keyword has to
@@ -129,7 +110,6 @@ router.get('/searchKeyword', (req, res) => {
   Shelter.find({
     name : keyword
   })
-  .exec()
   .then((user) => res.send(user))
   .catch((err) => {
     res.send("" + err);
@@ -151,13 +131,6 @@ router.post('/user/logout/:id', (req, res) => {
     })
 });
 
-router.get('/getUserNames', (req, res) => {
-  let allUserName = []
-  User.find({}, {username: 1, _id: 0})
-  .then((user) => res.send(user))
-  .catch((err) => res.send(err))
-});
-
 router.post('/updatePassword/:_id', (req, res) => {
   User.findByIdAndUpdate({
     _id: req.params._id
@@ -174,3 +147,6 @@ router.post('/updatePassword/:_id', (req, res) => {
 });
 
 module.exports = router;
+
+
+//var hash = bcrypt.hashSync(plainPassword, 10);
