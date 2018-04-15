@@ -14,7 +14,7 @@ public class ProfileScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile_screen);
 
-        profileText = (TextView) findViewById(R.id.profileText);
+        profileText = findViewById(R.id.profileText);
         //profileText.setText("Welcome " + LoginScreen.currentUser + ", you are a " + LoginScreen.accountState);
 
         //Generates back button on action bar

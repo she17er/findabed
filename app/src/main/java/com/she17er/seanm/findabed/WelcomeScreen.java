@@ -24,8 +24,9 @@ public class WelcomeScreen extends AppCompatActivity {
         setContentView(R.layout.activity_welcome_screen);
 
         //Login button functionality, switches to login activity screen
-        login = (Button) findViewById(R.id.loginButton);
+        login = findViewById(R.id.loginButton);
         login.setOnClickListener(new View.OnClickListener() {
+           @Override
            public void onClick(View view) {
                Intent loginIntent = new Intent(view.getContext(), LoginScreen.class);
                startActivityForResult(loginIntent, 0);
@@ -33,8 +34,9 @@ public class WelcomeScreen extends AppCompatActivity {
         });
 
         //Signup button functionality, switches to signup activity screen
-        signup = (Button) findViewById(R.id.signupButton);
+        signup = findViewById(R.id.signupButton);
         signup.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 Intent signupIntent = new Intent(view.getContext(), SignupScreen.class);
                 startActivityForResult(signupIntent, 0);

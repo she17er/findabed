@@ -46,39 +46,39 @@ public class ShelterInspectScreen extends AppCompatActivity {
             shelter = Dashboard.masterShelters.get(shelterPosition);
         }
 
-        bookButton = (Button) findViewById(R.id.bookButton);
+        bookButton = findViewById(R.id.bookButton);
         addButtonListener();
 
-        name = (TextView) findViewById(R.id.shelterName);
-        address = (TextView) findViewById(R.id.shelterAddress);
-        number = (TextView) findViewById(R.id.shelterPhoneNumber);
-        capacity = (TextView) findViewById(R.id.shelterCapacity);
-        gender = (TextView) findViewById(R.id.shelterGender);
-        latitude = (TextView) findViewById(R.id.shelterLatitude);
-        longitude = (TextView) findViewById(R.id.shelterLongitude);
-        age = (TextView) findViewById(R.id.shelterAges);
-        restrictions = (TextView) findViewById(R.id.shelterRestrictions);
-        currCapacity = (TextView) findViewById(R.id.currCapacity);
+        name = findViewById(R.id.shelterName);
+        address = findViewById(R.id.shelterAddress);
+        number = findViewById(R.id.shelterPhoneNumber);
+        capacity = findViewById(R.id.shelterCapacity);
+        gender = findViewById(R.id.shelterGender);
+        latitude = findViewById(R.id.shelterLatitude);
+        longitude = findViewById(R.id.shelterLongitude);
+        age = findViewById(R.id.shelterAges);
+        restrictions = findViewById(R.id.shelterRestrictions);
+        currCapacity = findViewById(R.id.currCapacity);
 
-        nameF = (TextView) findViewById(R.id.shelterNameField);
+        nameF = findViewById(R.id.shelterNameField);
         nameF.setText(shelter.getName());
-        addressF = (TextView) findViewById(R.id.shelterAddressField);
+        addressF = findViewById(R.id.shelterAddressField);
         addressF.setText(shelter.getAddress());
-        numberF = (TextView) findViewById(R.id.shelterPhoneNumberField);
+        numberF = findViewById(R.id.shelterPhoneNumberField);
         numberF.setText(shelter.getPhoneNumber());
-        capacityF = (TextView) findViewById(R.id.shelterCapacityField);
+        capacityF = findViewById(R.id.shelterCapacityField);
         capacityF.setText("" + shelter.getCapacity());
-        genderF = (TextView) findViewById(R.id.shelterGenderField);
+        genderF = findViewById(R.id.shelterGenderField);
         genderF.setText(shelter.getGender());
-        latitudeF = (TextView) findViewById(R.id.shelterLatitudeField);
+        latitudeF = findViewById(R.id.shelterLatitudeField);
         latitudeF.setText("" + shelter.getLatitude());
-        longitudeF = (TextView) findViewById(R.id.shelterLongitudeField);
+        longitudeF = findViewById(R.id.shelterLongitudeField);
         longitudeF.setText("" + shelter.getLongitude());
-        ageF = (TextView) findViewById(R.id.shelterAgesField);
+        ageF = findViewById(R.id.shelterAgesField);
         ageF.setText(shelter.getAgeRange());
-        currCapacityF = (TextView)findViewById(R.id.currCapacityField);
+        currCapacityF = findViewById(R.id.currCapacityField);
         currCapacityF.setText("" + (shelter.getCapacity() - shelter.getCurrentCapacity()));
-        restrictionsF = (TextView) findViewById(R.id.shelterRestrictionsField);
+        restrictionsF = findViewById(R.id.shelterRestrictionsField);
         restrictionsF.setText(shelter.getRestrictions());
     }
 

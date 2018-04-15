@@ -61,10 +61,12 @@ public class Shelter implements Parcelable {
         setCurrentCapacity(in.readString());
 //        set_id();
     }
+    @Override
     public int describeContents() {
         // TODO Auto-generated method stub
         return 0;
     }
+    @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(_id);
         dest.writeString(name);
@@ -79,10 +81,12 @@ public class Shelter implements Parcelable {
     }
     public static final Parcelable.Creator<Shelter> CREATOR = new Parcelable.Creator<Shelter>()
     {
+        @Override
         public Shelter createFromParcel(Parcel in)
         {
             return new Shelter(in);
         }
+        @Override
         public Shelter[] newArray(int size)
         {
             return new Shelter[size];

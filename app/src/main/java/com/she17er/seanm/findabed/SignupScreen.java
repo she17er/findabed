@@ -44,17 +44,17 @@ public class SignupScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_screen);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         //Initializes all UI components
-        submit = (Button) findViewById(R.id.submitButton);
-        username = (EditText) findViewById(R.id.usernameField);
-        email = (EditText) findViewById(R.id.emailField);
-        phone = (EditText) findViewById(R.id.phoneField);
-        password = (EditText) findViewById(R.id.passwordField);
-        passwordCheck = (EditText) findViewById(R.id.reenterPasswordField);
-        age = (EditText) findViewById(R.id.ageField);
+        submit = findViewById(R.id.submitButton);
+        username = findViewById(R.id.usernameField);
+        email = findViewById(R.id.emailField);
+        phone = findViewById(R.id.phoneField);
+        password = findViewById(R.id.passwordField);
+        passwordCheck = findViewById(R.id.reenterPasswordField);
+        age = findViewById(R.id.ageField);
 
         populateSpinners();
         addButtonListener();
@@ -92,7 +92,7 @@ public class SignupScreen extends AppCompatActivity {
      * These spinners include genderSpinner, vetSpinner, roleSpinner, and accountSpinner
      */
     private void populateSpinners() {
-        genderSpinner = (Spinner) findViewById(R.id.genderSpinner);
+        genderSpinner = findViewById(R.id.genderSpinner);
         List<String> genderEntries = new ArrayList<>();
         genderEntries.add("Male");
         genderEntries.add("Female");
@@ -102,7 +102,7 @@ public class SignupScreen extends AppCompatActivity {
         dataAdapterGender.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         genderSpinner.setAdapter(dataAdapterGender);
 
-        vetSpinner = (Spinner) findViewById(R.id.vetStatusSpinner);
+        vetSpinner = findViewById(R.id.vetStatusSpinner);
         List<String> vetStatEntries = new ArrayList<>();
         vetStatEntries.add("Non-Veteran");
         vetStatEntries.add("Veteran");
@@ -111,7 +111,7 @@ public class SignupScreen extends AppCompatActivity {
         dataAdapterGender.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         vetSpinner.setAdapter(dataAdapterVet);
 
-        accountSpinner = (Spinner) findViewById(R.id.accountStateSpinner);
+        accountSpinner = findViewById(R.id.accountStateSpinner);
         List<String> accountEntries = new ArrayList<>();
         accountEntries.add("User");
         accountEntries.add("Admin");
@@ -120,7 +120,7 @@ public class SignupScreen extends AppCompatActivity {
         dataAdapterAccount.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         accountSpinner.setAdapter(dataAdapterAccount);
 
-        roleSpinner = (Spinner) findViewById(R.id.roleDescriptionSpinner);
+        roleSpinner = findViewById(R.id.roleDescriptionSpinner);
         List<String> roleEntries = new ArrayList<>();
         roleEntries.add("Shelter Seeker");
         roleEntries.add("Shelter Worker");
@@ -232,7 +232,7 @@ public class SignupScreen extends AppCompatActivity {
 
                 BufferedReader in = new BufferedReader(new InputStreamReader(unConnection.getInputStream()));
                 String inputLine = "";
-                StringBuffer userNameContent = new StringBuffer();
+                StringBuilder userNameContent = new StringBuilder();
                 while ((inputLine = in.readLine()) != null) {
                     userNameContent.append(inputLine);
                     return inputLine;
@@ -295,7 +295,7 @@ public class SignupScreen extends AppCompatActivity {
 
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String inputLine;
-                StringBuffer content = new StringBuffer();
+                StringBuilder content = new StringBuilder();
                 while ((inputLine = in.readLine()) != null) {
                     content.append(inputLine);
                 }

@@ -58,10 +58,10 @@ public class BookingScreen extends AppCompatActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         //Adds UI components
-        numberText = (EditText) findViewById(R.id.numberText);
-        confirmButton = (Button) findViewById(R.id.confirmBookingButton);
-        cancelBookingButton = (Button) findViewById(R.id.cancelBookingButton);
-        cancelButton = (Button)findViewById(R.id.cancelButton);
+        numberText = findViewById(R.id.numberText);
+        confirmButton = findViewById(R.id.confirmBookingButton);
+        cancelBookingButton = findViewById(R.id.cancelBookingButton);
+        cancelButton = findViewById(R.id.cancelButton);
         addButtonListener();
 
         //Initializes shelter data
@@ -161,7 +161,7 @@ public class BookingScreen extends AppCompatActivity {
 
                 BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 String inputLine;
-                StringBuffer content = new StringBuffer();
+                StringBuilder content = new StringBuilder();
                 while ((inputLine = in.readLine()) != null) {
                     content.append(inputLine);
                 }

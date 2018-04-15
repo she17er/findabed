@@ -73,8 +73,8 @@ public class LoginScreen extends AppCompatActivity {
         currUser = new User();
 
         // Set up the login form.
-        mUserView = (AutoCompleteTextView) findViewById(R.id.username);
-        mPasswordView = (EditText) findViewById(R.id.password);
+        mUserView = findViewById(R.id.username);
+        mPasswordView = findViewById(R.id.password);
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
@@ -87,7 +87,7 @@ public class LoginScreen extends AppCompatActivity {
         });
 
         //Sign in button functionality
-        mUserSignInButton = (Button) findViewById(R.id.username_sign_in_button);
+        mUserSignInButton = findViewById(R.id.username_sign_in_button);
         mUserSignInButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {

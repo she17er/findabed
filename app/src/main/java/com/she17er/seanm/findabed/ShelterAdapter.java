@@ -41,7 +41,7 @@ public class ShelterAdapter extends RecyclerView.Adapter<ShelterAdapter.ViewHold
             // to access the context from any ViewHolder instance.
             super(itemView);
 
-            shelterName = (TextView) itemView.findViewById(R.id.shelter_name);
+            shelterName = itemView.findViewById(R.id.shelter_name);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -59,9 +59,9 @@ public class ShelterAdapter extends RecyclerView.Adapter<ShelterAdapter.ViewHold
     }
 
     // Store a member variable for the shelters
-    private List<Shelter> mShelters;
+    private final List<Shelter> mShelters;
     // Store the context for easy access
-    private Context mContext;
+    private final Context mContext;
 
     // Pass in the shelter array into the constructor
     public ShelterAdapter(Context context, List<Shelter> shelters) {

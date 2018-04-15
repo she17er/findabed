@@ -134,23 +134,26 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        shelterView = (RecyclerView) findViewById(R.id.shelterRecyclerView);
-        logout = (Button) findViewById(R.id.logoutButton);
+        shelterView = findViewById(R.id.shelterRecyclerView);
+        logout = findViewById(R.id.logoutButton);
         logout.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), WelcomeScreen.class);
                 startActivityForResult(intent, 0);
             }
         });
-        profile = (Button) findViewById(R.id.profileButton);
+        profile = findViewById(R.id.profileButton);
         profile.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), ProfileScreen.class);
                 startActivityForResult(intent, 0);
             }
         });
-        map = (Button) findViewById(R.id.mapButton);
+        map = findViewById(R.id.mapButton);
         map.setOnClickListener(new View.OnClickListener() {
+            @Override
             public void onClick(View view) {
                 Intent intent = new Intent(view.getContext(), MapScreen.class);
                 Bundle bundle = new Bundle();
@@ -373,7 +376,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
      * Populates the genderSelect and ageSelect spinners with all appropriate entry choices
      */
     private void populateSpinners() {
-        genderSelect = (Spinner) findViewById(R.id.genderFilterSpinner);
+        genderSelect = findViewById(R.id.genderFilterSpinner);
         List<String> genderEntries = new ArrayList<>();
         genderEntries.add("Any Gender");
         genderEntries.add("Female");
@@ -383,7 +386,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
         dataAdapterGender.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         genderSelect.setAdapter(dataAdapterGender);
 
-        ageSelect = (Spinner) findViewById(R.id.ageFilterSpinner);
+        ageSelect = findViewById(R.id.ageFilterSpinner);
         List<String> ageEntries = new ArrayList<>();
         ageEntries.add("Any Age");
         ageEntries.add("Children");
