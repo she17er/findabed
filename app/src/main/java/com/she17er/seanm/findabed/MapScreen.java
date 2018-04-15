@@ -40,7 +40,7 @@ public class MapScreen extends FragmentActivity implements OnMapReadyCallback {
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         Bundle bundle = getIntent().getExtras();
-        ArrayList<Shelter> shelterList = new ArrayList<Shelter>();
+        ArrayList<Shelter> shelterList = new ArrayList<>();
         shelterList = bundle.getParcelableArrayList("data");
         LatLng temp = new LatLng(shelterList.get(0).getLatitude(), shelterList.get(0).getLongitude());
         for (Shelter s: shelterList) {

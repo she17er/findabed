@@ -174,7 +174,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
         } catch (Exception e) {
             Log.d("Async Exception", e.toString());
         }
-
+        jsonData = allInfo;
 
         // Adds shelters to master list (also has legacy csv code)
         masterShelters = jsonParser(allInfo);
@@ -247,12 +247,12 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
      * @return an ArrayList containing various shelters with their information
      */
     public ArrayList<Shelter> jsonParser(String ShelterInfo) {
-        ArrayList<Shelter> allShelters = new ArrayList<Shelter>();
+        ArrayList<Shelter> allShelters = new ArrayList<>();
         String tempInfo = ShelterInfo.substring(3);
         ArrayList<String> Info = new ArrayList<>();
         int count = 0;
         try {
-            while (tempInfo.indexOf("},{") != -1) {
+            while (tempInfo.contains("},{")) {
                 int rightIndex = tempInfo.indexOf("},{");
                 Info.add(tempInfo.substring(0, rightIndex));
                 tempInfo = tempInfo.substring(rightIndex + 3);
@@ -304,6 +304,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
         } catch (Exception e) {
             Log.d("jsonParser", "Parser failed");
             e.printStackTrace();
+            return null;
         }
         return allShelters;
     }
@@ -377,7 +378,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
         genderEntries.add("Any Gender");
         genderEntries.add("Female");
         genderEntries.add("Male");
-        ArrayAdapter<String> dataAdapterGender = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> dataAdapterGender = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, genderEntries);
         dataAdapterGender.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         genderSelect.setAdapter(dataAdapterGender);
@@ -388,7 +389,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
         ageEntries.add("Children");
         ageEntries.add("Young Adults");
         ageEntries.add("Families with Newborns");
-        ArrayAdapter<String> dataAdapterRole = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> dataAdapterRole = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, ageEntries);
         dataAdapterRole.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         ageSelect.setAdapter(dataAdapterRole);
@@ -414,7 +415,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
                         builder.setCharAt(currentIndex, ';'); // sets the comma in the quotes to semi-colon
                     }
                 }
-                ArrayList<String> tokens = new ArrayList<String> (Arrays.asList(builder.toString().split(",")));
+                ArrayList<String> tokens = new ArrayList<> (Arrays.asList(builder.toString().split(",")));
                 dataStore.add(new Shelter(tokens));
             }
         } catch (FileNotFoundException e) {

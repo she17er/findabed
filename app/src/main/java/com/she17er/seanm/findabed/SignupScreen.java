@@ -97,7 +97,7 @@ public class SignupScreen extends AppCompatActivity {
         genderEntries.add("Male");
         genderEntries.add("Female");
         genderEntries.add("Other");
-        ArrayAdapter<String> dataAdapterGender = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> dataAdapterGender = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, genderEntries);
         dataAdapterGender.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         genderSpinner.setAdapter(dataAdapterGender);
@@ -106,7 +106,7 @@ public class SignupScreen extends AppCompatActivity {
         List<String> vetStatEntries = new ArrayList<>();
         vetStatEntries.add("Non-Veteran");
         vetStatEntries.add("Veteran");
-        ArrayAdapter<String> dataAdapterVet = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> dataAdapterVet = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, vetStatEntries);
         dataAdapterGender.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         vetSpinner.setAdapter(dataAdapterVet);
@@ -115,7 +115,7 @@ public class SignupScreen extends AppCompatActivity {
         List<String> accountEntries = new ArrayList<>();
         accountEntries.add("User");
         accountEntries.add("Admin");
-        ArrayAdapter<String> dataAdapterAccount = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> dataAdapterAccount = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, accountEntries);
         dataAdapterAccount.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         accountSpinner.setAdapter(dataAdapterAccount);
@@ -124,7 +124,7 @@ public class SignupScreen extends AppCompatActivity {
         List<String> roleEntries = new ArrayList<>();
         roleEntries.add("Shelter Seeker");
         roleEntries.add("Shelter Worker");
-        ArrayAdapter<String> dataAdapterRole = new ArrayAdapter<String>(this,
+        ArrayAdapter<String> dataAdapterRole = new ArrayAdapter<>(this,
                 android.R.layout.simple_spinner_item, roleEntries);
         dataAdapterRole.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         roleSpinner.setAdapter(dataAdapterRole);
