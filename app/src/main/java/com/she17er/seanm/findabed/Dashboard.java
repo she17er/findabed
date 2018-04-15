@@ -412,7 +412,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
                     if (currentChar == '\"') {
                         inQuotes = !inQuotes; // toggle state
                     }
-                    if (currentChar == ',' && inQuotes) {
+                    if ((currentChar == ',') && inQuotes) {
                         builder.setCharAt(currentIndex, ';'); // sets the comma in the quotes to semi-colon
                     }
                 }

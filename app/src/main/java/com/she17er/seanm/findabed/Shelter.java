@@ -134,7 +134,7 @@ public class Shelter implements Parcelable {
      */
     public void setCapacity(String s) {
         s = s.replaceAll(";", ",");
-        if (s == null || s.equals(" ")) {
+        if ((s == null) || s.equals(" ")) {
             this.capacity = 0;
         } else {
             this.capacity = Integer.parseInt(s);

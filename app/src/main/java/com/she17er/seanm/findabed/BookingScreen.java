@@ -95,7 +95,7 @@ public class BookingScreen extends AppCompatActivity {
                     numberText.setError("Please enter a number");
                 } else {
                     bookingNumber = Integer.parseInt(numberText.getText().toString());
-                    if (bookingNumber + shelter.getCurrentCapacity() > shelter.getCapacity()) {
+                    if ((bookingNumber + shelter.getCurrentCapacity()) > shelter.getCapacity()) {
                         numberText.setError("Not enough space in the shelter");
                     } else {
                         //Writes the name of the shelter booked to a local variable

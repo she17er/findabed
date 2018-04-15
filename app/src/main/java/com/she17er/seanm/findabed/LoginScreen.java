@@ -78,7 +78,7 @@ public class LoginScreen extends AppCompatActivity {
         mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if (id == EditorInfo.IME_ACTION_DONE || id == EditorInfo.IME_NULL) {
+                if ((id == EditorInfo.IME_ACTION_DONE) || (id == EditorInfo.IME_NULL)) {
                     attemptLogin();
                     return true;
                 }
@@ -263,7 +263,7 @@ public class LoginScreen extends AppCompatActivity {
             showProgress(false);
 
             // Performs the actual login if username/ password are valid
-            if (success && currUser.getLoginTimes() <= 3) {
+            if (success && (currUser.getLoginTimes() <= 3)) {
                 Intent intent = new Intent(getApplicationContext(), Dashboard.class);
                 startActivity(intent);
                 finish();
