@@ -172,11 +172,20 @@ public class Shelter implements Parcelable {
     }
 
     public void setLatitude(String latitude) {
-        latitude = latitude.replaceAll(";", ",");
+        if (latitude == null) {
+            throw new IllegalArgumentException("Latitude entered was null");
+        }
+        latitude = latitude.replaceAll(";", "");
+        latitude = latitude.replaceAll(",", "");
         try {
-            this.latitude = Double.valueOf(latitude);
+            double newLat = Double.valueOf(latitude);
+            if (newLat > 90 || newLat < -90) {
+                throw new IllegalArgumentException("Illegal Latitude Entered: " + newLat);
+            } else {
+                this.latitude = newLat;
+            }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new NumberFormatException();
         }
     }
 
