@@ -12,6 +12,10 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+/**
+ * Screen that shows the shelter data for a given shelter
+ */
+
 public class ShelterInspectScreen extends AppCompatActivity {
 
     //UI Setup

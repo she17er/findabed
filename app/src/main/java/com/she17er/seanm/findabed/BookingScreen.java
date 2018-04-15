@@ -32,6 +32,10 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * The booking screen for booking a new shelter
+ */
+
 public class BookingScreen extends AppCompatActivity {
 
     //UI Components

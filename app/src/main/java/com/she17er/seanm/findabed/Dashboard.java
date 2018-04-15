@@ -48,10 +48,6 @@ import org.json.JSONObject;
 /**
  * Initial dashboard activity that a user sees upon login
  * Parses and displays all shelters from a CSV file as a list
- *
- * @author sean walsh
- * @edited by elissa huang
- * @version 1.3
  */
 
 public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTextListener {
@@ -400,6 +396,8 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
 
     /**
      * Reads all shelter data from csv in the modal and adds them to an ArrayList
+     * @param id The shelter's position
+     * @param dataStore The array of all shelters to get positions from
      */
     public void addCSVShelters(int id, ArrayList<Shelter> dataStore) {
         InputStream inputStream = getResources().openRawResource(id);

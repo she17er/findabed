@@ -10,14 +10,11 @@ import java.util.Iterator;
 
 /**
  * Represents a given shelter
- *
- * @author elissa huang
- * @edited by sean walsh
- * @version 1.3
  */
 
 public class Shelter implements Parcelable {
-//
+
+    //All shelter parameters
     private String _id;
     private static int count = 0;
     private String name;
@@ -32,8 +29,15 @@ public class Shelter implements Parcelable {
     private int currentCapacity;
     private String backendID;
 
+    /**
+     * Constructs a new shelter without any params (redundant)
+     */
     public Shelter(){}
 
+    /**
+     * Constructs a new shelter with appropriate parameters
+     * @param tokens The raw text to be converted to each parameter for this shelter
+     */
     public Shelter(ArrayList<String> tokens) {
         setName(tokens.get(1));
         setCapacity(tokens.get(2));
@@ -49,6 +53,11 @@ public class Shelter implements Parcelable {
 //        set_id();
         //set_id(tokens.get(10)); //add this after finish the csv parsing algorithm
     }
+
+    /**
+     * Generates a shelter using a parcel instead of the CSV reader
+     * @param in The parcel passed in from MapScreen (and JSON reader maybe?)
+     */
     public Shelter(Parcel in) {
         set_id(in.readString());
         setName(in.readString());
@@ -61,11 +70,13 @@ public class Shelter implements Parcelable {
         setCurrentCapacity(in.readString());
 //        set_id();
     }
+
     @Override
     public int describeContents() {
         // TODO Auto-generated method stub
         return 0;
     }
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(_id);
@@ -79,6 +90,8 @@ public class Shelter implements Parcelable {
         dest.writeString(phoneNumber);
         dest.writeString(Integer.toString(currentCapacity));
     }
+
+
     public static final Parcelable.Creator<Shelter> CREATOR = new Parcelable.Creator<Shelter>()
     {
         @Override
@@ -92,20 +105,37 @@ public class Shelter implements Parcelable {
             return new Shelter[size];
         }
     };
+
+    /**
+     * Gets a shelter's name
+     * @return The shelter name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Sets a shelter's name
+     * @param name The shelter's name
+     */
     public void setName(String name) {
         name = name.replaceAll(";", ",");
         this.name = name;
 
     }
 
+    /**
+     * Gets a shelter's capacity
+     * @return Shelter capacity
+     */
     public int getCapacity() {
         return capacity;
     }
 
+    /**
+     * Sets a shelter's capacity
+     * @param s The shelter's capacity
+     */
     public void setCapacity(String s) {
         s = s.replaceAll(";", ",");
         if (s == null || s.equals(" ")) {
@@ -115,19 +145,39 @@ public class Shelter implements Parcelable {
         }
     }
 
+    /**
+     * Gets a shelter's gender restrictions
+     * @return The shelter's gender restrictions
+     */
     public String getGender() {
         return gender;
     }
 
+    /**
+     * Gets a shelters age range
+     * @return The shelter's age range
+     */
     public String getAgeRange() { return ageRange; }
 
+    /**
+     * Gets a shelters restrictions
+     * @return The shelter's restrictions
+     */
     public String getRestrictions() { return restrictions; }
 
+    /**
+     * Sets a shelters current capacity
+     * @param currentCapacity The shelter's current capacity
+     */
     public void setCurrentCapacity(String currentCapacity) {
         currentCapacity = currentCapacity.replaceAll(";", ",");
         this.currentCapacity = Integer.parseInt(currentCapacity);
     }
 
+    /**
+     * Sets the new gender restrictions
+     * @param gender The updated gender restrictions
+     */
     public void setGenderAndAge(String gender) {
         restrictions = gender.toLowerCase();
         if (restrictions.equals("")) {
@@ -158,10 +208,18 @@ public class Shelter implements Parcelable {
         }
     }
 
+    /**
+     * Gets a shelter's longitude
+     * @return Shelter's longitude
+     */
     public double getLongitude() {
         return longitude;
     }
 
+    /**
+     * Sets a shelter's longitude
+     * @param longitude The shelter's longitude
+     */
     public void setLongitude(String longitude) {
         longitude = longitude.replaceAll(";", ",");
         try {
@@ -171,10 +229,18 @@ public class Shelter implements Parcelable {
         }
     }
 
+    /**
+     * Gets a shelter's latitude
+     * @return The shelter's latitude
+     */
     public double getLatitude() {
         return latitude;
     }
 
+    /**
+     * Sets a shelter's latitude
+     * @param latitude The shelter's latitude
+     */
     public void setLatitude(String latitude) {
         latitude = latitude.replaceAll(";", ",");
         try {
@@ -184,28 +250,52 @@ public class Shelter implements Parcelable {
         }
     }
 
+    /**
+     * Gets a shelter's address
+     * @return Shelter address
+     */
     public String getAddress() {
         return address;
     }
 
+    /**
+     * Sets a shelter's address
+     * @param address Shelter address
+     */
     public void setAddress(String address) {
         address = address.replaceAll(";", ",");
         this.address = address;
     }
 
+    /**
+     * Gets a shelter's phone number
+     * @return Shelter phone number
+     */
     public String getPhoneNumber() {
         return phoneNumber;
     }
 
+    /**
+     * Sets a shelter's phone number
+     * @param phoneNumber Shelter phone number
+     */
     public void setPhoneNumber(String phoneNumber) {
         phoneNumber = phoneNumber.replaceAll(";", ",");
         this.phoneNumber = phoneNumber;
     }
 
+    /**
+     * Gets a shelters current capacity
+     * @return Current capacity
+     */
     public int getCurrentCapacity() {
         return currentCapacity;
     }
 
+    /**
+     * Sets a shelters ArrayList position/ ID
+     * @param id Shelter's position
+     */
     public void set_id(String id) {
 //        int pos = 0;
 //        while (!Dashboard.masterShelters.get(pos).getName().equals(this.getName())) {
@@ -215,24 +305,47 @@ public class Shelter implements Parcelable {
         _id = id;
     }
 
+    /**
+     * Gets a shelter's ArrayList position ID
+     * @return Shelter's position
+     */
     public String get_id() {return this._id;}
 
+    /**
+     * Sets a shelter's backend ID
+     * @param id Shelter's backend ID
+     */
     public void setBackendID(String id) {
         backendID = id;
     }
 
+    /**
+     * Gets a shelter's backend ID
+     * @return Shelter's backend ID
+     */
     public String getBackendID() {
         return backendID;
     }
 
+    /**
+     * Increments current shelter capacity
+     */
     public void incrementCurrentCapacity() {
         currentCapacity += 1;
     }
 
+    /**
+     * Decrements current shelter capacity
+     */
     public void decrementCurrentCapacity() {
         currentCapacity -= 1;
     }
 
+    /**
+     * Gets the string representing a shelter, cotaining both its position and current
+     * capacity
+     * @return Shelter represented as a string
+     */
     public String toString() {
         return _id + currentCapacity;
     }

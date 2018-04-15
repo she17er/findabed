@@ -20,10 +20,23 @@ public class ShelterAdapter extends RecyclerView.Adapter<ShelterAdapter.ViewHold
     //Listener variable, interface, and method for parent (Dashboard)
     private OnItemClickListener listener;
 
+    /**
+     * Gets a specific shelter from the Dashboard
+     */
     public interface OnItemClickListener {
+
+        /**
+         * Sets up onClickListener for adapter
+         * @param itemView The View passed in to be opened up
+         * @param position The shelter's position in the list of all shelters
+         */
         void onItemClick(View itemView, int position);
     }
 
+    /**
+     * Sets up the shelter actionListeners
+     * @param listener The actionlistener for this shelterAdapter
+     */
     public void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
     }
@@ -34,8 +47,11 @@ public class ShelterAdapter extends RecyclerView.Adapter<ShelterAdapter.ViewHold
         //All variables to be rendered in a row
         public TextView shelterName;
 
-        // We also create a constructor that accepts the entire item row
-        // and does the view lookups to find each subview
+        /**
+         * We also create a constructor that accepts the entire item row
+         * and does the view lookups to find each subview
+         * @param itemView The view for a given shelter in the adapter
+         */
         public ViewHolder(final View itemView) {
             // Stores the itemView in a public final member variable that can be used
             // to access the context from any ViewHolder instance.
@@ -63,7 +79,11 @@ public class ShelterAdapter extends RecyclerView.Adapter<ShelterAdapter.ViewHold
     // Store the context for easy access
     private final Context mContext;
 
-    // Pass in the shelter array into the constructor
+    /**
+     * Pass in the shelter array into the constructor
+     * @param context The context for a shelter selected
+     * @param shelters The list of all shelters
+     */
     public ShelterAdapter(Context context, List<Shelter> shelters) {
         mShelters = shelters;
         mContext = context;

@@ -5,6 +5,10 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+/**
+ * Screen that shows user's profile data
+ */
+
 public class ProfileScreen extends AppCompatActivity {
 
     TextView profileText;
