@@ -57,13 +57,16 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
     Button logout;
     Button map;
     Button profile;
-    Spinner genderSelect, ageSelect;
+    Spinner genderSelect;
+    Spinner ageSelect;
 
     //ArrayList that stores data from CSV
-    public static ArrayList<Shelter> masterShelters, currentShelters;
+    public static ArrayList<Shelter> masterShelters;
+    public static ArrayList<Shelter> currentShelters;
 
     //Current restrictions from the spinners
-    String gender, age;
+    String gender;
+    String age;
 
     //Backend URL for populating shelters list
     String getSheltersURL = "https://she17er.herokuapp.com/api/shelter/getShelters";

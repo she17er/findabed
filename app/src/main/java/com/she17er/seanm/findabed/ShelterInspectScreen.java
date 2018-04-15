@@ -19,8 +19,26 @@ import org.w3c.dom.Text;
 public class ShelterInspectScreen extends AppCompatActivity {
 
     //UI Setup
-    TextView name, address, number, capacity, gender, latitude, longitude, age, restrictions, currCapacity;
-    TextView nameF, addressF, numberF, capacityF, genderF, latitudeF, longitudeF, ageF, restrictionsF, currCapacityF;
+    TextView name;
+    TextView address;
+    TextView number;
+    TextView capacity;
+    TextView gender;
+    TextView latitude;
+    TextView longitude;
+    TextView age;
+    TextView restrictions;
+    TextView currCapacity;
+    TextView nameF;
+    TextView addressF;
+    TextView numberF;
+    TextView capacityF;
+    TextView genderF;
+    TextView latitudeF;
+    TextView longitudeF;
+    TextView ageF;
+    TextView restrictionsF;
+    TextView currCapacityF;
     Button bookButton;
 
     //Data variables

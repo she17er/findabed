@@ -30,8 +30,16 @@ import java.util.List;
 public class SignupScreen extends AppCompatActivity {
 
     //UI references
-    private EditText username, email, phone, password, passwordCheck, age;
-    private Spinner genderSpinner, vetSpinner, roleSpinner, accountSpinner;
+    private EditText username;
+    private EditText email;
+    private EditText phone;
+    private EditText password;
+    private EditText passwordCheck;
+    private EditText age;
+    private Spinner genderSpinner;
+    private Spinner vetSpinner;
+    private Spinner roleSpinner;
+    private Spinner accountSpinner;
     private Button submit;
     private String currUsernames;
     private ArrayList<String> allNames;
