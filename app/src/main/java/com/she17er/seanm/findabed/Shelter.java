@@ -1,12 +1,8 @@
 package com.she17er.seanm.findabed;
+
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Log;
-
-import com.google.android.gms.maps.model.Dash;
-
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * Represents a given shelter
