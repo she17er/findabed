@@ -53,24 +53,24 @@ import org.json.JSONObject;
 public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     //UI Components
-    RecyclerView shelterView;
-    Button logout;
-    Button map;
-    Button profile;
-    Spinner genderSelect;
-    Spinner ageSelect;
+    private RecyclerView shelterView;
+    private Button logout;
+    private Button map;
+    private Button profile;
+    private Spinner genderSelect;
+    private Spinner ageSelect;
 
     //ArrayList that stores data from CSV
     public static List<Shelter> masterShelters;
-    public static ArrayList<Shelter> currentShelters;
+    private static ArrayList<Shelter> currentShelters;
 
     //Current restrictions from the spinners
-    String gender;
-    String age;
+    private String gender;
+    private String age;
 
     //Backend URL for populating shelters list
-    String getSheltersURL = "https://she17er.herokuapp.com/api/shelter/getShelters";
-    public static String jsonData;
+    private final String getSheltersURL = "https://she17er.herokuapp.com/api/shelter/getShelters";
+    private static String jsonData;
 
     /**
      * This class gets all the shelter information from the backend.

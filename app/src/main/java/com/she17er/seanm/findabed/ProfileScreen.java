@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 public class ProfileScreen extends AppCompatActivity {
 
-    TextView profileText;
+    private TextView profileText;
 
     @Override
     protected final void onCreate(Bundle savedInstanceState) {

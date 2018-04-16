@@ -4,7 +4,7 @@ package com.she17er.seanm.findabed;
 /**
  * Represents a single user
  */
-public class User {
+class User {
     private String username;
     private boolean booked;
     private int loginTimes;

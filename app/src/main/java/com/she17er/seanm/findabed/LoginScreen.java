@@ -64,7 +64,7 @@ public class LoginScreen extends AppCompatActivity {
     private User currUser;
 
     //URL for the login route on the backend
-    String backendURL = "https://she17er.herokuapp.com/api/users/login";
+    private final String backendURL = "https://she17er.herokuapp.com/api/users/login";
 
     @Override
     protected final void onCreate(Bundle savedInstanceState) {
@@ -194,7 +194,7 @@ public class LoginScreen extends AppCompatActivity {
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
-    public class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
+    class UserLoginTask extends AsyncTask<Void, Void, Boolean> {
         private final String mUser;
         private final String mPassword;
 
