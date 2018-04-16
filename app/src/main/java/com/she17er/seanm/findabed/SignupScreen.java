@@ -168,6 +168,27 @@ public class SignupScreen extends AppCompatActivity {
 
     }
 
+    @Override
+    public String toString() {
+        return "SignupScreen{" +
+                "username=" + username +
+                ", email=" + email +
+                ", phone=" + phone +
+                ", password=" + password +
+                ", passwordCheck=" + passwordCheck +
+                ", age=" + age +
+                ", genderSpinner=" + genderSpinner +
+                ", vetSpinner=" + vetSpinner +
+                ", roleSpinner=" + roleSpinner +
+                ", accountSpinner=" + accountSpinner +
+                ", submit=" + submit +
+                ", currUsernames='" + currUsernames + '\'' +
+                ", allNames=" + allNames +
+                ", backendURL='" + backendURL + '\'' +
+                ", userNameURL='" + userNameURL + '\'' +
+                '}';
+    }
+
     /**
      * Checks if all entered sign-up data is valid
      * Throws error messages on sign-up text-boxes that are invalid

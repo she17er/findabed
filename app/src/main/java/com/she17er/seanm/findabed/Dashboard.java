@@ -66,6 +66,13 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
         String shelterInfo = "";
 
         @Override
+        public String toString() {
+            return "AsyncTaskRunner{" +
+                    "shelterInfo='" + shelterInfo + '\'' +
+                    '}';
+        }
+
+        @Override
         protected final String doInBackground(String... params) {
 
             try {
@@ -230,6 +237,21 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
         searchView.setOnQueryTextListener(this);
 
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Dashboard{" +
+                "shelterView=" + shelterView +
+                ", logout=" + logout +
+                ", map=" + map +
+                ", profile=" + profile +
+                ", genderSelect=" + genderSelect +
+                ", ageSelect=" + ageSelect +
+                ", gender='" + gender + '\'' +
+                ", age='" + age + '\'' +
+                ", getSheltersURL='" + getSheltersURL + '\'' +
+                '}';
     }
 
     /**

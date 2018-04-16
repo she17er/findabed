@@ -12,6 +12,14 @@ import android.widget.Button;
  */
 public class WelcomeScreen extends AppCompatActivity {
 
+    @Override
+    public String toString() {
+        return "WelcomeScreen{" +
+                "login=" + login +
+                ", signup=" + signup +
+                '}';
+    }
+
     //UI references
     private Button login;
     private Button signup;

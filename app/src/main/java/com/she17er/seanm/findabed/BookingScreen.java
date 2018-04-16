@@ -41,6 +41,27 @@ public class BookingScreen extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
 
+    /**
+     * toString for BookingScreen
+     *
+     * @return BookingScreen as a String
+     */
+    @Override
+    public String toString() {
+        return "BookingScreen{" +
+                "numberText=" + numberText +
+                ", confirmButton=" + confirmButton +
+                ", cancelBookingButton=" + cancelBookingButton +
+                ", cancelButton=" + cancelButton +
+                ", bookingURL='" + bookingURL + '\'' +
+                ", shelterPosition=" + shelterPosition +
+                ", shelterID='" + shelterID + '\'' +
+                ", shelter=" + shelter +
+                ", bookingNumber=" + bookingNumber +
+                ", sharedPreferences=" + sharedPreferences +
+                '}';
+    }
+
     @Override
     protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,14 +89,6 @@ public class BookingScreen extends AppCompatActivity {
         if (shelter.getCurrentCapacity() == 0) {
             cancelBookingButton.setVisibility(View.INVISIBLE);
         }
-    }
-
-    /**
-     * toString for BookingScreen
-     * @return BookingScreen as a String
-     */
-    public String toString() {
-        return "Booking screen for " + shelter.getName() + ", ID: " + shelterID;
     }
 
     /**
