@@ -41,4 +41,11 @@ public class ProfileScreen extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+
+    @Override
+    public String toString() {
+        return "ProfileScreen{" +
+                "profileText=" + profileText +
+                '}';
+    }
 }

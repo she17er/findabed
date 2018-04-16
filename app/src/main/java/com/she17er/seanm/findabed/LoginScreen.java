@@ -34,6 +34,20 @@ import java.net.URL;
  */
 public class LoginScreen extends AppCompatActivity {
 
+    @Override
+    public String toString() {
+        return "LoginScreen{" +
+                "mAuthTask=" + mAuthTask +
+                ", mUserView=" + mUserView +
+                ", mPasswordView=" + mPasswordView +
+                ", mProgressView=" + mProgressView +
+                ", mLoginFormView=" + mLoginFormView +
+                ", mUserSignInButton=" + mUserSignInButton +
+                ", currUser=" + currUser +
+                ", backendURL='" + backendURL + '\'' +
+                '}';
+    }
+
     //Keep track of the login task to ensure we can cancel it if requested
     private UserLoginTask mAuthTask = null;
 
@@ -183,6 +197,14 @@ public class LoginScreen extends AppCompatActivity {
         UserLoginTask(String username, String password) {
             mUser = username;
             mPassword = password;
+        }
+
+        @Override
+        public String toString() {
+            return "UserLoginTask{" +
+                    "mUser='" + mUser + '\'' +
+                    ", mPassword='" + mPassword + '\'' +
+                    '}';
         }
 
         @Override

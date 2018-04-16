@@ -43,8 +43,33 @@ public class ShelterInspectScreen extends AppCompatActivity {
 
     @Override
     public String toString() {
-        return "Shelter";
+        return "ShelterInspectScreen{" +
+                "name=" + name +
+                ", address=" + address +
+                ", number=" + number +
+                ", capacity=" + capacity +
+                ", gender=" + gender +
+                ", latitude=" + latitude +
+                ", longitude=" + longitude +
+                ", age=" + age +
+                ", restrictions=" + restrictions +
+                ", currCapacity=" + currCapacity +
+                ", nameF=" + nameF +
+                ", addressF=" + addressF +
+                ", numberF=" + numberF +
+                ", capacityF=" + capacityF +
+                ", genderF=" + genderF +
+                ", latitudeF=" + latitudeF +
+                ", longitudeF=" + longitudeF +
+                ", ageF=" + ageF +
+                ", restrictionsF=" + restrictionsF +
+                ", currCapacityF=" + currCapacityF +
+                ", bookButton=" + bookButton +
+                ", shelterPosition=" + shelterPosition +
+                ", shelter=" + shelter +
+                '}';
     }
+
     @Override
     protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

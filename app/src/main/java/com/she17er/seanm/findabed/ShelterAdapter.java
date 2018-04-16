@@ -15,6 +15,15 @@ import java.util.List;
 
 public class ShelterAdapter extends RecyclerView.Adapter<ShelterAdapter.ViewHolder> {
 
+    @Override
+    public String toString() {
+        return "ShelterAdapter{" +
+                "listener=" + listener +
+                ", mShelters=" + mShelters +
+                ", mContext=" + mContext +
+                '}';
+    }
+
     //Listener variable, interface, and method for parent (Dashboard)
     private OnItemClickListener listener;
 
@@ -42,6 +51,13 @@ public class ShelterAdapter extends RecyclerView.Adapter<ShelterAdapter.ViewHold
     // Provide a direct reference to each of the views within a data item
     // Used to cache the views within the item layout for fast access
     public class ViewHolder extends RecyclerView.ViewHolder {
+        @Override
+        public String toString() {
+            return "ViewHolder{" +
+                    "shelterName=" + shelterName +
+                    '}';
+        }
+
         //All variables to be rendered in a row
         final TextView shelterName;
 

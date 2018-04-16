@@ -32,6 +32,30 @@ public class Shelter implements Parcelable {
     public Shelter(){}
 
     /**
+     * Gets the string representing a shelter, cotaining both its position and current
+     * capacity
+     *
+     * @return Shelter represented as a string
+     */
+    @Override
+    public String toString() {
+        return "Shelter{" +
+                "_id='" + _id + '\'' +
+                ", name='" + name + '\'' +
+                ", capacity=" + capacity +
+                ", gender='" + gender + '\'' +
+                ", ageRange='" + ageRange + '\'' +
+                ", restrictions='" + restrictions + '\'' +
+                ", longitude=" + longitude +
+                ", latitude=" + latitude +
+                ", address='" + address + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", currentCapacity=" + currentCapacity +
+                ", backendID='" + backendID + '\'' +
+                '}';
+    }
+
+    /**
      * Constructs a new shelter with appropriate parameters
      * @param tokens The raw text to be converted to each parameter for this shelter
      */
@@ -345,15 +369,6 @@ public class Shelter implements Parcelable {
      */
     public final void decrementCurrentCapacity() {
         currentCapacity -= 1;
-    }
-
-    /**
-     * Gets the string representing a shelter, cotaining both its position and current
-     * capacity
-     * @return Shelter represented as a string
-     */
-    public final String toString() {
-        return _id + currentCapacity;
     }
 
     /**

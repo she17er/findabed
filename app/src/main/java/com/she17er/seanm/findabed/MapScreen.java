@@ -19,6 +19,14 @@ import java.util.List;
 
 public class MapScreen extends FragmentActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
+
+    @Override
+    public String toString() {
+        return "MapScreen{" +
+                "mMap=" + mMap +
+                '}';
+    }
+
     @Override
     protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
