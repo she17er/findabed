@@ -184,7 +184,7 @@ public class Shelter implements Parcelable {
         if (gender.contains("women")) {
             this.gender = "women";
         } else if (gender.contains("men")) {
-            this.gender = "men ";
+            this.gender = "men";
         } else {
             this.gender = "any gender";
         }
