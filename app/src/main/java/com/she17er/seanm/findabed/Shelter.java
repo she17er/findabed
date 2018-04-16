@@ -143,7 +143,7 @@ public class Shelter implements Parcelable {
      * @param name The shelter's name
      */
     public void setName(String name) {
-        name = name.replaceAll(";", ",");
+        name.replaceAll(";", ",");
         this.name = name;
 
     }
@@ -194,7 +194,7 @@ public class Shelter implements Parcelable {
      * @param currentCapacity The shelter's current capacity
      */
     public void setCurrentCapacity(String currentCapacity) {
-        currentCapacity = currentCapacity.replaceAll(";", ",");
+        currentCapacity.replaceAll(";", ",");
         this.currentCapacity = Integer.parseInt(currentCapacity);
     }
 
@@ -246,11 +246,9 @@ public class Shelter implements Parcelable {
      * @param longitude The shelter's longitude
      */
     public void setLongitude(String longitude) {
-        longitude = longitude.replaceAll(";", ",");
+        longitude.replaceAll(";", ",");
         try {
             this.longitude = Double.valueOf(longitude).doubleValue();
-        } catch (final NumberFormatException e) {
-            e.printStackTrace();
         } catch (final RuntimeException e) {
             e.printStackTrace();
         }
@@ -281,8 +279,6 @@ public class Shelter implements Parcelable {
             } else {
                 this.latitude = newLat;
             }
-        } catch (final NumberFormatException e) {
-            e.printStackTrace();
         } catch (final IllegalArgumentException e) {
             e.printStackTrace();
         } catch (final Exception e) {
@@ -303,7 +299,7 @@ public class Shelter implements Parcelable {
      * @param address Shelter address
      */
     public void setAddress(String address) {
-        address = address.replaceAll(";", ",");
+        address.replaceAll(";", ",");
         this.address = address;
     }
 
@@ -320,7 +316,7 @@ public class Shelter implements Parcelable {
      * @param phoneNumber Shelter phone number
      */
     public void setPhoneNumber(String phoneNumber) {
-        phoneNumber = phoneNumber.replaceAll(";", ",");
+        phoneNumber.replaceAll(";", ",");
         this.phoneNumber = phoneNumber;
     }
 

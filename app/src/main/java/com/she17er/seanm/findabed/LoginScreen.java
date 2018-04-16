@@ -248,8 +248,6 @@ public class LoginScreen extends AppCompatActivity {
 
             } catch (final MalformedURLException e) {
                 e.printStackTrace();
-            } catch (final IOException e) {
-                e.printStackTrace();
             } catch (final Exception e) {
                 e.printStackTrace();
             }

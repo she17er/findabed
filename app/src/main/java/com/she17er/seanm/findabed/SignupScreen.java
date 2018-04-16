@@ -83,8 +83,6 @@ public class SignupScreen extends AppCompatActivity {
             this.currUsernames = AsyncGetUsername.get();
         } catch (final InterruptedException e) {
             e.printStackTrace();
-        } catch (final ExecutionException e) {
-            e.printStackTrace();
         } catch (final Exception e) {
             e.printStackTrace();
         }
@@ -288,8 +286,6 @@ public class SignupScreen extends AppCompatActivity {
                 in.close();
             } catch (final MalformedURLException e) {
                 e.printStackTrace();
-            } catch (final IOException e) {
-                e.printStackTrace();
             } catch (final Exception e) {
                 e.printStackTrace();
             }
@@ -357,8 +353,6 @@ public class SignupScreen extends AppCompatActivity {
 
 
             } catch (final MalformedURLException e) {
-                e.printStackTrace();
-            } catch (final IOException e) {
                 e.printStackTrace();
             } catch (final Exception e) {
                 e.printStackTrace();

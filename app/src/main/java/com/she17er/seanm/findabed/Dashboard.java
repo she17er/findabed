@@ -105,8 +105,6 @@ public class Dashboard extends AppCompatActivity implements OnQueryTextListener 
                 return this.shelterInfo;
             } catch (final MalformedURLException e) {
                 e.printStackTrace();
-            } catch (final IOException e) {
-                e.printStackTrace();
             } catch (final Exception e) {
                 e.printStackTrace();
             }
@@ -180,8 +178,6 @@ public class Dashboard extends AppCompatActivity implements OnQueryTextListener 
             allInfo = getShelters.get();
         } catch (final InterruptedException e) {
             e.printStackTrace();
-        } catch (final ExecutionException e) {
-            e.printStackTrace();
         } catch (final Exception e) {
             e.printStackTrace();
         }
@@ -206,12 +202,16 @@ public class Dashboard extends AppCompatActivity implements OnQueryTextListener 
             @Override
             public void onItemSelected(final AdapterView<?> adapterView, final View view,
                                        final int i, final long l) {
-                if (i == 1) {
-                    Dashboard.this.gender = "women";
-                } else if (i == 2) {
-                    Dashboard.this.gender = "men";
-                } else {
-                    Dashboard.this.gender = "";
+                switch (i) {
+                    case 1:
+                        Dashboard.this.gender = "women";
+                        break;
+                    case 2:
+                        Dashboard.this.gender = "men";
+                        break;
+                    default:
+                        Dashboard.this.gender = "";
+                        break;
                 }
                 Dashboard.this.spinnerSearch();
             }
@@ -226,14 +226,19 @@ public class Dashboard extends AppCompatActivity implements OnQueryTextListener 
             @Override
             public void onItemSelected(final AdapterView<?> adapterView, final View view,
                                        final int i, final long l) {
-                if (i == 0) {
-                    Dashboard.this.age = "";
-                } else if (i == 1) {
-                    Dashboard.this.age = "children";
-                } else if (i == 2) {
-                    Dashboard.this.age = "young adults";
-                } else {
-                    Dashboard.this.age = "newborn";
+                switch (i) {
+                    case 0:
+                        Dashboard.this.age = "";
+                        break;
+                    case 1:
+                        Dashboard.this.age = "children";
+                        break;
+                    case 2:
+                        Dashboard.this.age = "young adults";
+                        break;
+                    default:
+                        Dashboard.this.age = "newborn";
+                        break;
                 }
                 Dashboard.this.spinnerSearch();
             }
@@ -455,8 +460,6 @@ public class Dashboard extends AppCompatActivity implements OnQueryTextListener 
                         .split(",")));
                 dataStore.add(new Shelter(tokens));
             }
-        } catch (final FileNotFoundException e) {
-            e.printStackTrace();
         } catch (final IOException e) {
             e.printStackTrace();
         } finally {
