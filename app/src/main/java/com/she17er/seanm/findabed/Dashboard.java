@@ -41,7 +41,7 @@ import java.util.concurrent.ExecutionException;
 public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTextListener {
 
     //UI Components
-    private RecyclerView shelterView;
+    protected RecyclerView shelterView;
     private Button logout;
     private Button map;
     private Button profile;
@@ -49,8 +49,8 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
     private Spinner ageSelect;
 
     //ArrayList that stores data from CSV
-    public static List<Shelter> masterShelters;
-    private static ArrayList<Shelter> currentShelters;
+    protected static List<Shelter> masterShelters;
+    protected static ArrayList<Shelter> currentShelters;
 
     //Current restrictions from the spinners
     private String gender;
@@ -376,7 +376,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
      *
      * @param mShelters The list of shelters to be added, filtered based on criteria
      */
-    private void populateShelterList(final ArrayList<Shelter> mShelters) {
+    protected void populateShelterList(final ArrayList<Shelter> mShelters) {
         // Create adapter passing in the sample user data
         ShelterAdapter adapter = new ShelterAdapter(this, mShelters);
         adapter.setOnItemClickListener(new ShelterAdapter.OnItemClickListener() {
