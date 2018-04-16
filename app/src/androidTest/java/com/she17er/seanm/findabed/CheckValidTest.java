@@ -1,6 +1,8 @@
 package com.she17er.seanm.findabed;
 
+import android.support.test.annotation.UiThreadTest;
 import android.support.test.rule.ActivityTestRule;
+import android.support.test.rule.UiThreadTestRule;
 import android.support.test.runner.AndroidJUnit4;
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -27,18 +29,176 @@ public class CheckValidTest{
     public ActivityTestRule<SignupScreen> rule = new ActivityTestRule<>(SignupScreen.class);
 
     @Test
-    public void checkValid() {
+    @UiThreadTest
+    public void correctUserInfo() {
         SignupScreen signupTest = rule.getActivity();
-        try {
-            signupTest.username.getText().clear();
-            signupTest.email.getText().clear();
-            signupTest.phone.getText().clear();
-            signupTest.password.getText().clear();
-            signupTest.passwordCheck.getText().clear();
-            signupTest.age.getText().clear();
-        } catch (Exception e) {
-            assertEquals(false, signupTest.checkValid());
-        }
+        signupTest.username.setText("username");
+        signupTest.email.setText("test@example.com");
+        signupTest.phone.setText("1234567890");
+        signupTest.password.setText("password");
+        signupTest.passwordCheck.setText("password");
+        signupTest.age.setText("20");
+        signupTest.allNames = new ArrayList<>();
+        signupTest.allNames.add("othername");
+        assertEquals(true, signupTest.checkValid());
     }
 
+    @Test
+    @UiThreadTest
+    public void emptyUsername() {
+        SignupScreen signupTest = rule.getActivity();
+        signupTest.username.getText().clear();
+        signupTest.email.setText("test@example.com");
+        signupTest.phone.setText("1234567890");
+        signupTest.password.setText("password");
+        signupTest.passwordCheck.setText("password");
+        signupTest.age.setText("20");
+        assertEquals(false, signupTest.checkValid());
+    }
+
+    @Test
+    @UiThreadTest
+    public void noRepeatedUsers() {
+        SignupScreen signupTest = rule.getActivity();
+        signupTest.username.setText("username");
+        signupTest.email.setText("test@example.com");
+        signupTest.phone.setText("1234567890");
+        signupTest.password.setText("password");
+        signupTest.passwordCheck.setText("password");
+        signupTest.age.setText("20");
+        signupTest.allNames = new ArrayList<>();
+        assertEquals(true, signupTest.checkValid());
+    }
+
+    @Test
+    @UiThreadTest
+    public void repeatedUser() {
+        SignupScreen signupTest = rule.getActivity();
+        signupTest.username.setText("username");
+        signupTest.email.setText("test@example.com");
+        signupTest.phone.setText("1234567890");
+        signupTest.password.setText("password");
+        signupTest.passwordCheck.setText("password");
+        signupTest.age.setText("20");
+        signupTest.allNames = new ArrayList<>();
+        signupTest.allNames.add("username");
+        assertEquals(false, signupTest.checkValid());
+    }
+
+    @Test
+    @UiThreadTest
+    public void emptyEmail() {
+        SignupScreen signupTest = rule.getActivity();
+        signupTest.username.setText("name");
+        signupTest.email.getText().clear();
+        signupTest.phone.setText("1234567890");
+        signupTest.password.setText("password");
+        signupTest.passwordCheck.setText("password");
+        signupTest.age.setText("20");
+        assertEquals(false, signupTest.checkValid());
+    }
+
+    @Test
+    @UiThreadTest
+    public void wrongEmailFormat() {
+        SignupScreen signupTest = rule.getActivity();
+        signupTest.username.setText("name");
+        signupTest.email.setText("exampletestcom");
+        signupTest.phone.setText("1234567890");
+        signupTest.password.setText("password");
+        signupTest.passwordCheck.setText("password");
+        signupTest.age.setText("20");
+        assertEquals(false, signupTest.checkValid());
+    }
+
+    @Test
+    @UiThreadTest
+    public void emptyPhone() {
+        SignupScreen signupTest = rule.getActivity();
+        signupTest.username.setText("name");
+        signupTest.email.setText("test@example.com");
+        signupTest.phone.getText().clear();
+        signupTest.password.setText("password");
+        signupTest.passwordCheck.setText("password");
+        signupTest.age.setText("20");
+        assertEquals(false, signupTest.checkValid());
+    }
+
+    @Test
+    @UiThreadTest
+    public void emptyPassword() {
+        SignupScreen signupTest = rule.getActivity();
+        signupTest.username.setText("name");
+        signupTest.email.setText("test@example.com");
+        signupTest.phone.setText("1234567890");
+        signupTest.password.getText().clear();
+        signupTest.passwordCheck.setText("password");
+        signupTest.age.setText("20");
+        assertEquals(false, signupTest.checkValid());
+    }
+
+    @Test
+    @UiThreadTest
+    public void shortPassword() {
+        SignupScreen signupTest = rule.getActivity();
+        signupTest.username.setText("name");
+        signupTest.email.setText("test@example.com");
+        signupTest.phone.setText("1234567890");
+        signupTest.password.setText("pass");
+        signupTest.passwordCheck.setText("pass");
+        signupTest.age.setText("20");
+        assertEquals(false, signupTest.checkValid());
+    }
+
+    @Test
+    @UiThreadTest
+    public void emptyPasswordCheck() {
+        SignupScreen signupTest = rule.getActivity();
+        signupTest.username.setText("name");
+        signupTest.email.setText("test@example.com");
+        signupTest.phone.setText("1234567890");
+        signupTest.password.setText("password");
+        signupTest.passwordCheck.getText().clear();
+        signupTest.age.setText("20");
+        assertEquals(false, signupTest.checkValid());
+    }
+
+    @Test
+    @UiThreadTest
+    public void mismatchedPasswordCheck() {
+        SignupScreen signupTest = rule.getActivity();
+        signupTest.username.setText("name");
+        signupTest.email.setText("test@example.com");
+        signupTest.phone.setText("1234567890");
+        signupTest.password.setText("password");
+        signupTest.passwordCheck.setText("pass");
+        signupTest.age.setText("20");
+        assertEquals(false, signupTest.checkValid());
+    }
+
+    @Test
+    @UiThreadTest
+    public void emptyAge() {
+        SignupScreen signupTest = rule.getActivity();
+        signupTest.username.setText("name");
+        signupTest.email.setText("test@example.com");
+        signupTest.phone.setText("1234567890");
+        signupTest.password.setText("password");
+        signupTest.passwordCheck.setText("password");
+        signupTest.age.getText().clear();
+        assertEquals(false, signupTest.checkValid());
+    }
+
+    @Test
+    @UiThreadTest
+    public void impossibleAge() {
+        SignupScreen signupTest = rule.getActivity();
+        signupTest.username.setText("name");
+        signupTest.email.setText("test@example.com");
+        signupTest.phone.setText("1234567890");
+        signupTest.password.setText("password");
+        signupTest.passwordCheck.setText("password");
+        signupTest.age.setText("2000");
+        assertEquals(false, signupTest.checkValid());
+    }
 }

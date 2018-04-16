@@ -207,9 +207,7 @@ public class SignupScreen extends AppCompatActivity {
         if (TextUtils.isEmpty(passwordCheck.getText())) {
             passwordCheck.setError("Please re-enter your password");
             validLogin = false;
-        }
-        //@todo Fix password confirmation, I have no clue why this always fails :(
-         else if (!password.getText().toString().equals(passwordCheck.getText().toString())) {
+        } else if (!password.getText().toString().equals(passwordCheck.getText().toString())) {
             passwordCheck.setError("Passwords must match");
             validLogin = false;
         }
