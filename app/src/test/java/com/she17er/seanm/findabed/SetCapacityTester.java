@@ -15,14 +15,20 @@ public class SetCapacityTester {
         shelterCap.setCapacity(" ");
         assertEquals(shelterCap.getCapacity(), 0);
 
-        shelterCap.setCapacity(null);
-        assertEquals(shelterCap.getCapacity(), 0);
 
         shelterCap.setCapacity("87");
         assertEquals(shelterCap.getCapacity(), 87);
 
         shelterCap.setCapacity("fail");
 
+    }
+
+    @Test(expected = NullPointerException.class)
+    public void setCapNull() throws Exception {
+        Shelter shelterCap = new Shelter();
+
+        shelterCap.setCapacity(null);
+        assertEquals(shelterCap.getCapacity(), 0);
     }
 
 }
