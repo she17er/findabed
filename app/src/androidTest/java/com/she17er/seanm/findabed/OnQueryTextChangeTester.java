@@ -1,3 +1,8 @@
+/**
+ * @author Kevin Luikey
+ * Tester for the onQueryTextChange method
+ */
+
 package com.she17er.seanm.findabed;
 
 import android.support.test.annotation.UiThreadTest;
