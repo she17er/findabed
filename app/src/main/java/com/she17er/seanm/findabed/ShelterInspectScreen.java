@@ -1,12 +1,16 @@
 package com.she17er.seanm.findabed;
 
+import android.R.id;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.she17er.seanm.findabed.R.layout;
 
 /**
  * Screen that shows the shelter data for a given shelter
@@ -44,116 +48,116 @@ public class ShelterInspectScreen extends AppCompatActivity {
     @Override
     public String toString() {
         return "ShelterInspectScreen{" +
-                "name=" + name +
-                ", address=" + address +
-                ", number=" + number +
-                ", capacity=" + capacity +
-                ", gender=" + gender +
-                ", latitude=" + latitude +
-                ", longitude=" + longitude +
-                ", age=" + age +
-                ", restrictions=" + restrictions +
-                ", currCapacity=" + currCapacity +
-                ", nameF=" + nameF +
-                ", addressF=" + addressF +
-                ", numberF=" + numberF +
-                ", capacityF=" + capacityF +
-                ", genderF=" + genderF +
-                ", latitudeF=" + latitudeF +
-                ", longitudeF=" + longitudeF +
-                ", ageF=" + ageF +
-                ", restrictionsF=" + restrictionsF +
-                ", currCapacityF=" + currCapacityF +
-                ", bookButton=" + bookButton +
-                ", shelterPosition=" + shelterPosition +
-                ", shelter=" + shelter +
+                "name=" + this.name +
+                ", address=" + this.address +
+                ", number=" + this.number +
+                ", capacity=" + this.capacity +
+                ", gender=" + this.gender +
+                ", latitude=" + this.latitude +
+                ", longitude=" + this.longitude +
+                ", age=" + this.age +
+                ", restrictions=" + this.restrictions +
+                ", currCapacity=" + this.currCapacity +
+                ", nameF=" + this.nameF +
+                ", addressF=" + this.addressF +
+                ", numberF=" + this.numberF +
+                ", capacityF=" + this.capacityF +
+                ", genderF=" + this.genderF +
+                ", latitudeF=" + this.latitudeF +
+                ", longitudeF=" + this.longitudeF +
+                ", ageF=" + this.ageF +
+                ", restrictionsF=" + this.restrictionsF +
+                ", currCapacityF=" + this.currCapacityF +
+                ", bookButton=" + this.bookButton +
+                ", shelterPosition=" + this.shelterPosition +
+                ", shelter=" + this.shelter +
                 '}';
     }
 
     @Override
-    protected final void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shelter_inspect_screen);
+        this.setContentView(layout.activity_shelter_inspect_screen);
 
         //Generates back button on action bar
         if (getActionBar() != null) {
-            getActionBar().setDisplayHomeAsUpEnabled(true);
+            this.getActionBar().setDisplayHomeAsUpEnabled(true);
         }
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
 
         //Removes actionbar title
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        this.getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        View parentLayout = getWindow().getDecorView().findViewById(android.R.id.content);
-        Intent intent = this.getIntent();
+        final View parentLayout = this.getWindow().getDecorView().findViewById(id.content);
+        final Intent intent = getIntent();
         if (intent.getExtras() != null) {
-            shelterPosition = Integer.parseInt(intent.getExtras().getString("shelterID"));
-            shelter = Dashboard.masterShelters.get(shelterPosition);
+            this.shelterPosition = Integer.parseInt(intent.getExtras().getString("shelterID"));
+            this.shelter = Dashboard.masterShelters.get(this.shelterPosition);
         }
 
-        bookButton = findViewById(R.id.bookButton);
-        addButtonListener();
+        this.bookButton = this.findViewById(R.id.bookButton);
+        this.addButtonListener();
 
-        name = findViewById(R.id.shelterName);
-        address = findViewById(R.id.shelterAddress);
-        number = findViewById(R.id.shelterPhoneNumber);
-        capacity = findViewById(R.id.shelterCapacity);
-        gender = findViewById(R.id.shelterGender);
-        latitude = findViewById(R.id.shelterLatitude);
-        longitude = findViewById(R.id.shelterLongitude);
-        age = findViewById(R.id.shelterAges);
-        restrictions = findViewById(R.id.shelterRestrictions);
-        currCapacity = findViewById(R.id.currCapacity);
+        this.name = this.findViewById(R.id.shelterName);
+        this.address = this.findViewById(R.id.shelterAddress);
+        this.number = this.findViewById(R.id.shelterPhoneNumber);
+        this.capacity = this.findViewById(R.id.shelterCapacity);
+        this.gender = this.findViewById(R.id.shelterGender);
+        this.latitude = this.findViewById(R.id.shelterLatitude);
+        this.longitude = this.findViewById(R.id.shelterLongitude);
+        this.age = this.findViewById(R.id.shelterAges);
+        this.restrictions = this.findViewById(R.id.shelterRestrictions);
+        this.currCapacity = this.findViewById(R.id.currCapacity);
 
-        String capacityText = "" + shelter.getCapacity();
-        String latitudeText = "" + shelter.getLatitude();
-        String longitudeText = "" + shelter.getLongitude();
-        String currCapacityText = "" + (shelter.getCapacity() - shelter.getCurrentCapacity());
+        final String capacityText = "" + this.shelter.getCapacity();
+        final String latitudeText = "" + this.shelter.getLatitude();
+        final String longitudeText = "" + this.shelter.getLongitude();
+        final String currCapacityText = "" + (this.shelter.getCapacity() - this.shelter.getCurrentCapacity());
 
-        nameF = findViewById(R.id.shelterNameField);
-        nameF.setText(shelter.getName());
-        addressF = findViewById(R.id.shelterAddressField);
-        addressF.setText(shelter.getAddress());
-        numberF = findViewById(R.id.shelterPhoneNumberField);
-        numberF.setText(shelter.getPhoneNumber());
-        capacityF = findViewById(R.id.shelterCapacityField);
-        capacityF.setText(capacityText);
-        genderF = findViewById(R.id.shelterGenderField);
-        genderF.setText(shelter.getGender());
-        latitudeF = findViewById(R.id.shelterLatitudeField);
-        latitudeF.setText(latitudeText);
-        longitudeF = findViewById(R.id.shelterLongitudeField);
-        longitudeF.setText(longitudeText);
-        ageF = findViewById(R.id.shelterAgesField);
-        ageF.setText(shelter.getAgeRange());
-        currCapacityF = findViewById(R.id.currCapacityField);
-        currCapacityF.setText(currCapacityText);
-        restrictionsF = findViewById(R.id.shelterRestrictionsField);
-        restrictionsF.setText(shelter.getRestrictions());
+        this.nameF = this.findViewById(R.id.shelterNameField);
+        this.nameF.setText(this.shelter.getName());
+        this.addressF = this.findViewById(R.id.shelterAddressField);
+        this.addressF.setText(this.shelter.getAddress());
+        this.numberF = this.findViewById(R.id.shelterPhoneNumberField);
+        this.numberF.setText(this.shelter.getPhoneNumber());
+        this.capacityF = this.findViewById(R.id.shelterCapacityField);
+        this.capacityF.setText(capacityText);
+        this.genderF = this.findViewById(R.id.shelterGenderField);
+        this.genderF.setText(this.shelter.getGender());
+        this.latitudeF = this.findViewById(R.id.shelterLatitudeField);
+        this.latitudeF.setText(latitudeText);
+        this.longitudeF = this.findViewById(R.id.shelterLongitudeField);
+        this.longitudeF.setText(longitudeText);
+        this.ageF = this.findViewById(R.id.shelterAgesField);
+        this.ageF.setText(this.shelter.getAgeRange());
+        this.currCapacityF = this.findViewById(R.id.currCapacityField);
+        this.currCapacityF.setText(currCapacityText);
+        this.restrictionsF = this.findViewById(R.id.shelterRestrictionsField);
+        this.restrictionsF.setText(this.shelter.getRestrictions());
     }
 
     /**
      * Adds a button listener
      */
     private void addButtonListener() {
-        bookButton.setOnClickListener(new View.OnClickListener() {
+        this.bookButton.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), BookingScreen.class);
-                intent.putExtra("shelterID", "" + shelterPosition);
-                startActivityForResult(intent, 0);
+            public void onClick(final View view) {
+                final Intent intent = new Intent(view.getContext(), BookingScreen.class);
+                intent.putExtra("shelterID", "" + ShelterInspectScreen.this.shelterPosition);
+                ShelterInspectScreen.this.startActivityForResult(intent, 0);
             }
         });
     }
 
     @Override
-    public final boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                this.finish();
+            case id.home:
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -1,5 +1,6 @@
 package com.she17er.seanm.findabed;
 
+import android.R.layout;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -11,11 +12,17 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.SearchView;
+import android.widget.SearchView.OnQueryTextListener;
 import android.widget.Spinner;
+
+import com.she17er.seanm.findabed.R.id;
+import com.she17er.seanm.findabed.ShelterAdapter.OnItemClickListener;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -38,7 +45,7 @@ import java.util.concurrent.ExecutionException;
  * Parses and displays all shelters from a CSV file as a list
  */
 
-public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTextListener {
+public class Dashboard extends AppCompatActivity implements OnQueryTextListener {
 
     //UI Components
     protected RecyclerView shelterView;
@@ -70,180 +77,180 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
         @Override
         public String toString() {
             return "AsyncTaskRunner{" +
-                    "shelterInfo='" + shelterInfo + '\'' +
+                    "shelterInfo='" + this.shelterInfo + '\'' +
                     '}';
         }
 
         @Override
-        protected final String doInBackground(String... params) {
+        protected String doInBackground(final String... params) {
 
             try {
 
-                URL url = new URL(getSheltersURL);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                final URL url = new URL(Dashboard.this.getSheltersURL);
+                final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setRequestMethod("GET");
                 connection.setDoOutput(true);
                 connection.connect();
 
-                BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
-                StringBuilder sb = new StringBuilder();
+                final BufferedReader br = new BufferedReader(new InputStreamReader(url.openStream()));
+                final StringBuilder sb = new StringBuilder();
 
                 String line;
                 while ((line = br.readLine()) != null) {
-                    shelterInfo += line + "\n";
+                    this.shelterInfo += line + "\n";
                     //Log.d("readLine", line);
                 }
                 br.close();
 
-                return shelterInfo;
-            } catch (MalformedURLException e) {
+                return this.shelterInfo;
+            } catch (final MalformedURLException e) {
                 e.printStackTrace();
-            } catch (IOException e) {
+            } catch (final IOException e) {
                 e.printStackTrace();
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 e.printStackTrace();
             }
             return "";
         }
 
         @Override
-        protected final void onPostExecute(String s) {
-            super.onPostExecute(s);
+        protected void onPostExecute(final String result) {
+            super.onPostExecute(result);
         }
 
         @Override
-        protected final void onPreExecute() {
+        protected void onPreExecute() {
             super.onPreExecute();
         }
 
         @Override
-        protected final void onProgressUpdate(String... values) {
+        protected void onProgressUpdate(final String... values) {
             super.onProgressUpdate(values);
         }
 
         //Gets the shelter info json data
-        public final String getShelterInfo() {
-            return shelterInfo;
+        public String getShelterInfo() {
+            return this.shelterInfo;
         }
 
     }
 
     @Override
-    protected final void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_dashboard);
-        shelterView = findViewById(R.id.shelterRecyclerView);
-        logout = findViewById(R.id.logoutButton);
-        logout.setOnClickListener(new View.OnClickListener() {
+        this.setContentView(R.layout.activity_dashboard);
+        this.shelterView = this.findViewById(id.shelterRecyclerView);
+        this.logout = this.findViewById(id.logoutButton);
+        this.logout.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), WelcomeScreen.class);
-                startActivityForResult(intent, 0);
+            public void onClick(final View view) {
+                final Intent intent = new Intent(view.getContext(), WelcomeScreen.class);
+                Dashboard.this.startActivityForResult(intent, 0);
             }
         });
-        profile = findViewById(R.id.profileButton);
-        profile.setOnClickListener(new View.OnClickListener() {
+        this.profile = this.findViewById(id.profileButton);
+        this.profile.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), ProfileScreen.class);
-                startActivityForResult(intent, 0);
+            public void onClick(final View view) {
+                final Intent intent = new Intent(view.getContext(), ProfileScreen.class);
+                Dashboard.this.startActivityForResult(intent, 0);
             }
         });
-        map = findViewById(R.id.mapButton);
-        map.setOnClickListener(new View.OnClickListener() {
+        this.map = this.findViewById(id.mapButton);
+        this.map.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(), MapScreen.class);
-                Bundle bundle = new Bundle();
-                bundle.putParcelableArrayList("data", currentShelters);
+            public void onClick(final View view) {
+                final Intent intent = new Intent(view.getContext(), MapScreen.class);
+                final Bundle bundle = new Bundle();
+                bundle.putParcelableArrayList("data", Dashboard.currentShelters);
                 intent.putExtras(bundle);
-                startActivityForResult(intent, 0);
+                Dashboard.this.startActivityForResult(intent, 0);
             }
         });
 
         //Removes actionbar title
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        this.getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         //Populates shelter list from JSON data
 
-        AsyncTaskRunner getShelters = new AsyncTaskRunner();
+        final Dashboard.AsyncTaskRunner getShelters = new Dashboard.AsyncTaskRunner();
         getShelters.execute("start");
         String allInfo = "";
         try {
             allInfo = getShelters.get();
-        } catch (InterruptedException e) {
+        } catch (final InterruptedException e) {
             e.printStackTrace();
-        } catch (ExecutionException e) {
+        } catch (final ExecutionException e) {
             e.printStackTrace();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
-        jsonData = allInfo;
+        Dashboard.jsonData = allInfo;
 
         // Adds shelters to master list (also has legacy csv code)
-        masterShelters = jsonParser(allInfo);
-        currentShelters = new ArrayList<>();
+        Dashboard.masterShelters = this.jsonParser(allInfo);
+        Dashboard.currentShelters = new ArrayList<>();
 //        addCSVShelters(R.raw.data, masterShelters);
-        for (Iterator<Shelter> iterator = masterShelters.iterator(); iterator.hasNext(); ) {
-            Shelter shelter = iterator.next();
-            currentShelters.add(shelter);
+        for (final Iterator<Shelter> iterator = Dashboard.masterShelters.iterator(); iterator.hasNext(); ) {
+            final Shelter shelter = iterator.next();
+            Dashboard.currentShelters.add(shelter);
         }
 
-        populateShelterList(currentShelters);
+        this.populateShelterList(Dashboard.currentShelters);
 
         //Initialize Spinners
-        gender = "";
-        age = "";
-        populateSpinners();
-        genderSelect.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        this.gender = "";
+        this.age = "";
+        this.populateSpinners();
+        this.genderSelect.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView,
-                                       int position, long id) {
-                if (position == 1) {
-                    gender = "women";
-                } else if (position == 2) {
-                    gender = "men";
+            public void onItemSelected(final AdapterView<?> adapterView, final View view,
+                                       final int i, final long l) {
+                if (i == 1) {
+                    Dashboard.this.gender = "women";
+                } else if (i == 2) {
+                    Dashboard.this.gender = "men";
                 } else {
-                    gender = "";
+                    Dashboard.this.gender = "";
                 }
-                spinnerSearch();
+                Dashboard.this.spinnerSearch();
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
+            public void onNothingSelected(final AdapterView<?> adapterView) {
             }
 
         });
 
-        ageSelect.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        this.ageSelect.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView,
-                                       int position, long id) {
-                if (position == 0) {
-                    age = "";
-                } else if (position == 1) {
-                    age = "children";
-                } else if (position == 2) {
-                    age = "young adults";
+            public void onItemSelected(final AdapterView<?> adapterView, final View view,
+                                       final int i, final long l) {
+                if (i == 0) {
+                    Dashboard.this.age = "";
+                } else if (i == 1) {
+                    Dashboard.this.age = "children";
+                } else if (i == 2) {
+                    Dashboard.this.age = "young adults";
                 } else {
-                    age = "newborn";
+                    Dashboard.this.age = "newborn";
                 }
-                spinnerSearch();
+                Dashboard.this.spinnerSearch();
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
+            public void onNothingSelected(final AdapterView<?> adapterView) {
             }
 
         });
     }
 
     @Override
-    public final boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_main, menu);
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        this.getMenuInflater().inflate(R.menu.menu_main, menu);
 
-        final MenuItem searchItem = menu.findItem(R.id.action_search);
-        final SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        MenuItem searchItem = menu.findItem(id.action_search);
+        SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setOnQueryTextListener(this);
 
         return true;
@@ -252,15 +259,15 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
     @Override
     public String toString() {
         return "Dashboard{" +
-                "shelterView=" + shelterView +
-                ", logout=" + logout +
-                ", map=" + map +
-                ", profile=" + profile +
-                ", genderSelect=" + genderSelect +
-                ", ageSelect=" + ageSelect +
-                ", gender='" + gender + '\'' +
-                ", age='" + age + '\'' +
-                ", getSheltersURL='" + getSheltersURL + '\'' +
+                "shelterView=" + this.shelterView +
+                ", logout=" + this.logout +
+                ", map=" + this.map +
+                ", profile=" + this.profile +
+                ", genderSelect=" + this.genderSelect +
+                ", ageSelect=" + this.ageSelect +
+                ", gender='" + this.gender + '\'' +
+                ", age='" + this.age + '\'' +
+                ", getSheltersURL='" + this.getSheltersURL + '\'' +
                 '}';
     }
 
@@ -268,21 +275,21 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
      * @param ShelterInfo the information got from the database
      * @return an ArrayList containing various shelters with their information
      */
-    public final ArrayList<Shelter> jsonParser(String ShelterInfo) {
-        ArrayList<Shelter> allShelters = new ArrayList<>();
+    public ArrayList<Shelter> jsonParser(final String ShelterInfo) {
+        final ArrayList<Shelter> allShelters = new ArrayList<>();
         String tempInfo = ShelterInfo.substring(3);
-        List<String> Info = new ArrayList<>();
+        final List<String> Info = new ArrayList<>();
         int count = 0;
         try {
             while (tempInfo.contains("},{")) {
-                int rightIndex = tempInfo.indexOf("},{");
+                final int rightIndex = tempInfo.indexOf("},{");
                 Info.add(tempInfo.substring(0, rightIndex));
                 tempInfo = tempInfo.substring(rightIndex + 3);
             }
             Info.add(tempInfo);
-            for (Iterator<String> iterator = Info.iterator(); iterator.hasNext(); ) {
-                String s = iterator.next();
-                List<String> arr = new ArrayList<>();
+            for (final Iterator<String> iterator = Info.iterator(); iterator.hasNext(); ) {
+                final String s = iterator.next();
+                final List<String> arr = new ArrayList<>();
                 int i = s.indexOf("name");
                 int j = s.indexOf(',', i);
                 arr.add(s.substring(i + 7, j - 1));
@@ -310,7 +317,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
                 i = s.indexOf("_id");
                 j = s.indexOf(',', i);
                 arr.add(s.substring(i + 6, j - 1));
-                Shelter newShelter = new Shelter();
+                final Shelter newShelter = new Shelter();
                 newShelter.setBackendID(arr.get(8));
                 newShelter.setAddress(arr.get(5));
                 newShelter.setCapacity(arr.get(1));
@@ -324,7 +331,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
                 count++;
                 allShelters.add(newShelter);
             }
-        } catch (RuntimeException e) {
+        } catch (final RuntimeException e) {
             Log.d("jsonParser", "Parser failed");
             e.printStackTrace();
             return null;
@@ -333,21 +340,21 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
     }
 
     @Override
-    public final boolean onQueryTextChange(String query) {
+    public boolean onQueryTextChange(final String s) {
         // Here is where we are going to implement the filter logic
-        final ArrayList<Shelter> updatedShelters = new ArrayList<>();
-        for (Iterator<Shelter> iterator = currentShelters.iterator(); iterator.hasNext(); ) {
-            Shelter aShelter = iterator.next();
-            if (aShelter.getName().toLowerCase().contains(query)) {
+        ArrayList<Shelter> updatedShelters = new ArrayList<>();
+        for (final Iterator<Shelter> iterator = Dashboard.currentShelters.iterator(); iterator.hasNext(); ) {
+            final Shelter aShelter = iterator.next();
+            if (aShelter.getName().toLowerCase().contains(s)) {
                 updatedShelters.add(aShelter);
             }
         }
-        populateShelterList(updatedShelters);
+        this.populateShelterList(updatedShelters);
         return false;
     }
 
     @Override
-    public final boolean onQueryTextSubmit(String query) {
+    public boolean onQueryTextSubmit(final String s) {
         return false;
     }
 
@@ -355,20 +362,20 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
      * Narrows down displayed/ searchable shelters based on spinner selection
      */
     private void spinnerSearch() {
-        currentShelters = new ArrayList<>();
+        Dashboard.currentShelters = new ArrayList<>();
         String wrongGender = "";
-        if (gender.equals("women")) {
+        if ("women".equals(this.gender)) {
             wrongGender = "men ";
-        } else if (gender.equals("men ")) {
+        } else if ("men ".equals(this.gender)) {
             wrongGender = "women";
         }
-        for (Iterator<Shelter> iterator = masterShelters.iterator(); iterator.hasNext(); ) {
-            Shelter shelter = iterator.next();
-            if (!shelter.getGender().equals(wrongGender) && shelter.getAgeRange().contains(age)) {
-                currentShelters.add(shelter);
+        for (final Iterator<Shelter> iterator = Dashboard.masterShelters.iterator(); iterator.hasNext(); ) {
+            final Shelter shelter = iterator.next();
+            if (!shelter.getGender().equals(wrongGender) && shelter.getAgeRange().contains(this.age)) {
+                Dashboard.currentShelters.add(shelter);
             }
         }
-        populateShelterList(currentShelters);
+        this.populateShelterList(Dashboard.currentShelters);
     }
 
     /**
@@ -376,48 +383,48 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
      *
      * @param mShelters The list of shelters to be added, filtered based on criteria
      */
-    protected void populateShelterList(final ArrayList<Shelter> mShelters) {
+    protected void populateShelterList(ArrayList<Shelter> mShelters) {
         // Create adapter passing in the sample user data
-        ShelterAdapter adapter = new ShelterAdapter(this, mShelters);
-        adapter.setOnItemClickListener(new ShelterAdapter.OnItemClickListener() {
+        final ShelterAdapter adapter = new ShelterAdapter(this, mShelters);
+        adapter.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(View itemView, int position) {
-                Intent intent = new Intent(itemView.getContext(), ShelterInspectScreen.class);
-                intent.putExtra("shelterID", "" + masterShelters.get(position).get_id());
-                intent.putExtra("backendID", masterShelters.get(position).getBackendID());
-                startActivityForResult(intent, 0);
+            public void onItemClick(final View itemView, final int position) {
+                final Intent intent = new Intent(itemView.getContext(), ShelterInspectScreen.class);
+                intent.putExtra("shelterID", "" + Dashboard.masterShelters.get(position).get_id());
+                intent.putExtra("backendID", Dashboard.masterShelters.get(position).getBackendID());
+                Dashboard.this.startActivityForResult(intent, 0);
             }
         });
         // Attach the adapter to the recyclerview to populate items
-        shelterView.setAdapter(adapter);
+        this.shelterView.setAdapter(adapter);
         // Set layout manager to position the items
-        shelterView.setLayoutManager(new LinearLayoutManager(this));
+        this.shelterView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     /**
      * Populates the genderSelect and ageSelect spinners with all appropriate entry choices
      */
     private void populateSpinners() {
-        genderSelect = findViewById(R.id.genderFilterSpinner);
-        List<String> genderEntries = new ArrayList<>();
+        this.genderSelect = this.findViewById(id.genderFilterSpinner);
+        final List<String> genderEntries = new ArrayList<>();
         genderEntries.add("Any Gender");
         genderEntries.add("Female");
         genderEntries.add("Male");
-        ArrayAdapter<String> dataAdapterGender = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, genderEntries);
-        dataAdapterGender.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        genderSelect.setAdapter(dataAdapterGender);
+        final ArrayAdapter<String> dataAdapterGender = new ArrayAdapter<>(this,
+                layout.simple_spinner_item, genderEntries);
+        dataAdapterGender.setDropDownViewResource(layout.simple_spinner_dropdown_item);
+        this.genderSelect.setAdapter(dataAdapterGender);
 
-        ageSelect = findViewById(R.id.ageFilterSpinner);
-        List<String> ageEntries = new ArrayList<>();
+        this.ageSelect = this.findViewById(id.ageFilterSpinner);
+        final List<String> ageEntries = new ArrayList<>();
         ageEntries.add("Any Age");
         ageEntries.add("Children");
         ageEntries.add("Young Adults");
         ageEntries.add("Families with Newborns");
-        ArrayAdapter<String> dataAdapterRole = new ArrayAdapter<>(this,
-                android.R.layout.simple_spinner_item, ageEntries);
-        dataAdapterRole.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        ageSelect.setAdapter(dataAdapterRole);
+        final ArrayAdapter<String> dataAdapterRole = new ArrayAdapter<>(this,
+                layout.simple_spinner_item, ageEntries);
+        dataAdapterRole.setDropDownViewResource(layout.simple_spinner_dropdown_item);
+        this.ageSelect.setAdapter(dataAdapterRole);
     }
 
     /**
@@ -425,38 +432,38 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
      * @param id The shelter's position
      * @param dataStore The array of all shelters to get positions from
      */
-    public final void addCSVShelters(int id, List<Shelter> dataStore) {
-        InputStream inputStream = getResources().openRawResource(id);
-        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream,
+    public void addCSVShelters(final int id, final List<Shelter> dataStore) {
+        final InputStream inputStream = this.getResources().openRawResource(id);
+        final BufferedReader br = new BufferedReader(new InputStreamReader(inputStream,
                 Charset.forName("UTF-8")));
         try {
             String s = br.readLine();
             while ((s = br.readLine()) != null) {
-                StringBuilder builder = new StringBuilder(s);
+                final StringBuilder builder = new StringBuilder(s);
                 boolean inQuotes = false;
                 for (int currentIndex = 0; currentIndex < builder.length(); currentIndex++) {
-                    char currentChar = builder.charAt(currentIndex);
-                    if (currentChar == '\"') {
+                    final char currentChar = builder.charAt(currentIndex);
+                    if ((int) currentChar == (int) '\"') {
                         inQuotes = !inQuotes; // toggle state
                     }
-                    if ((currentChar == ',') && inQuotes) {
+                    if (((int) currentChar == (int) ',') && inQuotes) {
                         builder.setCharAt(currentIndex, ';'); // sets the comma in the
                         // quotes to semi-colon
                     }
                 }
-                ArrayList<String> tokens = new ArrayList<> (Arrays.asList(builder.toString()
+                final ArrayList<String> tokens = new ArrayList<> (Arrays.asList(builder.toString()
                         .split(",")));
                 dataStore.add(new Shelter(tokens));
             }
-        } catch (FileNotFoundException e) {
+        } catch (final FileNotFoundException e) {
             e.printStackTrace();
-        } catch (IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         } finally {
             if (br != null) {
                 try {
                     br.close();
-                } catch (IOException e) {
+                } catch (final IOException e) {
                     e.printStackTrace();
                 }
             }

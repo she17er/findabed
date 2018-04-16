@@ -11,9 +11,9 @@ class User {
     @Override
     public String toString() {
         return "User{" +
-                "username='" + username + '\'' +
-                ", booked=" + booked +
-                ", loginTimes=" + loginTimes +
+                "username='" + this.username + '\'' +
+                ", booked=" + this.booked +
+                ", loginTimes=" + this.loginTimes +
                 '}';
     }
 
@@ -25,7 +25,8 @@ class User {
      * @param username The username of the user
      * @param booked Whether the user has booked a bed or not
      */
-    public User(String username, boolean booked){
+    User(final String username, final boolean booked) {
+        super();
         this.username = username;
         this.booked = booked;
     }
@@ -33,28 +34,30 @@ class User {
     /**
      * Constructs a new user
      */
-    public User(){}
+    User() {
+        super();
+    }
 
     /**
      * Sets a user as having booked a bed
      * @param status True if booked, false otherwise
      */
-    public final void setBooked(boolean status) {
-        this.booked = status;
+    public void setBooked(final boolean status) {
+        booked = status;
     }
 
     /**
      * Gets the number of times a user has tried to login
      * @return Number of failed logins for this user
      */
-    public final int getLoginTimes(){
-        return loginTimes;
+    public int getLoginTimes(){
+        return this.loginTimes;
     }
 
     /**
      * Increases the number of "failed logins" for this user
      */
-    public final void loginTrial() {
-        this.loginTimes++;
+    public void loginTrial() {
+        loginTimes++;
     }
 }

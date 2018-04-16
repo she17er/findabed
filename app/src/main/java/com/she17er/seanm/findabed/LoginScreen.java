@@ -1,23 +1,28 @@
 package com.she17er.seanm.findabed;
 
+import android.R.integer;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.AsyncTask;
-import android.os.Build;
+import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.inputmethod.EditorInfo;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TextView.OnEditorActionListener;
+
+import com.she17er.seanm.findabed.R.id;
+import com.she17er.seanm.findabed.R.layout;
+import com.she17er.seanm.findabed.R.string;
 
 import org.json.JSONObject;
 
@@ -37,19 +42,19 @@ public class LoginScreen extends AppCompatActivity {
     @Override
     public String toString() {
         return "LoginScreen{" +
-                "mAuthTask=" + mAuthTask +
-                ", mUserView=" + mUserView +
-                ", mPasswordView=" + mPasswordView +
-                ", mProgressView=" + mProgressView +
-                ", mLoginFormView=" + mLoginFormView +
-                ", mUserSignInButton=" + mUserSignInButton +
-                ", currUser=" + currUser +
-                ", backendURL='" + backendURL + '\'' +
+                "mAuthTask=" + this.mAuthTask +
+                ", mUserView=" + this.mUserView +
+                ", mPasswordView=" + this.mPasswordView +
+                ", mProgressView=" + this.mProgressView +
+                ", mLoginFormView=" + this.mLoginFormView +
+                ", mUserSignInButton=" + this.mUserSignInButton +
+                ", currUser=" + this.currUser +
+                ", backendURL='" + this.backendURL + '\'' +
                 '}';
     }
 
     //Keep track of the login task to ensure we can cancel it if requested
-    private UserLoginTask mAuthTask = null;
+    private LoginScreen.UserLoginTask mAuthTask;
 
     // UI references.
     private AutoCompleteTextView mUserView;
@@ -63,19 +68,19 @@ public class LoginScreen extends AppCompatActivity {
     private final String backendURL = "https://she17er.herokuapp.com/api/users/login";
 
     @Override
-    protected final void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login_screen);
-        currUser = new User();
+        this.setContentView(layout.activity_login_screen);
+        this.currUser = new User();
 
         // Set up the login form.
-        mUserView = findViewById(R.id.username);
-        mPasswordView = findViewById(R.id.password);
-        mPasswordView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        this.mUserView = this.findViewById(id.username);
+        this.mPasswordView = this.findViewById(id.password);
+        this.mPasswordView.setOnEditorActionListener(new OnEditorActionListener() {
             @Override
-            public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
-                if ((id == EditorInfo.IME_ACTION_DONE) || (id == EditorInfo.IME_NULL)) {
-                    attemptLogin();
+            public boolean onEditorAction(final TextView textView, final int i, final KeyEvent keyEvent) {
+                if ((i == EditorInfo.IME_ACTION_DONE) || (i == EditorInfo.IME_NULL)) {
+                    LoginScreen.this.attemptLogin();
                     return true;
                 }
                 return false;
@@ -83,17 +88,17 @@ public class LoginScreen extends AppCompatActivity {
         });
 
         //Sign in button functionality
-        mUserSignInButton = findViewById(R.id.username_sign_in_button);
-        mUserSignInButton.setOnClickListener(new OnClickListener() {
+        this.mUserSignInButton = this.findViewById(id.username_sign_in_button);
+        this.mUserSignInButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                attemptLogin();
+            public void onClick(final View view) {
+                LoginScreen.this.attemptLogin();
             }
         });
 
         //Login form & loader setup
-        mLoginFormView = findViewById(R.id.login_form);
-        mProgressView = findViewById(R.id.login_progress);
+        this.mLoginFormView = this.findViewById(id.login_form);
+        this.mProgressView = this.findViewById(id.login_progress);
     }
 
     /**
@@ -107,32 +112,32 @@ public class LoginScreen extends AppCompatActivity {
         }
 
         // Reset errors.
-        mUserView.setError(null);
-        mPasswordView.setError(null);
+        this.mUserView.setError(null);
+        this.mPasswordView.setError(null);
 
         // Store values at the time of the login attempt
-        String username = mUserView.getText().toString().toLowerCase();
-        String password = mPasswordView.getText().toString();
+        final String username = this.mUserView.getText().toString().toLowerCase();
+        final String password = this.mPasswordView.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
 
         // Check for a valid password, if the user entered one
         if (TextUtils.isEmpty(password)) {
-            mPasswordView.setError(getString(R.string.error_field_required));
-            focusView = mPasswordView;
+            this.mPasswordView.setError(this.getString(string.error_field_required));
+            focusView = this.mPasswordView;
             cancel = true;
         }
-        else if (!TextUtils.isEmpty(password) && !isPasswordValid(password)) {
-            mPasswordView.setError(getString(R.string.error_invalid_password));
-            focusView = mPasswordView;
+        else if (!TextUtils.isEmpty(password) && !this.isPasswordValid(password)) {
+            this.mPasswordView.setError(this.getString(string.error_invalid_password));
+            focusView = this.mPasswordView;
             cancel = true;
         }
 
         // Check for a valid username
         if (TextUtils.isEmpty(username)) {
-            mUserView.setError(getString(R.string.error_field_required));
-            focusView = mUserView;
+            this.mUserView.setError(this.getString(string.error_field_required));
+            focusView = this.mUserView;
             cancel = true;
         }
 
@@ -143,45 +148,45 @@ public class LoginScreen extends AppCompatActivity {
         } else {
             // Show a progress spinner, and kick off a background task to
             // perform the user login attempt.
-            showProgress(true);
-            mAuthTask = new UserLoginTask(username, password);
-            mAuthTask.execute((Void) null);
-            currUser.loginTrial();
+            this.showProgress(true);
+            this.mAuthTask = new LoginScreen.UserLoginTask(username, password);
+            this.mAuthTask.execute((Void) null);
+            this.currUser.loginTrial();
         }
     }
 
     /**
      * Checks if a password passes criteria before it is checked against list of users
      */
-    private boolean isPasswordValid(String password) {
+    private boolean isPasswordValid(final String password) {
         return password.length() > 5;
     }
 
     /**
      * Shows the progress UI and hides the login form
      */
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
+    @TargetApi(VERSION_CODES.HONEYCOMB_MR2)
     private void showProgress(final boolean show) {
         // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
         // for very easy animations. If available, use these APIs to fade-in
         // the progress spinner.
-        int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
+        final int shortAnimTime = this.getResources().getInteger(integer.config_shortAnimTime);
 
-        mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
-        mLoginFormView.animate().setDuration(shortAnimTime).alpha(
-                show ? 0 : 1).setListener(new AnimatorListenerAdapter() {
+        this.mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+        this.mLoginFormView.animate().setDuration((long) shortAnimTime).alpha(
+                (float) (show ? 0 : 1)).setListener(new AnimatorListenerAdapter() {
             @Override
-            public void onAnimationEnd(Animator animation) {
-                mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
+            public void onAnimationEnd(final Animator animation) {
+                LoginScreen.this.mLoginFormView.setVisibility(show ? View.GONE : View.VISIBLE);
             }
         });
 
-        mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-        mProgressView.animate().setDuration(shortAnimTime).alpha(
-                show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
+        this.mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+        this.mProgressView.animate().setDuration((long) shortAnimTime).alpha(
+                (float) (show ? 1 : 0)).setListener(new AnimatorListenerAdapter() {
             @Override
-            public void onAnimationEnd(Animator animation) {
-                mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            public void onAnimationEnd(final Animator animation) {
+                LoginScreen.this.mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
             }
         });
     }
@@ -194,36 +199,37 @@ public class LoginScreen extends AppCompatActivity {
         private final String mUser;
         private final String mPassword;
 
-        UserLoginTask(String username, String password) {
-            mUser = username;
-            mPassword = password;
+        UserLoginTask(final String username, final String password) {
+            super();
+            this.mUser = username;
+            this.mPassword = password;
         }
 
         @Override
         public String toString() {
             return "UserLoginTask{" +
-                    "mUser='" + mUser + '\'' +
-                    ", mPassword='" + mPassword + '\'' +
+                    "mUser='" + this.mUser + '\'' +
+                    ", mPassword='" + this.mPassword + '\'' +
                     '}';
         }
 
         @Override
-        protected final Boolean doInBackground(Void... params) {
+        protected Boolean doInBackground(final Void... params) {
 
             try {
                 // Simulate network access.
-                URL url = new URL(backendURL);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                final URL url = new URL(LoginScreen.this.backendURL);
+                final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setDoOutput(true);
                 connection.setRequestProperty("Content-Type", "application/json");
                 connection.setRequestMethod("POST");
                 connection.connect();
 
-                JSONObject user = new JSONObject();
-                user.put("username", mUser);
-                user.put("password", mPassword);
+                final JSONObject user = new JSONObject();
+                user.put("username", this.mUser);
+                user.put("password", this.mPassword);
 
-                DataOutputStream localDataOutputStream = new DataOutputStream(connection
+                final DataOutputStream localDataOutputStream = new DataOutputStream(connection
                         .getOutputStream());
                 localDataOutputStream.writeBytes(user.toString());
                 localDataOutputStream.flush();
@@ -233,18 +239,18 @@ public class LoginScreen extends AppCompatActivity {
                     return Boolean.FALSE;
                 }
 
-                BufferedReader in = new BufferedReader(new InputStreamReader(connection
+                final BufferedReader in = new BufferedReader(new InputStreamReader(connection
                         .getInputStream()));
-                String inputLine;
+                final String inputLine;
                 inputLine = in.readLine();
                 Log.d("LoginRes", inputLine);
                 in.close();
 
-            } catch (MalformedURLException e) {
+            } catch (final MalformedURLException e) {
                 e.printStackTrace();
-            } catch (IOException e) {
+            } catch (final IOException e) {
                 e.printStackTrace();
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 e.printStackTrace();
             }
 
@@ -259,25 +265,25 @@ public class LoginScreen extends AppCompatActivity {
         }
 
         @Override
-        protected final void onPostExecute(final Boolean success) {
-            mAuthTask = null;
-            showProgress(false);
+        protected void onPostExecute(Boolean result) {
+            LoginScreen.this.mAuthTask = null;
+            LoginScreen.this.showProgress(false);
 
             // Performs the actual login if username/ password are valid
-            if (success.booleanValue() && (currUser.getLoginTimes() <= 3)) {
-                Intent intent = new Intent(getApplicationContext(), Dashboard.class);
-                startActivity(intent);
-                finish();
+            if (result.booleanValue() && (currUser.getLoginTimes() <= 3)) {
+                final Intent intent = new Intent(LoginScreen.this.getApplicationContext(), Dashboard.class);
+                LoginScreen.this.startActivity(intent);
+                LoginScreen.this.finish();
             } else {
-                mPasswordView.setError(getString(R.string.error_incorrect_password));
-                mPasswordView.requestFocus();
+                LoginScreen.this.mPasswordView.setError(LoginScreen.this.getString(string.error_incorrect_password));
+                LoginScreen.this.mPasswordView.requestFocus();
             }
         }
 
         @Override
-        protected final void onCancelled() {
-            mAuthTask = null;
-            showProgress(false);
+        protected void onCancelled() {
+            LoginScreen.this.mAuthTask = null;
+            LoginScreen.this.showProgress(false);
         }
     }
 }

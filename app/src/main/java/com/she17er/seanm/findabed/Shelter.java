@@ -13,7 +13,7 @@ public class Shelter implements Parcelable {
 
     //All shelter parameters
     private String _id;
-    private static int count = 0;
+    private static int count;
     private String name;
     private int capacity;
     private String gender;
@@ -29,7 +29,9 @@ public class Shelter implements Parcelable {
     /**
      * Constructs a new shelter without any params (redundant)
      */
-    public Shelter(){}
+    public Shelter() {
+        super();
+    }
 
     /**
      * Gets the string representing a shelter, cotaining both its position and current
@@ -40,18 +42,18 @@ public class Shelter implements Parcelable {
     @Override
     public String toString() {
         return "Shelter{" +
-                "_id='" + _id + '\'' +
-                ", name='" + name + '\'' +
-                ", capacity=" + capacity +
-                ", gender='" + gender + '\'' +
-                ", ageRange='" + ageRange + '\'' +
-                ", restrictions='" + restrictions + '\'' +
-                ", longitude=" + longitude +
-                ", latitude=" + latitude +
-                ", address='" + address + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", currentCapacity=" + currentCapacity +
-                ", backendID='" + backendID + '\'' +
+                "_id='" + this._id + '\'' +
+                ", name='" + this.name + '\'' +
+                ", capacity=" + this.capacity +
+                ", gender='" + this.gender + '\'' +
+                ", ageRange='" + this.ageRange + '\'' +
+                ", restrictions='" + this.restrictions + '\'' +
+                ", longitude=" + this.longitude +
+                ", latitude=" + this.latitude +
+                ", address='" + this.address + '\'' +
+                ", phoneNumber='" + this.phoneNumber + '\'' +
+                ", currentCapacity=" + this.currentCapacity +
+                ", backendID='" + this.backendID + '\'' +
                 '}';
     }
 
@@ -59,17 +61,18 @@ public class Shelter implements Parcelable {
      * Constructs a new shelter with appropriate parameters
      * @param tokens The raw text to be converted to each parameter for this shelter
      */
-    public Shelter(List<String> tokens) {
-        setName(tokens.get(1));
-        setCapacity(tokens.get(2));
-        setGenderAndAge(tokens.get(3));
-        setLongitude(tokens.get(4));
-        setLatitude(tokens.get(5));
-        setAddress(tokens.get(6));
-        setPhoneNumber(tokens.get(8));
-        setCurrentCapacity(tokens.get(9));
-        _id = Integer.toString(count);
-        count++;
+    public Shelter(final List<String> tokens) {
+        super();
+        this.setName(tokens.get(1));
+        this.setCapacity(tokens.get(2));
+        this.setGenderAndAge(tokens.get(3));
+        this.setLongitude(tokens.get(4));
+        this.setLatitude(tokens.get(5));
+        this.setAddress(tokens.get(6));
+        this.setPhoneNumber(tokens.get(8));
+        this.setCurrentCapacity(tokens.get(9));
+        this._id = Integer.toString(Shelter.count);
+        Shelter.count++;
 //        setBackendID(tokens.get(10));
 //        set_id();
         //set_id(tokens.get(10)); //add this after finish the csv parsing algorithm
@@ -79,50 +82,51 @@ public class Shelter implements Parcelable {
      * Generates a shelter using a parcel instead of the CSV reader
      * @param in The parcel passed in from MapScreen (and JSON reader maybe?)
      */
-    private Shelter(Parcel in) {
-        set_id(in.readString());
-        setName(in.readString());
-        setCapacity(in.readString());
-        setGenderAndAge(in.readString() + in.readString());
-        setLongitude(in.readString());
-        setLatitude(in.readString());
-        setAddress(in.readString());
-        setPhoneNumber(in.readString());
-        setCurrentCapacity(in.readString());
+    private Shelter(final Parcel in) {
+        super();
+        this.set_id(in.readString());
+        this.setName(in.readString());
+        this.setCapacity(in.readString());
+        this.setGenderAndAge(in.readString() + in.readString());
+        this.setLongitude(in.readString());
+        this.setLatitude(in.readString());
+        this.setAddress(in.readString());
+        this.setPhoneNumber(in.readString());
+        this.setCurrentCapacity(in.readString());
 //        set_id();
     }
 
     @Override
-    public final int describeContents() {
+    public int describeContents() {
         return 0;
     }
 
     @Override
-    public final void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(_id);
-        dest.writeString(name);
-        dest.writeString(Integer.toString(capacity));
-        dest.writeString(ageRange);
-        dest.writeString(restrictions);
-        dest.writeString(Double.toString(longitude));
-        dest.writeString(Double.toString(latitude));
-        dest.writeString(address);
-        dest.writeString(phoneNumber);
-        dest.writeString(Integer.toString(currentCapacity));
+    public void writeToParcel(final Parcel parcel, final int i) {
+        parcel.writeString(this._id);
+        parcel.writeString(this.name);
+        parcel.writeString(Integer.toString(this.capacity));
+        parcel.writeString(this.ageRange);
+        parcel.writeString(this.restrictions);
+        parcel.writeString(Double.toString(this.longitude));
+        parcel.writeString(Double.toString(this.latitude));
+        parcel.writeString(this.address);
+        parcel.writeString(this.phoneNumber);
+        parcel.writeString(Integer.toString(this.currentCapacity));
     }
 
 
-    public static final Parcelable.Creator<Shelter> CREATOR = new Parcelable.Creator<Shelter>()
+    public static final Creator<Shelter> CREATOR = new Creator<Shelter>()
     {
         @Override
-        public Shelter createFromParcel(Parcel in)
+        public Shelter createFromParcel(final Parcel parcel)
         {
-            return new Shelter(in);
+            return new Shelter(parcel);
         }
         @Override
-        public Shelter[] newArray(int size)
+        public Shelter[] newArray(final int i)
         {
-            return new Shelter[size];
+            return new Shelter[i];
         }
     };
 
@@ -130,15 +134,15 @@ public class Shelter implements Parcelable {
      * Gets a shelter's name
      * @return The shelter name
      */
-    public final String getName() {
-        return name;
+    public String getName() {
+        return this.name;
     }
 
     /**
      * Sets a shelter's name
      * @param name The shelter's name
      */
-    public final void setName(String name) {
+    public void setName(String name) {
         name = name.replaceAll(";", ",");
         this.name = name;
 
@@ -148,20 +152,20 @@ public class Shelter implements Parcelable {
      * Gets a shelter's capacity
      * @return Shelter capacity
      */
-    public final int getCapacity() {
-        return capacity;
+    public int getCapacity() {
+        return this.capacity;
     }
 
     /**
      * Sets a shelter's capacity
      * @param s The shelter's capacity
      */
-    public final void setCapacity(String s) {
+    public void setCapacity(String s) {
         s = s.replaceAll(";", ",");
-        if ((s == null) || s.equals(" ")) {
-            this.capacity = 0;
+        if ((s == null) || " ".equals(s)) {
+            capacity = 0;
         } else {
-            this.capacity = Integer.parseInt(s);
+            capacity = Integer.parseInt(s);
         }
     }
 
@@ -169,27 +173,27 @@ public class Shelter implements Parcelable {
      * Gets a shelter's gender restrictions
      * @return The shelter's gender restrictions
      */
-    public final String getGender() {
-        return gender;
+    public String getGender() {
+        return this.gender;
     }
 
     /**
      * Gets a shelters age range
      * @return The shelter's age range
      */
-    public final String getAgeRange() { return ageRange; }
+    public String getAgeRange() { return this.ageRange; }
 
     /**
      * Gets a shelters restrictions
      * @return The shelter's restrictions
      */
-    public final String getRestrictions() { return restrictions; }
+    public String getRestrictions() { return this.restrictions; }
 
     /**
      * Sets a shelters current capacity
      * @param currentCapacity The shelter's current capacity
      */
-    public final void setCurrentCapacity(String currentCapacity) {
+    public void setCurrentCapacity(String currentCapacity) {
         currentCapacity = currentCapacity.replaceAll(";", ",");
         this.currentCapacity = Integer.parseInt(currentCapacity);
     }
@@ -198,10 +202,10 @@ public class Shelter implements Parcelable {
      * Sets the new gender restrictions
      * @param gender The updated gender restrictions
      */
-    public final void setGenderAndAge(String gender) {
-        restrictions = gender.toLowerCase();
-        if (restrictions.equals("")) {
-            restrictions = "N/A";
+    public void setGenderAndAge(String gender) {
+        this.restrictions = gender.toLowerCase();
+        if ("".equals(this.restrictions)) {
+            this.restrictions = "N/A";
         }
 
         gender = gender.replaceAll(";", ",").toLowerCase();
@@ -213,19 +217,19 @@ public class Shelter implements Parcelable {
             this.gender = "any gender";
         }
 
-        ageRange = "";
+        this.ageRange = "";
         if (gender.contains("newborn")) {
-            ageRange += "newborns, ";
+            this.ageRange += "newborns, ";
         }
         if (gender.contains("children")) {
-            ageRange += "children, ";
+            this.ageRange += "children, ";
         }
         if (gender.contains("young adults")) {
-            ageRange += "young adults, ";
+            this.ageRange += "young adults, ";
         }
         if (!gender.contains("newborn") && !gender.contains("children") && !gender
                 .contains("young adults")) {
-            ageRange = "any age";
+            this.ageRange = "any age";
         }
     }
 
@@ -233,21 +237,21 @@ public class Shelter implements Parcelable {
      * Gets a shelter's longitude
      * @return Shelter's longitude
      */
-    public final double getLongitude() {
-        return longitude;
+    public double getLongitude() {
+        return this.longitude;
     }
 
     /**
      * Sets a shelter's longitude
      * @param longitude The shelter's longitude
      */
-    public final void setLongitude(String longitude) {
+    public void setLongitude(String longitude) {
         longitude = longitude.replaceAll(";", ",");
         try {
             this.longitude = Double.valueOf(longitude).doubleValue();
-        } catch (NumberFormatException e) {
+        } catch (final NumberFormatException e) {
             e.printStackTrace();
-        } catch (RuntimeException e) {
+        } catch (final RuntimeException e) {
             e.printStackTrace();
         }
     }
@@ -256,32 +260,32 @@ public class Shelter implements Parcelable {
      * Gets a shelter's latitude
      * @return The shelter's latitude
      */
-    public final double getLatitude() {
-        return latitude;
+    public double getLatitude() {
+        return this.latitude;
     }
 
     /**
      * Sets a shelter's latitude
      * @param latitude The shelter's latitude
      */
-    public void setLatitude(String latitude) {
+    public void setLatitude(final String latitude) {
         if (latitude == null) {
             throw new IllegalArgumentException("Latitude entered was null");
         }
         String latitude1 = latitude.replaceAll(";", "");
         latitude1 = latitude.replaceAll(",", "");
         try {
-            double newLat = Double.valueOf(latitude1).doubleValue();
-            if (newLat > 90 || newLat < -90) {
+            final double newLat = Double.valueOf(latitude1).doubleValue();
+            if ((newLat > 90.0) || (newLat < -90.0)) {
                 throw new IllegalArgumentException("Illegal Latitude Entered: " + newLat);
             } else {
                 this.latitude = newLat;
             }
-        } catch (NumberFormatException e) {
+        } catch (final NumberFormatException e) {
             e.printStackTrace();
-        } catch (IllegalArgumentException e) {
+        } catch (final IllegalArgumentException e) {
             e.printStackTrace();
-        } catch (Exception e) {
+        } catch (final Exception e) {
             throw new NumberFormatException("Number exception");
         }
     }
@@ -290,15 +294,15 @@ public class Shelter implements Parcelable {
      * Gets a shelter's address
      * @return Shelter address
      */
-    public final String getAddress() {
-        return address;
+    public String getAddress() {
+        return this.address;
     }
 
     /**
      * Sets a shelter's address
      * @param address Shelter address
      */
-    public final void setAddress(String address) {
+    public void setAddress(String address) {
         address = address.replaceAll(";", ",");
         this.address = address;
     }
@@ -307,15 +311,15 @@ public class Shelter implements Parcelable {
      * Gets a shelter's phone number
      * @return Shelter phone number
      */
-    public final String getPhoneNumber() {
-        return phoneNumber;
+    public String getPhoneNumber() {
+        return this.phoneNumber;
     }
 
     /**
      * Sets a shelter's phone number
      * @param phoneNumber Shelter phone number
      */
-    public final void setPhoneNumber(String phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         phoneNumber = phoneNumber.replaceAll(";", ",");
         this.phoneNumber = phoneNumber;
     }
@@ -324,74 +328,74 @@ public class Shelter implements Parcelable {
      * Gets a shelters current capacity
      * @return Current capacity
      */
-    public final int getCurrentCapacity() {
-        return currentCapacity;
+    public int getCurrentCapacity() {
+        return this.currentCapacity;
     }
 
     /**
      * Sets a shelters ArrayList position/ ID
      * @param id Shelter's position
      */
-    public final void set_id(String id) {
+    public void set_id(final String id) {
 //        int pos = 0;
 //        while (!Dashboard.masterShelters.get(pos).getName().equals(this.getName())) {
 //            pos++;
 //        }
 //        _id = "" + pos;
-        _id = id;
+        this._id = id;
     }
 
     /**
      * Gets a shelter's ArrayList position ID
      * @return Shelter's position
      */
-    public final String get_id() {return this._id;}
+    public String get_id() {return _id;}
 
     /**
      * Sets a shelter's backend ID
      * @param id Shelter's backend ID
      */
-    public final void setBackendID(String id) {
-        backendID = id;
+    public void setBackendID(final String id) {
+        this.backendID = id;
     }
 
     /**
      * Gets a shelter's backend ID
      * @return Shelter's backend ID
      */
-    public final String getBackendID() {
-        return backendID;
+    public String getBackendID() {
+        return this.backendID;
     }
 
     /**
      * Increments current shelter capacity
      */
-    public final void incrementCurrentCapacity() {
-        currentCapacity += 1;
+    public void incrementCurrentCapacity() {
+        this.currentCapacity += 1;
     }
 
     /**
      * Decrements current shelter capacity
      */
-    public final void decrementCurrentCapacity() {
-        currentCapacity -= 1;
+    public void decrementCurrentCapacity() {
+        this.currentCapacity -= 1;
     }
 
     /**
      * the equals method for this class
-     * @param s The object to compare to
+     * @param obj The object to compare to
      * @return Whether s is equal to this object
      */
     @Override
-    public boolean equals(Object s) {
-        if (s == null) {
+    public boolean equals(final Object obj) {
+        if (obj == null) {
             return false;
         }
-        if (!(s instanceof Shelter)) {
+        if (!(obj instanceof Shelter)) {
             return false;
         }
-        Shelter that = (Shelter) s;
-        return that.getBackendID().equals(this.backendID) && this.getAddress().equals(that
+        final Shelter that = (Shelter) obj;
+        return that.getBackendID().equals(backendID) && getAddress().equals(that
                 .getAddress());
     }
 }

@@ -6,11 +6,14 @@ import android.support.v4.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.GoogleMap.OnMarkerClickListener;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.she17er.seanm.findabed.R.id;
+import com.she17er.seanm.findabed.R.layout;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -26,20 +29,20 @@ public class MapScreen extends FragmentActivity implements OnMapReadyCallback {
     @Override
     public String toString() {
         return "MapScreen{" +
-                "mMap=" + mMap +
+                "mMap=" + this.mMap +
                 '}';
     }
 
     @Override
-    protected final void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map_screen);
+        this.setContentView(layout.activity_map_screen);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
+        final SupportMapFragment mapFragment = (SupportMapFragment) this.getSupportFragmentManager()
+                .findFragmentById(id.map);
         mapFragment.getMapAsync(this);
         if (getActionBar() != null) {
-            getActionBar().setDisplayHomeAsUpEnabled(true);
+            this.getActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
     /**
@@ -52,31 +55,31 @@ public class MapScreen extends FragmentActivity implements OnMapReadyCallback {
      * installed Google Play services and returned to the app.
      */
     @Override
-    public final void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        Bundle bundle = getIntent().getExtras();
+    public void onMapReady(final GoogleMap googleMap) {
+        this.mMap = googleMap;
+        final Bundle bundle = this.getIntent().getExtras();
         List<Shelter> shelterList = new ArrayList<>();
         shelterList = bundle.getParcelableArrayList("data");
-        LatLng temp = new LatLng(shelterList.get(0).getLatitude(), shelterList.get(0)
+        final LatLng temp = new LatLng(shelterList.get(0).getLatitude(), shelterList.get(0)
                 .getLongitude());
-        for (Iterator<Shelter> iterator = shelterList.iterator(); iterator.hasNext(); ) {
-            Shelter s = iterator.next();
-            LatLng mark = new LatLng(s.getLatitude(), s.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(mark).title(s.getName()).snippet("" + s
+        for (final Iterator<Shelter> iterator = shelterList.iterator(); iterator.hasNext(); ) {
+            final Shelter s = iterator.next();
+            final LatLng mark = new LatLng(s.getLatitude(), s.getLongitude());
+            this.mMap.addMarker(new MarkerOptions().position(mark).title(s.getName()).snippet("" + s
                     .get_id()));
         }
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(temp));
-        mMap.animateCamera( CameraUpdateFactory.zoomTo( 11.0f ) );
-        mMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+        this.mMap.moveCamera(CameraUpdateFactory.newLatLng(temp));
+        this.mMap.animateCamera( CameraUpdateFactory.zoomTo( 11.0f ) );
+        this.mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
             @Override
-            public boolean onMarkerClick(Marker marker) {
+            public boolean onMarkerClick(final Marker marker) {
                 //The snippet is the same as the position in the arrayList
-                String name = marker.getSnippet();
+                final String name = marker.getSnippet();
 //                name = "0";
                 //Using position get Value from arraylist
-                Intent intent = new Intent(MapScreen.this, ShelterInspectScreen.class);
+                final Intent intent = new Intent(MapScreen.this, ShelterInspectScreen.class);
                 intent.putExtra("shelterID", "" + name);
-                startActivityForResult(intent, 0);
+                MapScreen.this.startActivityForResult(intent, 0);
                 return false;
             }
         });

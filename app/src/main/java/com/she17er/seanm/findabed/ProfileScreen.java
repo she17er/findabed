@@ -1,9 +1,12 @@
 package com.she17er.seanm.findabed;
 
+import android.R.id;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import com.she17er.seanm.findabed.R.layout;
 
 /**
  * Screen that shows user's profile data
@@ -14,29 +17,29 @@ public class ProfileScreen extends AppCompatActivity {
     private TextView profileText;
 
     @Override
-    protected final void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile_screen);
+        this.setContentView(layout.activity_profile_screen);
 
-        profileText = findViewById(R.id.profileText);
+        this.profileText = this.findViewById(R.id.profileText);
         //profileText.setText("Welcome " + LoginScreen.currentUser + ", you are a
         // " + LoginScreen.accountState);
 
         //Generates back button on action bar
         if (getActionBar() != null) {
-            getActionBar().setDisplayHomeAsUpEnabled(true);
+            this.getActionBar().setDisplayHomeAsUpEnabled(true);
         }
         if (getSupportActionBar() != null) {
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            this.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
     }
 
     @Override
-    public final boolean onOptionsItemSelected(MenuItem item) {
+    public boolean onOptionsItemSelected(final MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                this.finish();
+            case id.home:
+                finish();
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -46,7 +49,7 @@ public class ProfileScreen extends AppCompatActivity {
     @Override
     public String toString() {
         return "ProfileScreen{" +
-                "profileText=" + profileText +
+                "profileText=" + this.profileText +
                 '}';
     }
 }

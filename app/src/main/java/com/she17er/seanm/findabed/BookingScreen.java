@@ -7,8 +7,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.she17er.seanm.findabed.R.id;
+import com.she17er.seanm.findabed.R.layout;
 
 import org.json.JSONObject;
 
@@ -43,45 +47,45 @@ public class BookingScreen extends AppCompatActivity {
     @Override
     public String toString() {
         return "BookingScreen{" +
-                "numberText=" + numberText +
-                ", confirmButton=" + confirmButton +
-                ", cancelBookingButton=" + cancelBookingButton +
-                ", cancelButton=" + cancelButton +
-                ", bookingURL='" + bookingURL + '\'' +
-                ", shelterPosition=" + shelterPosition +
-                ", shelterID='" + shelterID + '\'' +
-                ", shelter=" + shelter +
-                ", bookingNumber=" + bookingNumber +
-                ", sharedPreferences=" + sharedPreferences +
+                "numberText=" + this.numberText +
+                ", confirmButton=" + this.confirmButton +
+                ", cancelBookingButton=" + this.cancelBookingButton +
+                ", cancelButton=" + this.cancelButton +
+                ", bookingURL='" + this.bookingURL + '\'' +
+                ", shelterPosition=" + this.shelterPosition +
+                ", shelterID='" + this.shelterID + '\'' +
+                ", shelter=" + this.shelter +
+                ", bookingNumber=" + this.bookingNumber +
+                ", sharedPreferences=" + this.sharedPreferences +
                 '}';
     }
 
     @Override
-    protected final void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_booking_screen);
+        this.setContentView(layout.activity_booking_screen);
 
         //Removes actionbar title
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        this.getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         //Adds UI components
-        numberText = findViewById(R.id.numberText);
-        confirmButton = findViewById(R.id.confirmBookingButton);
-        cancelBookingButton = findViewById(R.id.cancelBookingButton);
-        cancelButton = findViewById(R.id.cancelButton);
-        addButtonListener();
+        this.numberText = this.findViewById(id.numberText);
+        this.confirmButton = this.findViewById(id.confirmBookingButton);
+        this.cancelBookingButton = this.findViewById(id.cancelBookingButton);
+        this.cancelButton = this.findViewById(id.cancelButton);
+        this.addButtonListener();
 
         //Initializes shelter data
-        Intent intent = this.getIntent();
+        final Intent intent = getIntent();
         if (intent.getExtras() != null) {
-            shelterPosition = Integer.parseInt(intent.getExtras().getString("shelterID"));
-            shelter = Dashboard.masterShelters.get(shelterPosition);
-            shelterID = shelter.getBackendID();
+            this.shelterPosition = Integer.parseInt(intent.getExtras().getString("shelterID"));
+            this.shelter = Dashboard.masterShelters.get(this.shelterPosition);
+            this.shelterID = this.shelter.getBackendID();
         }
 
         //Hides cancelBookingButton if there is no booking for a user to cancel
         if (shelter.getCurrentCapacity() == 0) {
-            cancelBookingButton.setVisibility(View.INVISIBLE);
+            this.cancelBookingButton.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -90,33 +94,33 @@ public class BookingScreen extends AppCompatActivity {
      */
     private void addButtonListener() {
         //Button listener that beings a booking
-        confirmButton.setOnClickListener(new View.OnClickListener() {
+        this.confirmButton.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View v) {
-                if (numberText.getText().toString().equals("")) {
-                    numberText.setError("Please enter a number");
+            public void onClick(final View view) {
+                if ("".equals(BookingScreen.this.numberText.getText().toString())) {
+                    BookingScreen.this.numberText.setError("Please enter a number");
                 } else {
-                    bookingNumber = Integer.parseInt(numberText.getText().toString());
-                    if ((bookingNumber + shelter.getCurrentCapacity()) > shelter.getCapacity()) {
-                        numberText.setError("Not enough space in the shelter");
+                    BookingScreen.this.bookingNumber = Integer.parseInt(BookingScreen.this.numberText.getText().toString());
+                    if ((BookingScreen.this.bookingNumber + BookingScreen.this.shelter.getCurrentCapacity()) > BookingScreen.this.shelter.getCapacity()) {
+                        BookingScreen.this.numberText.setError("Not enough space in the shelter");
                     } else {
                         //Writes the name of the shelter booked to a local variable
 //                        SharedPreferences.Editor userData = sharedPreferences.edit();
 //                        userData.putString("booking", shelter.getName()).apply();
 
-                        AsyncTaskRunner makeBooking = new AsyncTaskRunner();
+                        final BookingScreen.AsyncTaskRunner makeBooking = new BookingScreen.AsyncTaskRunner();
                         makeBooking.execute("start");
-                        Intent intent = new Intent(v.getContext(), Dashboard.class);
-                        startActivityForResult(intent, 0);
+                        final Intent intent = new Intent(view.getContext(), Dashboard.class);
+                        BookingScreen.this.startActivityForResult(intent, 0);
                     }
                 }
             }
         });
 
         //Button to cancel a booking and return to the Dashboard
-        cancelBookingButton.setOnClickListener(new View.OnClickListener() {
+        this.cancelBookingButton.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(final View view) {
 //                SharedPreferences userData = getSharedPreferences("booking", 0);
 //                if (userData.) {
 //
@@ -126,17 +130,17 @@ public class BookingScreen extends AppCompatActivity {
 //                } else {
 //
 //                }
-                Intent intent = new Intent(v.getContext(), Dashboard.class);
-                startActivityForResult(intent, 0);
+                final Intent intent = new Intent(view.getContext(), Dashboard.class);
+                BookingScreen.this.startActivityForResult(intent, 0);
             }
         });
 
         //Button to return to dashboard
-        cancelButton.setOnClickListener(new View.OnClickListener() {
+        this.cancelButton.setOnClickListener(new OnClickListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), Dashboard.class);
-                startActivityForResult(intent, 0);
+            public void onClick(final View view) {
+                final Intent intent = new Intent(view.getContext(), Dashboard.class);
+                BookingScreen.this.startActivityForResult(intent, 0);
             }
         });
     }
@@ -147,59 +151,59 @@ public class BookingScreen extends AppCompatActivity {
     private class AsyncTaskRunner extends AsyncTask<String, String, String> {
 
         @Override
-        protected final String doInBackground(String... params) {
+        protected String doInBackground(final String... params) {
             try {
 
-                URL url = new URL(bookingURL + shelterID);
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+                final URL url = new URL(BookingScreen.this.bookingURL + BookingScreen.this.shelterID);
+                final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
                 connection.setDoOutput(true);
                 connection.setRequestProperty("Content-Type", "application/json");
                 connection.setRequestMethod("POST");
                 connection.connect();
 
-                JSONObject booking = new JSONObject();
-                booking.put("currCapacity", shelter
-                        .getCurrentCapacity() + bookingNumber);
+                final JSONObject booking = new JSONObject();
+                booking.put("currCapacity", BookingScreen.this.shelter
+                        .getCurrentCapacity() + BookingScreen.this.bookingNumber);
 
-                DataOutputStream localDataOutputStream = new DataOutputStream(connection
+                final DataOutputStream localDataOutputStream = new DataOutputStream(connection
                         .getOutputStream());
                 localDataOutputStream.writeBytes(booking.toString());
                 localDataOutputStream.flush();
                 localDataOutputStream.close();
 
-                BufferedReader in = new BufferedReader(new InputStreamReader(connection
+                final BufferedReader in = new BufferedReader(new InputStreamReader(connection
                         .getInputStream()));
                 String inputLine;
-                StringBuilder content = new StringBuilder();
+                final StringBuilder content = new StringBuilder();
                 while ((inputLine = in.readLine()) != null) {
                     content.append(inputLine);
                 }
                 in.close();
 
 
-            } catch (MalformedURLException e) {
+            } catch (final MalformedURLException e) {
                 e.printStackTrace();
-            } catch (IOException e) {
+            } catch (final IOException e) {
                 e.printStackTrace();
-            } catch (Exception e) {
+            } catch (final Exception e) {
                 e.printStackTrace();
             }
             return "";
         }
 
         @Override
-        protected final void onPostExecute(String s) {
-            Log.d("targetString", s);
-            super.onPostExecute(s);
+        protected void onPostExecute(final String result) {
+            Log.d("targetString", result);
+            super.onPostExecute(result);
         }
 
         @Override
-        protected final void onPreExecute() {
+        protected void onPreExecute() {
             super.onPreExecute();
         }
 
         @Override
-        protected final void onProgressUpdate(String... values) {
+        protected void onProgressUpdate(final String... values) {
             super.onProgressUpdate(values);
         }
     }
