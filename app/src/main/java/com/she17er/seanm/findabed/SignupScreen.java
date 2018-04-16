@@ -13,15 +13,20 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Activity containing a signup form for users
@@ -78,6 +83,10 @@ public class SignupScreen extends AppCompatActivity {
 
         try {
             currUsernames = AsyncGetUsername.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -200,7 +209,8 @@ public class SignupScreen extends AppCompatActivity {
             username.setError("Username is required");
             validLogin = false;
         }
-        for (String s: allNames) {
+        for (Iterator<String> iterator = allNames.iterator(); iterator.hasNext(); ) {
+            String s = iterator.next();
             if (username.getText().toString().equals(s)) {
                 username.setError("this username has been registered");
                 validLogin = false;
@@ -269,7 +279,8 @@ public class SignupScreen extends AppCompatActivity {
                 unConnection.setRequestMethod("GET");
                 unConnection.connect();
 
-                BufferedReader in = new BufferedReader(new InputStreamReader(unConnection.getInputStream()));
+                BufferedReader in = new BufferedReader(new InputStreamReader(unConnection
+                        .getInputStream()));
                 String inputLine = "";
                 StringBuilder userNameContent = new StringBuilder();
                 while ((inputLine = in.readLine()) != null) {
@@ -277,6 +288,10 @@ public class SignupScreen extends AppCompatActivity {
                     return inputLine;
                 }
                 in.close();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -327,12 +342,14 @@ public class SignupScreen extends AppCompatActivity {
                 user.put("role", roleSpinner.getSelectedItem().toString());
                 user.put("login", "false");
 
-                DataOutputStream localDataOutputStream = new DataOutputStream(connection.getOutputStream());
+                DataOutputStream localDataOutputStream = new DataOutputStream(connection
+                        .getOutputStream());
                 localDataOutputStream.writeBytes(user.toString());
                 localDataOutputStream.flush();
                 localDataOutputStream.close();
 
-                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection
+                        .getInputStream()));
                 String inputLine;
                 StringBuilder content = new StringBuilder();
                 while ((inputLine = in.readLine()) != null) {
@@ -341,6 +358,10 @@ public class SignupScreen extends AppCompatActivity {
                 in.close();
 
 
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             } catch (Exception e) {
                 e.printStackTrace();
             }

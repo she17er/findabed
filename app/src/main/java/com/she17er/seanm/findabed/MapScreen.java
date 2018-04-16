@@ -1,7 +1,8 @@
 package com.she17er.seanm.findabed;
+
 import android.content.Intent;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -10,7 +11,9 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -54,10 +57,13 @@ public class MapScreen extends FragmentActivity implements OnMapReadyCallback {
         Bundle bundle = getIntent().getExtras();
         List<Shelter> shelterList = new ArrayList<>();
         shelterList = bundle.getParcelableArrayList("data");
-        LatLng temp = new LatLng(shelterList.get(0).getLatitude(), shelterList.get(0).getLongitude());
-        for (Shelter s: shelterList) {
+        LatLng temp = new LatLng(shelterList.get(0).getLatitude(), shelterList.get(0)
+                .getLongitude());
+        for (Iterator<Shelter> iterator = shelterList.iterator(); iterator.hasNext(); ) {
+            Shelter s = iterator.next();
             LatLng mark = new LatLng(s.getLatitude(), s.getLongitude());
-            mMap.addMarker(new MarkerOptions().position(mark).title(s.getName()).snippet("" + s.get_id()));
+            mMap.addMarker(new MarkerOptions().position(mark).title(s.getName()).snippet("" + s
+                    .get_id()));
         }
         mMap.moveCamera(CameraUpdateFactory.newLatLng(temp));
         mMap.animateCamera( CameraUpdateFactory.zoomTo( 11.0f ) );

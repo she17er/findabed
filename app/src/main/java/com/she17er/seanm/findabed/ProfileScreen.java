@@ -1,7 +1,7 @@
 package com.she17er.seanm.findabed;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 
@@ -19,7 +19,8 @@ public class ProfileScreen extends AppCompatActivity {
         setContentView(R.layout.activity_profile_screen);
 
         profileText = findViewById(R.id.profileText);
-        //profileText.setText("Welcome " + LoginScreen.currentUser + ", you are a " + LoginScreen.accountState);
+        //profileText.setText("Welcome " + LoginScreen.currentUser + ", you are a
+        // " + LoginScreen.accountState);
 
         //Generates back button on action bar
         if (getActionBar() != null) {

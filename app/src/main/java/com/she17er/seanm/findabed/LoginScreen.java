@@ -4,12 +4,10 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
-
 import android.os.AsyncTask;
-
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -25,8 +23,10 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
@@ -209,7 +209,6 @@ public class LoginScreen extends AppCompatActivity {
 
         @Override
         protected final Boolean doInBackground(Void... params) {
-            // TODO: attempt authentication against a network service.
 
             try {
                 // Simulate network access.
@@ -224,21 +223,27 @@ public class LoginScreen extends AppCompatActivity {
                 user.put("username", mUser);
                 user.put("password", mPassword);
 
-                DataOutputStream localDataOutputStream = new DataOutputStream(connection.getOutputStream());
+                DataOutputStream localDataOutputStream = new DataOutputStream(connection
+                        .getOutputStream());
                 localDataOutputStream.writeBytes(user.toString());
                 localDataOutputStream.flush();
                 localDataOutputStream.close();
 
                 if (connection.getResponseCode() != 200) {
-                    return false;
+                    return Boolean.FALSE;
                 }
 
-                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection
+                        .getInputStream()));
                 String inputLine;
                 inputLine = in.readLine();
                 Log.d("LoginRes", inputLine);
                 in.close();
 
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -250,7 +255,7 @@ public class LoginScreen extends AppCompatActivity {
 //            } else {
 //                return false;
 //            }
-            return true;
+            return Boolean.TRUE;
         }
 
         @Override
@@ -259,7 +264,7 @@ public class LoginScreen extends AppCompatActivity {
             showProgress(false);
 
             // Performs the actual login if username/ password are valid
-            if (success && (currUser.getLoginTimes() <= 3)) {
+            if (success.booleanValue() && (currUser.getLoginTimes() <= 3)) {
                 Intent intent = new Intent(getApplicationContext(), Dashboard.class);
                 startActivity(intent);
                 finish();

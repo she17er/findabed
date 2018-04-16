@@ -94,7 +94,6 @@ public class Shelter implements Parcelable {
 
     @Override
     public final int describeContents() {
-        // TODO Auto-generated method stub
         return 0;
     }
 
@@ -224,7 +223,8 @@ public class Shelter implements Parcelable {
         if (gender.contains("young adults")) {
             ageRange += "young adults, ";
         }
-        if (!gender.contains("newborn") && !gender.contains("children") && !gender.contains("young adults")) {
+        if (!gender.contains("newborn") && !gender.contains("children") && !gender
+                .contains("young adults")) {
             ageRange = "any age";
         }
     }
@@ -244,8 +244,10 @@ public class Shelter implements Parcelable {
     public final void setLongitude(String longitude) {
         longitude = longitude.replaceAll(";", ",");
         try {
-            this.longitude = Double.valueOf(longitude);
-        } catch (Exception e) {
+            this.longitude = Double.valueOf(longitude).doubleValue();
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        } catch (RuntimeException e) {
             e.printStackTrace();
         }
     }
@@ -269,14 +271,18 @@ public class Shelter implements Parcelable {
         String latitude1 = latitude.replaceAll(";", "");
         latitude1 = latitude.replaceAll(",", "");
         try {
-            double newLat = Double.valueOf(latitude1);
+            double newLat = Double.valueOf(latitude1).doubleValue();
             if (newLat > 90 || newLat < -90) {
                 throw new IllegalArgumentException("Illegal Latitude Entered: " + newLat);
             } else {
                 this.latitude = newLat;
             }
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
         } catch (Exception e) {
-            throw new NumberFormatException();
+            throw new NumberFormatException("Number exception");
         }
     }
 
@@ -373,8 +379,8 @@ public class Shelter implements Parcelable {
 
     /**
      * the equals method for this class
-     * @param s
-     * @return
+     * @param s The object to compare to
+     * @return Whether s is equal to this object
      */
     @Override
     public boolean equals(Object s) {
@@ -385,6 +391,7 @@ public class Shelter implements Parcelable {
             return false;
         }
         Shelter that = (Shelter) s;
-        return that.getBackendID().equals(this.backendID) && this.getAddress().equals(that.getAddress());
+        return that.getBackendID().equals(this.backendID) && this.getAddress().equals(that
+                .getAddress());
     }
 }

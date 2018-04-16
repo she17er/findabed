@@ -2,24 +2,11 @@ package com.she17er.seanm.findabed;
 
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,6 +16,21 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Spinner;
+
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.nio.charset.Charset;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 
 /**
@@ -94,6 +96,10 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
                 br.close();
 
                 return shelterInfo;
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -120,9 +126,6 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
             return shelterInfo;
         }
 
-        /**
-         *
-         */
     }
 
     @Override
@@ -168,6 +171,10 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
         String allInfo = "";
         try {
             allInfo = getShelters.get();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -177,7 +184,8 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
         masterShelters = jsonParser(allInfo);
         currentShelters = new ArrayList<>();
 //        addCSVShelters(R.raw.data, masterShelters);
-        for (Shelter shelter : masterShelters) {
+        for (Iterator<Shelter> iterator = masterShelters.iterator(); iterator.hasNext(); ) {
+            Shelter shelter = iterator.next();
             currentShelters.add(shelter);
         }
 
@@ -189,7 +197,8 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
         populateSpinners();
         genderSelect.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView,
+                                       int position, long id) {
                 if (position == 1) {
                     gender = "women";
                 } else if (position == 2) {
@@ -208,7 +217,8 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
 
         ageSelect.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView,
+                                       int position, long id) {
                 if (position == 0) {
                     age = "";
                 } else if (position == 1) {
@@ -270,7 +280,8 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
                 tempInfo = tempInfo.substring(rightIndex + 3);
             }
             Info.add(tempInfo);
-            for (String s : Info) {
+            for (Iterator<String> iterator = Info.iterator(); iterator.hasNext(); ) {
+                String s = iterator.next();
                 List<String> arr = new ArrayList<>();
                 int i = s.indexOf("name");
                 int j = s.indexOf(',', i);
@@ -313,7 +324,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
                 count++;
                 allShelters.add(newShelter);
             }
-        } catch (Exception e) {
+        } catch (RuntimeException e) {
             Log.d("jsonParser", "Parser failed");
             e.printStackTrace();
             return null;
@@ -325,7 +336,8 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
     public final boolean onQueryTextChange(String query) {
         // Here is where we are going to implement the filter logic
         final ArrayList<Shelter> updatedShelters = new ArrayList<>();
-        for (Shelter aShelter : currentShelters) {
+        for (Iterator<Shelter> iterator = currentShelters.iterator(); iterator.hasNext(); ) {
+            Shelter aShelter = iterator.next();
             if (aShelter.getName().toLowerCase().contains(query)) {
                 updatedShelters.add(aShelter);
             }
@@ -350,7 +362,8 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
         } else if (gender.equals("men ")) {
             wrongGender = "women";
         }
-        for (Shelter shelter : masterShelters) {
+        for (Iterator<Shelter> iterator = masterShelters.iterator(); iterator.hasNext(); ) {
+            Shelter shelter = iterator.next();
             if (!shelter.getGender().equals(wrongGender) && shelter.getAgeRange().contains(age)) {
                 currentShelters.add(shelter);
             }
@@ -414,7 +427,8 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
      */
     public final void addCSVShelters(int id, List<Shelter> dataStore) {
         InputStream inputStream = getResources().openRawResource(id);
-        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
+        BufferedReader br = new BufferedReader(new InputStreamReader(inputStream,
+                Charset.forName("UTF-8")));
         try {
             String s = br.readLine();
             while ((s = br.readLine()) != null) {
@@ -426,10 +440,12 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
                         inQuotes = !inQuotes; // toggle state
                     }
                     if ((currentChar == ',') && inQuotes) {
-                        builder.setCharAt(currentIndex, ';'); // sets the comma in the quotes to semi-colon
+                        builder.setCharAt(currentIndex, ';'); // sets the comma in the
+                        // quotes to semi-colon
                     }
                 }
-                ArrayList<String> tokens = new ArrayList<> (Arrays.asList(builder.toString().split(",")));
+                ArrayList<String> tokens = new ArrayList<> (Arrays.asList(builder.toString()
+                        .split(",")));
                 dataStore.add(new Shelter(tokens));
             }
         } catch (FileNotFoundException e) {

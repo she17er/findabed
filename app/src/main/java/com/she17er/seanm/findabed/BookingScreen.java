@@ -3,8 +3,8 @@ package com.she17er.seanm.findabed;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -14,8 +14,10 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
@@ -24,28 +26,20 @@ import java.net.URL;
 
 public class BookingScreen extends AppCompatActivity {
 
+    //Needs to add id to use it
+    private final String bookingURL = "https://she17er.herokuapp.com/api/shelter/updateCapacity/";
+    SharedPreferences sharedPreferences;
     //UI Components
     private EditText numberText;
     private Button confirmButton;
     private Button cancelBookingButton;
     private Button cancelButton;
-
-    //Needs to add id to use it
-    private final String bookingURL = "https://she17er.herokuapp.com/api/shelter/updateCapacity/";
-
     //Shelter Data
     private int shelterPosition;
     private String shelterID;
     private Shelter shelter;
     private int bookingNumber;
 
-    SharedPreferences sharedPreferences;
-
-    /**
-     * toString for BookingScreen
-     *
-     * @return BookingScreen as a String
-     */
     @Override
     public String toString() {
         return "BookingScreen{" +
@@ -164,14 +158,17 @@ public class BookingScreen extends AppCompatActivity {
                 connection.connect();
 
                 JSONObject booking = new JSONObject();
-                booking.put("currCapacity", shelter.getCurrentCapacity() + bookingNumber);
+                booking.put("currCapacity", shelter
+                        .getCurrentCapacity() + bookingNumber);
 
-                DataOutputStream localDataOutputStream = new DataOutputStream(connection.getOutputStream());
+                DataOutputStream localDataOutputStream = new DataOutputStream(connection
+                        .getOutputStream());
                 localDataOutputStream.writeBytes(booking.toString());
                 localDataOutputStream.flush();
                 localDataOutputStream.close();
 
-                BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+                BufferedReader in = new BufferedReader(new InputStreamReader(connection
+                        .getInputStream()));
                 String inputLine;
                 StringBuilder content = new StringBuilder();
                 while ((inputLine = in.readLine()) != null) {
@@ -180,6 +177,10 @@ public class BookingScreen extends AppCompatActivity {
                 in.close();
 
 
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
             } catch (Exception e) {
                 e.printStackTrace();
             }

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Adapter that displays list of all shelters for the Dashboard recycler view
@@ -60,6 +61,20 @@ public class ShelterAdapter extends RecyclerView.Adapter<ShelterAdapter.ViewHold
 
         //All variables to be rendered in a row
         final TextView shelterName;
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof ShelterAdapter.ViewHolder)) return false;
+            ShelterAdapter.ViewHolder that = (ShelterAdapter.ViewHolder) o;
+            return Objects.equals(this.shelterName, that.shelterName);
+        }
+
+        @Override
+        public int hashCode() {
+
+            return Objects.hash(this.shelterName);
+        }
 
         /**
          * We also create a constructor that accepts the entire item row
@@ -118,7 +133,7 @@ public class ShelterAdapter extends RecyclerView.Adapter<ShelterAdapter.ViewHold
         View shelterView = inflater.inflate(R.layout.item_shelter, parent, false);
 
         // Return a new holder instance
-        ViewHolder viewHolder = new ViewHolder(shelterView);
+        ShelterAdapter.ViewHolder viewHolder = new ShelterAdapter.ViewHolder(shelterView);
         return viewHolder;
     }
 
