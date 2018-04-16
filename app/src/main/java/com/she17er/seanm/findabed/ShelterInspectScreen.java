@@ -1,16 +1,12 @@
 package com.she17er.seanm.findabed;
 
 import android.content.Intent;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import org.w3c.dom.Text;
 
 /**
  * Screen that shows the shelter data for a given shelter
@@ -45,6 +41,10 @@ public class ShelterInspectScreen extends AppCompatActivity {
     int shelterPosition;
     Shelter shelter;
 
+    @Override
+    public String toString() {
+        return "Shelter";
+    }
     @Override
     protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,6 +109,9 @@ public class ShelterInspectScreen extends AppCompatActivity {
         restrictionsF.setText(shelter.getRestrictions());
     }
 
+    /**
+     * Adds a button listener
+     */
     private void addButtonListener() {
         bookButton.setOnClickListener(new View.OnClickListener() {
             @Override

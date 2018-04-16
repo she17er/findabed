@@ -2,7 +2,7 @@ package com.she17er.seanm.findabed;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import java.util.ArrayList;
+
 import java.util.List;
 
 /**
@@ -238,12 +238,21 @@ public class Shelter implements Parcelable {
      * Sets a shelter's latitude
      * @param latitude The shelter's latitude
      */
-    public final void setLatitude(String latitude) {
-        latitude = latitude.replaceAll(";", ",");
+    public void setLatitude(String latitude) {
+        if (latitude == null) {
+            throw new IllegalArgumentException("Latitude entered was null");
+        }
+        latitude = latitude.replaceAll(";", "");
+        latitude = latitude.replaceAll(",", "");
         try {
-            this.latitude = Double.valueOf(latitude);
+            double newLat = Double.valueOf(latitude);
+            if (newLat > 90 || newLat < -90) {
+                throw new IllegalArgumentException("Illegal Latitude Entered: " + newLat);
+            } else {
+                this.latitude = newLat;
+            }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new NumberFormatException();
         }
     }
 
