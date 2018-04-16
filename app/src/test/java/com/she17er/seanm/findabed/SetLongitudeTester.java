@@ -5,6 +5,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.BlockJUnit4ClassRunner;
 
+import static junit.framework.Assert.assertEquals;
 import static org.junit.Assert.*;
 
 @RunWith(value = BlockJUnit4ClassRunner.class)

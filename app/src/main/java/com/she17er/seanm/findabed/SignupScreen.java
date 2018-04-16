@@ -30,23 +30,28 @@ import java.util.List;
 public class SignupScreen extends AppCompatActivity {
 
     //UI references
-    private EditText username;
-    private EditText email;
-    private EditText phone;
-    private EditText password;
-    private EditText passwordCheck;
-    private EditText age;
-    private Spinner genderSpinner;
-    private Spinner vetSpinner;
-    private Spinner roleSpinner;
-    private Spinner accountSpinner;
-    private Button submit;
-    private String currUsernames;
-    private List<String> allNames;
+    protected EditText username;
+    protected EditText email;
+    protected EditText phone;
+    protected EditText password;
+    protected EditText passwordCheck;
+    protected EditText age;
+    protected Spinner genderSpinner;
+    protected Spinner vetSpinner;
+    protected Spinner roleSpinner;
+    protected Spinner accountSpinner;
+    protected Button submit;
+    protected String currUsernames;
+    protected List<String> allNames;
 
     //URL for the Heroku backend
     private final String backendURL = "https://she17er.herokuapp.com/api/users/newUsers";
     private final String userNameURL = "https://she17er.herokuapp.com/api/users/getUserNames";
+
+    /**
+     * Default constructor
+     */
+    public SignupScreen(){}
 
     @Override
     protected final void onCreate(Bundle savedInstanceState) {
@@ -157,11 +162,18 @@ public class SignupScreen extends AppCompatActivity {
     }
 
     /**
+     * Sets up test cases for signup screen
+     */
+    public void setTestCases() {
+
+    }
+
+    /**
      * Checks if all entered sign-up data is valid
      * Throws error messages on sign-up text-boxes that are invalid
      * @return Whether or not the sign-up data is valid
      */
-    private boolean checkValid() {
+    protected boolean checkValid() {
         boolean validLogin = true;
         if (TextUtils.isEmpty(username.getText())) {
             username.setError("Username is required");

@@ -30,4 +30,7 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
     compile files('../libraries/opencsv/opencsv-4.1.jar')
+    testImplementation 'junit:junit:4.12'
+    testCompile 'junit:junit:4.12'
+    androidTestCompile 'junit:junit:4.12'
 }

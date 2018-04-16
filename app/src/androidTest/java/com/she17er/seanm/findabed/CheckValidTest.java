@@ -21,24 +21,24 @@ import java.util.regex.Pattern;
 import static org.junit.Assert.*;
 
 @RunWith(AndroidJUnit4.class)
-public class jsonParserTest{
-
-//    private Dashboard testDashboard;
+public class CheckValidTest{
 
     @Rule
-    public ActivityTestRule<Dashboard> rule = new ActivityTestRule<>(Dashboard.class);
-
+    public ActivityTestRule<SignupScreen> rule = new ActivityTestRule<>(SignupScreen.class);
 
     @Test
-    public void jsonParser() {
-        Dashboard dashboardTest = rule.getActivity();
-        ArrayList<Shelter> allShelter = new ArrayList<>();
-        ArrayList<Shelter> equals1 = new ArrayList<>();
+    public void checkValid() {
+        SignupScreen signupTest = rule.getActivity();
         try {
-            allShelter = dashboardTest.jsonParser("");
+            signupTest.username.getText().clear();
+            signupTest.email.getText().clear();
+            signupTest.phone.getText().clear();
+            signupTest.password.getText().clear();
+            signupTest.passwordCheck.getText().clear();
+            signupTest.age.getText().clear();
         } catch (Exception e) {
-            assertEquals(equals1, allShelter);
+            assertEquals(false, signupTest.checkValid());
         }
-        RecyclerView testView = (RecyclerView) dashboardTest.findViewById(R.id.shelterRecyclerView);
     }
+
 }
