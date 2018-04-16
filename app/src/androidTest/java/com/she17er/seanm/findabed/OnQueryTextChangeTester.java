@@ -1,3 +1,8 @@
+/**
+ * @author Kevin Luikey
+ * Tester for the onQueryTextChange method
+ */
+
 package com.she17er.seanm.findabed;
 
 import android.support.test.annotation.UiThreadTest;
@@ -59,8 +64,8 @@ public class OnQueryTextChangeTester{
         ArrayList<Shelter> correct = new ArrayList<Shelter>();
 
         textChangeTest.currentShelters.clear();
-        textChangeTest.currentSelters.add(new Shelter());
-        textChangeTest.currentSelters.add(new Shelter());
+        textChangeTest.currentShelters.add(new Shelter());
+        textChangeTest.currentShelters.add(new Shelter());
         textChangeTest.currentShelters.get(0).setName("abcabcabc");
         textChangeTest.currentShelters.get(1).setName("abca");
 
@@ -82,8 +87,8 @@ public class OnQueryTextChangeTester{
         correct.get(1).setName("abCa");
 
         textChangeTest.currentShelters.clear();
-        textChangeTest.currentSelters.add(new Shelter());
-        textChangeTest.currentSelters.add(new Shelter());
+        textChangeTest.currentShelters.add(new Shelter());
+        textChangeTest.currentShelters.add(new Shelter());
         textChangeTest.currentShelters.get(0).setName("abCABcabc");
         textChangeTest.currentShelters.get(1).setName("abCa");
 
@@ -103,8 +108,8 @@ public class OnQueryTextChangeTester{
         correct.get(0).setName("abcadbcabc");
 
         textChangeTest.currentShelters.clear();
-        textChangeTest.currentSelters.add(new Shelter());
-        textChangeTest.currentSelters.add(new Shelter());
+        textChangeTest.currentShelters.add(new Shelter());
+        textChangeTest.currentShelters.add(new Shelter());
         textChangeTest.currentShelters.get(0).setName("abcadbcabc");
         textChangeTest.currentShelters.get(1).setName("abca");
 
@@ -122,8 +127,8 @@ public class OnQueryTextChangeTester{
         ArrayList<Shelter> correct = new ArrayList<Shelter>();
 
         textChangeTest.currentShelters.clear();
-        textChangeTest.currentSelters.add(new Shelter());
-        textChangeTest.currentSelters.add(new Shelter());
+        textChangeTest.currentShelters.add(new Shelter());
+        textChangeTest.currentShelters.add(new Shelter());
         textChangeTest.currentShelters.get(0).setName("abcabcabc");
         textChangeTest.currentShelters.get(1).setName("abca");
 
@@ -141,8 +146,8 @@ public class OnQueryTextChangeTester{
         ArrayList<Shelter> correct = new ArrayList<Shelter>();
 
         textChangeTest.currentShelters.clear();
-        textChangeTest.currentSelters.add(new Shelter());
-        textChangeTest.currentSelters.add(new Shelter());
+        textChangeTest.currentShelters.add(new Shelter());
+        textChangeTest.currentShelters.add(new Shelter());
         textChangeTest.currentShelters.get(0).setName("abcabcabc");
         textChangeTest.currentShelters.get(1).setName("abca");
 
@@ -162,8 +167,8 @@ public class OnQueryTextChangeTester{
         correct.get(0).setName("abcadbcabc");
 
         textChangeTest.currentShelters.clear();
-        textChangeTest.currentSelters.add(new Shelter());
-        textChangeTest.currentSelters.add(new Shelter());
+        textChangeTest.currentShelters.add(new Shelter());
+        textChangeTest.currentShelters.add(new Shelter());
         textChangeTest.currentShelters.get(0).setName("abca");
         textChangeTest.currentShelters.get(1).setName("abcadbcabc");
 
@@ -185,8 +190,8 @@ public class OnQueryTextChangeTester{
         correct.get(1).setName("abcabcabc");
 
         textChangeTest.currentShelters.clear();
-        textChangeTest.currentSelters.add(new Shelter());
-        textChangeTest.currentSelters.add(new Shelter());
+        textChangeTest.currentShelters.add(new Shelter());
+        textChangeTest.currentShelters.add(new Shelter());
         textChangeTest.currentShelters.get(0).setName("abca");
         textChangeTest.currentShelters.get(1).setName("abcabcabc");
 
