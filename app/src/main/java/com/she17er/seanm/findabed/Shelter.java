@@ -2,7 +2,7 @@ package com.she17er.seanm.findabed;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import java.util.ArrayList;
+
 import java.util.List;
 
 /**
@@ -238,12 +238,21 @@ public class Shelter implements Parcelable {
      * Sets a shelter's latitude
      * @param latitude The shelter's latitude
      */
-    public final void setLatitude(String latitude) {
-        latitude = latitude.replaceAll(";", ",");
+    public void setLatitude(String latitude) {
+        if (latitude == null) {
+            throw new IllegalArgumentException("Latitude entered was null");
+        }
+        String latitude1 = latitude.replaceAll(";", "");
+        latitude1 = latitude.replaceAll(",", "");
         try {
-            this.latitude = Double.valueOf(latitude);
+            double newLat = Double.valueOf(latitude1);
+            if (newLat > 90 || newLat < -90) {
+                throw new IllegalArgumentException("Illegal Latitude Entered: " + newLat);
+            } else {
+                this.latitude = newLat;
+            }
         } catch (Exception e) {
-            e.printStackTrace();
+            throw new NumberFormatException();
         }
     }
 
@@ -345,5 +354,22 @@ public class Shelter implements Parcelable {
      */
     public final String toString() {
         return _id + currentCapacity;
+    }
+
+    /**
+     * the equals method for this class
+     * @param s
+     * @return
+     */
+    @Override
+    public boolean equals(Object s) {
+        if (s == null) {
+            return false;
+        }
+        if (!(s instanceof Shelter)) {
+            return false;
+        }
+        Shelter that = (Shelter) s;
+        return that.getBackendID().equals(this.backendID) && this.getAddress().equals(that.getAddress());
     }
 }
