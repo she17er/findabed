@@ -42,14 +42,14 @@ public class SignupScreen extends AppCompatActivity {
     private Spinner accountSpinner;
     private Button submit;
     private String currUsernames;
-    private ArrayList<String> allNames;
+    private List<String> allNames;
 
     //URL for the Heroku backend
     String backendURL = "https://she17er.herokuapp.com/api/users/newUsers";
     String userNameURL = "https://she17er.herokuapp.com/api/users/getUserNames";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_screen);
         Toolbar toolbar = findViewById(R.id.toolbar);
@@ -212,7 +212,7 @@ public class SignupScreen extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public final boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
@@ -230,7 +230,7 @@ public class SignupScreen extends AppCompatActivity {
     private class AsyncTaskRunnerGetUsername extends AsyncTask<String, String, String> {
 
         @Override
-        protected String doInBackground(String ...params) {
+        protected final String doInBackground(String... params) {
             try {
                 URL url1 = new URL(userNameURL);
                 HttpURLConnection unConnection = (HttpURLConnection) url1.openConnection();
@@ -252,17 +252,17 @@ public class SignupScreen extends AppCompatActivity {
             return "";
         }
         @Override
-        protected void onPostExecute(String s) {
+        protected final void onPostExecute(String s) {
             super.onPostExecute(s);
         }
 
         @Override
-        protected void onPreExecute() {
+        protected final void onPreExecute() {
             super.onPreExecute();
         }
 
         @Override
-        protected void onProgressUpdate(String... values) {
+        protected final void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
         }
     }
@@ -274,7 +274,7 @@ public class SignupScreen extends AppCompatActivity {
     private class AsyncTaskRunner extends AsyncTask<String, String, String> {
 
         @Override
-        protected String doInBackground(String... params) {
+        protected final String doInBackground(String... params) {
             try {
 
                 URL url = new URL(backendURL);
@@ -307,7 +307,6 @@ public class SignupScreen extends AppCompatActivity {
                 while ((inputLine = in.readLine()) != null) {
                     content.append(inputLine);
                 }
-                Log.d("res", content.toString());
                 in.close();
 
 
@@ -318,18 +317,18 @@ public class SignupScreen extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(String s) {
+        protected final void onPostExecute(String s) {
             Log.d("targetString", s);
             super.onPostExecute(s);
         }
 
         @Override
-        protected void onPreExecute() {
+        protected final void onPreExecute() {
             super.onPreExecute();
         }
 
         @Override
-        protected void onProgressUpdate(String... values) {
+        protected final void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
         }
     }

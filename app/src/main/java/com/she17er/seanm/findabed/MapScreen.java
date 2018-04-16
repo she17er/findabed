@@ -13,6 +13,7 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 /**
  * Screen that shows the map of all shelters
@@ -21,7 +22,7 @@ import java.util.HashMap;
 public class MapScreen extends FragmentActivity implements OnMapReadyCallback {
     private GoogleMap mMap;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_screen);
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
@@ -42,10 +43,10 @@ public class MapScreen extends FragmentActivity implements OnMapReadyCallback {
      * installed Google Play services and returned to the app.
      */
     @Override
-    public void onMapReady(GoogleMap googleMap) {
+    public final void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
         Bundle bundle = getIntent().getExtras();
-        ArrayList<Shelter> shelterList = new ArrayList<>();
+        List<Shelter> shelterList = new ArrayList<>();
         shelterList = bundle.getParcelableArrayList("data");
         LatLng temp = new LatLng(shelterList.get(0).getLatitude(), shelterList.get(0).getLongitude());
         for (Shelter s: shelterList) {

@@ -37,7 +37,7 @@ public class ShelterAdapter extends RecyclerView.Adapter<ShelterAdapter.ViewHold
      * Sets up the shelter actionListeners
      * @param listener The actionlistener for this shelterAdapter
      */
-    public void setOnItemClickListener(OnItemClickListener listener) {
+    public final void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
     }
 
@@ -96,7 +96,7 @@ public class ShelterAdapter extends RecyclerView.Adapter<ShelterAdapter.ViewHold
 
     // Usually involves inflating a layout from XML and returning the holder
     @Override
-    public ShelterAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public final ShelterAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
@@ -110,7 +110,7 @@ public class ShelterAdapter extends RecyclerView.Adapter<ShelterAdapter.ViewHold
 
     // Involves populating data into the item through holder
     @Override
-    public void onBindViewHolder(ShelterAdapter.ViewHolder viewHolder, int position) {
+    public final void onBindViewHolder(ShelterAdapter.ViewHolder viewHolder, int position) {
         // Get the data model based on position
         Shelter shelter = mShelters.get(position);
 
@@ -122,7 +122,7 @@ public class ShelterAdapter extends RecyclerView.Adapter<ShelterAdapter.ViewHold
 
     // Returns the total count of items in the list
     @Override
-    public int getItemCount() {
+    public final int getItemCount() {
         return mShelters.size();
     }
 }

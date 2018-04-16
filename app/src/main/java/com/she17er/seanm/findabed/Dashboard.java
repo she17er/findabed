@@ -61,7 +61,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
     Spinner ageSelect;
 
     //ArrayList that stores data from CSV
-    public static ArrayList<Shelter> masterShelters;
+    public static List<Shelter> masterShelters;
     public static ArrayList<Shelter> currentShelters;
 
     //Current restrictions from the spinners
@@ -80,7 +80,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
         String shelterInfo = "";
 
         @Override
-        protected String doInBackground(String... params) {
+        protected final String doInBackground(String... params) {
 
             try {
 
@@ -100,37 +100,40 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
                 }
                 br.close();
 
-                Log.d("shelterInfoString", shelterInfo);
                 return shelterInfo;
             } catch (Exception e) {
-                Log.d("GETError", e.toString());
+                e.printStackTrace();
             }
             return "";
         }
 
         @Override
-        protected void onPostExecute(String s) {
+        protected final void onPostExecute(String s) {
             super.onPostExecute(s);
         }
 
         @Override
-        protected void onPreExecute() {
+        protected final void onPreExecute() {
             super.onPreExecute();
         }
 
         @Override
-        protected void onProgressUpdate(String... values) {
+        protected final void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
         }
 
         //Gets the shelter info json data
-        public String getShelterInfo() {
+        public final String getShelterInfo() {
             return shelterInfo;
         }
+
+        /**
+         *
+         */
     }
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         shelterView = findViewById(R.id.shelterRecyclerView);
@@ -172,9 +175,8 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
         String allInfo = "";
         try {
             allInfo = getShelters.get();
-            Log.d("Async Result", getShelters.get());
         } catch (Exception e) {
-            Log.d("Async Exception", e.toString());
+            e.printStackTrace();
         }
         jsonData = allInfo;
 
@@ -234,7 +236,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
     }
 
     @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
+    public final boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_main, menu);
 
         final MenuItem searchItem = menu.findItem(R.id.action_search);
@@ -248,10 +250,10 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
      * @param ShelterInfo the information got from the database
      * @return an ArrayList containing various shelters with their information
      */
-    public ArrayList<Shelter> jsonParser(String ShelterInfo) {
+    public final ArrayList<Shelter> jsonParser(String ShelterInfo) {
         ArrayList<Shelter> allShelters = new ArrayList<>();
         String tempInfo = ShelterInfo.substring(3);
-        ArrayList<String> Info = new ArrayList<>();
+        List<String> Info = new ArrayList<>();
         int count = 0;
         try {
             while (tempInfo.contains("},{")) {
@@ -261,7 +263,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
             }
             Info.add(tempInfo);
             for (String s : Info) {
-                ArrayList<String> arr = new ArrayList<>();
+                List<String> arr = new ArrayList<>();
                 int i = s.indexOf("name");
                 int j = s.indexOf(',', i);
                 arr.add(s.substring(i + 7, j - 1));
@@ -312,7 +314,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
     }
 
     @Override
-    public boolean onQueryTextChange(String query) {
+    public final boolean onQueryTextChange(String query) {
         // Here is where we are going to implement the filter logic
         final ArrayList<Shelter> updatedShelters = new ArrayList<>();
         for (Shelter aShelter : currentShelters) {
@@ -325,7 +327,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
     }
 
     @Override
-    public boolean onQueryTextSubmit(String query) {
+    public final boolean onQueryTextSubmit(String query) {
         return false;
     }
 
@@ -402,7 +404,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
      * @param id The shelter's position
      * @param dataStore The array of all shelters to get positions from
      */
-    public void addCSVShelters(int id, ArrayList<Shelter> dataStore) {
+    public final void addCSVShelters(int id, List<Shelter> dataStore) {
         InputStream inputStream = getResources().openRawResource(id);
         BufferedReader br = new BufferedReader(new InputStreamReader(inputStream, Charset.forName("UTF-8")));
         try {
