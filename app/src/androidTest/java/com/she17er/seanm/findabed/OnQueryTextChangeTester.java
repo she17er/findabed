@@ -1,8 +1,3 @@
-/**
- * @author Kevin Luikey
- * Tester for the onQueryTextChange method
- */
-
 package com.she17er.seanm.findabed;
 
 import android.support.test.annotation.UiThreadTest;
@@ -26,6 +21,11 @@ import org.junit.runner.RunWith;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 import static org.junit.Assert.*;
+
+/**
+ * @author Kevin Luikey
+ * Tester for the onQueryTextChange method
+ */
 
 @RunWith(AndroidJUnit4.class)
 public class OnQueryTextChangeTester{

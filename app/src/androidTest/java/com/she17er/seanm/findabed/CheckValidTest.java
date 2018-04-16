@@ -22,6 +22,11 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 import static org.junit.Assert.*;
 
+/**
+ * JUnit Android UI tester for the checkValid method in Dashboard
+ * @author Sean Walsh
+ */
+
 @RunWith(AndroidJUnit4.class)
 public class CheckValidTest{
 
