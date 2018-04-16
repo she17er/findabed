@@ -198,7 +198,7 @@ public class Dashboard extends AppCompatActivity implements SearchView.OnQueryTe
                 if (position == 1) {
                     gender = "women";
                 } else if (position == 2) {
-                    gender = "men ";
+                    gender = "men";
                 } else {
                     gender = "";
                 }

@@ -345,4 +345,21 @@ public class Shelter implements Parcelable {
     public String toString() {
         return _id + currentCapacity;
     }
+
+    /**
+     * the equals method for this class
+     * @param s
+     * @return
+     */
+    @Override
+    public boolean equals(Object s) {
+        if (s == null) {
+            return false;
+        }
+        if (!(s instanceof Shelter)) {
+            return false;
+        }
+        Shelter that = (Shelter) s;
+        return that.getBackendID().equals(this.backendID) && this.getAddress().equals(that.getAddress());
+    }
 }
