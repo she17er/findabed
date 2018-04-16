@@ -37,7 +37,7 @@ public class ShelterAdapter extends RecyclerView.Adapter<ShelterAdapter.ViewHold
      * Sets up the shelter actionListeners
      * @param listener The actionlistener for this shelterAdapter
      */
-    public void setOnItemClickListener(OnItemClickListener listener) {
+    public final void setOnItemClickListener(OnItemClickListener listener) {
         this.listener = listener;
     }
 
@@ -45,14 +45,14 @@ public class ShelterAdapter extends RecyclerView.Adapter<ShelterAdapter.ViewHold
     // Used to cache the views within the item layout for fast access
     public class ViewHolder extends RecyclerView.ViewHolder {
         //All variables to be rendered in a row
-        public TextView shelterName;
+        final TextView shelterName;
 
         /**
          * We also create a constructor that accepts the entire item row
          * and does the view lookups to find each subview
          * @param itemView The view for a given shelter in the adapter
          */
-        public ViewHolder(final View itemView) {
+        ViewHolder(final View itemView) {
             // Stores the itemView in a public final member variable that can be used
             // to access the context from any ViewHolder instance.
             super(itemView);
@@ -96,7 +96,7 @@ public class ShelterAdapter extends RecyclerView.Adapter<ShelterAdapter.ViewHold
 
     // Usually involves inflating a layout from XML and returning the holder
     @Override
-    public ShelterAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public final ShelterAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         Context context = parent.getContext();
         LayoutInflater inflater = LayoutInflater.from(context);
 
@@ -110,7 +110,7 @@ public class ShelterAdapter extends RecyclerView.Adapter<ShelterAdapter.ViewHold
 
     // Involves populating data into the item through holder
     @Override
-    public void onBindViewHolder(ShelterAdapter.ViewHolder viewHolder, int position) {
+    public final void onBindViewHolder(ShelterAdapter.ViewHolder viewHolder, int position) {
         // Get the data model based on position
         Shelter shelter = mShelters.get(position);
 
@@ -122,7 +122,7 @@ public class ShelterAdapter extends RecyclerView.Adapter<ShelterAdapter.ViewHold
 
     // Returns the total count of items in the list
     @Override
-    public int getItemCount() {
+    public final int getItemCount() {
         return mShelters.size();
     }
 }

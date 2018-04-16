@@ -4,7 +4,7 @@ package com.she17er.seanm.findabed;
 /**
  * Represents a single user
  */
-public class User {
+class User {
     private String username;
     private boolean booked;
     private int loginTimes;
@@ -29,7 +29,7 @@ public class User {
      * Sets a user as having booked a bed
      * @param status True if booked, false otherwise
      */
-    public void setBooked(boolean status) {
+    public final void setBooked(boolean status) {
         this.booked = status;
     }
 
@@ -37,14 +37,14 @@ public class User {
      * Gets the number of times a user has tried to login
      * @return Number of failed logins for this user
      */
-    public int getLoginTimes(){
+    public final int getLoginTimes(){
         return loginTimes;
     }
 
     /**
      * Increases the number of "failed logins" for this user
      */
-    public void loginTrial() {
+    public final void loginTrial() {
         this.loginTimes++;
     }
 }

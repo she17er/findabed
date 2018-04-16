@@ -15,11 +15,11 @@ import android.widget.Button;
 public class WelcomeScreen extends AppCompatActivity {
 
     //UI references
-    Button login;
-    Button signup;
+    private Button login;
+    private Button signup;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_screen);
 

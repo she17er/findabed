@@ -39,24 +39,24 @@ import java.util.Arrays;
 public class BookingScreen extends AppCompatActivity {
 
     //UI Components
-    EditText numberText;
-    Button confirmButton;
-    Button cancelBookingButton;
-    Button cancelButton;
+    private EditText numberText;
+    private Button confirmButton;
+    private Button cancelBookingButton;
+    private Button cancelButton;
 
     //Needs to add id to use it
-    String bookingURL = "https://she17er.herokuapp.com/api/shelter/updateCapacity/";
+    private final String bookingURL = "https://she17er.herokuapp.com/api/shelter/updateCapacity/";
 
     //Shelter Data
-    int shelterPosition;
-    String shelterID;
-    Shelter shelter;
-    int bookingNumber;
+    private int shelterPosition;
+    private String shelterID;
+    private Shelter shelter;
+    private int bookingNumber;
 
     SharedPreferences sharedPreferences;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_booking_screen);
 
@@ -85,6 +85,14 @@ public class BookingScreen extends AppCompatActivity {
     }
 
     /**
+     * toString for BookingScreen
+     * @return BookingScreen as a String
+     */
+    public String toString() {
+        return "Booking screen for " + shelter.getName() + ", ID: " + shelterID;
+    }
+
+    /**
      * Adds all button listeners
      */
     private void addButtonListener() {
@@ -92,7 +100,6 @@ public class BookingScreen extends AppCompatActivity {
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("number", numberText.getText().toString());
                 if (numberText.getText().toString().equals("")) {
                     numberText.setError("Please enter a number");
                 } else {
@@ -101,8 +108,8 @@ public class BookingScreen extends AppCompatActivity {
                         numberText.setError("Not enough space in the shelter");
                     } else {
                         //Writes the name of the shelter booked to a local variable
-                        SharedPreferences.Editor userData = sharedPreferences.edit();
-                        userData.putString("booking", shelter.getName()).apply();
+//                        SharedPreferences.Editor userData = sharedPreferences.edit();
+//                        userData.putString("booking", shelter.getName()).apply();
 
                         AsyncTaskRunner makeBooking = new AsyncTaskRunner();
                         makeBooking.execute("start");
@@ -147,7 +154,7 @@ public class BookingScreen extends AppCompatActivity {
     private class AsyncTaskRunner extends AsyncTask<String, String, String> {
 
         @Override
-        protected String doInBackground(String... params) {
+        protected final String doInBackground(String... params) {
             try {
 
                 URL url = new URL(bookingURL + shelterID);
@@ -171,7 +178,6 @@ public class BookingScreen extends AppCompatActivity {
                 while ((inputLine = in.readLine()) != null) {
                     content.append(inputLine);
                 }
-                Log.d("res", content.toString());
                 in.close();
 
 
@@ -182,18 +188,18 @@ public class BookingScreen extends AppCompatActivity {
         }
 
         @Override
-        protected void onPostExecute(String s) {
+        protected final void onPostExecute(String s) {
             Log.d("targetString", s);
             super.onPostExecute(s);
         }
 
         @Override
-        protected void onPreExecute() {
+        protected final void onPreExecute() {
             super.onPreExecute();
         }
 
         @Override
-        protected void onProgressUpdate(String... values) {
+        protected final void onProgressUpdate(String... values) {
             super.onProgressUpdate(values);
         }
     }

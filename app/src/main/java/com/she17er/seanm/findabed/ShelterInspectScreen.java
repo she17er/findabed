@@ -19,34 +19,34 @@ import org.w3c.dom.Text;
 public class ShelterInspectScreen extends AppCompatActivity {
 
     //UI Setup
-    TextView name;
-    TextView address;
-    TextView number;
-    TextView capacity;
-    TextView gender;
-    TextView latitude;
-    TextView longitude;
-    TextView age;
-    TextView restrictions;
-    TextView currCapacity;
-    TextView nameF;
-    TextView addressF;
-    TextView numberF;
-    TextView capacityF;
-    TextView genderF;
-    TextView latitudeF;
-    TextView longitudeF;
-    TextView ageF;
-    TextView restrictionsF;
-    TextView currCapacityF;
-    Button bookButton;
+    private TextView name;
+    private TextView address;
+    private TextView number;
+    private TextView capacity;
+    private TextView gender;
+    private TextView latitude;
+    private TextView longitude;
+    private TextView age;
+    private TextView restrictions;
+    private TextView currCapacity;
+    private TextView nameF;
+    private TextView addressF;
+    private TextView numberF;
+    private TextView capacityF;
+    private TextView genderF;
+    private TextView latitudeF;
+    private TextView longitudeF;
+    private TextView ageF;
+    private TextView restrictionsF;
+    private TextView currCapacityF;
+    private Button bookButton;
 
     //Data variables
-    int shelterPosition;
-    Shelter shelter;
+    private int shelterPosition;
+    private Shelter shelter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected final void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shelter_inspect_screen);
 
@@ -82,6 +82,11 @@ public class ShelterInspectScreen extends AppCompatActivity {
         restrictions = findViewById(R.id.shelterRestrictions);
         currCapacity = findViewById(R.id.currCapacity);
 
+        String capacityText = "" + shelter.getCapacity();
+        String latitudeText = "" + shelter.getLatitude();
+        String longitudeText = "" + shelter.getLongitude();
+        String currCapacityText = "" + (shelter.getCapacity() - shelter.getCurrentCapacity());
+
         nameF = findViewById(R.id.shelterNameField);
         nameF.setText(shelter.getName());
         addressF = findViewById(R.id.shelterAddressField);
@@ -89,17 +94,17 @@ public class ShelterInspectScreen extends AppCompatActivity {
         numberF = findViewById(R.id.shelterPhoneNumberField);
         numberF.setText(shelter.getPhoneNumber());
         capacityF = findViewById(R.id.shelterCapacityField);
-        capacityF.setText("" + shelter.getCapacity());
+        capacityF.setText(capacityText);
         genderF = findViewById(R.id.shelterGenderField);
         genderF.setText(shelter.getGender());
         latitudeF = findViewById(R.id.shelterLatitudeField);
-        latitudeF.setText("" + shelter.getLatitude());
+        latitudeF.setText(latitudeText);
         longitudeF = findViewById(R.id.shelterLongitudeField);
-        longitudeF.setText("" + shelter.getLongitude());
+        longitudeF.setText(longitudeText);
         ageF = findViewById(R.id.shelterAgesField);
         ageF.setText(shelter.getAgeRange());
         currCapacityF = findViewById(R.id.currCapacityField);
-        currCapacityF.setText("" + (shelter.getCapacity() - shelter.getCurrentCapacity()));
+        currCapacityF.setText(currCapacityText);
         restrictionsF = findViewById(R.id.shelterRestrictionsField);
         restrictionsF.setText(shelter.getRestrictions());
     }
@@ -116,7 +121,7 @@ public class ShelterInspectScreen extends AppCompatActivity {
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
+    public final boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             // Respond to the action bar's Up/Home button
             case android.R.id.home:
