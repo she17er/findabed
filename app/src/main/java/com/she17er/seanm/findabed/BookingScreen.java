@@ -25,19 +25,19 @@ import java.net.URL;
 public class BookingScreen extends AppCompatActivity {
 
     //UI Components
-    EditText numberText;
-    Button confirmButton;
-    Button cancelBookingButton;
-    Button cancelButton;
+    private EditText numberText;
+    private Button confirmButton;
+    private Button cancelBookingButton;
+    private Button cancelButton;
 
     //Needs to add id to use it
-    String bookingURL = "https://she17er.herokuapp.com/api/shelter/updateCapacity/";
+    private final String bookingURL = "https://she17er.herokuapp.com/api/shelter/updateCapacity/";
 
     //Shelter Data
-    int shelterPosition;
-    String shelterID;
-    Shelter shelter;
-    int bookingNumber;
+    private int shelterPosition;
+    private String shelterID;
+    private Shelter shelter;
+    private int bookingNumber;
 
     SharedPreferences sharedPreferences;
 

@@ -45,8 +45,8 @@ public class SignupScreen extends AppCompatActivity {
     private List<String> allNames;
 
     //URL for the Heroku backend
-    String backendURL = "https://she17er.herokuapp.com/api/users/newUsers";
-    String userNameURL = "https://she17er.herokuapp.com/api/users/getUserNames";
+    private final String backendURL = "https://she17er.herokuapp.com/api/users/newUsers";
+    private final String userNameURL = "https://she17er.herokuapp.com/api/users/getUserNames";
 
     @Override
     protected final void onCreate(Bundle savedInstanceState) {

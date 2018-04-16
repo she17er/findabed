@@ -13,8 +13,8 @@ import android.widget.Button;
 public class WelcomeScreen extends AppCompatActivity {
 
     //UI references
-    Button login;
-    Button signup;
+    private Button login;
+    private Button signup;
 
     @Override
     protected final void onCreate(Bundle savedInstanceState) {

@@ -43,14 +43,14 @@ public class ShelterAdapter extends RecyclerView.Adapter<ShelterAdapter.ViewHold
     // Used to cache the views within the item layout for fast access
     public class ViewHolder extends RecyclerView.ViewHolder {
         //All variables to be rendered in a row
-        public TextView shelterName;
+        final TextView shelterName;
 
         /**
          * We also create a constructor that accepts the entire item row
          * and does the view lookups to find each subview
          * @param itemView The view for a given shelter in the adapter
          */
-        public ViewHolder(final View itemView) {
+        ViewHolder(final View itemView) {
             // Stores the itemView in a public final member variable that can be used
             // to access the context from any ViewHolder instance.
             super(itemView);

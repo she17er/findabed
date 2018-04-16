@@ -15,31 +15,31 @@ import android.widget.TextView;
 public class ShelterInspectScreen extends AppCompatActivity {
 
     //UI Setup
-    TextView name;
-    TextView address;
-    TextView number;
-    TextView capacity;
-    TextView gender;
-    TextView latitude;
-    TextView longitude;
-    TextView age;
-    TextView restrictions;
-    TextView currCapacity;
-    TextView nameF;
-    TextView addressF;
-    TextView numberF;
-    TextView capacityF;
-    TextView genderF;
-    TextView latitudeF;
-    TextView longitudeF;
-    TextView ageF;
-    TextView restrictionsF;
-    TextView currCapacityF;
-    Button bookButton;
+    private TextView name;
+    private TextView address;
+    private TextView number;
+    private TextView capacity;
+    private TextView gender;
+    private TextView latitude;
+    private TextView longitude;
+    private TextView age;
+    private TextView restrictions;
+    private TextView currCapacity;
+    private TextView nameF;
+    private TextView addressF;
+    private TextView numberF;
+    private TextView capacityF;
+    private TextView genderF;
+    private TextView latitudeF;
+    private TextView longitudeF;
+    private TextView ageF;
+    private TextView restrictionsF;
+    private TextView currCapacityF;
+    private Button bookButton;
 
     //Data variables
-    int shelterPosition;
-    Shelter shelter;
+    private int shelterPosition;
+    private Shelter shelter;
 
     @Override
     public String toString() {

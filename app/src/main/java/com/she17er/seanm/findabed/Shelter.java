@@ -55,7 +55,7 @@ public class Shelter implements Parcelable {
      * Generates a shelter using a parcel instead of the CSV reader
      * @param in The parcel passed in from MapScreen (and JSON reader maybe?)
      */
-    public Shelter(Parcel in) {
+    private Shelter(Parcel in) {
         set_id(in.readString());
         setName(in.readString());
         setCapacity(in.readString());
@@ -354,5 +354,22 @@ public class Shelter implements Parcelable {
      */
     public final String toString() {
         return _id + currentCapacity;
+    }
+
+    /**
+     * the equals method for this class
+     * @param s
+     * @return
+     */
+    @Override
+    public boolean equals(Object s) {
+        if (s == null) {
+            return false;
+        }
+        if (!(s instanceof Shelter)) {
+            return false;
+        }
+        Shelter that = (Shelter) s;
+        return that.getBackendID().equals(this.backendID) && this.getAddress().equals(that.getAddress());
     }
 }
