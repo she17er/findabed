@@ -107,6 +107,11 @@ public class LoginScreen extends AppCompatActivity {
      * errors are presented and no actual login attempt is made.
      */
     private void attemptLogin() {
+        if (currUser.getLoginTimes() >= 3) {
+            this.mPasswordView.setError(null);
+            this.mUserView.setError("Too many trial times");
+            return;
+        }
         if (mAuthTask != null) {
             return;
         }
