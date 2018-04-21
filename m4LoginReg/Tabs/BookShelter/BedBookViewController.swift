@@ -139,8 +139,17 @@ class BedBookViewController: UIViewController {
         
         let parameters: Parameters = [
         
-            "currCapacity": "\(currCapacity + beds)"
+            "currCapacity": currCapacity + beds
         ]
+        if (ShelterPersistence.isBooked()) {
+            let alert = UIAlertController(title: "Booking Error", message: "You have to cancel your previous booking before making a new one", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
+                    self.performSegue(withIdentifier: "alertIdentifier", sender: alert)
+                
+            }))
+            self.present(alert, animated: true, completion: nil)
+        }
+        ShelterPersistence.toggleBookedShelter(id)
         
         Alamofire.request("https://she17er.herokuapp.com/api/shelter/updateCapacity/\(id)", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).responseString {
             response in

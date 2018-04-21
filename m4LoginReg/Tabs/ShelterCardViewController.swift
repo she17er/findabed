@@ -40,10 +40,10 @@ class ShelterCardViewController: UIViewController, UICollectionViewDelegateFlowL
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if (filteredShelters.count == 0) {
-            return shelters.count
+        if (isSearching) {
+            return filteredShelters.count
         }
-        return filteredShelters.count
+        return shelters.count
     }
     
     

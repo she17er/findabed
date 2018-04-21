@@ -10,32 +10,11 @@ import UIKit
 
 //let sheltersKey = "shelters"
 let favouriteSheltersKey = "favouriteShelters"
+let bookedShelterKey = "bookedShelter"
 
 struct ShelterPersistence {
     
     static var shelters: [Shelter] = []
-    
-//    static private var sheltersDict : [String: Shelter] {
-//        if let sheltersDict = UserDefaults.standard.dictionary(forKey: sheltersKey) as? [String: Shelter] {
-//            return sheltersDict
-//        }
-//        return [:]
-//    }
-//
-//    static func getAllShelters() -> [Shelter] {
-//        return sheltersDict.map({ key, value in return value})
-//    }
-//
-//    static func getShelterById(_ _id: String) -> Shelter? {
-//        return sheltersDict[_id]
-//    }
-    
-//    static func saveShelter(_ shelter:Shelter) {
-//        var dict = sheltersDict
-//        dict[shelter._id] = shelter
-//        UserDefaults.standard.set(dict, forKey: sheltersKey)
-//        UserDefaults.standard.synchronize()
-//    }
     
     static func getFavouriteShelters() -> [Shelter] {
         if let favouriteSheltersIds = UserDefaults.standard.array(forKey: favouriteSheltersKey) as? [String] {
@@ -46,9 +25,26 @@ struct ShelterPersistence {
         return []
     }
     
+    static func getBookedShelter() -> [Shelter] {
+        if let bookedShelterId = UserDefaults.standard.string(forKey: bookedShelterKey) {
+            return shelters.filter({ shelter in
+                return bookedShelterId == shelter._id
+            })
+        }
+        return []
+    }
+    
     static func isFavourite(_ _id: String) -> Bool {
         if let favouriteShelterIds = UserDefaults.standard.array(forKey: favouriteSheltersKey) as? [String] {
             return favouriteShelterIds.contains(_id)
+        }
+        return false
+    }
+    
+    static func isBooked() -> Bool {
+        if let bookedShelter = UserDefaults.standard.string(forKey: bookedShelterKey) {
+            print(bookedShelter)
+            return !bookedShelter.isEmpty
         }
         return false
     }
@@ -63,7 +59,24 @@ struct ShelterPersistence {
         } else {
             shelterIds.append(_id)
         }
+        
         UserDefaults.standard.set(shelterIds, forKey: favouriteSheltersKey)
+        UserDefaults.standard.synchronize()
+    }
+    
+    static func toggleBookedShelter(_ _id: String) {
+        var bookedShelter: String = ""
+        if let bookedShelterSaved = UserDefaults.standard.string(forKey: bookedShelterKey) as? String {
+            bookedShelter = bookedShelterSaved
+        }
+        
+        if (bookedShelter == _id) {
+            bookedShelter = ""
+        } else {
+            bookedShelter = _id
+        }
+        
+        UserDefaults.standard.set(bookedShelter, forKey: bookedShelterKey)
         UserDefaults.standard.synchronize()
     }
     

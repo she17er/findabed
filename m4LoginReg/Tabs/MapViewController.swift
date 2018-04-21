@@ -11,7 +11,7 @@ import MapKit
 import Alamofire
 import SwiftyJSON
 
-class MapViewController: UIViewController, MKMapViewDelegate {
+class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate{
 
     @IBOutlet weak var mapView: MKMapView!
     var currCapacity:String = ""
@@ -24,6 +24,11 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     var latitude: Double = 0.0
     var longitude: Double = 0.0
     var shelters:[Shelter] = []
+    
+    
+    private var locationManager: CLLocationManager!
+    private var currentLocation: CLLocation?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -32,6 +37,16 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         requestCoOrdinates()
         
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        // Check for Location Services
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.startUpdatingLocation()
+        }
     }
     
     func requestCoOrdinates() {
@@ -85,6 +100,21 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
     }
     
+    // MARK - CLLocationManagerDelegate
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        defer { currentLocation = locations.last }
+        
+        if currentLocation == nil {
+            // Zoom to user location
+            if let userLocation = locations.last {
+                let viewRegion = MKCoordinateRegionMakeWithDistance(userLocation.coordinate, 2000, 2000)
+                mapView.setRegion(viewRegion, animated: false)
+            }
+        }
+    }
+    
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? ShelterViewController {
             destination.currCapacity = currCapacity
@@ -96,6 +126,8 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             destination.id = id
         }
     }
+    
+    
     
     
     
