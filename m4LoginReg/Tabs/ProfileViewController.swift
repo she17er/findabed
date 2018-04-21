@@ -19,6 +19,9 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         requestShelter()
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
     }
     
     override func viewWillAppear(_ animated: Bool) { // called every time
