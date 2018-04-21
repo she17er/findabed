@@ -818,7 +818,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="349" height="227"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YMq-Be-3in">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YMq-Be-3in">
                                                     <rect key="frame" x="20" y="12" width="309" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="xba-xi-vyP"/>
@@ -862,7 +862,7 @@
                                             <constraint firstItem="Q6Y-H1-7Cr" firstAttribute="centerX" secondItem="YMq-Be-3in" secondAttribute="centerX" id="4Qx-rL-uAR"/>
                                             <constraint firstItem="FfI-mk-r2R" firstAttribute="leading" secondItem="N8w-y8-ZC7" secondAttribute="leadingMargin" constant="12" id="FFE-Fv-yKi"/>
                                             <constraint firstItem="FfI-mk-r2R" firstAttribute="leading" secondItem="Q6Y-H1-7Cr" secondAttribute="leading" constant="8" id="HEM-Sn-unB"/>
-                                            <constraint firstItem="YMq-Be-3in" firstAttribute="leading" secondItem="N8w-y8-ZC7" secondAttribute="leadingMargin" constant="137" id="KrK-eg-S0I"/>
+                                            <constraint firstItem="YMq-Be-3in" firstAttribute="leading" secondItem="N8w-y8-ZC7" secondAttribute="leadingMargin" constant="12" id="KrK-eg-S0I"/>
                                             <constraint firstItem="FfI-mk-r2R" firstAttribute="top" secondItem="Q6Y-H1-7Cr" secondAttribute="bottom" constant="18" id="Xnq-IU-4y2"/>
                                             <constraint firstItem="Q6Y-H1-7Cr" firstAttribute="centerX" secondItem="N8w-y8-ZC7" secondAttribute="centerX" id="YHX-jZ-ohV"/>
                                             <constraint firstItem="Q6Y-H1-7Cr" firstAttribute="top" secondItem="k4j-nR-bLT" secondAttribute="bottom" constant="7" id="ejV-Yj-0CV"/>
@@ -1263,6 +1263,7 @@
                         <outlet property="mapView" destination="kcz-bv-bkN" id="KUR-O2-Uhu"/>
                         <outlet property="phoneNumberUI" destination="YWz-jb-UOB" id="thg-jS-zTA"/>
                         <outlet property="shelterNameUI" destination="Z3K-YM-a2j" id="D9L-d3-dYz"/>
+                        <outlet property="starBtn" destination="eYB-hz-rip" id="z8h-iv-x9u"/>
                         <segue destination="IJs-BT-oQp" kind="show" identifier="cancelBedIdentifier" id="GHx-JK-i5a"/>
                     </connections>
                 </viewController>
@@ -1488,7 +1489,7 @@
                         <outlet property="adultCounter" destination="Foe-8u-W5h" id="zJ5-JY-qIW"/>
                         <outlet property="childCounter" destination="1Wa-dj-iyg" id="bsh-ZH-cf8"/>
                         <outlet property="youngAdultCounter" destination="Qe1-Zv-1XP" id="iKf-17-PNO"/>
-                        <segue destination="KSg-Ab-jtb" kind="show" identifier="alertIdentifier" id="g6o-eu-JYf"/>
+                        <segue destination="rQQ-tZ-5Kr" kind="show" identifier="alertIdentifier" id="QhK-Z3-3Kq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e0w-PG-YCm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1527,7 +1528,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="349" height="227"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fqq-0y-NQI">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fqq-0y-NQI">
                                                     <rect key="frame" x="20" y="12" width="309" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="Hvx-cS-leu"/>
@@ -1571,7 +1572,7 @@
                                             <constraint firstAttribute="bottomMargin" secondItem="rrW-mH-kC6" secondAttribute="bottom" constant="12" id="2LH-qV-jUK"/>
                                             <constraint firstItem="9Fr-M6-9fD" firstAttribute="top" secondItem="Fqq-0y-NQI" secondAttribute="bottom" constant="11" id="2Vv-Zj-RJp"/>
                                             <constraint firstItem="rrW-mH-kC6" firstAttribute="leading" secondItem="yCZ-YU-Oaj" secondAttribute="leadingMargin" constant="12" id="67d-az-hE8"/>
-                                            <constraint firstItem="Fqq-0y-NQI" firstAttribute="leading" secondItem="yCZ-YU-Oaj" secondAttribute="leadingMargin" constant="137" id="6lL-aZ-cXF"/>
+                                            <constraint firstItem="Fqq-0y-NQI" firstAttribute="leading" secondItem="yCZ-YU-Oaj" secondAttribute="leadingMargin" constant="12" id="6lL-aZ-cXF"/>
                                             <constraint firstItem="gEY-Fa-F5P" firstAttribute="centerX" secondItem="yCZ-YU-Oaj" secondAttribute="centerX" id="8Ld-Yk-RkK"/>
                                             <constraint firstItem="gEY-Fa-F5P" firstAttribute="top" secondItem="9Fr-M6-9fD" secondAttribute="bottom" constant="7" id="IiT-Dg-ZBU"/>
                                             <constraint firstItem="gEY-Fa-F5P" firstAttribute="trailing" secondItem="9Fr-M6-9fD" secondAttribute="trailing" id="Nxp-Od-WAV"/>
@@ -1721,7 +1722,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="QhK-Z3-3Kq"/>
         <segue reference="pDj-xV-g6j"/>
-        <segue reference="g6o-eu-JYf"/>
     </inferredMetricsTieBreakers>
 </document>

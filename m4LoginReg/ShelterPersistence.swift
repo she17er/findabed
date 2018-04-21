@@ -11,7 +11,7 @@ import UIKit
 //let sheltersKey = "shelters"
 let favouriteSheltersKey = "favouriteShelters"
 let bookedShelterKey = "bookedShelter"
-
+let bedBookedKey = "bedBooked"
 struct ShelterPersistence {
     
     static var shelters: [Shelter] = []
@@ -32,6 +32,13 @@ struct ShelterPersistence {
             })
         }
         return []
+    }
+    
+    static func getBookedBeds() -> Int {
+        if let bookedBeds = UserDefaults.standard.integer(forKey: bedBookedKey) as Int? {
+            return bookedBeds
+        }
+        return 0
     }
     
     static func isFavourite(_ _id: String) -> Bool {
@@ -78,6 +85,22 @@ struct ShelterPersistence {
         
         UserDefaults.standard.set(bookedShelter, forKey: bookedShelterKey)
         UserDefaults.standard.synchronize()
+    }
+    
+    static func toggleBookedBeds(_ beds: Int) {
+        var bedBooked: Int = 0
+        if let bedBookedSaved = UserDefaults.standard.integer(forKey: bedBookedKey) as? Int {
+            bedBooked = bedBookedSaved
+        }
+        
+        if (bedBooked == beds) {
+            bedBooked = 0
+        } else {
+            bedBooked = beds
+        }
+        
+        UserDefaults.standard.set(bedBooked, forKey: bedBookedKey)
+//        UserDefaults.standard.synchronize()
     }
     
 }

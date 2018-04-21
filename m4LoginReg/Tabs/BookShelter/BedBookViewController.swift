@@ -150,7 +150,7 @@ class BedBookViewController: UIViewController {
             self.present(alert, animated: true, completion: nil)
         } else {
             ShelterPersistence.toggleBookedShelter(id)
-            
+            ShelterPersistence.toggleBookedBeds(beds)
             Alamofire.request("https://she17er.herokuapp.com/api/shelter/updateCapacity/\(id)", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).responseString {
                 response in
                 print (response)

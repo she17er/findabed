@@ -16,6 +16,7 @@ class CancelShelterViewController: UIViewController {
     @IBOutlet weak var shelterNameUI: UILabel!
     @IBOutlet weak var acceptedTypesUI: UITextView!
     @IBOutlet weak var phoneNumberUI: UITextView!
+    @IBOutlet weak var starBtn: UIButton!
     
     var backBtn: UIButton!
     
@@ -27,19 +28,37 @@ class CancelShelterViewController: UIViewController {
     var longitude:Double = 0
     var id:String = ""
     override func viewDidLoad() {
+        backBtn = makeCancelButton(xVal: 16, yVal: 28)
         
+        shelterNameUI.text = shelterName
+        acceptedTypesUI.text = "ACCEPTED TYPES • \(acceptedTypes)"
+        phoneNumberUI.text = "Phone Number \n\(phoneNumber)"
+        currentCapacityUI.text = "Current Capacity | \(currCapacity)"
+        
+        mapView.centerCoordinate = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+        
+        let myAnnotation: MKPointAnnotation = MKPointAnnotation()
+        myAnnotation.coordinate = CLLocationCoordinate2DMake(latitude, longitude)
+        myAnnotation.title = "Shelter"
+        mapView.addAnnotation(myAnnotation)
+        
+        backBtn.addTarget(self, action: #selector(self.GoBack), for: .touchUpInside)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destination = segue.destination as? BedBookViewController {
+        if let destination = segue.destination as? CancelBedViewController {
             destination.id = self.id
             destination.currCapacity = Int(self.currCapacity)!
         }
     }
     
     @IBAction func cancelShelterBookingBtn(_ sender: Any) {
+        performSegue(withIdentifier: "cancelBedIdentifier", sender: self)
     }
     @IBAction func favouriteShelterBtn(_ sender: Any) {
+        ShelterPersistence.toggleFavouriteShelterById(self.id)
+        
+        starBtn.setTitle("★", for: .normal)
     }
     @objc func GoBack() {
         self.navigationController?.popViewController(animated: true)

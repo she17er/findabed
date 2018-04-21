@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import Alamofire
 
 class CancelBedViewController: UIViewController {
 
     var id: String = ""
+    var currCapacity: Int = 0
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,7 +25,17 @@ class CancelBedViewController: UIViewController {
     }
     
     @IBAction func onYesClicked(_ sender: Any) {
+        let beds = ShelterPersistence.getBookedBeds()
+        let parameters: Parameters = [
+            
+            "currCapacity": currCapacity - beds
+        ]
         ShelterPersistence.toggleBookedShelter(id)
+        Alamofire.request("https://she17er.herokuapp.com/api/shelter/updateCapacity/\(id)", method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: nil).responseString {
+            response in
+            print (response)
+        }
+        ShelterPersistence.toggleBookedBeds(beds)
     }
     
     @IBAction func onNoClicked(_ sender: Any) {
