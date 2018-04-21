@@ -1,6 +1,7 @@
 package com.she17er.seanm.findabed;
 
 import android.R.id;
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -14,6 +15,7 @@ import com.she17er.seanm.findabed.R.layout;
 /**
  * Welcome screen that the application starts with
  */
+@TargetApi(21)
 public class WelcomeScreen extends AppCompatActivity {
 
     @Override
@@ -32,7 +34,6 @@ public class WelcomeScreen extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(layout.activity_welcome_screen);
-
         //Login button functionality, switches to login activity screen
         this.login = this.findViewById(R.id.loginButton);
         this.login.setOnClickListener(new OnClickListener() {

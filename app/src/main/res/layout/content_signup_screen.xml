@@ -149,6 +149,7 @@
             android:id="@+id/submitButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@drawable/altbutton_shape"
             android:text="@string/submitButton" />
 
     </LinearLayout>

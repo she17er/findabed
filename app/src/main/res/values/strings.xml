@@ -2,7 +2,7 @@
     <string name="app_name">findabed</string>
 
     <!-- Welcome screen strings -->
-    <string name="welcome_text">Welcome to findabed</string>
+    <string name="welcome_text">findabed</string>
     <string name="login_button">Login</string>
     <string name="signup_button">Signup</string>
     <string name="title_activity_login_screen">Log In</string>

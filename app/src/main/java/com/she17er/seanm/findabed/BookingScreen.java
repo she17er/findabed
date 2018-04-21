@@ -1,5 +1,6 @@
 package com.she17er.seanm.findabed;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -27,7 +28,7 @@ import java.net.URL;
 /**
  * The booking screen for booking a new shelter
  */
-
+@TargetApi(21)
 public class BookingScreen extends AppCompatActivity {
 
     //Needs to add id to use it

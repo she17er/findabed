@@ -17,6 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentEnd="true"
+            android:background="@drawable/button_shape"
             android:text="@string/logoutButton" />
 
         <android.support.v7.widget.RecyclerView
@@ -32,7 +33,9 @@
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentStart="true"
+            android:background="@drawable/button_shape"
             android:text="@string/profileButton" />
+
 
         <Spinner
             android:id="@+id/genderFilterSpinner"
@@ -56,6 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/shelterRecyclerView"
             android:layout_centerHorizontal="true"
+            android:background="@drawable/button_shape"
             android:text="Map" />
 
     </RelativeLayout>
