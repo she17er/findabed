@@ -7,16 +7,6 @@ package com.she17er.seanm.findabed;
 class User {
     private String username;
     private boolean booked;
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "username='" + this.username + '\'' +
-                ", booked=" + this.booked +
-                ", loginTimes=" + this.loginTimes +
-                '}';
-    }
-
     private int loginTimes;
 
     /**
@@ -59,5 +49,14 @@ class User {
      */
     public void loginTrial() {
         loginTimes++;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + this.username + '\'' +
+                ", booked=" + this.booked +
+                ", loginTimes=" + this.loginTimes +
+                '}';
     }
 }

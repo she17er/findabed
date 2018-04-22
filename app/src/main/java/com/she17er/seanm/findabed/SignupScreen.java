@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,10 +27,14 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.Key;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 
 /**
  * Activity containing a signup form for users
@@ -56,6 +61,10 @@ public class SignupScreen extends AppCompatActivity {
     private final String backendURL = "https://she17er.herokuapp.com/api/users/newUsers";
     private final String userNameURL = "https://she17er.herokuapp.com/api/users/getUserNames";
 
+    //Strings for encryption
+    private static final String ALGORITHM = "AES";
+    private static final String KEY = "1Hbfh667adfDEJ78";
+
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,7 +83,6 @@ public class SignupScreen extends AppCompatActivity {
 
         this.populateSpinners();
         this.addButtonListener();
-
 
         final SignupScreen.AsyncTaskRunnerGetUsername AsyncGetUsername = new SignupScreen.AsyncTaskRunnerGetUsername();
         AsyncGetUsername.execute("start");
@@ -167,34 +175,6 @@ public class SignupScreen extends AppCompatActivity {
     }
 
     /**
-     * Sets up test cases for signup screen
-     */
-    public void setTestCases() {
-
-    }
-
-    @Override
-    public String toString() {
-        return "SignupScreen{" +
-                "username=" + this.username +
-                ", email=" + this.email +
-                ", phone=" + this.phone +
-                ", password=" + this.password +
-                ", passwordCheck=" + this.passwordCheck +
-                ", age=" + this.age +
-                ", genderSpinner=" + this.genderSpinner +
-                ", vetSpinner=" + this.vetSpinner +
-                ", roleSpinner=" + this.roleSpinner +
-                ", accountSpinner=" + this.accountSpinner +
-                ", submit=" + this.submit +
-                ", currUsernames='" + this.currUsernames + '\'' +
-                ", allNames=" + this.allNames +
-                ", backendURL='" + this.backendURL + '\'' +
-                ", userNameURL='" + this.userNameURL + '\'' +
-                '}';
-    }
-
-    /**
      * Checks if all entered sign-up data is valid
      * Throws error messages on sign-up text-boxes that are invalid
      * @return Whether or not the sign-up data is valid
@@ -258,6 +238,31 @@ public class SignupScreen extends AppCompatActivity {
             default:
                 return super.onOptionsItemSelected(item);
         }
+    }
+
+    /**
+     * Generates a randomized key for password encryption
+     * @return The encyrption key
+     * @throws Exception Any exception this might throw
+     */
+    private static Key generateKey() throws Exception {
+        Key key = new SecretKeySpec(KEY.getBytes(), ALGORITHM);
+        return key;
+    }
+
+    /**
+     * Encrypts a given String
+     * @param value The plaintext string to be encrypted
+     * @return The encrypted String
+     * @throws Exception Any exception this might throw
+     */
+    public static String encrypt(String value) throws Exception {
+        Key key = generateKey();
+        Cipher cipher = Cipher.getInstance(ALGORITHM);
+        cipher.init(Cipher.ENCRYPT_MODE, key);
+        byte [] encryptedByteValue = cipher.doFinal(value.getBytes("utf-8"));
+        String encryptedValue64 = Base64.encodeToString(encryptedByteValue, Base64.DEFAULT);
+        return encryptedValue64;
     }
 
     /**
@@ -325,6 +330,16 @@ public class SignupScreen extends AppCompatActivity {
                 connection.connect();
 
                 final JSONObject user = new JSONObject();
+
+                String encryptedPassword = "";
+                try {
+                    encryptedPassword = encrypt(password.getText().toString());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    //Throws null pointer to crash app for security purposes
+                    throw new NullPointerException("Password encryption failed!");
+                }
+
                 user.put("username", SignupScreen.this.username.getText().toString().toLowerCase());
                 user.put("age", SignupScreen.this.age.getText());
                 user.put("gender", SignupScreen.this.genderSpinner.getSelectedItem().toString());
@@ -332,7 +347,7 @@ public class SignupScreen extends AppCompatActivity {
                 user.put("contact.phone", SignupScreen.this.phone.getText().toString());
                 user.put("contact.email", SignupScreen.this.email.getText().toString());
                 user.put("account_State", SignupScreen.this.accountSpinner.getSelectedItem().toString());
-                user.put("password", SignupScreen.this.password.getText().toString());
+                user.put("password", encryptedPassword);
                 user.put("role", SignupScreen.this.roleSpinner.getSelectedItem().toString());
                 user.put("login", "false");
 
@@ -375,5 +390,26 @@ public class SignupScreen extends AppCompatActivity {
         protected void onProgressUpdate(final String... values) {
             super.onProgressUpdate(values);
         }
+    }
+
+    @Override
+    public String toString() {
+        return "SignupScreen{" +
+                "username=" + this.username +
+                ", email=" + this.email +
+                ", phone=" + this.phone +
+                ", password=" + this.password +
+                ", passwordCheck=" + this.passwordCheck +
+                ", age=" + this.age +
+                ", genderSpinner=" + this.genderSpinner +
+                ", vetSpinner=" + this.vetSpinner +
+                ", roleSpinner=" + this.roleSpinner +
+                ", accountSpinner=" + this.accountSpinner +
+                ", submit=" + this.submit +
+                ", currUsernames='" + this.currUsernames + '\'' +
+                ", allNames=" + this.allNames +
+                ", backendURL='" + this.backendURL + '\'' +
+                ", userNameURL='" + this.userNameURL + '\'' +
+                '}';
     }
 }

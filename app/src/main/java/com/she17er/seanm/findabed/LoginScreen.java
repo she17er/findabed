@@ -10,6 +10,7 @@ import android.os.Build.VERSION_CODES;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
+import android.util.Base64;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
@@ -33,25 +34,15 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.security.Key;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 
 /**
  * Login screen that offers login via username/password.
  */
 public class LoginScreen extends AppCompatActivity {
-
-    @Override
-    public String toString() {
-        return "LoginScreen{" +
-                "mAuthTask=" + this.mAuthTask +
-                ", mUserView=" + this.mUserView +
-                ", mPasswordView=" + this.mPasswordView +
-                ", mProgressView=" + this.mProgressView +
-                ", mLoginFormView=" + this.mLoginFormView +
-                ", mUserSignInButton=" + this.mUserSignInButton +
-                ", currUser=" + this.currUser +
-                ", backendURL='" + this.backendURL + '\'' +
-                '}';
-    }
 
     //Keep track of the login task to ensure we can cancel it if requested
     private LoginScreen.UserLoginTask mAuthTask;
@@ -66,6 +57,10 @@ public class LoginScreen extends AppCompatActivity {
 
     //URL for the login route on the backend
     private final String backendURL = "https://she17er.herokuapp.com/api/users/login";
+
+    //Strings for encryption
+    private static final String ALGORITHM = "AES";
+    private static final String KEY = "1Hbfh667adfDEJ78";
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -197,6 +192,31 @@ public class LoginScreen extends AppCompatActivity {
     }
 
     /**
+     * Generates a new encryption key
+     * @return The encryption key
+     * @throws Exception Any exception
+     */
+    private static Key generateKey() throws Exception {
+        Key key = new SecretKeySpec(KEY.getBytes(), ALGORITHM);
+        return key;
+    }
+
+    /**
+     * Encryptes a given String
+     * @param value The String to be encrypted
+     * @return The newly encrypted String
+     * @throws Exception Any exception
+     */
+    public static String encrypt(String value) throws Exception {
+        Key key = generateKey();
+        Cipher cipher = Cipher.getInstance(ALGORITHM);
+        cipher.init(Cipher.ENCRYPT_MODE, key);
+        byte [] encryptedByteValue = cipher.doFinal(value.getBytes("utf-8"));
+        String encryptedValue64 = Base64.encodeToString(encryptedByteValue, Base64.DEFAULT);
+        return encryptedValue64;
+    }
+
+    /**
      * Represents an asynchronous login/registration task used to authenticate
      * the user.
      */
@@ -230,9 +250,18 @@ public class LoginScreen extends AppCompatActivity {
                 connection.setRequestMethod("POST");
                 connection.connect();
 
+                String encryptedPassword = "";
+                try {
+                    encryptedPassword = encrypt(mPassword);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    //Crash the app if this fails for security purposes
+                    throw new NullPointerException("The login password encryption failed!");
+                }
+
                 final JSONObject user = new JSONObject();
                 user.put("username", this.mUser);
-                user.put("password", this.mPassword);
+                user.put("password", encryptedPassword);
 
                 final DataOutputStream localDataOutputStream = new DataOutputStream(connection
                         .getOutputStream());
