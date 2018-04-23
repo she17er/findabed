@@ -305,6 +305,7 @@ public class LoginScreen extends AppCompatActivity {
             if (result.booleanValue() && (currUser.getLoginTimes() <= 3)) {
                 final Intent intent = new Intent(LoginScreen.this.getApplicationContext(), Dashboard.class);
                 LoginScreen.this.startActivity(intent);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
                 LoginScreen.this.finish();
             } else {
                 LoginScreen.this.mPasswordView.setError(LoginScreen.this.getString(string.error_incorrect_password));

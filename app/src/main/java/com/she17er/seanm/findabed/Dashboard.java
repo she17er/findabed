@@ -144,6 +144,7 @@ public class Dashboard extends AppCompatActivity implements OnQueryTextListener 
             public void onClick(final View view) {
                 final Intent intent = new Intent(view.getContext(), WelcomeScreen.class);
                 Dashboard.this.startActivityForResult(intent, 0);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
         });
         this.profile = this.findViewById(id.profileButton);
@@ -152,6 +153,7 @@ public class Dashboard extends AppCompatActivity implements OnQueryTextListener 
             public void onClick(final View view) {
                 final Intent intent = new Intent(view.getContext(), ProfileScreen.class);
                 Dashboard.this.startActivityForResult(intent, 0);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
         });
         this.map = this.findViewById(id.mapButton);
@@ -163,6 +165,7 @@ public class Dashboard extends AppCompatActivity implements OnQueryTextListener 
                 bundle.putParcelableArrayList("data", Dashboard.currentShelters);
                 intent.putExtras(bundle);
                 Dashboard.this.startActivityForResult(intent, 0);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
         });
 

@@ -42,6 +42,7 @@ public class WelcomeScreen extends AppCompatActivity {
            public void onClick(final View view) {
                final Intent loginIntent = new Intent(view.getContext(), LoginScreen.class);
                WelcomeScreen.this.startActivityForResult(loginIntent, 0);
+               overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
            }
         });
 
