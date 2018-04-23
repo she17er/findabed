@@ -34,6 +34,7 @@ public class WelcomeScreen extends AppCompatActivity {
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.setContentView(layout.activity_welcome_screen);
+        overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
         //Login button functionality, switches to login activity screen
         this.login = this.findViewById(R.id.loginButton);
         this.login.setOnClickListener(new OnClickListener() {
