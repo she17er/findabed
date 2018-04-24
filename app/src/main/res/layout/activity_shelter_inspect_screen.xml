@@ -149,6 +149,7 @@
                 android:id="@+id/bookButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="@drawable/altbutton_shape"
                 android:text="book" />
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>

@@ -49,6 +49,7 @@ public class FavoritesScreen extends AppCompatActivity {
                 intent.putExtra("shelterID", "" + Dashboard.masterShelters.get(position).get_id());
                 intent.putExtra("backendID", Dashboard.masterShelters.get(position).getBackendID());
                 FavoritesScreen.this.startActivityForResult(intent, 0);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
         });
         // Attach the adapter to the recyclerview to populate items

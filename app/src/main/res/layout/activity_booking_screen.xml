@@ -26,21 +26,24 @@
 
             <Button
                 android:id="@+id/confirmBookingButton"
-                android:layout_width="wrap_content"
+                android:layout_width="177dp"
                 android:layout_height="wrap_content"
+                android:background="@drawable/favorites_shape"
                 android:text="Confirm Booking" />
 
             <Button
                 android:id="@+id/cancelBookingButton"
-                android:layout_width="wrap_content"
+                android:layout_width="177dp"
                 android:layout_height="wrap_content"
+                android:background="@drawable/button_shape"
                 android:text="Cancel Booking" />
 
             <Button
                 android:id="@+id/cancelButton"
-                android:layout_width="wrap_content"
+                android:layout_width="67dp"
                 android:layout_height="wrap_content"
-                android:text="Cancel" />
+                android:background="@drawable/button_shape"
+                android:text="Exit" />
 
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
