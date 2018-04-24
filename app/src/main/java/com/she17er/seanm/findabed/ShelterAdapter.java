@@ -12,6 +12,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.she17er.seanm.findabed.R.id;
 import com.she17er.seanm.findabed.R.layout;
@@ -179,6 +180,10 @@ public class ShelterAdapter extends Adapter<ViewHolder> {
                         savedShelterNames.remove(name);
                         editor.putStringSet("Saved", savedShelterNames);
                         editor.commit();
+
+                        //Toast to confirm action
+                        Toast.makeText(getContext(), "Shelter removed!",
+                                Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -202,6 +207,10 @@ public class ShelterAdapter extends Adapter<ViewHolder> {
                 savedShelterNames.add(name);
                 editor.putStringSet("Saved", savedShelterNames);
                 editor.commit();
+
+                //Toast to confirm action
+                Toast.makeText(getContext(), "Shelter added!",
+                        Toast.LENGTH_SHORT).show();
             }
         });
     }
