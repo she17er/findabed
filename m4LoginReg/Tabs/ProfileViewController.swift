@@ -26,6 +26,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
     
     override func viewWillAppear(_ animated: Bool) { // called every time
         requestShelter()
+        self.collectionView.reloadData()
     }
     
     func requestShelter() {
@@ -54,24 +55,34 @@ class ProfileViewController: UIViewController, UICollectionViewDelegateFlowLayou
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CollectionViewCell
         
         print(indexPath.row)
-        var currentShelters:[Shelter] = ShelterPersistence.getBookedShelter()
+        if (isBooked) {
+            var currentShelters:[Shelter] = ShelterPersistence.getBookedShelter()
+            
+            var shelter = currentShelters[0]
+            cell.labelName.text = shelter.name
+            cell.acceptedTypesLabel.text = "ACCEPTED TYPES • \(shelter.acceptedTypes[0])"
+            cell.phoneNumberLabel.text = "Phone Number \n\(shelter.phoneNumber)"
+            cell.currCapacityLabel.text = "Current Capacity |  \(shelter.currCapacity)"
+            //This creates the shadows and modifies the cards a little bit
+            cell.contentView.layer.cornerRadius = 4.0
+            cell.contentView.layer.borderWidth = 1.0
+            cell.contentView.layer.borderColor = UIColor.clear.cgColor
+            cell.contentView.layer.masksToBounds = false
+            cell.layer.shadowColor = UIColor.gray.cgColor
+            cell.layer.shadowOffset = CGSize(width: 0, height: 1.0)
+            cell.layer.shadowRadius = 4.0
+            cell.layer.shadowOpacity = 1.0
+            cell.layer.masksToBounds = false
+            cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: cell.contentView.layer.cornerRadius).cgPath
+        } else {
+            cell.labelName.text = "No Bookings"
+            cell.acceptedTypesLabel.text = ""
+            cell.phoneNumberLabel.text = ""
+            cell.currCapacityLabel.text = ""
+            
+        }
         
-        var shelter = currentShelters[0]
-        cell.labelName.text = shelter.name
-        cell.acceptedTypesLabel.text = "ACCEPTED TYPES • \(shelter.acceptedTypes[0])"
-        cell.phoneNumberLabel.text = "Phone Number \n\(shelter.phoneNumber)"
-        cell.currCapacityLabel.text = "Current Capacity |  \(shelter.currCapacity)"
-        //This creates the shadows and modifies the cards a little bit
-        cell.contentView.layer.cornerRadius = 4.0
-        cell.contentView.layer.borderWidth = 1.0
-        cell.contentView.layer.borderColor = UIColor.clear.cgColor
-        cell.contentView.layer.masksToBounds = false
-        cell.layer.shadowColor = UIColor.gray.cgColor
-        cell.layer.shadowOffset = CGSize(width: 0, height: 1.0)
-        cell.layer.shadowRadius = 4.0
-        cell.layer.shadowOpacity = 1.0
-        cell.layer.masksToBounds = false
-        cell.layer.shadowPath = UIBezierPath(roundedRect: cell.bounds, cornerRadius: cell.contentView.layer.cornerRadius).cgPath
+       
         
         return cell
     }

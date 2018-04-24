@@ -155,6 +155,7 @@ class BedBookViewController: UIViewController {
                 response in
                 print (response)
             }
+            self.navigationController?.popViewController(animated: true)
         }
         
     }

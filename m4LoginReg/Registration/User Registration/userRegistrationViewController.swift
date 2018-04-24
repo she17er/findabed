@@ -8,13 +8,14 @@
 
 import Foundation
 import UIKit
-class userRegistrationViewController: UIViewController{
+class userRegistrationViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource{
     
     @IBOutlet weak var userNameTxtField: UITextField!
     @IBOutlet weak var pwdTxtField: UITextField!
-    @IBOutlet weak var genderTxtField: UITextField!
     @IBOutlet weak var veteranTxtField: UITextField!
  
+    @IBOutlet weak var genderPickerView: UIPickerView!
+    var genderTxt: String = ""
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -28,7 +29,6 @@ class userRegistrationViewController: UIViewController{
         
         userNameTxtField.inputAccessoryView = toolbar
         pwdTxtField.inputAccessoryView = toolbar
-        genderTxtField.inputAccessoryView = toolbar
         veteranTxtField.inputAccessoryView = toolbar
         
     }

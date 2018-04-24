@@ -71,6 +71,8 @@ class userRegistrationContinuedViewController: UIViewController, UIPickerViewDat
             
         }
         
+        self.navigationController?.popToRootViewController(animated: true)
+        
     }
     
     let roles = ["user", "admin", "shelter"]

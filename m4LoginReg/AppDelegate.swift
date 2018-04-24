@@ -20,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let mainVC = MainTabBarController()
         mainVC.tabBar.isTranslucent = false        
     GMSPlacesClient.provideAPIKey("AIzaSyBPGhReWRKt7K7vAhX7o6iOKyeMEXiadM8")
+        
         return true
     }
 
