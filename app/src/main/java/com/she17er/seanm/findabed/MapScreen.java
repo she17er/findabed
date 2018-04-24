@@ -1,6 +1,7 @@
 package com.she17er.seanm.findabed;
 
 import android.content.Intent;
+import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 
@@ -70,6 +71,18 @@ public class MapScreen extends FragmentActivity implements OnMapReadyCallback {
         }
         this.mMap.moveCamera(CameraUpdateFactory.newLatLng(temp));
         this.mMap.animateCamera( CameraUpdateFactory.zoomTo( 11.0f ) );
+
+        //Gets the current location of the user and updates it while map is open
+        mMap.setOnMyLocationChangeListener(new GoogleMap.OnMyLocationChangeListener() {
+
+            @Override
+            public void onMyLocationChange(Location arg0) {
+                // TODO Auto-generated method stub
+
+                mMap.addMarker(new MarkerOptions().position(new LatLng(arg0.getLatitude(), arg0.getLongitude())).title("It's Me!"));
+            }
+        });
+
         this.mMap.setOnMarkerClickListener(new OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(final Marker marker) {
