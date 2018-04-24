@@ -97,7 +97,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".Dashboard" />
         </activity>
-
+        <activity
+            android:name=".FavoritesScreen"
+            android:label="FavoritesScreen"
+            android:parentActivityName=".Dashboard">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".Dashboard" />
+        </activity>
     </application>
 
 </manifest>

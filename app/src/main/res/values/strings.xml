@@ -79,4 +79,5 @@
     <string name="search_hint">Search Shelters</string>
     <string name="action_search">Search Shelter</string>
     <string name="title_activity_map_screen">Map</string>
+    <string name="title_activity_favorites_screen">FavoritesScreen</string>
 </resources>

@@ -36,6 +36,15 @@
             android:background="@drawable/button_shape"
             android:text="@string/profileButton" />
 
+        <Button
+            android:id="@+id/favoritesButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="39dp"
+            android:layout_toEndOf="@+id/profileButton"
+            android:background="@drawable/button_shape"
+            android:text="Favorites" />
 
         <Spinner
             android:id="@+id/genderFilterSpinner"

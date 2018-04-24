@@ -3,10 +3,12 @@ package com.she17er.seanm.findabed;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.she17er.seanm.findabed.R.id;
@@ -67,6 +69,7 @@ public class ShelterAdapter extends Adapter<ViewHolder> {
 
         //All variables to be rendered in a row
         final TextView shelterName;
+        final Button favoritesButton;
 
         @Override
         public boolean equals(final Object obj) {
@@ -93,6 +96,7 @@ public class ShelterAdapter extends Adapter<ViewHolder> {
             super(itemView);
 
             this.shelterName = itemView.findViewById(id.shelter_name);
+            this.favoritesButton = itemView.findViewById(id.favorites_button);
 
 
             itemView.setOnClickListener(new OnClickListener() {
@@ -152,8 +156,16 @@ public class ShelterAdapter extends Adapter<ViewHolder> {
 
         // Set item views based on your views and data model
         final TextView textView = holder.shelterName;
-
         textView.setText(shelter.getName());
+
+        //Button for adding to favorites
+        Button button = holder.favoritesButton;
+        button.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("ButtonTest", "test");
+            }
+        });
     }
 
     // Returns the total count of items in the list

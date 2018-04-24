@@ -103,8 +103,8 @@ public class LoginScreen extends AppCompatActivity {
      */
     private void attemptLogin() {
         if (currUser.getLoginTimes() >= 3) {
-            this.mPasswordView.setError(null);
-            this.mUserView.setError("Too many trial times");
+//            this.mPasswordView.setError(null);
+            this.mUserView.setError("You've been locked out for too many login attempts");
             return;
         }
         if (mAuthTask != null) {

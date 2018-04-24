@@ -52,6 +52,7 @@ public class Dashboard extends AppCompatActivity implements OnQueryTextListener 
     private Button logout;
     private Button map;
     private Button profile;
+    private Button favorites;
     private Spinner genderSelect;
     private Spinner ageSelect;
 
@@ -138,6 +139,15 @@ public class Dashboard extends AppCompatActivity implements OnQueryTextListener 
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_dashboard);
         this.shelterView = this.findViewById(id.shelterRecyclerView);
+        this.favorites = this.findViewById(id.favoritesButton);
+        this.favorites.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                final Intent intent = new Intent(view.getContext(), FavoritesScreen.class);
+                Dashboard.this.startActivityForResult(intent, 0);
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
+            }
+        });
         this.logout = this.findViewById(id.logoutButton);
         this.logout.setOnClickListener(new OnClickListener() {
             @Override
