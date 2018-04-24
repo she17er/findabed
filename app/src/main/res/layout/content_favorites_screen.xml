@@ -12,10 +12,9 @@
         tools:layout_editor_absoluteY="0dp">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/shelterRecyclerView"
+            android:id="@+id/favoritesRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="500dp"
-            android:layout_above="@+id/logoutButton"
             android:layout_alignParentStart="true" />
 
     </RelativeLayout>
