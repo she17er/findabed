@@ -16,9 +16,17 @@
         />
 
     <Button
-        android:id="@+id/favorites_button"
-        android:layout_width="100dp"
+        android:id="@+id/removeFavorites_button"
+        android:layout_width="80dp"
         android:layout_height="wrap_content"
+        android:background="@drawable/favorites_shape"
+        android:text="Unstar" />
+
+    <Button
+        android:id="@+id/favorites_button"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/favorites_shape"
         android:text="Star" />
 
 </LinearLayout>

@@ -70,6 +70,7 @@ public class ShelterAdapter extends Adapter<ViewHolder> {
         //All variables to be rendered in a row
         final TextView shelterName;
         final Button favoritesButton;
+        final Button removeFavoritesButton;
 
         @Override
         public boolean equals(final Object obj) {
@@ -95,8 +96,10 @@ public class ShelterAdapter extends Adapter<ViewHolder> {
             // to access the context from any ViewHolder instance.
             super(itemView);
 
+            //Initializes all buttons and text per line of a shelter view
             this.shelterName = itemView.findViewById(id.shelter_name);
             this.favoritesButton = itemView.findViewById(id.favorites_button);
+            this.removeFavoritesButton = itemView.findViewById(id.removeFavorites_button);
 
 
             itemView.setOnClickListener(new OnClickListener() {
@@ -158,24 +161,47 @@ public class ShelterAdapter extends Adapter<ViewHolder> {
         final TextView textView = holder.shelterName;
         textView.setText(shelter.getName());
 
-        //Button for adding to favorites
-        Button button = holder.favoritesButton;
-        button.setOnClickListener(new OnClickListener() {
+        //Button for removing from favorites
+        Button unstar = holder.removeFavoritesButton;
+        unstar.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+                Log.d("unstar", "works");
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences
+                        (mContext);
                 SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences
                         (mContext).edit();
                 Set<String> savedShelterNames = new HashSet<>();
-                if (preferences.getStringSet("Saved", null) != null) {
+                if (preferences != null && preferences.getStringSet("Saved", null) != null) {
+                    savedShelterNames = preferences.getStringSet("Saved", null);
+                    String name = holder.shelterName.getText().toString();
+                    if (savedShelterNames.contains(name)) {
+                        savedShelterNames.remove(name);
+                        editor.putStringSet("Saved", savedShelterNames);
+                        editor.commit();
+                    }
+                }
+            }
+        });
+
+        //Button for adding to favorites
+        Button star = holder.favoritesButton;
+        star.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("star", "works");
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences
+                        (mContext);
+                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences
+                        (mContext).edit();
+                Set<String> savedShelterNames = new HashSet<>();
+                if (preferences != null && preferences.getStringSet("Saved", null) != null) {
                     savedShelterNames = preferences.getStringSet("Saved", null);
                 }
                 String name = holder.shelterName.getText().toString();
                 savedShelterNames.add(name);
                 editor.putStringSet("Saved", savedShelterNames);
                 editor.commit();
-                Log.d("sharedPreferences", java.util.Arrays.toString(preferences.getStringSet
-                        ("Saved", null).toArray()));
             }
         });
     }
