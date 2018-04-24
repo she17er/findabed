@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -183,8 +184,17 @@ public class Dashboard extends AppCompatActivity implements OnQueryTextListener 
         //Removes actionbar title
         this.getSupportActionBar().setDisplayShowTitleEnabled(false);
 
-        //Populates shelter list from JSON data
+        //Shows a snacking if user is coming from a successful booking attempt
+        //Snackbar that launches when an account is successfully created
+        final View parentLayout = this.getWindow().getDecorView().findViewById(android.R.id.content);
+        final Intent intent = getIntent();
+        if (intent.getExtras() != null) {
+            final Snackbar confirmationSnackBar = Snackbar.make(parentLayout,
+                    intent.getExtras().getString("FromBooking"), Snackbar.LENGTH_LONG);
+            confirmationSnackBar.show();
+        }
 
+        //Populates shelter list from JSON data
         final Dashboard.AsyncTaskRunner getShelters = new Dashboard.AsyncTaskRunner();
         getShelters.execute("start");
         String allInfo = "";

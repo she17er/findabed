@@ -167,7 +167,7 @@ public class SignupScreen extends AppCompatActivity {
                     final SignupScreen.AsyncTaskRunner postReq = new SignupScreen.AsyncTaskRunner();
                     postReq.execute("start");
                     final Intent successIntent = new Intent(view.getContext(), WelcomeScreen.class);
-                    successIntent.putExtra("FromSignUp", "Account successfully created!");
+                    successIntent.putExtra("FromSignup", "Account successfully created!");
                     SignupScreen.this.startActivityForResult(successIntent, 0);
                 }
             }

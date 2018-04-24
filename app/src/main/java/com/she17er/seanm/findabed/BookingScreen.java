@@ -112,6 +112,7 @@ public class BookingScreen extends AppCompatActivity {
                         final BookingScreen.AsyncTaskRunner makeBooking = new BookingScreen.AsyncTaskRunner();
                         makeBooking.execute("start");
                         final Intent intent = new Intent(view.getContext(), Dashboard.class);
+                        intent.putExtra("FromBooking", "Booking successful!");
                         BookingScreen.this.startActivityForResult(intent, 0);
                     }
                 }
