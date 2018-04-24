@@ -15,6 +15,11 @@ class loginViewController: UIViewController {
     @IBOutlet weak var nameTxt: UITextField!
     @IBOutlet weak var passwordTxt: UITextField!
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.hideKeyboardWhenTappedAround()
+        
+    }
     
     @IBAction func onSubmitClicked(_ sender: Any) {
         let name = nameTxt.text
@@ -39,3 +44,14 @@ class loginViewController: UIViewController {
     }
 }
 
+extension UIViewController {
+    func hideKeyboardWhenTappedAround() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIViewController.dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
+    }
+}

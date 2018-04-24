@@ -25,6 +25,8 @@ class userRegistrationContinuedViewController: UIViewController, UIPickerViewDat
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.hideKeyboardWhenTappedAround()
+
         rolePickerView?.delegate = self
         rolePickerView?.dataSource = self
         let toolbar = UIToolbar()

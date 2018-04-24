@@ -144,7 +144,7 @@ class BedBookViewController: UIViewController {
         if (ShelterPersistence.isBooked()) {
             let alert = UIAlertController(title: "Booking Error", message: "You have to cancel your previous booking before making a new one", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Default action"), style: .default, handler: { _ in
-                    self.performSegue(withIdentifier: "alertIdentifier", sender: alert)
+                    self.navigationController?.popViewController(animated: true)
                 
             }))
             self.present(alert, animated: true, completion: nil)

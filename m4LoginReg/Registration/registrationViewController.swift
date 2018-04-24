@@ -37,7 +37,8 @@ class registrationViewController: UIViewController, UIPickerViewDataSource, UIPi
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
+        self.hideKeyboardWhenTappedAround()
+
         rolePickerView?.delegate = self
         rolePickerView?.dataSource = self
     }
@@ -51,7 +52,7 @@ class registrationViewController: UIViewController, UIPickerViewDataSource, UIPi
         if roleTxt == "user" {
             self.performSegue(withIdentifier: "userRegIdentifier", sender:self)
         } else if roleTxt == "shelter" {
-            self.performSegue(withIdentifier: "shelterRegIdentifier", sender:self)
+            self.performSegue(withIdentifier: "userRegIdentifier", sender:self)
         }
     }
     

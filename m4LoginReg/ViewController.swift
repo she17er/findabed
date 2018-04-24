@@ -11,24 +11,27 @@ import UIKit
 class ViewController: UIViewController {
     
     
-    @IBOutlet weak var loginButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        
     
     }
     
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+  
     @IBAction func registerButtonClicked(_ sender: Any) {
         print("Register")
+        
+        self.performSegue(withIdentifier: "userRegIdentifier", sender: self)
     }
     
+    @IBAction func loginButtonClicked(_ sender: Any) {
+        self.performSegue(withIdentifier: "loginIdentifier", sender: self)
+    }
 }
 
 extension UIView {

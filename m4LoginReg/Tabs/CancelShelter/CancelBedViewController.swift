@@ -36,6 +36,7 @@ class CancelBedViewController: UIViewController {
             print (response)
         }
         ShelterPersistence.toggleBookedBeds(beds)
+        self.navigationController?.popViewController(animated: true)
     }
     
     @IBAction func onNoClicked(_ sender: Any) {
