@@ -20,6 +20,28 @@
             android:background="@drawable/button_shape"
             android:text="@string/logoutButton" />
 
+        <Button
+            android:id="@+id/mapButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/favoritesButton"
+            android:layout_marginLeft="25dp"
+            android:layout_toEndOf="@+id/ageFilterSpinner"
+            android:background="@drawable/button_shape"
+            android:text="Map" />
+
+        <Button
+            android:id="@+id/favoritesButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="0dp"
+            android:layout_marginLeft="30dp"
+            android:layout_marginStart="105dp"
+            android:background="@drawable/button_shape"
+            android:text="Starred" />
+
         <android.support.v7.widget.RecyclerView
             android:id="@+id/shelterRecyclerView"
             android:layout_width="match_parent"
@@ -36,16 +58,6 @@
             android:background="@drawable/button_shape"
             android:text="@string/profileButton" />
 
-        <Button
-            android:id="@+id/favoritesButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="39dp"
-            android:layout_toEndOf="@+id/profileButton"
-            android:background="@drawable/button_shape"
-            android:text="Favorites" />
-
         <Spinner
             android:id="@+id/genderFilterSpinner"
             android:layout_width="180dp"
@@ -61,15 +73,6 @@
             android:layout_alignParentStart="true"
             android:layout_alignTop="@+id/genderFilterSpinner"
             android:layout_marginStart="12dp" />
-
-        <Button
-            android:id="@+id/mapButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/shelterRecyclerView"
-            android:layout_centerHorizontal="true"
-            android:background="@drawable/button_shape"
-            android:text="Map" />
 
     </RelativeLayout>
 

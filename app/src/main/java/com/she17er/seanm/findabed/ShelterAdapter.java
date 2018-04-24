@@ -24,15 +24,6 @@ import java.util.Objects;
 
 public class ShelterAdapter extends Adapter<ViewHolder> {
 
-    @Override
-    public String toString() {
-        return "ShelterAdapter{" +
-                "listener=" + this.listener +
-                ", mShelters=" + this.mShelters +
-                ", mContext=" + this.mContext +
-                '}';
-    }
-
     //Listener variable, interface, and method for parent (Dashboard)
     private ShelterAdapter.OnItemClickListener listener;
 
@@ -172,5 +163,14 @@ public class ShelterAdapter extends Adapter<ViewHolder> {
     @Override
     public int getItemCount() {
         return this.mShelters.size();
+    }
+
+    @Override
+    public String toString() {
+        return "ShelterAdapter{" +
+                "listener=" + this.listener +
+                ", mShelters=" + this.mShelters +
+                ", mContext=" + this.mContext +
+                '}';
     }
 }
