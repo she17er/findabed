@@ -4,6 +4,7 @@ import android.R.layout;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -204,6 +205,9 @@ public class Dashboard extends AppCompatActivity implements OnQueryTextListener 
             final Shelter shelter = iterator.next();
             Dashboard.currentShelters.add(shelter);
         }
+
+        //Sets up shared preferences default
+        PreferenceManager.setDefaultValues(this, R.xml.preference, false);
 
         this.populateShelterList(Dashboard.currentShelters);
 

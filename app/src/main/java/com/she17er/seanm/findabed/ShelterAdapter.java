@@ -1,6 +1,8 @@
 package com.she17er.seanm.findabed;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.RecyclerView.Adapter;
 import android.util.Log;
@@ -15,14 +17,21 @@ import com.she17er.seanm.findabed.R.id;
 import com.she17er.seanm.findabed.R.layout;
 import com.she17er.seanm.findabed.ShelterAdapter.ViewHolder;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
+
+import static android.content.Context.MODE_PRIVATE;
 
 /**
  * Adapter that displays list of all shelters for the Dashboard recycler view
  */
 
 public class ShelterAdapter extends Adapter<ViewHolder> {
+
+    //SharedPreferences to store saved shelters
+//    SharedPreferences sharedPreferences;
 
     //Listener variable, interface, and method for parent (Dashboard)
     private ShelterAdapter.OnItemClickListener listener;
@@ -154,7 +163,19 @@ public class ShelterAdapter extends Adapter<ViewHolder> {
         button.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View view) {
-                Log.d("ButtonTest", "test");
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(mContext);
+                SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences
+                        (mContext).edit();
+                Set<String> savedShelterNames = new HashSet<>();
+                if (preferences.getStringSet("Saved", null) != null) {
+                    savedShelterNames = preferences.getStringSet("Saved", null);
+                }
+                String name = holder.shelterName.getText().toString();
+                savedShelterNames.add(name);
+                editor.putStringSet("Saved", savedShelterNames);
+                editor.commit();
+                Log.d("sharedPreferences", java.util.Arrays.toString(preferences.getStringSet
+                        ("Saved", null).toArray()));
             }
         });
     }

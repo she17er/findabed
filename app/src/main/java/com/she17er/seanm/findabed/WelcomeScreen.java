@@ -3,6 +3,7 @@ package com.she17er.seanm.findabed;
 import android.R.id;
 import android.annotation.TargetApi;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -12,19 +13,13 @@ import android.widget.Button;
 
 import com.she17er.seanm.findabed.R.layout;
 
+import java.util.Set;
+
 /**
  * Welcome screen that the application starts with
  */
 @TargetApi(21)
 public class WelcomeScreen extends AppCompatActivity {
-
-    @Override
-    public String toString() {
-        return "WelcomeScreen{" +
-                "login=" + this.login +
-                ", signup=" + this.signup +
-                '}';
-    }
 
     //UI references
     private Button login;
@@ -64,5 +59,13 @@ public class WelcomeScreen extends AppCompatActivity {
                     intent.getExtras().getString("FromSignup"), Snackbar.LENGTH_LONG);
             confirmationSnackBar.show();
         }
+    }
+
+    @Override
+    public String toString() {
+        return "WelcomeScreen{" +
+                "login=" + this.login +
+                ", signup=" + this.signup +
+                '}';
     }
 }
