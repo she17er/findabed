@@ -1,6 +1,0 @@
-framework module Pods_m4LoginReg {
-  umbrella header "Pods-m4LoginReg-umbrella.h"
-
-  export *
-  module * { export * }
-}
