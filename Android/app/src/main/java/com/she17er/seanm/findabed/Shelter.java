@@ -11,6 +11,8 @@ import java.util.List;
 
 public class Shelter implements Parcelable {
 
+    //A test comment for git
+
     //All shelter parameters
     private String _id;
     private static int count;
