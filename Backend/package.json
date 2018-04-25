@@ -1,0 +1,38 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "This is the repository for Team 17 of the Georgia Tech CS 2340 class",
+  "main": "index.js",
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "body-parser": "^1.18.2",
+    "dotenv": "^5.0.0",
+    "express": "^4.16.2",
+    "express-validation": "^1.0.2",
+    "express-validator": "^4.3.0",
+    "mongodb": "^3.0.2",
+    "mongoose": "^5.0.12",
+    "morgan": "^1.9.0",
+    "node-env-file": "^0.1.8",
+    "nodemon": "^1.14.12",
+    "passport": "^0.4.0",
+    "passport-http": "^0.3.0",
+    "passport-local": "^1.0.0",
+    "passport-strategy": "^1.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/she17er/findabed.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/she17er/findabed/issues"
+  },
+  "homepage": "https://github.com/she17er/findabed#readme"
+}

@@ -1,4 +1,4 @@
-#Android
+######Android######
 *.iml
 .gradle
 /local.properties
@@ -10,7 +10,7 @@
 /node_modules
 .externalNativeBuild
 
-#WebApp
+#####WebApp######
 # Logs
 logs
 *.log
@@ -49,3 +49,10 @@ typings
 
 # Optional REPL history
 .node_repl_history
+
+######Backend######
+node_modules/
+.gradle/
+.idea/
+app/
+build/
