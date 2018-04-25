@@ -1,0 +1,83 @@
+<resources>
+    <string name="app_name">findabed</string>
+
+    <!-- Welcome screen strings -->
+    <string name="welcome_text">findabed</string>
+    <string name="login_button">Login</string>
+    <string name="signup_button">Signup</string>
+    <string name="title_activity_login_screen">Log In</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_username">Username</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Log In</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+    <!-- Strings related to the dashboard -->
+    <string name="title_activity_dashboard">Dashboard</string>
+    <string name="dashboardWelcomeText">Welcome </string>
+    <string name="shelterList">Shelter List</string>
+    <string name="logoutButton">Logout</string>
+    <string name="profileButton">Profile</string>
+
+    <!-- Strings related to the signup screen -->
+    <string name="logout_button">Logout</string>
+    <string name="title_activity_signup_screen">SignupScreen</string>
+    <string name="nameDesc">Name:</string>
+    <string name="usernameDesc">Username:</string>
+    <string name="emailDesc">Email:</string>
+    <string name="phoneDesc">Phone Number:</string>
+    <string name="passwordDesc">Password:</string>
+    <string name="passwordDesc2">Reenter Password:</string>
+    <string name="ageDesc">Age:</string>
+    <string name="genderDesc">Gender:</string>
+    <string name="vetStatDesc">Veteran Status:</string>
+    <string name="accountStateDesc">Account State:</string>
+    <string name="roleDesc">Role:</string>
+    <!-- Strings for gender spinner -->
+    <string-array name="genderArray">
+        <item>Male</item>
+        <item>Female</item>
+        <item>Other</item>
+    </string-array>
+    <!-- Strings for vetStatus spinner -->
+    <string-array name="vetStatArray">
+        <item>Non-Veteran</item>
+        <item>Veteran</item>
+    </string-array>
+    <!-- Strings for accountState spinner -->
+    <string-array name="accountStateArray">
+        <item>User</item>
+        <item>Admin</item>
+    </string-array>
+    <!-- Strings for role spinner -->
+    <string-array name="roleArray">
+        <item>Shelter Seeker</item>
+        <item>Shelter Worker</item>
+    </string-array>
+    <string name="submitButton">Submit</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Strings related to the shelter inspector screen -->
+    <string name="shelterName">Name: </string>
+    <string name="shelterCapacity">Capacity: </string>
+    <string name="shelterGender">Genders Accepted: </string>
+    <string name="shelterLatitude">Latitude: </string>
+    <string name="shelterLongitude">Longitude</string>
+    <string name="shelterAddress">Address: </string>
+    <string name="shelterPhoneNumber">Phone Number: </string>
+    <string name="shelterAgeRange">Age Ranges Accepted: </string>
+    <string name="shelterRestrictions">Restrictions: </string>
+    <!-- Search xml strings -->
+    <string name="search_hint">Search Shelters</string>
+    <string name="action_search">Search Shelter</string>
+    <string name="title_activity_map_screen">Map</string>
+    <string name="title_activity_favorites_screen">FavoritesScreen</string>
+</resources>
